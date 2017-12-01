@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="面试题," />
+  <meta name="keywords" content="树枝剪问题," />
 
 
 
@@ -80,22 +80,18 @@
 
 
 
-<meta name="description" content="历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5 理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支： 而CART一般是GINI系数分支： C4.5一般是信息增益率分支： 工">
-<meta name="keywords" content="面试题">
+<meta name="description" content="通常情况下， 随机森林不需要后剪枝。 剪枝的意义是：防止决策树生成过于庞大的子叶，避免实验预测结果过拟合，在实际生产中效果很差 剪枝通常有两种： PrePrune：预剪枝，及早的停止树增长，在每个父节点分支的时候计算是否达到了限制值 PostPrune：后剪枝，基于完全生长（过拟合）的树上进行剪枝，砍掉一些对衡量函数影">
+<meta name="keywords" content="树枝剪问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面试之常见决策树异同">
-<meta property="og:url" content="http://sladesha.github.io/2017/12/01/面试之常见决策树异同/index.html">
+<meta property="og:title" content="随机森林-枝剪问题">
+<meta property="og:url" content="http://sladesha.github.io/2017/10/02/随机森林-枝剪问题/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5 理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支： 而CART一般是GINI系数分支： C4.5一般是信息增益率分支： 工程上总的来说：CART和C4.5之间主要差异在于分类结果上，CART可以回归分析">
+<meta property="og:description" content="通常情况下， 随机森林不需要后剪枝。 剪枝的意义是：防止决策树生成过于庞大的子叶，避免实验预测结果过拟合，在实际生产中效果很差 剪枝通常有两种： PrePrune：预剪枝，及早的停止树增长，在每个父节点分支的时候计算是否达到了限制值 PostPrune：后剪枝，基于完全生长（过拟合）的树上进行剪枝，砍掉一些对衡量函数影响不大的枝叶 剪枝的依据： 常见的有错误率校验（判断枝剪是降低了模型预测的正确率">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e712ccfe23449bd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a39ef858bf85cc82.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-422628f7caf8e0b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T16:00:38.466Z">
+<meta property="og:updated_time" content="2017-12-01T16:23:43.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面试之常见决策树异同">
-<meta name="twitter:description" content="历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5 理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支： 而CART一般是GINI系数分支： C4.5一般是信息增益率分支： 工程上总的来说：CART和C4.5之间主要差异在于分类结果上，CART可以回归分析">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-e712ccfe23449bd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="随机森林-枝剪问题">
+<meta name="twitter:description" content="通常情况下， 随机森林不需要后剪枝。 剪枝的意义是：防止决策树生成过于庞大的子叶，避免实验预测结果过拟合，在实际生产中效果很差 剪枝通常有两种： PrePrune：预剪枝，及早的停止树增长，在每个父节点分支的时候计算是否达到了限制值 PostPrune：后剪枝，基于完全生长（过拟合）的树上进行剪枝，砍掉一些对衡量函数影响不大的枝叶 剪枝的依据： 常见的有错误率校验（判断枝剪是降低了模型预测的正确率">
 
 
 
@@ -125,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/面试之常见决策树异同/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/10/02/随机森林-枝剪问题/"/>
 
 
 
 
 
-  <title>面试之常见决策树异同 | Sladesal's Algorithm World</title>
+  <title>随机森林-枝剪问题 | Sladesal's Algorithm World</title>
   
 
 
@@ -258,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/面试之常见决策树异同/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/10/02/随机森林-枝剪问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -275,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">面试之常见决策树异同</h1>
+          <h1 class="post-title" itemprop="name headline">随机森林-枝剪问题</h1>
         
 
         <div class="post-meta">
@@ -287,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T23:59:54+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T00:08:38+08:00">
+                2017-10-02
               </time>
             
 
@@ -310,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -329,8 +325,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/12/01/面试之常见决策树异同/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/01/面试之常见决策树异同/" itemprop="commentsCount"></span>
+                <a href="/2017/10/02/随机森林-枝剪问题/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/10/02/随机森林-枝剪问题/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -352,7 +348,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  499 字
+                  743 字
                 </span>
               
 
@@ -368,7 +364,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -389,15 +385,22 @@
       
 
       
-        <p>历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5</p>
-<p><strong>理论上</strong>总的来说，<br>C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性<br>ID3是信息增益分支：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-e712ccfe23449bd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">而CART一般是GINI系数分支：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-a39ef858bf85cc82.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">C4.5一般是信息增益率分支：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-422628f7caf8e0b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>工程上</strong>总的来说：<br>CART和C4.5之间主要差异在于分类结果上，<strong>CART可以回归分析也可以分类，C4.5只能做分类；C4.5子节点是可以多分的，而CART是无数个二叉子节点</strong>；<br>以此拓展出以CART为基础的“树群”random forest ， 以回归树为基础的“树群”GBDT</p>
-<p>样本数据的差异：<br>ID3只能对分类变量进行处理，C4.5和CART可以处理连续和分类两种自变量<br>ID3对缺失值敏感，而C4.5和CART对缺失值可以进行多种方式的处理<br>只从样本量考虑，<em>小样本建议考虑c4.5、大样本建议考虑cart</em>。c4.5处理过程中需对数据集进行多次排序，处理成本耗时较高，而cart本身是一种大样本的统计方法，小样本处理下泛化误差较大</p>
-<p>目标因变量的差异：<br>ID3和C4.5只能做分类，CART（分类回归树）不仅可以做分类（0/1）还可以做回归（0-1）<br>ID3和C4.5节点上可以产出多叉（低、中、高），而CART节点上永远是二叉（低、非低）</p>
-<p>样本特征上的差异：<br>特征变量的使用中，多分的分类变量ID3和C4.5层级之间只单次使用，CART可多次重复使用</p>
-<p>决策树产生过程中的优化差异：<br>C4.5是通过枝剪来修正树的准确性，而CART是直接利用全部数据发现所有树的结构进行对比</p>
+        <p>通常情况下， 随机森林不需要后剪枝。</p>
+<p>剪枝的意义是：防止决策树生成过于庞大的子叶，避免实验预测结果过拟合，在实际生产中效果很差</p>
+<p>剪枝通常有两种：</p>
+<p>PrePrune：预剪枝，及早的停止树增长，在每个父节点分支的时候计算是否达到了限制值</p>
+<p>PostPrune：后剪枝，基于完全生长（过拟合）的树上进行剪枝，砍掉一些对衡量函数影响不大的枝叶</p>
+<p>剪枝的依据：</p>
+<p>常见的有错误率校验（判断枝剪是降低了模型预测的正确率），统计学检验，熵值，代价复杂度等等</p>
+<p>总结看来，枝剪的目的是担心全量数据在某棵树上的拟合过程中，过度判断了每个点及其对应类别的关系，有如以下这张图（以rule1&amp;rule2代替了rule3）：</p>
+<hr>
+<p>随机森林：</p>
+<p>定义：它是一种模型组合（常见的Boosting，Bagging等，衍生的有gbdt），这些算法最终的结果是生成N(可能会有几百棵以上）棵树，组合判断最终结果。</p>
+<p>如何组合判断？</p>
+<p>1.通常我们会规定随机森林里面的每棵树的选参个数，常见的有log，sqrt等等，这样的选取是随机选则的，这样有一个好处，让每一棵树上都有了尽可能多的变量组合，降低过拟合程度</p>
+<p>2.树的个数及树的节点的变量个数，通常的来说，最快捷的方式是先确定节点的变量个数为sqrt（变量的个数），然后在根据oob的准确率反过来看多个棵树时最优，确定了树的个数的时候再反过来确定mtry的个数，虽然有局限，但是也并不存在盲目性</p>
+<p>3.我个人理解，随机森林中的每一棵树我们需要它在某一片的数据中有非常好的拟合性，它并不是一个全数据拟合，只需要在它负责那块上有最佳的拟合效果。每次遇到这些数据(特征)的时候，我们在最后汇总N棵树的结果的时候，给这些数据对应的那块模型以最高权重即可</p>
+<p>最后总结一下，就是随机森林里面的每棵树的产生通过选特征参数选数据结构，都已经考虑了避免共线性避免过拟合，剩下的每棵树需要做的就是尽可能的在自己所对应的数据(特征)集情况下尽可能的做到最好的预测结果；如同，公司已经拆分好部门，你不需要考虑这样拆分是不是公司运营最好的一个组合方式，你需要做的就是当公司需要你的时候，尽可能的做好自己的事情，就酱。</p>
 
       
     </div>
@@ -444,7 +447,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+            <a href="/tags/树枝剪问题/" rel="tag"># 树枝剪问题</a>
           
         </div>
       
@@ -457,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/01/SMOTE算法/" rel="next" title="SMOTE算法">
-                <i class="fa fa-chevron-left"></i> SMOTE算法
+              <a href="/2017/09/01/面试之常见决策树异同/" rel="next" title="面试之常见决策树异同">
+                <i class="fa fa-chevron-left"></i> 面试之常见决策树异同
               </a>
             
           </div>
@@ -467,8 +470,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/02/随机森林-枝剪问题/" rel="prev" title="随机森林-枝剪问题">
-                随机森林-枝剪问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/01/交叉销售算法/" rel="prev" title="交叉销售算法">
+                交叉销售算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
