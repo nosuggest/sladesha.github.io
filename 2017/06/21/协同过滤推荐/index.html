@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="面试题," />
+  <meta name="keywords" content="推荐," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。">
-<meta name="keywords" content="面试题">
+<meta name="description" content="set.seed ( 1234 ) 加载数据包library ( “recommenderlab” ) 构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。val1&amp;lt;- matrix ( sample ( c ( as.">
+<meta name="keywords" content="推荐">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态最优化经典面试题">
-<meta property="og:url" content="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/index.html">
+<meta property="og:title" content="协同过滤推荐">
+<meta property="og:url" content="http://sladesha.github.io/2017/06/21/协同过滤推荐/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta property="og:description" content="set.seed ( 1234 ) 加载数据包library ( “recommenderlab” ) 构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。val1&amp;lt;- matrix ( sample ( c ( as.numeric ( 0 : 5 ) ,NA ) ,50 ,replace = TRUE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T15:57:08.374Z">
+<meta property="og:updated_time" content="2017-12-01T16:06:35.607Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态最优化经典面试题">
-<meta name="twitter:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta name="twitter:title" content="协同过滤推荐">
+<meta name="twitter:description" content="set.seed ( 1234 ) 加载数据包library ( “recommenderlab” ) 构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。val1&amp;lt;- matrix ( sample ( c ( as.numeric ( 0 : 5 ) ,NA ) ,50 ,replace = TRUE">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/06/21/协同过滤推荐/"/>
 
 
 
 
 
-  <title>动态最优化经典面试题 | Sladesal's Algorithm World</title>
+  <title>协同过滤推荐 | Sladesal's Algorithm World</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/21/协同过滤推荐/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">动态最优化经典面试题</h1>
+          <h1 class="post-title" itemprop="name headline">协同过滤推荐</h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:22:22+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T00:05:05+08:00">
+                2017-06-21
               </time>
             
 
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -325,8 +325,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/12/01/动态最优化经典面试题/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/01/动态最优化经典面试题/" itemprop="commentsCount"></span>
+                <a href="/2017/06/21/协同过滤推荐/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/21/协同过滤推荐/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -348,7 +348,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836 字
+                  797 字
                 </span>
               
 
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -385,16 +385,62 @@
       
 
       
-        <p>最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目：</p>
-<p><strong>一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？</strong></p>
-<p>先形象的理解一下这道题目，假设第一个蛋我们放在了i层，有两种case，碎或者不碎。<br>先看简单的结果，<br>case1:如果碎了，为了求出层数，那么我接下来的那颗蛋需要从第1层开始尝试i-1次，因为我们不允许冒第二次碎的风险了，这很好理解。<br>case2:如果没碎，我们得知一条新的信息，那就是我们要求的目标层在i层之上，但是我们依旧不知道是哪一层，假设是m层（m&gt;i）,那么同样的，和第i层一样，面临2个case，碎或者不碎。</p>
-<p>这时候，我们的前提是在最恶劣的情况下，保证我们的每次的风险都尽可能的小，至少要少于上一次的风险。</p>
-<p>我们可以让新的m的高度为i+i-1,其中，i是第一次我们放的层数，i-1是我们选择的风险若于第一次风险的层数高度，类推下去：i+i-1+i-2+i-3+…+1=200，得到i=20，就是我们第一次应该放的位置，同理第二次如果没有碎应该放的就是39…</p>
-<p><strong>我个人对这道题目的理解中，其实就为了平分风险，让每次碎的高度都相等，也就是i-1 = m-i-1+1==&gt;m=2i-1</strong></p>
-<p>这边的python代码网上也有很多，这边我罗列一个我写的，可能和别人的不一样，实现效率也可能较慢，建议大家在网上搜完善版本的，仅供大家熟悉上述的描述：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#n为层数，m为蛋数，f函数为求最优层数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n, m)</span>:</span></span><br><span class="line"><span class="comment">#如果是0层的，返回最优层数为0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="comment">#如果只有一个鸡蛋，必须要从最低层开始试，所以为当前最安全层n</span></span><br><span class="line">    <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line"><span class="comment">#这边我们来看，f(i - 1, m - 1)是如果i层碎了，我们需要计算i-1层下的情况，同时减少一颗蛋；</span></span><br><span class="line"><span class="comment">#f(n - i, m)是i层没碎，那相当于安全层从0变成了n，要计算的就是相当于有 f(n, m)变成了 f(n - i, m)</span></span><br><span class="line"><span class="comment">#最后在最大化风险下找出其中风险最小的层数即可</span></span><br><span class="line">    best_floor = min([max([f(i - <span class="number">1</span>, m - <span class="number">1</span>), f(n - i, m)]) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>)] + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> best_floor</span><br></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">74</span>]:print(f(<span class="number">100</span>, <span class="number">2</span>))</span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure></p>
-<p>这边f(200,2)实在没跑出来，时间太久了，所以跑了100，2的结果，迭代次数超多，具体我没有算过，建议优化一下计算的代码再执行。</p>
-<p>最后谢谢大家阅读。</p>
+        <p>set.seed ( 1234 )</p>
+<h1 id="加载数据包"><a href="#加载数据包" class="headerlink" title="加载数据包"></a>加载数据包</h1><p>library ( “recommenderlab” )</p>
+<h1 id="构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as-函数转为raringMatrix类型。"><a href="#构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as-函数转为raringMatrix类型。" class="headerlink" title="构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。"></a>构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。</h1><p>val1&lt;- matrix ( sample ( c ( as.numeric ( 0 : 5 ) ,NA ) ,50 ,replace = TRUE ,prob = c ( rep ( .4 / 6 , 6 ) , .6 ) ) ,ncol = 10 , dimnames = list ( user = paste ( “u” ,1 : 5 ,sep = ‘’ ) ,item = paste ( “i” ,1 : 10 ,sep = ‘’ ) ) )</p>
+<p>val2 &lt;- as ( val1, “realRatingMatrix” )</p>
+<p>数据转换</p>
+<p>val3&lt;- normalize ( val2 )</p>
+<h1 id="二元分类转换，normalize-函数进行标准化处理，标准化的目的是为了去除用户评分的偏差"><a href="#二元分类转换，normalize-函数进行标准化处理，标准化的目的是为了去除用户评分的偏差" class="headerlink" title="二元分类转换，normalize()函数进行标准化处理，标准化的目的是为了去除用户评分的偏差"></a>二元分类转换，normalize()函数进行标准化处理，标准化的目的是为了去除用户评分的偏差</h1><p>val4 &lt;- binarize ( val3 , minRating = 4 )</p>
+<p>val5 &lt;- as ( val4 , “matrix” )</p>
+<p>数据可视化</p>
+<p>接下来，我们采用MovieLense数据集，</p>
+<p>data ( MovieLense )</p>
+<p>key1 &lt;- sample ( MovieLense , 943 , replace = F )<br>image ( MovieLense )</p>
+<p>hist ( getRatings ( normalize ( MovieLense ) ) , breaks = 100 )</p>
+<p>hist ( rowCounts ( key1 ) , breaks = 50 )</p>
+<p>建立模型</p>
+<p>对于realRatingMatrix有六种方法：IBCF(基于物品的推荐)、UBCF（基于用户的推荐）、PCA（主成分分析）、RANDOM（随机推荐）、SVD（矩阵因子化）、POPULAR（基于流行度的推荐）</p>
+<p>建立协同过滤推荐算法模型，主要运用recommender(data=ratingMatrix,method,parameter=NULL)函数，getModel()可查看模型参数</p>
+<p>key1_recom &lt;- Recommender (key1 , method = “IBCF” )</p>
+<p>key1_popul &lt;- Recommender ( key1, method = “POPULAR” )</p>
+<h1 id="查看模型方法"><a href="#查看模型方法" class="headerlink" title="查看模型方法"></a>查看模型方法</h1><p>names ( getModel ( key1_recom ) )</p>
+<p>模型预测</p>
+<p>TOP-N预测</p>
+<p>对模型预测可运用predict()函数，在此分别以TOP-N预测及评分预测为例，预测第940-943位观影者的评分情况。n表示最终为TOP-N的列表推荐，参数type = “ratings”表示运用评分预测观影者对电影评分，模型结果均需转为list或矩阵表示</p>
+<p>pred &lt;- predict ( key1_popul ,key1 [ 940 : 943,] , n = 5 )</p>
+<p>as ( pred , “list” )</p>
+<h1 id="top-N为有序列表，抽取最优推荐子集"><a href="#top-N为有序列表，抽取最优推荐子集" class="headerlink" title="top-N为有序列表，抽取最优推荐子集"></a>top-N为有序列表，抽取最优推荐子集</h1><p>pred3 &lt;- bestN ( pred , n = 3 )</p>
+<p>as ( pred3 , “list” )</p>
+<h1 id="评分预测"><a href="#评分预测" class="headerlink" title="评分预测"></a>评分预测</h1><p>rate &lt;- predict ( key1_popul , key1 [ 940 : 943 ] , type = “ratings” )</p>
+<p>as ( rate , “matrix” ) [ , 1 : 5 ]</p>
+<p>预测模型评价</p>
+<p>评分预测模型评价</p>
+<p>eva &lt;- evaluationScheme (key1 [ 1 : 800 ] , method = “split” , train = 0.9,given = 15)<br>method=”split”&amp;train=0.9为按90%划分训练测试集合,given为评价的类目数</p>
+<p>r_eva1&lt;- Recommender ( getData ( eva , “train” ) , “UBCF” )</p>
+<p>p_eva1&lt;- predict ( r_eva1 , getData ( eva, “known” ) , type = “ratings” )</p>
+<p>r_eva2 &lt;- Recommender ( getData ( eva, “train” ) , “IBCF” )</p>
+<p>p_eva2 &lt;- predict ( r_eva2 , getData ( eva, “known” ) , type = “ratings” )<br>c_eva1 &lt;- calcPredictionAccuracy ( p_eva1 , getData ( eva , “unknown” ) )</p>
+<p>c_eva2 &lt;- calcPredictionAccuracy ( p_eva2 , getData ( eva , “unknown” ) )</p>
+<p>error &lt;- rbind ( c_eva1 , c_eva2 )</p>
+<p>rownames ( error ) &lt;- c ( “UBCF” , “IBCF” )<br>计算预测模型的准确度</p>
+<p>TOP-N预测模型评价</p>
+<p>通过4-fold交叉验证方法分割数据集，运用evaluate()进行TOP-N预测模型评价,评价结果可通过ROC曲线及准确率-召回率曲线展示:</p>
+<h1 id="4-fold交叉验证"><a href="#4-fold交叉验证" class="headerlink" title="4-fold交叉验证"></a>4-fold交叉验证</h1><p>tops &lt;- evaluationScheme ( key1 [ 1 : 800 ] , method = “cross” , k = 4 , given = 3 ,goodRating = 5 )</p>
+<p>results &lt;- evaluate ( tops , method = “POPULAR” , type = “topNList” ,n = c ( 1 , 3 , 5 , 10 ) )</p>
+<h1 id="获得混淆矩阵"><a href="#获得混淆矩阵" class="headerlink" title="获得混淆矩阵"></a>获得混淆矩阵</h1><p>getConfusionMatrix ( results ) [ [ 1 ] ]</p>
+<p>avg ( results )</p>
+<p>推荐算法的比较</p>
+<p>除了对预测模型进行评价，还可以对不同推荐算法进行比较。可首先构建一个推荐算法列表，通过ROC曲线、、准确率-召回率曲线或RMSE直方图进行比较</p>
+<p>TOP-N算法比较</p>
+<p>set.seed ( 2016 )</p>
+<p>scheme &lt;- evaluationScheme ( key1 , method = “split” , train = 0.9 , k = 1 , given = 10 , goodRating = 5 )</p>
+<h1 id="构建不同算法模型"><a href="#构建不同算法模型" class="headerlink" title="构建不同算法模型"></a>构建不同算法模型</h1><p>results &lt;- evaluate ( scheme ,test_data ,n = c ( 1 ,3 ,5 ,10 ,15 ,20 ) )</p>
+<h1 id="模型比较-ROC曲线"><a href="#模型比较-ROC曲线" class="headerlink" title="模型比较#ROC曲线"></a>模型比较#ROC曲线</h1><p>plot ( results , annotate = c ( 1 , 3 ) , legend = “bottomright” )</p>
+<h1 id="准确率-召回率曲线"><a href="#准确率-召回率曲线" class="headerlink" title="准确率-召回率曲线"></a>准确率-召回率曲线</h1><p>plot ( results , “prec/rec” , annotate = c ( 2 , 3 , 4 ) , legend = “topleft” )</p>
+<p>预测评分算法比较</p>
+<p>results2 &lt;- evaluate ( scheme , algorithms , type = “ratings” )</p>
+<p>plot ( results2 , ylim = c ( 0 , 20 ) )</p>
 
       
     </div>
@@ -441,7 +487,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
           
         </div>
       
@@ -454,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/02/用户生命周期/" rel="next" title="用户生命周期">
-                <i class="fa fa-chevron-left"></i> 用户生命周期
+              <a href="/2017/06/02/正则化-Lasso规约/" rel="next" title="正则化-Lasso规约">
+                <i class="fa fa-chevron-left"></i> 正则化-Lasso规约
               </a>
             
           </div>
@@ -464,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/01/基于SSD下的图像内容识别（一）/" rel="prev" title="基于SSD下的图像内容识别（一）">
-                基于SSD下的图像内容识别（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/12/订单需求预估/" rel="prev" title="订单需求预估">
+                订单需求预估 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -523,8 +569,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -610,6 +665,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#加载数据包"><span class="nav-number">1.</span> <span class="nav-text">加载数据包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as-函数转为raringMatrix类型。"><span class="nav-number">2.</span> <span class="nav-text">构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二元分类转换，normalize-函数进行标准化处理，标准化的目的是为了去除用户评分的偏差"><span class="nav-number">3.</span> <span class="nav-text">二元分类转换，normalize()函数进行标准化处理，标准化的目的是为了去除用户评分的偏差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看模型方法"><span class="nav-number">4.</span> <span class="nav-text">查看模型方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#top-N为有序列表，抽取最优推荐子集"><span class="nav-number">5.</span> <span class="nav-text">top-N为有序列表，抽取最优推荐子集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#评分预测"><span class="nav-number">6.</span> <span class="nav-text">评分预测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-fold交叉验证"><span class="nav-number">7.</span> <span class="nav-text">4-fold交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获得混淆矩阵"><span class="nav-number">8.</span> <span class="nav-text">获得混淆矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建不同算法模型"><span class="nav-number">9.</span> <span class="nav-text">构建不同算法模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型比较-ROC曲线"><span class="nav-number">10.</span> <span class="nav-text">模型比较#ROC曲线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准确率-召回率曲线"><span class="nav-number">11.</span> <span class="nav-text">准确率-召回率曲线</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
