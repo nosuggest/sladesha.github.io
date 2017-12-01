@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="理论解析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的python开发：特征工程代码模版 ，进入页面后ctrl+F搜smote就行，请自取  之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote">
+<meta name="keywords" content="理论解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SMOTE算法">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/SMOTE算法/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的python开发：特征工程代码模版 ，进入页面后ctrl+F搜smote就行，请自取  之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote，网上也没有搜到，所以就当做一个小练手来做一下。 首先，看下Smote算法之前">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f498eba11b0aa678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5782835263511a07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9fa8ec63346c4684.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-dad1a4b19048d4ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-dc13c3ce230c1d0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-051da4d8b859bbb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b603de85fc0748e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5a51fae31eb2d1ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T15:57:42.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SMOTE算法">
+<meta name="twitter:description" content="17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的python开发：特征工程代码模版 ，进入页面后ctrl+F搜smote就行，请自取  之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote，网上也没有搜到，所以就当做一个小练手来做一下。 首先，看下Smote算法之前">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-f498eba11b0aa678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/SMOTE算法/"/>
+
+
+
+
+
+  <title>SMOTE算法 | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/SMOTE算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SMOTE算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T23:56:34+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/01/SMOTE算法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/01/SMOTE算法/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,943 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的<a href="http://www.jianshu.com/p/1f2f887f0811" target="_blank" rel="noopener">python开发：特征工程代码模版
+</a>，进入页面后ctrl+F搜smote就行，请自取</p>
+<hr>
+<p>之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote，网上也没有搜到，所以就当做一个小练手来做一下。</p>
+<p>首先，看下Smote算法之前，我们先看下当正负样本不均衡的时候，我们通常用的方法：</p>
+<ul>
+<li>抽样<br>常规的包含过抽样、欠抽样、组合抽样<br>过抽样：将样本较少的一类sample补齐<br>欠抽样：将样本较多的一类sample压缩<br>组合抽样：约定一个量级N，同时进行过抽样和欠抽样，使得正负样本量和等于约定量级N</li>
+</ul>
+<p>这种方法要么丢失数据信息，要么会导致较少样本共线性，存在明显缺陷</p>
+<ul>
+<li>权重调整<br>常规的包括算法中的weight，weight matrix<br>改变入参的权重比，比如boosting中的全量迭代方式、逻辑回归中的前置的权重设置</li>
+</ul>
+<p>这种方式的弊端在于无法控制合适的权重比，需要多次尝试</p>
+<ul>
+<li>核函数修正<br>通过核函数的改变，来抵消样本不平衡带来的问题</li>
+</ul>
+<p>这种使用场景局限，前置的知识学习代价高，核函数调整代价高，黑盒优化</p>
+<ul>
+<li>模型修正<br>通过现有的较少的样本类别的数据，用算法去探查数据之间的特征，判读数据是否满足一定的规律<br>比如，通过线性拟合，发现少类样本成线性关系，可以新增线性拟合模型下的新点</li>
+</ul>
+<p>实际规律比较难发现，难度较高</p>
+<p><strong>SMOTE（Synthetic minoritye over-sampling technique,SMOTE）是Chawla在2002年提出的过抽样的算法，一定程度上可以避免以上的问题</strong></p>
+<p>下面介绍一下这个算法：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-f498eba11b0aa678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正负样本分布"></p>
+<p>很明显的可以看出，蓝色样本数量远远大于红色样本，在常规调用分类模型去判断的时候可能会导致之间忽视掉红色样本带了的影响，只强调蓝色样本的分类准确性，这边需要增加红色样本来平衡数据集</p>
+<p>Smote算法的思想其实很简单，先随机选定n个少类的样本，如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-5782835263511a07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="找出初始扩展的少类样本"></p>
+<p>再找出最靠近它的m个少类样本，如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-9fa8ec63346c4684.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>再任选最临近的m个少类样本中的任意一点，</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-dad1a4b19048d4ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>在这两点上任选一点，这点就是新增的数据样本</p>
+<hr>
+<p>R语言上的开发较为简单，有现成的包库，这边简单介绍一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm(list=ls())</span><br><span class="line">install.packages(“DMwR”,dependencies=T)</span><br><span class="line">library(DMwR)#加载smote包</span><br><span class="line">newdata=SMOTE(formula,data,perc.over=,perc.under=)</span><br><span class="line">#formula:申明自变量因变量</span><br><span class="line">#perc.over：过采样次数</span><br><span class="line">#perc.under：欠采样次数</span><br></pre></td></tr></table></figure></p>
+<p>效果对比：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-dc13c3ce230c1d0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>简单的看起来就好像是重复描绘了较少的类<br>这边的smote是封装好的，直接调用就行了，没有什么特别之处</p>
+<hr>
+<p>这边自己想拿刚学的python练练手，所有就拿python写了一下过程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">from sklearn.preprocessing import StandardScaler</span><br><span class="line">from numpy import *</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">#读数据</span><br><span class="line">data = pd.read_table(&apos;C:/Users/17031877/Desktop/supermarket_second_man_clothes_train.txt&apos;, low_memory=False)</span><br><span class="line"></span><br><span class="line">#简单的预处理</span><br><span class="line">test_date = pd.concat([data[&apos;label&apos;], data.iloc[:, 7:10]], axis=1)</span><br><span class="line">test_date = test_date.dropna(how=&apos;any&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>数据大致如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">test_date.head()</span><br><span class="line">Out[25]:</span><br><span class="line">   label  max_date_diff  max_pay  cnt_time</span><br><span class="line">0      0           23.0  43068.0        15</span><br><span class="line">1      0           10.0   1899.0         2</span><br><span class="line">2      0          146.0   3299.0        21</span><br><span class="line">3      0           30.0  31959.0        35</span><br><span class="line">4      0            3.0  24165.0        98</span><br><span class="line">test_date[&apos;label&apos;][test_date[&apos;label&apos;]==0].count()/test_date[&apos;label&apos;][test_date[&apos;label&apos;]==1].count()</span><br><span class="line">Out[37]: 67</span><br></pre></td></tr></table></figure></p>
+<p>label是样本类别判别标签，1:0=67:1，需要对label=1的数据进行扩充</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 筛选目标变量</span><br><span class="line">aimed_date = test_date[test_date[&apos;label&apos;] == 1]</span><br><span class="line"># 随机筛选少类扩充中心</span><br><span class="line">index = pd.DataFrame(aimed_date.index).sample(frac=0.1, random_state=1)</span><br><span class="line">index.columns = [&apos;id&apos;]</span><br><span class="line">number = len(index)</span><br><span class="line"># 生成array格式</span><br><span class="line">aimed_date_new = aimed_date.ix[index.values.ravel(), :]</span><br></pre></td></tr></table></figure>
+<p>随机选取了全量少数样本的10%作为数据扩充的中心点</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 自变量标准化</span><br><span class="line">sc = StandardScaler().fit(aimed_date_new)</span><br><span class="line">aimed_date_new = pd.DataFrame(sc.transform(aimed_date_new))</span><br><span class="line">sc1 = StandardScaler().fit(aimed_date)</span><br><span class="line">aimed_date = pd.DataFrame(sc1.transform(aimed_date))</span><br><span class="line"></span><br><span class="line"># 定义欧式距离计算</span><br><span class="line">def dist(a, b):</span><br><span class="line">    a = array(a)</span><br><span class="line">    b = array(b)</span><br><span class="line">    d = ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2 + (a[3] - b[3]) ** 2) ** 0.5</span><br><span class="line">    return d</span><br></pre></td></tr></table></figure>
+<p>下面定义距离计算的方式，所有算法中，涉及到距离的地方都需要标准化去除冈量，也同时加快了计算的速度<br>这边采取了欧式距离的方式，更多计算距离的方式参考：<br><a href="http://www.jianshu.com/p/1417fcb06797" target="_blank" rel="noopener">多种距离及相似度的计算理论介绍</a></p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 统计所有检验距离样本个数</span><br><span class="line">row_l1 = aimed_date_new.iloc[:, 0].count()</span><br><span class="line">row_l2 = aimed_date.iloc[:, 0].count()</span><br><span class="line">a = zeros((row_l1, row_l2))</span><br><span class="line">a = pd.DataFrame(a)</span><br><span class="line"># 计算距离矩阵</span><br><span class="line">for i in range(row_l1):</span><br><span class="line">    for j in range(row_l2):</span><br><span class="line">        d = dist(aimed_date_new.iloc[i, :], aimed_date.iloc[j, :])</span><br><span class="line">        a.ix[i, j] = d</span><br><span class="line">b = a.T.apply(lambda x: x.min())</span><br></pre></td></tr></table></figure>
+<p>调用上面的计算距离的函数，形成一个距离矩阵</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 找到同类点位置</span><br><span class="line">h = []</span><br><span class="line">z = []</span><br><span class="line">for i in range(number):</span><br><span class="line">    for j in range(len(a.iloc[i, :])):</span><br><span class="line">        ai = a.iloc[i, j]</span><br><span class="line">        bi = b[i]</span><br><span class="line">        if ai == bi:</span><br><span class="line">            h.append(i)</span><br><span class="line">            z.append(j)</span><br><span class="line">        else:</span><br><span class="line">            continue</span><br><span class="line">new_point = [0, 0, 0, 0]</span><br><span class="line">new_point = pd.DataFrame(new_point)</span><br><span class="line">for i in range(len(h)):</span><br><span class="line">    index_a = z[i]</span><br><span class="line">    new = aimed_date.iloc[index_a, :]</span><br><span class="line">    new_point = pd.concat([new, new_point], axis=1)</span><br><span class="line"></span><br><span class="line">new_point = new_point.iloc[:, range(len(new_point.columns) - 1)]</span><br></pre></td></tr></table></figure>
+<p>再找到位置的情况下，再去原始的数据集中根据位置查找具体的数据</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">r1 = []</span><br><span class="line">for i in range(len(new_point.columns)):</span><br><span class="line">    r1.append(random.uniform(0, 1))</span><br><span class="line">new_point_last = []</span><br><span class="line">new_point_last = pd.DataFrame(new_point_last)</span><br><span class="line"># 求新点 new_x=old_x+rand()*(append_x-old_x)</span><br><span class="line">for i in range(len(new_point.columns)):</span><br><span class="line">    new_x = (new_point.iloc[1:4, i] - aimed_date_new.iloc[number - 1 - i, 1:4]) * r1[i] + aimed_date_new.iloc[</span><br><span class="line">                                                                                          number - 1 - i, 1:4]</span><br><span class="line">    new_point_last = pd.concat([new_point_last, new_x], axis=1)</span><br><span class="line">print new_point_last</span><br></pre></td></tr></table></figure>
+<p>最后，再根据smote的计算公式<code>new_x=old_x+rand()*(append_x-old_x)</code>，计算出新的点即可，python练手到此就结束了</p>
+<p>其实，在这个结果上，我们可以综合Tomek link做一个集成的数据扩充的算法，思路如下：<br>假设，我们利用上述的算法产生了两个青色方框的新数据点：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-051da4d8b859bbb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>我们认为，对于新产生的青色数据点与其他非青色样本点距离最近的点，构成一对Tomek link</strong>，如下图框中的青蓝两点</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-b603de85fc0748e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我们可以定义规则：<br>当以新产生点为中心，Tomek link的距离为范围半径，去框定一个空间，空间内的<code>少数类的个数/多数类的个数</code>&lt;最低阀值的时候，认为新产生点为“垃圾点”，应该剔除或者再次进行smote训练；空间内的<code>少数类的个数/多数类的个数</code>&gt;=最低阀值的时候,在进行保留并纳入smote训练的初始少类样本集合中去抽样<br>所以，剔除左侧的青色新增点，只保留右边的新增数据如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-5a51fae31eb2d1ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>参考文献：</p>
+<ul>
+<li><a href="https://www.jair.org/media/953/live-953-2037-jair.pdf" target="_blank" rel="noopener">https://www.jair.org/media/953/live-953-2037-jair.pdf</a></li>
+<li><a href="https://github.com/fmfn/UnbalancedDataset" target="_blank" rel="noopener">https://github.com/fmfn/UnbalancedDataset</a></li>
+<li>Batista, G. E., Bazzan, A. L., &amp; Monard, M. C. (2003, December). Balancing Training Data for Automated Annotation of Keywords: a Case Study. In WOB (pp. 10-18).</li>
+<li>Batista, G. E., Prati, R. C., &amp; Monard, M. C. (2004). A study of the behavior of several methods for balancing machine learning training data. ACM Sigkdd Explorations Newsletter, 6(1), 20-29.</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有你们的支持，我们一定会不会停息</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesal 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesal 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/python开发：特征工程代码模版-二/" rel="next" title="python开发：特征工程代码模版(二)">
+                <i class="fa fa-chevron-left"></i> python开发：特征工程代码模版(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">55.9k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytllX3jJ';
+      var conf = 'df80cce337485e83adcdb34af93e3dbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
