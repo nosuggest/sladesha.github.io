@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据平衡," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前在R里面可以通过调用Rose这个package调用数据平衡函数，这边用python改写了一下，也算是自我学习了。 R：12345678910# 设定工作目录setwd(path)# 安装包install.packages(&quot;ROSE&quot;)library(ROSE)# 检查数据data(hacide">
+<meta name="keywords" content="数据平衡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据抽样平衡方法重写">
+<meta property="og:url" content="http://sladesha.github.io/2017/07/13/数据抽样平衡方法重写/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="之前在R里面可以通过调用Rose这个package调用数据平衡函数，这边用python改写了一下，也算是自我学习了。 R：12345678910# 设定工作目录setwd(path)# 安装包install.packages(&quot;ROSE&quot;)library(ROSE)# 检查数据data(hacide)table(hacide.train$cls)  0     1980    20  过抽样实现：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-01T15:49:27.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据抽样平衡方法重写">
+<meta name="twitter:description" content="之前在R里面可以通过调用Rose这个package调用数据平衡函数，这边用python改写了一下，也算是自我学习了。 R：12345678910# 设定工作目录setwd(path)# 安装包install.packages(&quot;ROSE&quot;)library(ROSE)# 检查数据data(hacide)table(hacide.train$cls)  0     1980    20  过抽样实现：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/07/13/数据抽样平衡方法重写/"/>
+
+
+
+
+
+  <title>数据抽样平衡方法重写 | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/07/13/数据抽样平衡方法重写/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据抽样平衡方法重写</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-13T23:48:38+08:00">
+                2017-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/07/13/数据抽样平衡方法重写/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/07/13/数据抽样平衡方法重写/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,165 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前在R里面可以通过调用Rose这个package调用数据平衡函数，这边用python改写了一下，也算是自我学习了。</p>
+<p>R：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设定工作目录</span></span><br><span class="line">setwd(path)</span><br><span class="line"><span class="comment"># 安装包</span></span><br><span class="line">install.packages(<span class="string">"ROSE"</span>)</span><br><span class="line"><span class="keyword">library</span>(ROSE)</span><br><span class="line"><span class="comment"># 检查数据</span></span><br><span class="line">data(hacide)</span><br><span class="line">table(hacide.train$cls)</span><br><span class="line">  <span class="number">0</span>     <span class="number">1</span></span><br><span class="line"><span class="number">980</span>    <span class="number">20</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>过抽样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_balanced_over &lt;- ovun.sample(cls ~ ., data = hacide.train, method = &quot;over&quot;,N = 1960)$data</span><br><span class="line">table(data_balanced_over$cls)</span><br><span class="line">0    1</span><br><span class="line">980 980</span><br></pre></td></tr></table></figure></p>
+<p><strong>这边需要注意是<code>ovun</code>不是<code>over</code></strong></p>
+<hr>
+<p>欠采样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_balanced_under &lt;- ovun.sample(cls ~ ., data = hacide.train, method = &quot;under&quot;, N = 40, seed = 1)$data</span><br><span class="line">table(data_balanced_under$cls)</span><br><span class="line">0    1</span><br><span class="line">20  20</span><br></pre></td></tr></table></figure></p>
+<p>这边需要注意的是欠采样是不放回采样，同时对数据信息的损失也是极大的</p>
+<hr>
+<p>组合采样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_balanced_both &lt;- ovun.sample(cls ~ ., data = hacide.train, method = &quot;both&quot;, p=0.5, N=1000, seed = 1)$data</span><br><span class="line">table(data_balanced_both$cls)</span><br><span class="line">0    1</span><br><span class="line">520 480</span><br></pre></td></tr></table></figure></p>
+<p><code>method</code>的不同值代表着不同的采样方法，p这边是控制正类的占比，seed保证抽取样本的固定，也就是种子值。</p>
+<hr>
+<hr>
+<p>在python上，我也没有发现有现成的package可以import，所以就参考了R的实现逻辑重写了一遍，新增了一个分层抽样<code>group_sample</code>,删除了过采样，重写了组合抽样<code>combine_sample</code>,欠抽样<code>under_sample</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math <span class="keyword">as</span> ma</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sample_s</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">''''this is my pleasure'''</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">group_sample</span><span class="params">(self, data_set, label, percent=<span class="number">0.1</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 分层抽样</span></span><br><span class="line">        <span class="comment"># data_set:数据集</span></span><br><span class="line">        <span class="comment"># label:分层变量</span></span><br><span class="line">        <span class="comment"># percent:抽样占比</span></span><br><span class="line">        <span class="comment"># q:每次抽取是否随机,null为随机</span></span><br><span class="line">        <span class="comment"># 抽样根据目标列分层，自动将样本数较多的样本分层按percent抽样，得到目标列样本较多的特征欠抽样数据</span></span><br><span class="line">        x = data_set</span><br><span class="line">        y = label</span><br><span class="line">        z = percent</span><br><span class="line">        diff_case = pd.DataFrame(x[y]).drop_duplicates([y])</span><br><span class="line">        result = []</span><br><span class="line">        result = pd.DataFrame(result)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(diff_case)):</span><br><span class="line">            k = np.array(diff_case)[i]</span><br><span class="line">            data_set = x[x[y] == k[<span class="number">0</span>]]</span><br><span class="line">            nrow_nb = data_set.iloc[:, <span class="number">0</span>].count()</span><br><span class="line">            data_set.index = range(nrow_nb)</span><br><span class="line">            index_id = rd.sample(range(nrow_nb), int(nrow_nb * z))</span><br><span class="line">            result = pd.concat([result, data_set.iloc[index_id, :]], axis=<span class="number">0</span>)</span><br><span class="line">        new_data = pd.Series(result[<span class="string">'label'</span>]).value_counts()</span><br><span class="line">        new_data = pd.DataFrame(new_data)</span><br><span class="line">        new_data.columns = [<span class="string">'cnt'</span>]</span><br><span class="line">        k1 = pd.DataFrame(new_data.index)</span><br><span class="line">        k2 = new_data[<span class="string">'cnt'</span>]</span><br><span class="line">        new_data = pd.concat([k1, k2], axis=<span class="number">1</span>)</span><br><span class="line">        new_data.columns = [<span class="string">'id'</span>, <span class="string">'cnt'</span>]</span><br><span class="line">        max_cnt = max(new_data[<span class="string">'cnt'</span>])</span><br><span class="line">        k3 = new_data[new_data[<span class="string">'cnt'</span>] == max_cnt][<span class="string">'id'</span>]</span><br><span class="line">        result = result[result[y] == k3[<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">under_sample</span><span class="params">(self, data_set, label, percent=<span class="number">0.1</span>, q=<span class="number">1</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 欠抽样</span></span><br><span class="line">        <span class="comment"># data_set:数据集</span></span><br><span class="line">        <span class="comment"># label:抽样标签</span></span><br><span class="line">        <span class="comment"># percent:抽样占比</span></span><br><span class="line">        <span class="comment"># q:每次抽取是否随机</span></span><br><span class="line">        <span class="comment"># 抽样根据目标列分层，自动将样本数较多的样本按percent抽样，得到目标列样本较多特征的欠抽样数据</span></span><br><span class="line">        x = data_set</span><br><span class="line">        y = label</span><br><span class="line">        z = percent</span><br><span class="line">        diff_case = pd.DataFrame(pd.Series(x[y]).value_counts())</span><br><span class="line">        diff_case.columns = [<span class="string">'cnt'</span>]</span><br><span class="line">        k1 = pd.DataFrame(diff_case.index)</span><br><span class="line">        k2 = diff_case[<span class="string">'cnt'</span>]</span><br><span class="line">        diff_case = pd.concat([k1, k2], axis=<span class="number">1</span>)</span><br><span class="line">        diff_case.columns = [<span class="string">'id'</span>, <span class="string">'cnt'</span>]</span><br><span class="line">        max_cnt = max(diff_case[<span class="string">'cnt'</span>])</span><br><span class="line">        k3 = diff_case[diff_case[<span class="string">'cnt'</span>] == max_cnt][<span class="string">'id'</span>]</span><br><span class="line">        new_data = x[x[y] == k3[<span class="number">0</span>]].sample(frac=z, random_state=q, axis=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> new_data</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combine_sample</span><span class="params">(self, data_set, label, number, percent=<span class="number">0.35</span>, q=<span class="number">1</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 组合抽样</span></span><br><span class="line">        <span class="comment"># data_set:数据集</span></span><br><span class="line">        <span class="comment"># label:目标列</span></span><br><span class="line">        <span class="comment"># number:计划抽取多类及少类样本和</span></span><br><span class="line">        <span class="comment"># percent：少类样本占比</span></span><br><span class="line">        <span class="comment"># q:每次抽取是否随机</span></span><br><span class="line">        <span class="comment"># 设定总的期待样本数量，及少类样本占比，采取多类样本欠抽样，少类样本过抽样的组合形式</span></span><br><span class="line">        x = data_set</span><br><span class="line">        y = label</span><br><span class="line">        n = number</span><br><span class="line">        p = percent</span><br><span class="line">        diff_case = pd.DataFrame(pd.Series(x[y]).value_counts())</span><br><span class="line">        diff_case.columns = [<span class="string">'cnt'</span>]</span><br><span class="line">        k1 = pd.DataFrame(diff_case.index)</span><br><span class="line">        k2 = diff_case[<span class="string">'cnt'</span>]</span><br><span class="line">        diff_case = pd.concat([k1, k2], axis=<span class="number">1</span>)</span><br><span class="line">        diff_case.columns = [<span class="string">'id'</span>, <span class="string">'cnt'</span>]</span><br><span class="line">        max_cnt = max(diff_case[<span class="string">'cnt'</span>])</span><br><span class="line">        k3 = diff_case[diff_case[<span class="string">'cnt'</span>] == max_cnt][<span class="string">'id'</span>]</span><br><span class="line">        k4 = diff_case[diff_case[<span class="string">'cnt'</span>] != max_cnt][<span class="string">'id'</span>]</span><br><span class="line">        n1 = p * n</span><br><span class="line">        n2 = n - n1</span><br><span class="line">        fre1 = n2 / float(x[x[y] == k3[<span class="number">0</span>]][<span class="string">'label'</span>].count())</span><br><span class="line">        fre2 = n1 / float(x[x[y] == k4[<span class="number">1</span>]][<span class="string">'label'</span>].count())</span><br><span class="line">        fre3 = ma.modf(fre2)</span><br><span class="line">        new_data1 = x[x[y] == k3[<span class="number">0</span>]].sample(frac=fre1, random_state=q, axis=<span class="number">0</span>)</span><br><span class="line">        new_data2 = x[x[y] == k4[<span class="number">1</span>]].sample(frac=fre3[<span class="number">0</span>], random_state=q, axis=<span class="number">0</span>)</span><br><span class="line">        test_data = pd.DataFrame([])</span><br><span class="line">        <span class="keyword">if</span> int(fre3[<span class="number">1</span>]) &gt; <span class="number">0</span>:</span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> i &lt; (int(fre3[<span class="number">1</span>])):</span><br><span class="line">                data = x[x[y] == k4[<span class="number">1</span>]]</span><br><span class="line">                test_data = pd.concat([test_data, data], axis=<span class="number">0</span>)</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">        result = pd.concat([new_data1, new_data2, test_data], axis=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p>
+<p>后续使用，只需要复制上述code，存成<code>.py</code>的文件，后续使用的时候：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加载函数</span></span><br><span class="line"><span class="keyword">import</span> sample_s <span class="keyword">as</span> sa</span><br><span class="line"><span class="comment">#这边可以选择你需要的分层抽样、欠抽样、组合抽样的函数</span></span><br><span class="line">sample = sa.group_sample()</span><br><span class="line"><span class="comment">#直接调用函数即可</span></span><br><span class="line">new_data3 = sample.combine_sample(data_train, <span class="string">'label'</span>, <span class="number">60000</span>, <span class="number">0.4</span>)</span><br><span class="line"><span class="comment">#将data_train里面的label保持正样本（少类样本）达到0.4的占比下，总数抽取到60000个样本</span></span><br></pre></td></tr></table></figure></p>
+<p>其实不是很难的一个过程，只是强化自己对python及R语言的书写方式的记忆，谢谢。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有你们的支持，我们一定会不会停息</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesal 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesal 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据平衡/" rel="tag"># 数据平衡</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/19/大数据量下的划分聚类方法/" rel="prev" title="大数据量下的划分聚类方法">
+                大数据量下的划分聚类方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">52.4k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytllX3jJ';
+      var conf = 'df80cce337485e83adcdb34af93e3dbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
