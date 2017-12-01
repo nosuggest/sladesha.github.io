@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="推荐," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近做了一个交叉销售的项目，梳理了一些关键点，分享如下，希望对大家有所启发核心目标：在有限资源下，尽可能的提供高转化率的用户群，辅助业务增长初步效果：商家ROI值为50以上，用户日转化率提升10倍以上，用户日最低转化效果5pp以上以下为正文：数据准备：1.商品相关性存在商品A,B,C…，商品之间用户会存在行为信息的关联">
+<meta name="keywords" content="推荐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="交叉销售算法">
+<meta property="og:url" content="http://sladesha.github.io/2017/11/01/交叉销售算法/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="最近做了一个交叉销售的项目，梳理了一些关键点，分享如下，希望对大家有所启发核心目标：在有限资源下，尽可能的提供高转化率的用户群，辅助业务增长初步效果：商家ROI值为50以上，用户日转化率提升10倍以上，用户日最低转化效果5pp以上以下为正文：数据准备：1.商品相关性存在商品A,B,C…，商品之间用户会存在行为信息的关联度，这边可以参考协调过滤算法中的Item-based，这边拓展为用户在不同商品">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b283d67baa29f175.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-89aab00daf12957b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2bb3bfc9f61d9511.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3dc206ce811fd331.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d85e9481b10fbed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1a793afc031f2358.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5ea000e1656570cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-57ff2e44ea9c3e9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b06aa864056a5ed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0d98bdffde0383d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T15:50:57.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="交叉销售算法">
+<meta name="twitter:description" content="最近做了一个交叉销售的项目，梳理了一些关键点，分享如下，希望对大家有所启发核心目标：在有限资源下，尽可能的提供高转化率的用户群，辅助业务增长初步效果：商家ROI值为50以上，用户日转化率提升10倍以上，用户日最低转化效果5pp以上以下为正文：数据准备：1.商品相关性存在商品A,B,C…，商品之间用户会存在行为信息的关联度，这边可以参考协调过滤算法中的Item-based，这边拓展为用户在不同商品">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-b283d67baa29f175.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/11/01/交叉销售算法/"/>
+
+
+
+
+
+  <title>交叉销售算法 | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/11/01/交叉销售算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">交叉销售算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T23:34:24+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/01/交叉销售算法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/01/交叉销售算法/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,888 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-b283d67baa29f175.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>最近做了一个交叉销售的项目，梳理了一些关键点，分享如下，希望对大家有所启发<br>核心目标：在有限资源下，尽可能的提供高转化率的用户群，辅助业务增长<br>初步效果：商家ROI值为50以上，用户日转化率提升10倍以上，用户日最低转化效果5pp以上<br>以下为正文：<br>数据准备：<br>1.商品相关性<br>存在商品A,B,C…，商品之间用户会存在行为信息的关联度，这边可以参考协调过滤算法中的Item-based，这边拓展为用户在不同商品之间的操作行为的差异性。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-89aab00daf12957b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>可以形成如下的特征矩阵：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-2bb3bfc9f61d9511.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这边相关的常见度量方式有以下几种：<br>a.距离衡量<br>包括浏览、点击、搜索等等各种行为的欧式、马氏、闵式、切比雪夫距离、汉明距离计算<br>b.相似度衡量<br>包括余弦相似度、杰卡德相似度衡量<br>c.复杂衡量<br>包括相关性衡量，熵值衡量，互信息量衡量，相关距离衡量<br>2.商品行为信息<br>探求商品及其对应行为信息的笛卡尔积的映射关系，得到一个商品+用户的行为魔方<br>商品集合：{商品A、商品B、…}<br>商品属性集合：{价格、是否打折、相比其他电商平台的比价、是否缺货…}<br>用户行为集合：{浏览次数、浏览时长、末次浏览间隔、搜索次数、末次搜索间隔…}<br>通过商品集合<em>商品属性集合</em>用户行为集合,形成高维的商品信息魔方，再通过探查算法，筛选优秀表现的特征，这里推荐的有pca，randomforest的importance，lasso变量压缩，相关性压缩，逐步回归压缩等方法，根据数据的属性特点可适当选取方法<br>最后，我们会得到如下一个待选特征组：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-3dc206ce811fd331.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>3.商品购买周期<br>针对每一件商品，都是有它自身的生命周期的，比如，在三个月内买过冰箱的用户，95%以上的用户是不会选择二次购买的；而在1个月的节点上，会有20%的用户会选择二次购买生活用纸。所以我们需要做的一件事情就是不断更新，平台上面每个类目下面的商品的自身生命周期。除此之外，考虑在过渡时间点，用户的需求变化情况，是否可以提前触发需求；这边利用，艾宾浩斯遗忘曲线和因子衰减规律拟合：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-d85e9481b10fbed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="艾宾浩斯曲线.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-1a793afc031f2358.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="衰减因子.png"></p>
+<p>确定lamda和b，计算每个用户对应的每个类目，当前时间下的剩余价值：f(最高价值)<em>lamda</em>b</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-5ea000e1656570cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="艾宾浩斯.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-57ff2e44ea9c3e9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="衰减因子公式.png"></p>
+<p>4.商品挖掘特征，用户挖掘特征<br>业务运营过程中，通过数据常规可以得到1.基础结论，2.挖掘结论。基础结论就是统计结论，比如昨日订单量，昨日销售量 ，昨日用户量；挖掘结论就是深层结论，比如昨日活跃用户数，每日预估销售量，用户生命周期等<br>存在如下的探索形式，这是一个漫长而又非常有价值的过程：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-b06aa864056a5ed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="特征分析.png"></p>
+<p>模型整合<br>再确定以上四大类的数据特征之后，我们通过组合模型的方法，判断用户的交叉销售结果</p>
+<hr>
+<p>1.cart regression<br>确保非线性密度均匀数据拟合效果，针对存在非线性关系且数据可被网格切分的产业用户有高的预测能力<br>2.ridge regression<br>确保可线性拟合及特征繁多数据的效果，针对存在线性关系的产业用户有高的预测能力<br>3.Svm-liner<br>确保线性且存在不可忽视的异常点的数据拟合效果，针对存在异常用户较多的部分产业用户有高的预测能力<br>4.xgboost<br>确保数据复杂高维且无明显关系的数据拟合效果，针对存在维度高、数据杂乱、无模型规律的部分产业用户有高的预测能力<br>以上的组合模型并非固定，也并非一定全部使用，在确定自身产业的特点后，择优选择，然后采取投票、加权、分组等组合方式产出结果即可。</p>
+<hr>
+<p>附上推荐Rcode简述，<br><strong>cart regression：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fit &lt;- rpart(y~x, data=database, method=&quot;class&quot;,control=ct, parms = list(prior = c(0.7,0.3), split = &quot;information&quot;));</span><br><span class="line"># xval是n折交叉验证</span><br><span class="line"># minsplit是最小分支节点数，设置后达不到最小分支节点的话会继续分划下去</span><br><span class="line"># minbucket：叶子节点最小样本数</span><br><span class="line"># maxdepth：树的深度</span><br><span class="line"># cp全称为complexity parameter，指某个点的复杂度，对每一步拆分,模型的拟合优度必须提高的程度</span><br><span class="line"># kyphosis是rpart这个包自带的数据集</span><br><span class="line"># na.action：缺失数据的处理办法，默认为删除因变量缺失的观测而保留自变量缺失的观测。</span><br><span class="line"># method：树的末端数据类型选择相应的变量分割方法:</span><br><span class="line"># 连续性method=“anova”,离散型method=“class”,计数型method=“poisson”,生存分析型method=“exp”</span><br><span class="line">#parms用来设置三个参数:先验概率、损失矩阵、分类纯度的度量方法（gini和information）</span><br><span class="line"># cost我觉得是损失矩阵，在剪枝的时候，叶子节点的加权误差与父节点的误差进行比较，考虑损失矩阵的时候，从将“减少-误差”调整为“减少-损失”</span><br></pre></td></tr></table></figure></p>
+<p><strong>ridge regression：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">library（glmnet）</span><br><span class="line">glmmod&lt;-glmnet(x,y,family = &apos;guassian&apos;,alpha = 0)</span><br><span class="line">最小惩罚：</span><br><span class="line">glmmod.min&lt;-glmnet(x,y,family = &apos;gaussian&apos;,alpha = 0,lambda = glmmod.cv$lambda.min)</span><br><span class="line">1个标准差下的最小惩罚：</span><br><span class="line">glmmod.1se&lt;-glmnet(x,y,family = &apos;gaussian&apos;,alpha = 0,lambda = glmmod.cv$lambda.1se)</span><br></pre></td></tr></table></figure></p>
+<p><strong>Svm-liner ：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">library(e1071)</span><br><span class="line">svm(x, y, scale = TRUE, type = NULL, kernel = &quot;&quot;,degree = 3, gamma = if (is.vector(x)) 1 else 1 / ncol(x),coef0 = 0, cost = 1, nu = 0.5, subset, na.action = na.omit)</span><br><span class="line">#type用于指定建立模型的类别:C-classification、nu-classification、one-classification、eps-regression和nu-regression</span><br><span class="line">#kernel是指在模型建立过程中使用的核函数</span><br><span class="line">#degree参数是指核函数多项式内积函数中的参数，其默认值为3</span><br><span class="line">#gamma参数给出了核函数中除线性内积函数以外的所有函数的参数，默认值为l</span><br><span class="line">#coef0参数是指核函数中多项式内积函数与sigmoid内积函数中的参数，默认值为0</span><br><span class="line">#参数cost就是软间隔模型中的离群点权重</span><br><span class="line">#参数nu是用于nu-regression、nu-classification和one-classification类型中的参数</span><br></pre></td></tr></table></figure></p>
+<p><strong>xgboost:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">library(xgboost)</span><br><span class="line">xgb &lt;- xgboost(data = data.matrix(x[,-1]), label = y, eta = 0.1,max_depth = 15, nround=25, subsample = 0.5,colsample_bytree = 0.5,seed = 1,eval_metric = &quot;merror&quot;,objective = &quot;multi:softprob&quot;,num_class = 12, nthread = 3)</span><br><span class="line">#eta：默认值设置为0.3。步长，控制速度及拟合程度</span><br><span class="line">#gamma:默认值设置为0。子树叶节点个数</span><br><span class="line">#max_depth:默认值设置为6。树的最大深度</span><br><span class="line">#min_child_weight:默认值设置为1。控制子树的权重和</span><br><span class="line">#max_delta_step：默认值设置为0。控制每棵树的权重</span><br><span class="line">#subsample： 默认值设置为1。抽样训练占比</span><br><span class="line">#lambda and alpha：正则化</span><br></pre></td></tr></table></figure></p>
+<p>最后通过组合算法的形式产出最终值：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-0d98bdffde0383d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Ensemble Learning"></p>
+<p><strong>典型算法代表：randomforest,adaboost,gbdt</strong></p>
+<p>之前写的没有用markdown，所以看起来很费力，还丢图，这次优化了一下视图，谢谢。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有你们的支持，我们一定会不会停息</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesal 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesal 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/27/SVD及扩展的矩阵分解方法/" rel="next" title="SVD及扩展的矩阵分解方法">
+                <i class="fa fa-chevron-left"></i> SVD及扩展的矩阵分解方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/01/动态最优化经典面试题/" rel="prev" title="动态最优化经典面试题">
+                动态最优化经典面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">53.9k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytllX3jJ';
+      var conf = 'df80cce337485e83adcdb34af93e3dbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
