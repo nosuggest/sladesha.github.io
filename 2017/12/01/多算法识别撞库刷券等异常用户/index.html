@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="风控," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。 问题剖析：此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：  1.难以找到一个很清晰的边界，界定什么是正常">
+<meta name="keywords" content="风控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多算法识别撞库刷券等异常用户">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。 问题剖析：此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：  1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户 2.维数灾难及交叉指标计算之间的高频计算性能瓶颈  算法概">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f32b17059e0e776b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0d68807163ff6089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c60ac94e5cc813c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d406583407427fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-26048e0fbf3736fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-12075db91cef6c5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f0ec3716c8511597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-4b18fea49c38f840.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-039151615db4b747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f30bdc606e81ad19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9cbadf3ff359e091.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-dbe05c6368f7f71f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-cc49e1a8115d8a1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-7a4d7306a3ff518d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-77ca366109e16fc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T10:41:32.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多算法识别撞库刷券等异常用户">
+<meta name="twitter:description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。 问题剖析：此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：  1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户 2.维数灾难及交叉指标计算之间的高频计算性能瓶颈  算法概">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-f32b17059e0e776b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/"/>
+
+
+
+
+
+  <title>多算法识别撞库刷券等异常用户 | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多算法识别撞库刷券等异常用户</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T18:41:01+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。</p>
+<p><strong>问题剖析：</strong><br>此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：</p>
+<ul>
+<li>1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户</li>
+<li>2.维数灾难及交叉指标计算之间的高频计算性能瓶颈</li>
+</ul>
+<p><strong>算法概述：</strong></p>
+<ul>
+<li>1.图形位置分布</li>
+<li>2.统计方法检测</li>
+<li>3.距离位置检测</li>
+<li>4.密度位置检测</li>
+<li>5.无监督模型识别</li>
+</ul>
+<p><strong>算法详述：</strong><br><strong>1.图形位置分布</strong><br>当我们不需要长期监控异常用户，只需要少数几次识别异常用户，且精度要求不高的时候，我们可以采取简单方便的图形识别方式，例如：箱式图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-f32b17059e0e776b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>箱式图判断中，一般我们只需要锁定25%(Q1)分位点的用户特征值，75%(Q3)分位点的用户特征值，Q3与Q1之间的位差即为IQR，一般认定Q3+1.5个IQR外的点即为异常点，对应的用户即为异常用户。这种方法也叫做“盖帽法”，不必人为设定上限阀值，随着用户的数据变化而变化上界，避免了高频修改的问题，只是精度欠缺且绝大多数情况下识别出的异常用户较少。</p>
+<p>方法比较简单，也不多加解释了。</p>
+<p><strong>2.统计方法检测</strong><br>方法也比较简单，上线开发简单。一直是分两步：</p>
+<ul>
+<li>先假设全量数据服从一定的分布，比如常见的正太分布，泊松分布等</li>
+<li>在计算每个点属于这个分布的概率，也就是大家常用的以平均值和方差定密度函数的问题</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-0d68807163ff6089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>因为这边，我们前期无法知道数据服从什么样的分布，所以，我们这边可以用切比雪夫不等式来代替确定的分布形式。除此之外，也就是同时用了马氏距离来衡量了每个具体的点在整体数据集中的位置。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-c60ac94e5cc813c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>核心代码就是下面这个协方差矩阵及矩阵相乘：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两个维度之间协方差矩阵</span></span><br><span class="line">S=np.cov(X)</span><br><span class="line"><span class="comment">#协方差矩阵的逆矩阵</span></span><br><span class="line">SI = np.linalg.inv(S)</span><br><span class="line"><span class="comment">#第一次计算全量用户的维度重心</span></span><br><span class="line">XTmean = XT.mean(axis=<span class="number">0</span>)</span><br><span class="line">d1=[]</span><br><span class="line">n  = XT.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">	delta = XT[i] - XTmean</span><br><span class="line">	d = np.sqrt(np.dot(np.dot(delta,SI),delta.T))</span><br><span class="line">	d1.append(d)</span><br></pre></td></tr></table></figure></p>
+<p>这个方法的最核心的优点就是对全量数据进行了分块，可以理解为将1拆分成了必定有问题的1/m用户，可能有问题的1/n用户，必定没问题的1/w用户（1/m+1/n+1/w=1），这也奠定了后续更好的方法的基础。<br>但是问题也是很明显的，对于1/m，1/n的大小确定无法非常的精准，多了则影响正常用户，少了则无法准确拦截，还是一个划分的算法，并不能给出每个人的好坏程度。</p>
+<p><strong>3.距离位置检测</strong><br>距离探测的方法有一个非常强的假设，正常的用户都比较集中，有较多的邻居，而异常用户都特立独行。<br>在常见的业务问题中都是满足的，比如对爬虫ip的识别，撞库的识别，这些一看那些高频访问的就不是正常用户，但是对于特别稀疏的业务场景，比如企业融资，高深度的敏感页面访问，均不是很适用，它们的频次较低无法构成一个邻居的概念。</p>
+<p>这边非常常用的有2种，一个是连续特征间的欧式距离（标准化下的欧式距离（马氏距离）），另一个是名义变量下的余弦相似度。</p>
+<p>这边只讨论第一种情况，连续特征下如何衡量数据是否为异常数据。前面我们也说到了，切比雪夫不等式的方法能够有效的划分出三个类别正常用户，异常用户，未知用户。所以，相应的，我们只需要在未知用户的集群里面去寻找与正常用户更不相似的，或者和异常用户更相似的用户就可以了。</p>
+<p>对于单变量衡量：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d406583407427fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>对于多变量衡量：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-26048e0fbf3736fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>核心计算相似度的方式就是以上两个公式，会有一些细节处理的问题及注意点，大家可自行研究。</p>
+<p><strong>4.密度位置检测</strong><br>这边先等下谈原理，较为冗长，先说结论，其实，在能够使用距离位置检测的情况下，优先使用距离位置检测的方法。密度方法的前提几乎与位置方法的前提一致，但是在计算量级上而言，存在较大的差异差别。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-12075db91cef6c5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>上述的图片是Fei Tony Liu, Kai Ming Ting, Zhi-Hua Zhou的一篇论文里面对比的常见的iForest,ORCA,LOF(也就是密度位置检测),RF方法的准确率和耗时情况，也清晰的可以看出，同为距离衡量的ORCA的耗时较大，但是LOF的耗时更高，甚至部分情况下都无法计算出结果。</p>
+<p>下面让我们看下理论先，密度位置检测的方法之一，LOF：<br>概念定义：<br>1) d(p,o)：两点p和o之间的距离；<br>2) k-distance：第k距离<br>　　　　对于点p的第k距离dk(p)定义如下：<br>　　　　dk(p)=d(p,o)，并且满足：<br>　　　　　　a) 在集合中至少有不包括p在内的k个点o,∈C{x≠p}， 满足d(p,o,)≤d(p,o) ；<br>　　　　　　b) 在集合中最多有不包括p在内的k−1个点o,∈C{x≠p}，满足d(p,o,)&lt;d(p,o) ；</p>
+<p>上面两个条件总结起来就是1.距离范围内至少满足一定数量的点数，2.最多允许有一个距离最大的非p点<br>形象的看，距离就是p的第k距离，也就是距离p第k远的点的距离，不包括p，如下图箭头的路径长度。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-f0ec3716c8511597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>3) k-distance neighborhood of p：第k距离邻域<br>　　　　点p的第k距离邻域Nk(p)，就是p的第k距离即以内的所有点，包括第k距离。<br>　　　　因此p的第k邻域点的个数记为 |Nk(p)|，且|Nk(p)|≥k</p>
+<p>我们在定义一些衡量指标，那么LOF就算是完成了：<br>1、可达距离（reach-distance）<br>点o到点p的第k可达距离定义为：<br>reach-distancek(p,o)=max{k−distance(o),d(p,o)}</p>
+<p>2、局部可达密度（local reachablility density）<br>点p处的局部可达密度为：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-4b18fea49c38f840.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其中，|Nk(p)|为p的第k领域点的个数，∑o∈Nk(p)reach-distk(p,o)计算的是p的k领域内的点到p的可达距离，也就是1中涉及的计算方式。</p>
+<p>3、局部离群因子（local outlier factor）<br>点p的局部离群因子为：<br>LOF（p） = （∑o∈Nk(p)lrdk(o)/lrdk(p)）/|Nk(p)|<br>其中，lrdk(o)/lrdk(p)比值衡量了p点与附近的点之间的密切差异情况，LOF值=1时，代表p与p附近的点密度一致；LOF值<1时，代表p点的密度大于p附近点的密度；lof值>1时，代表p点的密度小于p附近点的密度，也是非常符合我们的前提假设的，异常点总是比较稀疏，正常点总是比较稠密的。</1时，代表p点的密度大于p附近点的密度；lof值></p>
+<p>到此位置LOF的数学理论就完成了，让我们回顾一下它的思想。它其实就是找数据集合中的每一个点及其邻居的点，计算它和它的邻居的密度，当它的密度大于等于它邻居的密度的时候，则认为它是稠密中心，是正常用户数据；否则异常。<br>但是要计算每个点及对应的邻居的LOF值，计算成本也是非常的高的，最初我们也指出了这一点。</p>
+<p>核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_distance</span><span class="params">(k, instance, instances, distance_function=distance_euclidean)</span>:</span></span><br><span class="line">    distances = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> instance2 <span class="keyword">in</span> instances:</span><br><span class="line">        distance_value = distance_function(instance, instance2)</span><br><span class="line">        <span class="keyword">if</span> distance_value <span class="keyword">in</span> distances:</span><br><span class="line">            distances[distance_value].append(instance2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            distances[distance_value] = [instance2]</span><br><span class="line">    distances = sorted(distances.items())</span><br><span class="line">    neighbours = []</span><br><span class="line">    k_sero = <span class="number">0</span></span><br><span class="line">    k_dist = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">for</span> dist <span class="keyword">in</span> distances:</span><br><span class="line">        k_sero += len(dist[<span class="number">1</span>])</span><br><span class="line">        neighbours.extend(dist[<span class="number">1</span>])</span><br><span class="line">        k_dist = dist[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> k_sero &gt;= k:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> k_dist, neighbours</span><br></pre></td></tr></table></figure></p>
+<p><strong>5.无监督模型识别</strong><br>其实这边说完全的无监督，我觉得不是很准确，我觉得叫“半监督”可能更好一些。<br>这边方法很多，我只介绍两种：<br>1.Iforest<br>2.RNN</p>
+<p>先让我们看下Iforest：<br>算法的关键在于:对于一个有若干维的数据集合，对于其中的任一维度，如果该维度是连续属性的话，在若干次随机二分类后，边界稀疏点最容易优先达到子叶节点,如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-039151615db4b747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>算法实现详细的过程为：<br>假设数据集有N条数据，构建一颗iTree时，从N条数据中均匀抽样(一般是无放回抽样)出m(通常为256)个样本出来，作为这颗树的训练样本。在样本中，随机选一个特征，并在这个特征的所有值范围内(最小值与最大值之间)随机选一个值，对样本进行二叉划分，将样本中小于该值的划分到节点的左边，大于等于该值的划分到节点的右边,重复以上划分步骤，直到达到划分层数上限log(m)或者节点内只有一个样本，一棵树Itree的结果往往是不可信的，所以我们可以训练100-255棵树，最后整合所以树的结果取平均的深度作为输出深度，也叫做Isolation Forest。</p>
+<p>有了算法逻辑，再看衡量指标：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-f30bdc606e81ad19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。（这边需要注意，在sklearn中的Isolation是取得相反的逻辑，score越小数据异常的可能性越大。）</p>
+<p>这边也贴上核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None, sample_weight=None)</span>:</span></span><br><span class="line">       X = check_array(X, accept_sparse=[<span class="string">'csc'</span>], ensure_2d=<span class="keyword">False</span>)</span><br><span class="line">       <span class="keyword">if</span> issparse(X):</span><br><span class="line">           <span class="comment"># Pre-sort indices to avoid that each individual tree of the</span></span><br><span class="line">           <span class="comment"># ensemble sorts the indices.</span></span><br><span class="line">           X.sort_indices()</span><br><span class="line"></span><br><span class="line">       rnd = check_random_state(self.random_state)</span><br><span class="line">       y = rnd.uniform(size=X.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">       <span class="comment"># ensure that max_sample is in [1, n_samples]:</span></span><br><span class="line">       n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (self.max_samples &lt;= n_samples):</span><br><span class="line">           warn(<span class="string">"max_samples is larger than the total number of samples"</span></span><br><span class="line">                <span class="string">" n_samples. Corrected as max_samples=n_samples"</span>)</span><br><span class="line">           self.max_samples = n_samples</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (<span class="number">0</span> &lt; self.max_samples):</span><br><span class="line">           <span class="keyword">raise</span> ValueError(<span class="string">"max_samples has to be positive"</span>)</span><br><span class="line"></span><br><span class="line">       super(IsolationForest, self).fit(X, y, sample_weight=sample_weight)</span><br><span class="line">       <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">_cost</span><span class="params">(self, n)</span>:</span></span><br><span class="line">       <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1.</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           harmonic_number = np.log(n) + <span class="number">0.5772156649</span></span><br><span class="line">           <span class="keyword">return</span> <span class="number">2.</span> * harmonic_number - <span class="number">2.</span> * (n - <span class="number">1.</span>) / n</span><br></pre></td></tr></table></figure></p>
+<p>2.RNN<br>通常我们会以5层的卷积神经网络作为训练网络。我在这边处理之前将切比雪夫不等式划分出来的正常用户作为0-output，异常用户作为1-output，然后尽可能的降低损失函数的误差即可。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-9cbadf3ff359e091.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>第一层是常规层，将不同的input做线性组合：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-dbe05c6368f7f71f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>第二层、第四层是做数据非线性变化：<br>这边选用的是tanh函数</p>
+<p>第三层是做梯度分层下的非线性变化，抹平相似特征间的ouput：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-cc49e1a8115d8a1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，k为3，N为想要分的梯度的个数，a3为一个阶梯跳跃到另一个阶梯的转换效率，形如：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-7a4d7306a3ff518d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>第五层，也就是最后一层通过sigmoid进行0-1之间的压缩。</p>
+<p>这边的损失函数用的是常见的mse：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-77ca366109e16fc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>当通过测试数据训练完成后，再将未知数据进行模型训练，观察得到结果的大小，越靠近1，越有可能为异常用户。</p>
+<hr>
+<p>以上就是5种常见的只基于数据下的异常用户的识别，更偏方法技术一点，但是无论是算法实现还是业务应用中，同样需要注意输入特征的问题。由于大家运用方向不同，就不细节赘述。</p>
+<p>详细实现demo可以私信我要，最后谢谢大家阅读了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/风控/" rel="tag"># 风控</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/基于SSD下的图像内容识别（二）/" rel="next" title="基于SSD下的图像内容识别（二）">
+                <i class="fa fa-chevron-left"></i> 基于SSD下的图像内容识别（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/" rel="prev" title="基于Tensorflow的神经网络解决用户流失概率问题">
+                基于Tensorflow的神经网络解决用户流失概率问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
