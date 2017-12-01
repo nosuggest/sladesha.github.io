@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="R语言工具," />
 
 
 
@@ -80,16 +80,18 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，hp实验室研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sladesal&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/archives/page/2/index.html">
+<meta name="description" content="r与python差异比较大的一个地方就是，python的机器学习算法集中程度比较高，比如sklearn，就集成了很多的算法，而R语言更多时候需要一个包一个包去了解，比较费时费力，对于python转过来的朋友非常不友好，抽空整理了工作中常用的R包如下： 常用检验函数： 基本上分布中常见的都罗列了： 常用作图函数包： gg">
+<meta name="keywords" content="R语言工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用R语言包介绍">
+<meta property="og:url" content="http://sladesha.github.io/2017/06/19/常用R语言包介绍/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，hp实验室研究员">
+<meta property="og:description" content="r与python差异比较大的一个地方就是，python的机器学习算法集中程度比较高，比如sklearn，就集成了很多的算法，而R语言更多时候需要一个包一个包去了解，比较费时费力，对于python转过来的朋友非常不友好，抽空整理了工作中常用的R包如下： 常用检验函数： 基本上分布中常见的都罗列了： 常用作图函数包： ggplot2：万能，基本上excel能画的图它都能画 rattle：fancyRp">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-01T16:12:19.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sladesal&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，hp实验室研究员">
+<meta name="twitter:title" content="常用R语言包介绍">
+<meta name="twitter:description" content="r与python差异比较大的一个地方就是，python的机器学习算法集中程度比较高，比如sklearn，就集成了很多的算法，而R语言更多时候需要一个包一个包去了解，比较费时费力，对于python转过来的朋友非常不友好，抽空整理了工作中常用的R包如下： 常用检验函数： 基本上分布中常见的都罗列了： 常用作图函数包： ggplot2：万能，基本上excel能画的图它都能画 rattle：fancyRp">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/archives/page/2/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/06/19/常用R语言包介绍/"/>
 
 
 
 
 
-  <title>归档 | Sladesal's Algorithm World</title>
+  <title>常用R语言包介绍 | Sladesal's Algorithm World</title>
   
 
 
@@ -144,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,374 +240,304 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/19/常用R语言包介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">常用R语言包介绍</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T00:11:41+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 29 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/20/如何校验用户画像的准确性？/" itemprop="url">
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
               
-                <span itemprop="name">如何校验用户画像的准确性？</span>
+                <a href="/2017/06/19/常用R语言包介绍/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/19/常用R语言包介绍/" itemprop="commentsCount"></span>
+                </a>
               
-            </a>
-        
-      </h2>
+            
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-20T23:12:39+08:00"
-              content="2017-07-20" >
-          07-20
-        </time>
-      </div>
+          
+          
 
-    </header>
-  </article>
+          
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  887 字
+                </span>
+              
 
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/19/大数据量下的划分聚类方法/" itemprop="url">
-              
-                <span itemprop="name">大数据量下的划分聚类方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-19T23:17:47+08:00"
-              content="2017-07-19" >
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/13/数据抽样平衡方法重写/" itemprop="url">
-              
-                <span itemprop="name">数据抽样平衡方法重写</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-13T23:48:38+08:00"
-              content="2017-07-13" >
-          07-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>r与python差异比较大的一个地方就是，python的机器学习算法集中程度比较高，比如sklearn，就集成了很多的算法，而R语言更多时候需要一个包一个包去了解，比较费时费力，对于python转过来的朋友非常不友好，抽空整理了工作中常用的R包如下：</p>
+<p>常用检验函数：</p>
+<p>基本上分布中常见的都罗列了：</p>
+<p>常用作图函数包：</p>
+<p>ggplot2：万能，基本上excel能画的图它都能画</p>
+<p>rattle：fancyRpartPlot函数，决策树画图函数</p>
+<p>基础包函数：barplot、pie、dotchart、hist、densityplot、boxplot、contour等等</p>
+<p>正态检验：qqplot、qqline、qqnorm</p>
+<p>连续分类回归模型：</p>
+<p>stats包 lm函数，实现多元线性回归；glm函数，实现广义线性回归；nls函数，实现非线性最小二乘回归；knn函数，k最近邻算法</p>
+<p>rpart包 rpart函数，基于CART算法的分类回归树模型</p>
+<p>randomForest包 randomForest函数，基于rpart算法的集成算法</p>
+<p>e1071包 svm函数，支持向量机算法</p>
+<p>kernlab包 ksvm函数，基于核函数的支持向量机</p>
+<p>nnet包 nnet函数，单隐藏层的神经网络算法</p>
+<p>neuralnet包 neuralnet函数，多隐藏层多节点的神经网络算法</p>
+<p>RSNNS包 mlp函数，多层感知器神经网络；rbf函数，基于径向基函数的神经网络</p>
+<p>离散分类回归模型：</p>
+<p>stats包 glm函数，实现Logistic回归，选择logit连接函数</p>
+<p>kknn包 kknn函数，加权的k最近邻算法</p>
+<p>rpart包 rpart函数，基于CART算法的分类回归树模型</p>
+<p>adabag包bagging函数，基于rpart算法的集成算法；boosting函数，基于rpart算法的集成算法</p>
+<p>party包ctree函数，条件分类树算法</p>
+<p>RWeka包OneR函数，一维的学习规则算法；JPip函数，多维的学习规则算法；J48函数，基于C4.5算法的决策树</p>
+<p>C50包C5.0函数，基于C5.0算法的决策树</p>
+<p>e1071包naiveBayes函数，贝叶斯分类器算法</p>
+<p>klaR包NaiveBayes函数，贝叶斯分类器算分</p>
+<p>MASS包lda函数，线性判别分析；qda函数，二次判别分析</p>
+<p>聚类：Nbclust包Nbclust函数可以确定应该聚为几类</p>
+<p>stats包kmeans函数，k均值聚类算法；hclust函数，层次聚类算法</p>
+<p>cluster包pam函数，k中心点聚类算法</p>
+<p>fpc包dbscan函数，密度聚类算法；kmeansruns函数，相比于kmeans函数更加稳定，而且还可以估计聚为几类；pamk函数，相比于pam函数，可以给出参考的聚类个数</p>
+<p>mclust包Mclust函数，期望最大（EM）算法</p>
+<p>关联规则：arules包apriori函数</p>
+<p>Apriori关联规则算法</p>
+<p>recommenderlab协调过滤</p>
+<p>DRM：重复关联</p>
+<p>ECLAT算法： 采用等价类，RST深度搜索和集合的交集： eclat</p>
+<p>降维算法：</p>
+<p>psych包prcomp函数、factanal函数</p>
+<p>时序分析：</p>
+<p>ts时序构建函数</p>
+<p>timsac包时序分析</p>
+<p>holtwinter包时序分析</p>
+<p>decomp、tsr、stl成分分解</p>
+<p>zoo 时间序列数据的预处理</p>
+<p>统计及预处理：</p>
+<p>常用的包 Base R, nlme</p>
+<p>aov, anova 方差分析</p>
+<p>density 密度分析</p>
+<p>t.test, prop.test, anova, aov:假设检验</p>
+<p>rootSolve非线性求根</p>
+<p>reshape2数据预处理</p>
+<p>plyr及dplyr数据预处理大杀器</p>
+<p>最后剩下常用的就是读入和写出了：</p>
+<p>RODBC 连接ODBC数据库接口</p>
+<p>jsonlite 读写json文件</p>
+<p>yaml 读写yaml文件</p>
+<p>rmakdown写文档</p>
+<p>knitr自动文档生成</p>
+<p>一般业务中使用比较多的就是上面这些了，当然R里面有很多冷门的包，也很好用滴~</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/12/订单需求预估/" itemprop="url">
-              
-                <span itemprop="name">订单需求预估</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-12T23:52:58+08:00"
-              content="2017-07-12" >
-          07-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/21/推荐系统-威尔逊区间法/" itemprop="url">
-              
-                <span itemprop="name">推荐系统-威尔逊区间法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-21T00:07:13+08:00"
-              content="2017-06-21" >
-          06-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/21/协同过滤推荐/" itemprop="url">
-              
-                <span itemprop="name">协同过滤推荐</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-21T00:05:05+08:00"
-              content="2017-06-21" >
-          06-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/20/聚类算法思路总结/" itemprop="url">
-              
-                <span itemprop="name">聚类算法思路总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-20T00:10:34+08:00"
-              content="2017-06-20" >
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/19/常用R语言包介绍/" itemprop="url">
-              
-                <span itemprop="name">常用R语言包介绍</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-19T00:11:41+08:00"
-              content="2017-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/02/正则化-Lasso规约/" itemprop="url">
-              
-                <span itemprop="name">正则化-Lasso规约</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-02T00:03:24+08:00"
-              content="2017-06-02" >
-          06-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有你们的支持，我们一定会不会停息</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesal 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesal 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/R语言工具/" rel="tag"># R语言工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/正则化-Lasso规约/" rel="next" title="正则化-Lasso规约">
+                <i class="fa fa-chevron-left"></i> 正则化-Lasso规约
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/20/聚类算法思路总结/" rel="prev" title="聚类算法思路总结">
+                聚类算法思路总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -613,6 +545,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -876,6 +817,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
