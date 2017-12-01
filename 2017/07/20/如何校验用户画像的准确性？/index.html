@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="面试题," />
+  <meta name="keywords" content="数据处理," />
 
 
 
@@ -80,18 +80,29 @@
 
 
 
-<meta name="description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。">
-<meta name="keywords" content="面试题">
+<meta name="description" content="在用户研究的课题中，用户画像是几乎每个公司都会去做的，浅层的包括统计类的：上月购买量，上周活跃天数等；深层的包括洞察类的：潜在需求偏好，生命周期阶段等；前者的校验简单，后者的校验需要通过一些特别的方式。本文就洞察类画像校验做一系列的梳理。   省略掉预处理设计的过程，画像校验的步骤主要集中在画像开发，画像上线，画像更新">
+<meta name="keywords" content="数据处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态最优化经典面试题">
-<meta property="og:url" content="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/index.html">
+<meta property="og:title" content="如何校验用户画像的准确性？">
+<meta property="og:url" content="http://sladesha.github.io/2017/07/20/如何校验用户画像的准确性？/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta property="og:description" content="在用户研究的课题中，用户画像是几乎每个公司都会去做的，浅层的包括统计类的：上月购买量，上周活跃天数等；深层的包括洞察类的：潜在需求偏好，生命周期阶段等；前者的校验简单，后者的校验需要通过一些特别的方式。本文就洞察类画像校验做一系列的梳理。   省略掉预处理设计的过程，画像校验的步骤主要集中在画像开发，画像上线，画像更新中，并且三个阶段中，每个阶段的校验方式完全不同  用户画像开发中当我们所开发的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T12:55:30.200Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e48cbe975dca601c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-92eb834f8a12454d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-84b306d7fb8e875a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-825c0d26686ef2dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e2d386e07faf5b90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b3facbf505ae7149.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2017-12-01T15:14:27.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态最优化经典面试题">
-<meta name="twitter:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta name="twitter:title" content="如何校验用户画像的准确性？">
+<meta name="twitter:description" content="在用户研究的课题中，用户画像是几乎每个公司都会去做的，浅层的包括统计类的：上月购买量，上周活跃天数等；深层的包括洞察类的：潜在需求偏好，生命周期阶段等；前者的校验简单，后者的校验需要通过一些特别的方式。本文就洞察类画像校验做一系列的梳理。   省略掉预处理设计的过程，画像校验的步骤主要集中在画像开发，画像上线，画像更新中，并且三个阶段中，每个阶段的校验方式完全不同  用户画像开发中当我们所开发的">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-e48cbe975dca601c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/07/20/如何校验用户画像的准确性？/"/>
 
 
 
 
 
-  <title>动态最优化经典面试题 | Sladesal's Algorithm World</title>
+  <title>如何校验用户画像的准确性？ | Sladesal's Algorithm World</title>
   
 
 
@@ -254,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/07/20/如何校验用户画像的准确性？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -271,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">动态最优化经典面试题</h1>
+          <h1 class="post-title" itemprop="name headline">如何校验用户画像的准确性？</h1>
         
 
         <div class="post-meta">
@@ -283,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:22:22+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T23:12:39+08:00">
+                2017-07-20
               </time>
             
 
@@ -306,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -325,8 +336,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/12/01/动态最优化经典面试题/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/01/动态最优化经典面试题/" itemprop="commentsCount"></span>
+                <a href="/2017/07/20/如何校验用户画像的准确性？/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/07/20/如何校验用户画像的准确性？/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -348,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836 字
+                  1,388 字
                 </span>
               
 
@@ -364,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -385,16 +396,26 @@
       
 
       
-        <p>最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目：</p>
-<p><strong>一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？</strong></p>
-<p>先形象的理解一下这道题目，假设第一个蛋我们放在了i层，有两种case，碎或者不碎。<br>先看简单的结果，<br>case1:如果碎了，为了求出层数，那么我接下来的那颗蛋需要从第1层开始尝试i-1次，因为我们不允许冒第二次碎的风险了，这很好理解。<br>case2:如果没碎，我们得知一条新的信息，那就是我们要求的目标层在i层之上，但是我们依旧不知道是哪一层，假设是m层（m&gt;i）,那么同样的，和第i层一样，面临2个case，碎或者不碎。</p>
-<p>这时候，我们的前提是在最恶劣的情况下，保证我们的每次的风险都尽可能的小，至少要少于上一次的风险。</p>
-<p>我们可以让新的m的高度为i+i-1,其中，i是第一次我们放的层数，i-1是我们选择的风险若于第一次风险的层数高度，类推下去：i+i-1+i-2+i-3+…+1=200，得到i=20，就是我们第一次应该放的位置，同理第二次如果没有碎应该放的就是39…</p>
-<p><strong>我个人对这道题目的理解中，其实就为了平分风险，让每次碎的高度都相等，也就是i-1 = m-i-1+1==&gt;m=2i-1</strong></p>
-<p>这边的python代码网上也有很多，这边我罗列一个我写的，可能和别人的不一样，实现效率也可能较慢，建议大家在网上搜完善版本的，仅供大家熟悉上述的描述：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#n为层数，m为蛋数，f函数为求最优层数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n, m)</span>:</span></span><br><span class="line"><span class="comment">#如果是0层的，返回最优层数为0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="comment">#如果只有一个鸡蛋，必须要从最低层开始试，所以为当前最安全层n</span></span><br><span class="line">    <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line"><span class="comment">#这边我们来看，f(i - 1, m - 1)是如果i层碎了，我们需要计算i-1层下的情况，同时减少一颗蛋；</span></span><br><span class="line"><span class="comment">#f(n - i, m)是i层没碎，那相当于安全层从0变成了n，要计算的就是相当于有 f(n, m)变成了 f(n - i, m)</span></span><br><span class="line"><span class="comment">#最后在最大化风险下找出其中风险最小的层数即可</span></span><br><span class="line">    best_floor = min([max([f(i - <span class="number">1</span>, m - <span class="number">1</span>), f(n - i, m)]) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>)] + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> best_floor</span><br></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">74</span>]:print(f(<span class="number">100</span>, <span class="number">2</span>))</span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure></p>
-<p>这边f(200,2)实在没跑出来，时间太久了，所以跑了100，2的结果，迭代次数超多，具体我没有算过，建议优化一下计算的代码再执行。</p>
-<p>最后谢谢大家阅读。</p>
+        <blockquote>
+<p>在用户研究的课题中，用户画像是几乎每个公司都会去做的，浅层的包括统计类的：上月购买量，上周活跃天数等；深层的包括洞察类的：潜在需求偏好，生命周期阶段等；前者的校验简单，后者的校验需要通过一些特别的方式。本文就洞察类画像校验做一系列的梳理。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-e48cbe975dca601c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>省略掉预处理设计的过程，画像校验的步骤主要集中在画像开发，画像上线，画像更新中，并且三个阶段中，每个阶段的校验方式完全不同</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h1 id="用户画像开发中"><a href="#用户画像开发中" class="headerlink" title="用户画像开发中"></a>用户画像开发中</h1><p>当我们所开发的用户画像是类似于用户的下单需求、用户的购车意愿、用户是否有注册意愿这一类存在<strong>历史的正负样本</strong>的有监督的问题，我们可以利用历史确定的数据来校验我们的画像准确性。比如，银行在设计用户征信的画像前，会有一批外部购买的坏样本和好样本，其实画像问题就转化为分类问题去解决评估了。<br><strong>1.1 Recall、Pecision、K-S、F1曲线、Roc曲线、Confusion Matrix、AUC</strong><br>针对这类问题，已经有较为成熟的理论基础，直接利用测试样本判断的准确程度判断画像是否准确</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-92eb834f8a12454d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这张图是一张非常常见也是有效的来总结Recall、Pecision、Lift曲线、Roc曲线、Confusion Matrix的图。<br>FPR = FP/(FP + TN)<br>Recall=TPR=TP/(TP+FN)<br>Precision=TP/(TP+FP)<br>F1曲线:2<code>*</code>Precision<code>*</code>Recall/(Precision+Recall)<br>Roc曲线：TPR vs FPR，也就是Precision vs Recall<br>Auc：area under the roc curve ，也就是roc曲线下面的面积，积分或者投点法均可求解。<br>这边不详细讲细节，需要的可以参考<a href="https://www.zhihu.com/question/30643044" target="_blank" rel="noopener">精确率、召回率、F1 值、ROC、AUC 各自的优缺点是什么？</a></p>
+<p><strong>1.2 交叉验证</strong><br>并不是所有画像都是有监督训练的画像，举个例子，用户的性别画像，是一个无监督的刻画，当你无法通过app端资料填写直接获取到的时候，你只能够通过其他数据特征的对用户进行分群。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-84b306d7fb8e875a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">input :</span><br><span class="line">Data Set：测试数据集</span><br><span class="line"></span><br><span class="line">output :</span><br><span class="line">model：画像模型</span><br><span class="line">label：0(无效)，1（有效）</span><br><span class="line"></span><br><span class="line">methods：</span><br><span class="line">1.从原始数据集中确定画像模型关键features</span><br><span class="line">2.关键features分层，分为train features、test features</span><br><span class="line">3.train featrues训练画像</span><br><span class="line">4.test freatrues校验画像</span><br><span class="line">5.输出值对（model，label）</span><br><span class="line">6.重复2~5</span><br></pre></td></tr></table></figure>
+<p>首先，我们在总的数据集中筛选出所有关键影响特征，每次将筛选出的特征分为两块，测试特征训练特征，利用训练特征建立模型，再利用测试特征去判断模型是否合理（比如女鞋用户群的女鞋购买次数小于男性用户群，则次模型异常，删除），最后集成所有合理模型。<br>这样的逻辑中，我们将所有异常不合理的模型全部剔除，训练过程中就校验了用户画像的准确性<br><img src="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h1 id="用户画像上线后"><a href="#用户画像上线后" class="headerlink" title="用户画像上线后"></a>用户画像上线后</h1><h2 id="ABTest"><a href="#ABTest" class="headerlink" title="ABTest"></a>ABTest</h2><p><strong>不得不说，abtest是用户画像校验最为直观有效的校验方式。</strong></p>
+<p>用户分流模块：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-825c0d26686ef2dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">methods:</span><br><span class="line">1. 全量用户流量为Users，切分流量为三块Users：A1、Users：A2、Users：B，且满足Users：A1+Users：A2=Users：B</span><br><span class="line"></span><br><span class="line">2. 对流量Users：A1、Users：A2不做任何动作</span><br><span class="line">3. 对流量Users：B做相应的模型预测，保存结果</span><br><span class="line">4. 以用户活跃度为例子，选取观察日期周下平均登陆次数y为代价函数，</span><br><span class="line">if y（Users：A1）=y（Users：A2）then</span><br><span class="line">        if  y（Users：B）&gt; y（Users：A1+Users：A2）</span><br><span class="line">                 then 模型有效（差值越大代表准确越高）</span><br><span class="line">        else 模型无效（差值越小代表准确越差）</span><br><span class="line">else    模型无效</span><br><span class="line">5.准确程度量化：K=(p*exp(-(dist(y(Users:B),y(Users:A1+Users:A2)))^2/(2*最小容忍度^2)))^(-1)</span><br></pre></td></tr></table></figure>
+<p>一句话解释，就是A1=A2保证分配随机，A3好于A1+A2的效果检验画像是否准确？多准确？<br><img src="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h1 id="用户画像更新"><a href="#用户画像更新" class="headerlink" title="用户画像更新"></a>用户画像更新</h1><h2 id="用户回访"><a href="#用户回访" class="headerlink" title="用户回访"></a>用户回访</h2><p>在画像刻画完成后，必然会存在画像优化迭代的过程，客服回访是非常常见且有效的方式。<br>比如，我们定义了一波潜在流失用户10万人，随机抽取1000人，进行回访，根据回访结果做文本挖掘，提取关键词，看消极词用户的占比；<br><img src="http://upload-images.jianshu.io/upload_images/1129359-e2d386e07faf5b90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这个图随机找的，别在意"></p>
+<h2 id="机制检测"><a href="#机制检测" class="headerlink" title="机制检测"></a>机制检测</h2><p>再比如，我们定义了一波忠诚用户10万人，随机抽取100人，后台随机获取用户安装app的列表，看用户同类app的下载量数目的分布；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-b3facbf505ae7149.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><em>横轴为用户手机中同类竞品安装量的个数，纵轴为对应的随机抽样的100人中的个数</em><br>人群1分布为忠诚用户画像最准确的，同类app下载量集中在1附近，定义的用户极为准确<br>人群2分布杂乱，人群3分布在下降量异常高的数值附近，定义人群不准确<br><img src="http://upload-images.jianshu.io/upload_images/1129359-8ae0b22c2c485037.gif?imageMogr2/auto-orient/strip" alt=""><br><strong>用户画像是数据运营运营的基础，也是做深度挖掘的一个不可或缺的模块，只有先打好画像基础，确保画像质量，后续的深挖行为才有突破的可能</strong>，最后，谢谢大家阅读。</p>
 
       
     </div>
@@ -441,7 +462,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+            <a href="/tags/数据处理/" rel="tag"># 数据处理</a>
           
         </div>
       
@@ -454,18 +475,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/27/理论：SVD及扩展的矩阵分解方法/" rel="next" title="理论：SVD及扩展的矩阵分解方法">
-                <i class="fa fa-chevron-left"></i> 理论：SVD及扩展的矩阵分解方法
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/01/基于SSD下的图像内容识别（一）/" rel="prev" title="基于SSD下的图像内容识别（一）">
-                基于SSD下的图像内容识别（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/09/数据预处理-异常值识别/" rel="prev" title="数据预处理-异常值识别">
+                数据预处理-异常值识别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -523,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -610,6 +636,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用户画像开发中"><span class="nav-number">1.</span> <span class="nav-text">用户画像开发中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户画像上线后"><span class="nav-number">2.</span> <span class="nav-text">用户画像上线后</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ABTest"><span class="nav-number">2.1.</span> <span class="nav-text">ABTest</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户画像更新"><span class="nav-number">3.</span> <span class="nav-text">用户画像更新</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户回访"><span class="nav-number">3.1.</span> <span class="nav-text">用户回访</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机制检测"><span class="nav-number">3.2.</span> <span class="nav-text">机制检测</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
