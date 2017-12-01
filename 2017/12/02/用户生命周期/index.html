@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="面试题," />
+  <meta name="keywords" content="生命周期," />
 
 
 
@@ -80,18 +80,24 @@
 
 
 
-<meta name="description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。">
-<meta name="keywords" content="面试题">
+<meta name="description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  ###如何定义参与度？以电商平台而言，">
+<meta name="keywords" content="生命周期">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态最优化经典面试题">
-<meta property="og:url" content="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/index.html">
+<meta property="og:title" content="用户生命周期">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/02/用户生命周期/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta property="og:description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  ###如何定义参与度？以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T15:57:08.374Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b66a4221b9680612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-fdef42649ff582a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f5ba88f80a316047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f5e126daccf8ed96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-96dabb79daa143a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T16:02:20.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态最优化经典面试题">
-<meta name="twitter:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta name="twitter:title" content="用户生命周期">
+<meta name="twitter:description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  ###如何定义参与度？以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-b66a4221b9680612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/02/用户生命周期/"/>
 
 
 
 
 
-  <title>动态最优化经典面试题 | Sladesal's Algorithm World</title>
+  <title>用户生命周期 | Sladesal's Algorithm World</title>
   
 
 
@@ -254,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/02/用户生命周期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -271,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">动态最优化经典面试题</h1>
+          <h1 class="post-title" itemprop="name headline">用户生命周期</h1>
         
 
         <div class="post-meta">
@@ -283,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:22:22+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-02T00:01:25+08:00">
+                2017-12-02
               </time>
             
 
@@ -306,8 +312,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/特征刻画/" itemprop="url" rel="index">
+                    <span itemprop="name">特征刻画</span>
                   </a>
                 </span>
 
@@ -325,8 +331,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/12/01/动态最优化经典面试题/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/01/动态最优化经典面试题/" itemprop="commentsCount"></span>
+                <a href="/2017/12/02/用户生命周期/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/02/用户生命周期/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -348,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836 字
+                  1,829 字
                 </span>
               
 
@@ -364,7 +370,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -385,16 +391,103 @@
       
 
       
-        <p>最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目：</p>
-<p><strong>一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？</strong></p>
-<p>先形象的理解一下这道题目，假设第一个蛋我们放在了i层，有两种case，碎或者不碎。<br>先看简单的结果，<br>case1:如果碎了，为了求出层数，那么我接下来的那颗蛋需要从第1层开始尝试i-1次，因为我们不允许冒第二次碎的风险了，这很好理解。<br>case2:如果没碎，我们得知一条新的信息，那就是我们要求的目标层在i层之上，但是我们依旧不知道是哪一层，假设是m层（m&gt;i）,那么同样的，和第i层一样，面临2个case，碎或者不碎。</p>
-<p>这时候，我们的前提是在最恶劣的情况下，保证我们的每次的风险都尽可能的小，至少要少于上一次的风险。</p>
-<p>我们可以让新的m的高度为i+i-1,其中，i是第一次我们放的层数，i-1是我们选择的风险若于第一次风险的层数高度，类推下去：i+i-1+i-2+i-3+…+1=200，得到i=20，就是我们第一次应该放的位置，同理第二次如果没有碎应该放的就是39…</p>
-<p><strong>我个人对这道题目的理解中，其实就为了平分风险，让每次碎的高度都相等，也就是i-1 = m-i-1+1==&gt;m=2i-1</strong></p>
-<p>这边的python代码网上也有很多，这边我罗列一个我写的，可能和别人的不一样，实现效率也可能较慢，建议大家在网上搜完善版本的，仅供大家熟悉上述的描述：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#n为层数，m为蛋数，f函数为求最优层数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n, m)</span>:</span></span><br><span class="line"><span class="comment">#如果是0层的，返回最优层数为0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="comment">#如果只有一个鸡蛋，必须要从最低层开始试，所以为当前最安全层n</span></span><br><span class="line">    <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line"><span class="comment">#这边我们来看，f(i - 1, m - 1)是如果i层碎了，我们需要计算i-1层下的情况，同时减少一颗蛋；</span></span><br><span class="line"><span class="comment">#f(n - i, m)是i层没碎，那相当于安全层从0变成了n，要计算的就是相当于有 f(n, m)变成了 f(n - i, m)</span></span><br><span class="line"><span class="comment">#最后在最大化风险下找出其中风险最小的层数即可</span></span><br><span class="line">    best_floor = min([max([f(i - <span class="number">1</span>, m - <span class="number">1</span>), f(n - i, m)]) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>)] + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> best_floor</span><br></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">74</span>]:print(f(<span class="number">100</span>, <span class="number">2</span>))</span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure></p>
-<p>这边f(200,2)实在没跑出来，时间太久了，所以跑了100，2的结果，迭代次数超多，具体我没有算过，建议优化一下计算的代码再执行。</p>
-<p>最后谢谢大家阅读。</p>
+        <blockquote>
+<p>摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环</p>
+</blockquote>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。</p>
+<hr>
+<p>###如何定义参与度？<br>以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与平台的主要行为，综合考虑（但不限于此）这些因素，</p>
+<p><strong>活跃度：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">θ = α1* pv + α2 * click + α3* search + α4 * clc + α5* cart + α6* order + α7* comment + bubble</span><br></pre></td></tr></table></figure></p>
+<p> <em>其中，θ是活跃度，pv是用户浏览量，click是用户点击量，search是用户搜索量，clc是用户收藏量，cart是用户加购物车次，order为用户订单量，comment为用户评论量<br>α1 为全部用户冒泡次数 与 全部用户浏览量之比；<br>α2 为全部用户冒泡次数 与 全部用户点击量之比；<br>…
+</em><br><strong>这样保证了，所有平台参与行为与用户活跃情况成正相关，同时动态变化的降低了操作成本低的变量的权重，也满足奥卡姆剃刀原理</strong><br>后续再利用活跃度来直接衡量生命周期状态。</p>
+<h1 id="如何定义生命周期？"><a href="#如何定义生命周期？" class="headerlink" title="如何定义生命周期？"></a>如何定义生命周期？</h1><ul>
+<li>以电商平台为例，考虑用户的行为，先来定义生命周期状态划分逻辑：<br>1.计算用户连续N(N&gt;3)个周期内的参与度组成特征向量<br>2.形成不同生命周期下的模式特征向量<br>3.分类用户的特征向量如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">生命周期状态</th>
+<th style="text-align:center">生命周期类型</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">初生期</td>
+<td style="text-align:center">新增用户</td>
+<td style="text-align:center">处于新生用户没有用户记录</td>
+</tr>
+<tr>
+<td style="text-align:center">成长期</td>
+<td style="text-align:center">显性成长</td>
+<td style="text-align:center">最近三次生命周期状态都是成长期</td>
+</tr>
+<tr>
+<td style="text-align:center">成长期</td>
+<td style="text-align:center">隐性成长</td>
+<td style="text-align:center">最近三次生命周期状态不全是成长期</td>
+</tr>
+<tr>
+<td style="text-align:center">稳定期</td>
+<td style="text-align:center">低稳定</td>
+<td style="text-align:center">处于平稳期阶段，参与度低于1/4分位数</td>
+</tr>
+<tr>
+<td style="text-align:center">稳定期</td>
+<td style="text-align:center">中稳定</td>
+<td style="text-align:center">处于平稳期阶段，参与度介于1/4-3/4分位数</td>
+</tr>
+<tr>
+<td style="text-align:center">稳定期</td>
+<td style="text-align:center">高稳定</td>
+<td style="text-align:center">处于平稳期阶段，参与度高于3/4分位数</td>
+</tr>
+<tr>
+<td style="text-align:center">衰退期</td>
+<td style="text-align:center">轻微衰退</td>
+<td style="text-align:center">连续x个周期进入衰退期或流失期</td>
+</tr>
+<tr>
+<td style="text-align:center">衰退期</td>
+<td style="text-align:center">重度微衰退</td>
+<td style="text-align:center">连续x个周期进入衰退期或流失期</td>
+</tr>
+<tr>
+<td style="text-align:center">流失期</td>
+<td style="text-align:center">流失期</td>
+<td style="text-align:center">刚进入流失期</td>
+</tr>
+<tr>
+<td style="text-align:center">沉默期</td>
+<td style="text-align:center">沉默期</td>
+<td style="text-align:center">长期处于流失期</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>定义完整的用户生命周期状态后，再对用户的生命周期做session切分，根据聚类算法，将样本用户进行聚类，形成聚类中心，判断用户距离聚类中心距离，匹配用户所处的生命周期详细位置，反过来输出分位数，判断用户生命周期类型。</li>
+</ul>
+<h1 id="下面思考如何优化kmeans解决这个问题："><a href="#下面思考如何优化kmeans解决这个问题：" class="headerlink" title="下面思考如何优化kmeans解决这个问题："></a>下面思考如何优化kmeans解决这个问题：</h1><p>考虑到业务开发的效率等原因，常规的聚类算法中，kmeans常常为优先考虑的算法，但实际运用过程中，需要根据不同的问题有差异化的优化。</p>
+<p>1.考虑用户的特征偏移<br>可能存在用户的活跃属性间断，比如用户外出出差一周，导致某个单位统计时间内平台参与度下降，用户的活跃属性下降，而实际用户为真实高活跃用户，只是出现异常间断点，影响用户活跃的最终判断，利用语义分析中的最佳路径计算方式解决这个问题。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-b66a4221b9680612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这三条线中，蓝色和青色线的分布走势类似，而红色线条的差异较大；计算蓝色–&gt;红色的欧式距离，蓝色–&gt;青色的欧式距离，发现蓝色–&gt;青色的欧式距离反而大于蓝色–&gt;红色的欧式距离，时间波动的情况下，欧式距离偏差较大。</p>
+<p>所以，常规意义上的kmeans等基于欧式距离的算法这种情况下，使用较为局限。所以在整体思路不变的情况下，就距离计算，我们可以参考语音分析里面的DP（最佳路径规划算法），构造邻接矩阵，寻找最小最小路径和</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-fdef42649ff582a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>实际在计算蓝色曲线到青色曲线的距离的时候，同时计算AB（蓝色曲线当前位置A点到前一个时间段青色曲线位置B）、AC（蓝色曲线当前位置A点到当前时间段青色曲线位置C），AD（蓝色曲线当前位置A点到后一个时间段青色曲线位置D）的距离，综合判断一个点最短路径；再根据曲线上的每一个点，会形成一个矩阵，判断矩阵的每个点的最佳路径即可</p>
+<p>可以用如下的公式表述：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-f5ba88f80a316047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，<img src="http://upload-images.jianshu.io/upload_images/1129359-f5e126daccf8ed96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">就是路径选择的过程</p>
+<p>以上述的计算方式替换掉常规的kmeans中的欧式距离，提高了相似度的计算精度。</p>
+<p>2.常规等距划分session不适用于生命周期</p>
+<p>就用户平台活跃而言，不同用户可采用的用户时间窗口不同，新加入的用户可能可获取的时间长度较短；用户判断过程中的session与平台确定已知的生命周期session固定判断长度也是不相同的。同时，kmeans中的距离判断方法不能同时考虑到不同session下的距离计算问题</p>
+<p><strong>最简单常规的计算方式：</strong><br>是补全较短的session的时间窗口，在相同的时间窗口之下，再去计算较短的时间窗口与较长的时间窗口下的生命周期的均值，这样会人为干涉过多，数据质量较低，图b即为数据补齐</p>
+<p><strong>“STS距离”计算方式：</strong><br>在长时间窗口{r}集合中，寻找时间窗口长度子集，使得子集中的元长度与s曲线缺失的长度一致，在以s断点处开始向后寻找{r}子集合中的所有满足的元，再以均值时间序列替换原来的子集中的元作为r和s的拟合曲线，循环往复计算中心曲线2，如图c</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-96dabb79daa143a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>有了补齐长度下的中心曲线，再便可采用kmeans的常规方式，计算各时间长度窗口下的生命周期的距离</p>
+<p>3.附加限制属性<br>再最后落地生命周期的长度的时候，考虑到商品平台的特殊属性，比如：</p>
+<ul>
+<li>商品周期性（奶粉用户周期购买等）</li>
+<li>用户偏好属性(酒店用户品质偏好等）</li>
+<li>平台的时间依赖情况(夏季冬季季节偏好等）</li>
+<li>……<br>以上即为如何通过kmeans来确定一个用户所属的生命周期阶段</li>
+</ul>
+<p><em>本文参考文献如下：<br>1.<a href="http://www.doc88.com/p-0092455469704.html" target="_blank" rel="noopener">不等长时间序列下的滑窗相似度</a><br>2.<a href="http://www.jianshu.com/p/1417fcb06797" target="_blank" rel="noopener">kmeans距离计算方式剖析</a>
+</em></p>
 
       
     </div>
@@ -441,7 +534,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+            <a href="/tags/生命周期/" rel="tag"># 生命周期</a>
           
         </div>
       
@@ -454,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/01/交叉销售算法/" rel="next" title="交叉销售算法">
-                <i class="fa fa-chevron-left"></i> 交叉销售算法
+              <a href="/2017/12/01/面试之常见决策树异同/" rel="next" title="面试之常见决策树异同">
+                <i class="fa fa-chevron-left"></i> 面试之常见决策树异同
               </a>
             
           </div>
@@ -463,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/01/基于SSD下的图像内容识别（一）/" rel="prev" title="基于SSD下的图像内容识别（一）">
-                基于SSD下的图像内容识别（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -523,8 +612,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -610,6 +708,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定义生命周期？"><span class="nav-number">2.</span> <span class="nav-text">如何定义生命周期？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下面思考如何优化kmeans解决这个问题："><span class="nav-number">3.</span> <span class="nav-text">下面思考如何优化kmeans解决这个问题：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
