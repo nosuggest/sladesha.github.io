@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="推荐," />
+  <meta name="keywords" content="因子分析," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution">
-<meta name="keywords" content="推荐">
+<meta name="description" content="因子分析概述： 因子分析分为Q型和R型，我们对R型进行如下研究： 一.因子分析步骤： 1.确认是是否适合做因子分析 2.构造因子变量 3.旋转方法解释 4.计算因子变量得分 二.因子分析的计算过程： 1.将原始数据标准化 目的：消除数量级量纲不同 2.求标准化数据的相关矩阵 3.求相关矩阵的特征值和特征向量 4.计算方">
+<meta name="keywords" content="因子分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="推荐系统-威尔逊区间法">
-<meta property="og:url" content="http://sladesha.github.io/2017/06/21/推荐系统-威尔逊区间法/index.html">
+<meta property="og:title" content="因子分析原理剖析">
+<meta property="og:url" content="http://sladesha.github.io/2017/06/02/因子分析原理剖析/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution） 理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票">
+<meta property="og:description" content="因子分析概述： 因子分析分为Q型和R型，我们对R型进行如下研究： 一.因子分析步骤： 1.确认是是否适合做因子分析 2.构造因子变量 3.旋转方法解释 4.计算因子变量得分 二.因子分析的计算过程： 1.将原始数据标准化 目的：消除数量级量纲不同 2.求标准化数据的相关矩阵 3.求相关矩阵的特征值和特征向量 4.计算方差贡献率和累计方差贡献率 5.确定因子 F1,F2,F3…为前m个因子包含数据总">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T16:07:50.431Z">
+<meta property="og:updated_time" content="2017-12-01T16:13:48.171Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="推荐系统-威尔逊区间法">
-<meta name="twitter:description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution） 理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票">
+<meta name="twitter:title" content="因子分析原理剖析">
+<meta name="twitter:description" content="因子分析概述： 因子分析分为Q型和R型，我们对R型进行如下研究： 一.因子分析步骤： 1.确认是是否适合做因子分析 2.构造因子变量 3.旋转方法解释 4.计算因子变量得分 二.因子分析的计算过程： 1.将原始数据标准化 目的：消除数量级量纲不同 2.求标准化数据的相关矩阵 3.求相关矩阵的特征值和特征向量 4.计算方差贡献率和累计方差贡献率 5.确定因子 F1,F2,F3…为前m个因子包含数据总">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/06/21/推荐系统-威尔逊区间法/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/06/02/因子分析原理剖析/"/>
 
 
 
 
 
-  <title>推荐系统-威尔逊区间法 | Sladesal's Algorithm World</title>
+  <title>因子分析原理剖析 | Sladesal's Algorithm World</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/21/推荐系统-威尔逊区间法/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/02/因子分析原理剖析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">推荐系统-威尔逊区间法</h1>
+          <h1 class="post-title" itemprop="name headline">因子分析原理剖析</h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T00:07:13+08:00">
-                2017-06-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:13:00+08:00">
+                2017-06-02
               </time>
             
 
@@ -325,8 +325,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/06/21/推荐系统-威尔逊区间法/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/21/推荐系统-威尔逊区间法/" itemprop="commentsCount"></span>
+                <a href="/2017/06/02/因子分析原理剖析/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/02/因子分析原理剖析/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -348,7 +348,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,159 字
+                  1,250 字
                 </span>
               
 
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -385,47 +385,85 @@
       
 
       
-        <p>我推荐一种之前在惠普做过一种排序方法：威尔逊区间法</p>
-<p>我们先做如下设定：</p>
-<p>（1）每个用户的打分都是独立事件。</p>
-<p>（2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。</p>
-<p>（3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。</p>
-<p>这是一种统计分布，叫做”二项分布”（binomial distribution）</p>
-<p>理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票，50个人投喜欢；10个人投票，6个人喜欢，我们不能说后者比前者要好。</p>
-<p>所以这边同时要考虑（p，n）</p>
-<p>刚才说满足二项分布，这里p可以看作”二项分布”中某个事件的发生概率，因此我们可以计算出p的置信区间。</p>
-<p>所谓”置信区间”，就是说，以某个概率而言，p会落在的那个区间。</p>
-<p>置信区间展现的是这个参数的真实值有一定概率落在测量结果的周围的程度。置信区间给出的是被测量参数的测量值的可信程度，即前面所要求的“一个概率”，也就是结论的可信程度。</p>
-<p>二项分布的置信区间有多种计算公式，最常见的是”正态区间”（Normal approximation interval）。但是，它只适用于样本较多的情况（np &gt; 5 且 n(1 − p) &gt; 5），对于小样本，它的准确性很差。</p>
-<p>这边，我推荐用t检验来衡量小样本的数据，可以解决数据过少准确率不高的问题。</p>
-<p>这样一来，排名算法就比较清晰了：</p>
-<p>第一步，计算每个case的p（好评率）。</p>
-<p>第二步，计算每个”好评率”的置信区间（参考z Test或者t Test，以95%的概率来处理）。</p>
-<p>第三步，根据置信区间的下限值，进行排名。这个值越大，排名就越高。</p>
-<p>解释一下，n为评价数，p为好评率，z为对应检验对应概率区间下的统计量</p>
-<p>比如t-分布：</p>
-<p>可以看到，当n的值足够大时，这个下限值会趋向p，如果n非常小，这个下限值会大大小于p，更加符合实际。</p>
-<p>Reddit的评论排名，目前就使用这个算法。国内的化，滴滴也有部分业务涉及，效果也不错。</p>
-<hr>
-<p>更新一下，没想到这个话题还是有高达9个人关注，所以这边我再说一些更细化的过程吧</p>
-<p>在计算排名的时候，我们通常会考虑三个事情</p>
-<p>1.上文讲到的，次数+好评率的分布，次数越多好评率越可靠，好评率越高该项越值得推荐</p>
-<p>2.时间因素，如果一个项目是10天前推送的，一个项目是昨天推送的，很明显前者的次数远大于后者</p>
-<p>3.影响权重，你这边只考虑了喜欢和不喜欢，其实所有的排序不可能只以1个维度考虑，通常会考虑多个维度，比如浏览次数，搜索次数等，你需要考虑每个的重要性或者说权重大小</p>
-<p>1这里就不讲了，其他方法也有很多，比如贝叶斯平均的优化版本、再比如经典的Hacker公式：</p>
-<p>2.时间因素：</p>
-<p>时间越久，代表之前的投票结果对当前的影响越小，这边有很多不同的影响方式，举几个例子：</p>
-<p>比如艾宾浩斯遗忘规律：</p>
-<p>这里的c、k决定下降速度，业务运用过程中，c值一般在[1,2],k值一般在[1.5,2.5]</p>
-<p>比如时效衰减：</p>
-<p>这里就是比较常见的移动窗口式的，永远只看近期某一段时间，而且时间内呈线性下降，不过可以改变变化方式</p>
-<p>3.不同种的属性对于结果的影响自然不同</p>
-<p>举个例子，用户主动搜索和用户浏览相比，用户主动搜索的情况下，用户的需求更为强烈</p>
-<p>通常需要判断这些强烈程度都是通过：</p>
-<p>相关性：看因变量与自变量之间的相关系数，如：cor函数</p>
-<p>importance：看删除或者修改自变量，对应变量的判断影响大小，如：randomForest的重要性</p>
-<p>离散程度：看自变量的数据分布是否足够分散，是否具有判断依据，如：变异系数或者pca</p>
-<p>等等</p>
+        <p>因子分析概述：</p>
+<p>因子分析分为Q型和R型，我们对R型进行如下研究：</p>
+<p>一.因子分析步骤：</p>
+<p>1.确认是是否适合做因子分析</p>
+<p>2.构造因子变量</p>
+<p>3.旋转方法解释</p>
+<p>4.计算因子变量得分</p>
+<p>二.因子分析的计算过程：</p>
+<p>1.将原始数据标准化</p>
+<p>目的：消除数量级量纲不同</p>
+<p>2.求标准化数据的相关矩阵</p>
+<p>3.求相关矩阵的特征值和特征向量</p>
+<p>4.计算方差贡献率和累计方差贡献率</p>
+<p>5.确定因子</p>
+<p>F1,F2,F3…为前m个因子包含数据总量（累计贡献率）不低于80%。可取前m各因子来反映原评价</p>
+<p>6.因子旋转</p>
+<p>当所得因子不足以明显确定或不易理解时选择此方法</p>
+<p>7.原指标的线性组合求各因子的得分</p>
+<p>两种方法：回归估计和barlett估计法</p>
+<p>8.综合得分：以各因子的方差贡献率为权，各因子的线性组合得到各综合评价指标函数</p>
+<p>F=（λ1F1+…λmFm）/(λ1+…λm)</p>
+<p>=W1F1+…WmFm</p>
+<p>9.得分排序</p>
+<p>因子分析详解：</p>
+<p>因子分析模型，又名正交因子模型</p>
+<p>X=AF+ɛ</p>
+<p>其中：</p>
+<p>X=[X1,X2,X3…XP]‘</p>
+<p>A=</p>
+<p>F=[F1,F2…Fm]’</p>
+<p>ɛ=[ɛ1,ɛ2…ɛp]’</p>
+<p>以上满足：</p>
+<p>（1）m小于等于p</p>
+<p>（2）cov(F,ɛ)=0</p>
+<p>(3)Var(F)=Im</p>
+<p>D(ɛ)=Var(ɛ)=</p>
+<p>ɛ1,ɛ2…ɛp不相关，且方差不同</p>
+<p>我们把F成为X公共因子，A为荷载矩阵，ɛ为X特殊因子</p>
+<p>A=(aij)</p>
+<p>数学上证明：aij就是i个变量与第j个因子的相关系数，参见层次分析法aij定义。</p>
+<p><1>荷载矩阵</1></p>
+<p>就荷载矩阵的估计和解释方法有主因子和极大似然估计，我们就主因子分析而言：（是主因子不是主成份）</p>
+<p>设随机向量X的协方差阵为Ʃ</p>
+<p>λ1,λ2,λ3..&gt;0为Ʃ的特征根</p>
+<p>μ1，μ2，μ3…为对应的标准正交向量</p>
+<p>我们大一学过线代或者高代，里面有个东西叫谱分析：</p>
+<p>Ʃ=λ1μ1μ1’+……+λpμpμp’</p>
+<p>=</p>
+<p>当因子个数和变量个数一样多，特殊因子方差为0.</p>
+<p>此时，模型为X=AF,其中Var(F)=Ip</p>
+<p>于是，Var(X)=Var(AF)=AVar(F)A’=AA’</p>
+<p>对照Ʃ分解式,A第j列应该是</p>
+<p>也就是说，除了uj前面部分，第j列因子签好为第j个主成份的系数，所以为主成份法。</p>
+<p>如果非要作死考虑ɛ</p>
+<p>原来的协方差阵可以分解为：</p>
+<p>Ʃ=AA’+D=</p>
+<p>以上分析的目的；</p>
+<p>1.因子分析模型是描述原变量X的协方差阵Ʃ的一种模型</p>
+<p>2.主成份分析中每个主成份相应系数是唯一确定的，然而因子分析中的每个因子的相应系数不是唯一的，因而我们的因子荷载矩阵不是唯一的</p>
+<p>(主成分分析是因子分析的特例，非常类似，有兴趣的可以去看看，这两者非常容易混淆)</p>
+<p><2>共同度和方差贡献</2></p>
+<p>无论是在spss或者R的因子分析中都围绕着贡献度，我们来看下，它到底是什么意思。</p>
+<p>由因子分析模型，当仅有一个公因子F时，</p>
+<p>Var(Xi)=Var(aiF)+Var(ɛi)</p>
+<p>由于数据标准化，左端为1，右端分别为共性方差和个性方差</p>
+<p>共性方差越大，说明共性因子作用越大。</p>
+<p>因子载荷矩阵A中的第i行元素之平方和记为hi2</p>
+<p>成为变量(Xi)共同度</p>
+<p>它是公共因子对(Xi)的方差锁做出的贡献，反映了全部公共因子对变量(Xi)的影响。</p>
+<p>hi2大表明第i个分量对F的每一个分量F1,F2,…Fm的共同依赖程度大</p>
+<p>将因子载荷矩阵A的第j列的各元素的平方和记为gj2</p>
+<p>成为公共因子Fj对x的方差贡献。</p>
+<p>gj2表示第j个公共因子Fj对x的每一个分量Xi所提供的方差的总和，他就是衡量公共因子的相对重要行的指标。gj2越大，表明公共因子Fj对x的贡献越大，或者说对x的影响和作用就越大。</p>
+<p>如果将载荷矩阵A的所有gj2都计算出来，按大小排列，就可以提炼最有影响力的公共因子。</p>
+<p><3>因子旋转</3></p>
+<p>这方面涉及较为简单，我就简单提一下</p>
+<p>目的：建立因子分析模型不是只要找主因子，更加重要的是意义，以便对实际进行分析，因子旋转就是使所得结论更加清晰的表示。</p>
+<p>方法：正交旋转，斜交旋转两大类，常用正交。</p>
+<p>便于理解，我解释下旋转的意义，以平面直角坐标系为例，我们想得到的数据正好为：y=x和y=-x上的点，我们能解释的却在x=0和y=0上，这时候我们就可以旋转坐标系，却不影响结果。</p>
 
       
     </div>
@@ -472,7 +510,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/推荐/" rel="tag"># 推荐</a>
+            <a href="/tags/因子分析/" rel="tag"># 因子分析</a>
           
         </div>
       
@@ -485,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/21/协同过滤推荐/" rel="next" title="协同过滤推荐">
-                <i class="fa fa-chevron-left"></i> 协同过滤推荐
+              <a href="/2017/06/02/正则化-Lasso规约/" rel="next" title="正则化-Lasso规约">
+                <i class="fa fa-chevron-left"></i> 正则化-Lasso规约
               </a>
             
           </div>
@@ -495,8 +533,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/12/订单需求预估/" rel="prev" title="订单需求预估">
-                订单需求预估 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/19/常用R语言包介绍/" rel="prev" title="常用R语言包介绍">
+                常用R语言包介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
