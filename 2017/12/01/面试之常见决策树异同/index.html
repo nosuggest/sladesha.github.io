@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="面试题," />
 
 
 
@@ -80,16 +80,22 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，hp实验室研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sladesal&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/tags/理论解析/index.html">
+<meta name="description" content="历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5 理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支： 而CART一般是GINI系数分支： C4.5一般是信息增益率分支： 工">
+<meta name="keywords" content="面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试之常见决策树异同">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/面试之常见决策树异同/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，hp实验室研究员">
+<meta property="og:description" content="历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5 理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支： 而CART一般是GINI系数分支： C4.5一般是信息增益率分支： 工程上总的来说：CART和C4.5之间主要差异在于分类结果上，CART可以回归分析">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e712ccfe23449bd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a39ef858bf85cc82.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-422628f7caf8e0b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T16:00:38.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sladesal&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，hp实验室研究员">
+<meta name="twitter:title" content="面试之常见决策树异同">
+<meta name="twitter:description" content="历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5 理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支： 而CART一般是GINI系数分支： C4.5一般是信息增益率分支： 工程上总的来说：CART和C4.5之间主要差异在于分类结果上，CART可以回归分析">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-e712ccfe23449bd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/tags/理论解析/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/面试之常见决策树异同/"/>
 
 
 
 
 
-  <title>标签: 理论解析 | Sladesal's Algorithm World</title>
+  <title>面试之常见决策树异同 | Sladesal's Algorithm World</title>
   
 
 
@@ -144,7 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,138 +244,248 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>理论解析<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/面试之常见决策树异同/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/12/01/SMOTE算法/" itemprop="url">
-              
-                <span itemprop="name">SMOTE算法</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">面试之常见决策树异同</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-01T23:56:34+08:00"
-              content="2017-12-01" >
-          12-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T23:59:54+08:00">
+                2017-12-01
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/01/面试之常见决策树异同/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/01/面试之常见决策树异同/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  499 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/01/SVM理论解析及python实现/" itemprop="url">
-              
-                <span itemprop="name">SVM理论解析及python实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-01T17:43:46+08:00"
-              content="2017-12-01" >
-          12-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/27/SVD及扩展的矩阵分解方法/" itemprop="url">
-              
-                <span itemprop="name">SVD及扩展的矩阵分解方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-27T22:59:20+08:00"
-              content="2017-08-27" >
-          08-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/19/大数据量下的划分聚类方法/" itemprop="url">
-              
-                <span itemprop="name">大数据量下的划分聚类方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-19T23:17:47+08:00"
-              content="2017-07-19" >
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5</p>
+<p><strong>理论上</strong>总的来说，<br>C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性<br>ID3是信息增益分支：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-e712ccfe23449bd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">而CART一般是GINI系数分支：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-a39ef858bf85cc82.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">C4.5一般是信息增益率分支：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-422628f7caf8e0b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>工程上</strong>总的来说：<br>CART和C4.5之间主要差异在于分类结果上，<strong>CART可以回归分析也可以分类，C4.5只能做分类；C4.5子节点是可以多分的，而CART是无数个二叉子节点</strong>；<br>以此拓展出以CART为基础的“树群”random forest ， 以回归树为基础的“树群”GBDT</p>
+<p>样本数据的差异：<br>ID3只能对分类变量进行处理，C4.5和CART可以处理连续和分类两种自变量<br>ID3对缺失值敏感，而C4.5和CART对缺失值可以进行多种方式的处理<br>只从样本量考虑，<em>小样本建议考虑c4.5、大样本建议考虑cart</em>。c4.5处理过程中需对数据集进行多次排序，处理成本耗时较高，而cart本身是一种大样本的统计方法，小样本处理下泛化误差较大</p>
+<p>目标因变量的差异：<br>ID3和C4.5只能做分类，CART（分类回归树）不仅可以做分类（0/1）还可以做回归（0-1）<br>ID3和C4.5节点上可以产出多叉（低、中、高），而CART节点上永远是二叉（低、非低）</p>
+<p>样本特征上的差异：<br>特征变量的使用中，多分的分类变量ID3和C4.5层级之间只单次使用，CART可多次重复使用</p>
+<p>决策树产生过程中的优化差异：<br>C4.5是通过枝剪来修正树的准确性，而CART是直接利用全部数据发现所有树的结构进行对比</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有你们的支持，我们一定会不会停息</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesal 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesal 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/SMOTE算法/" rel="next" title="SMOTE算法">
+                <i class="fa fa-chevron-left"></i> SMOTE算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -377,6 +493,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -640,6 +765,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
