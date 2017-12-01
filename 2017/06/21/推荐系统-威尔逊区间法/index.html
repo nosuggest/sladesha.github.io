@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="正则化问题," />
+  <meta name="keywords" content="推荐," />
 
 
 
@@ -80,29 +80,18 @@
 
 
 
-<meta name="description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n">
-<meta name="keywords" content="正则化问题">
+<meta name="description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution">
+<meta name="keywords" content="推荐">
 <meta property="og:type" content="article">
-<meta property="og:title" content="正则化-Lasso规约">
-<meta property="og:url" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/index.html">
+<meta property="og:title" content="推荐系统-威尔逊区间法">
+<meta property="og:url" content="http://sladesha.github.io/2017/06/21/推荐系统-威尔逊区间法/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。 实际考虑回归的过程中，我们需要考虑">
+<meta property="og:description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution） 理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ef56928a462ec258?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d4a10e15eb588a58?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e06d7ab80cc112e9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-4488780e621c8d45?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-052572ba619894cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-acde75b94b40d61a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2b285d27a06188fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6905b27c01038db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9fb083e9aaa14975.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9d1352f5686c9a37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T16:04:21.755Z">
+<meta property="og:updated_time" content="2017-12-01T16:07:50.431Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则化-Lasso规约">
-<meta name="twitter:description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。 实际考虑回归的过程中，我们需要考虑">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-ef56928a462ec258?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="推荐系统-威尔逊区间法">
+<meta name="twitter:description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution） 理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票">
 
 
 
@@ -132,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/06/21/推荐系统-威尔逊区间法/"/>
 
 
 
 
 
-  <title>正则化-Lasso规约 | Sladesal's Algorithm World</title>
+  <title>推荐系统-威尔逊区间法 | Sladesal's Algorithm World</title>
   
 
 
@@ -265,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/21/推荐系统-威尔逊区间法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -282,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">正则化-Lasso规约</h1>
+          <h1 class="post-title" itemprop="name headline">推荐系统-威尔逊区间法</h1>
         
 
         <div class="post-meta">
@@ -294,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:03:24+08:00">
-                2017-06-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T00:07:13+08:00">
+                2017-06-21
               </time>
             
 
@@ -317,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -336,8 +325,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/06/02/正则化-Lasso规约/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/02/正则化-Lasso规约/" itemprop="commentsCount"></span>
+                <a href="/2017/06/21/推荐系统-威尔逊区间法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/21/推荐系统-威尔逊区间法/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -359,7 +348,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,980 字
+                  1,159 字
                 </span>
               
 
@@ -375,7 +364,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -396,35 +385,47 @@
       
 
       
-        <blockquote>
-<p>摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差</p>
-</blockquote>
+        <p>我推荐一种之前在惠普做过一种排序方法：威尔逊区间法</p>
+<p>我们先做如下设定：</p>
+<p>（1）每个用户的打分都是独立事件。</p>
+<p>（2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。</p>
+<p>（3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。</p>
+<p>这是一种统计分布，叫做”二项分布”（binomial distribution）</p>
+<p>理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票，50个人投喜欢；10个人投票，6个人喜欢，我们不能说后者比前者要好。</p>
+<p>所以这边同时要考虑（p，n）</p>
+<p>刚才说满足二项分布，这里p可以看作”二项分布”中某个事件的发生概率，因此我们可以计算出p的置信区间。</p>
+<p>所谓”置信区间”，就是说，以某个概率而言，p会落在的那个区间。</p>
+<p>置信区间展现的是这个参数的真实值有一定概率落在测量结果的周围的程度。置信区间给出的是被测量参数的测量值的可信程度，即前面所要求的“一个概率”，也就是结论的可信程度。</p>
+<p>二项分布的置信区间有多种计算公式，最常见的是”正态区间”（Normal approximation interval）。但是，它只适用于样本较多的情况（np &gt; 5 且 n(1 − p) &gt; 5），对于小样本，它的准确性很差。</p>
+<p>这边，我推荐用t检验来衡量小样本的数据，可以解决数据过少准确率不高的问题。</p>
+<p>这样一来，排名算法就比较清晰了：</p>
+<p>第一步，计算每个case的p（好评率）。</p>
+<p>第二步，计算每个”好评率”的置信区间（参考z Test或者t Test，以95%的概率来处理）。</p>
+<p>第三步，根据置信区间的下限值，进行排名。这个值越大，排名就越高。</p>
+<p>解释一下，n为评价数，p为好评率，z为对应检验对应概率区间下的统计量</p>
+<p>比如t-分布：</p>
+<p>可以看到，当n的值足够大时，这个下限值会趋向p，如果n非常小，这个下限值会大大小于p，更加符合实际。</p>
+<p>Reddit的评论排名，目前就使用这个算法。国内的化，滴滴也有部分业务涉及，效果也不错。</p>
 <hr>
-<p>先看一波过拟合：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-ef56928a462ec258?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="拟合曲线"></p>
-<p>图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。</p>
-<p>下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d4a10e15eb588a58?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>实际考虑回归的过程中，我们需要考虑到误差项，<br><img src="http://upload-images.jianshu.io/upload_images/1129359-e06d7ab80cc112e9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-4488780e621c8d45?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>这个和简单的线性回归的公式相似，而在正则化下来优化过拟合这件事情的时候，会加入一个约束条件，也就是惩罚函数：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-052572ba619894cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>这边这个惩罚函数有多种形式，比较常用的有l1,l2，大概有如下几种：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-acde75b94b40d61a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>讲一下比较常用的两种情况，q＝1和q＝2的情况：<br>q＝1，也就是今天想讲的lasso回归，为什么lasso可以控制过拟合呢，因为在数据训练的过程中，可能有几百个，或者几千个变量，再过多的变量衡量目标函数的因变量的时候，可能造成结果的过度解释，而通过q＝1下的惩罚函数来限制变量个数的情况，可以优先筛选掉一些不是特别重要的变量，见下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-2b285d27a06188fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>作图只要不是特殊情况下与正方形的边相切，一定是与某个顶点优先相交，那必然存在横纵坐标轴中的一个系数为0，起到对变量的筛选的作用。<br>q＝2的时候，其实就可以看作是上面这个蓝色的圆，在这个圆的限制下，点可以是圆上的任意一点，所以q＝2的时候也叫做岭回归，岭回归是起不到压缩变量的作用的，在这个图里也是可以看出来的。</p>
-<hr>
-<p>lasso回归：<br>lasso回归的特色就是在建立广义线型模型的时候，这里广义线型模型包含一维连续因变量、多维连续因变量、非负次数因变量、二元离散因变量、多元离散因变，除此之外，无论因变量是连续的还是离散的，lasso都能处理，总的来说，lasso对于数据的要求是极其低的，所以应用程度较广；除此之外，lasso还能够对变量进行筛选和对模型的复杂程度进行降低。这里的变量筛选是指不把所有的变量都放入模型中进行拟合，而是有选择的把变量放入模型从而得到更好的性能参数。 复杂度调整是指通过一系列参数控制模型的复杂度，从而避免过度拟合(Overfitting)。 对于线性模型来说，复杂度与模型的变量数有直接关系，变量数越多，模型复杂度就越高。 更多的变量在拟合时往往可以给出一个看似更好的模型，但是同时也面临过度拟合的危险。<br>lasso的复杂程度由<code>λ</code>来控制，<code>λ</code>越大对变量较多的线性模型的惩罚力度就越大，从而最终获得一个变量较少的模型。除此之外，另一个参数α来控制应对高相关性(highly correlated)数据时模型的性状。 lasso回归<code>α=1</code>，Ridge回归<code>α=0</code>，这就对应了惩罚函数的形式和目的。我们可以通过尝试若干次不同值下的λ，来选取最优λ下的参数，还可以结合CV选择最优秀的模型。</p>
-<p>######读取数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setwd(&quot;~/Desktop&quot;)</span><br><span class="line">library(glmnet)</span><br><span class="line">train_origin&lt;-read.table(&apos;trian.txt&apos;,header = T,fill = T)</span><br><span class="line">test_origin&lt;-read.table(&apos;test.txt&apos;,header = T,fill = T)</span><br><span class="line">train_test1&lt;-train_origin</span><br><span class="line">train_test1&lt;-train_test1[,-9]</span><br><span class="line">train_test1$tag&lt;-as.factor(train_test1$tag)</span><br><span class="line">train_test1$risk_level&lt;-as.factor(train_test1$risk_level)</span><br><span class="line">x&lt;-train_test1[,3:11]</span><br><span class="line">y&lt;-train_test1[,2]</span><br><span class="line">## one hot encoding</span><br><span class="line">x1&lt;-model.matrix(~., x)</span><br></pre></td></tr></table></figure></p>
-<p>通常数据中会存在离散点，而lasso在R里面是通过数值矩阵来做输入的，所以需要对原数据做一步预处理，不然这边会抛错误；除此之外，如果数据之间差别的数量级较大，还需要进行标准化，R里面也是可以进行处理的，这边就不赘述了，<code>glmnet()</code>函数中添加参数<code>standardize = TRUE</code>来实现，<code>scale()</code>函数也可以实现，自行选择即可。</p>
-<p>######模型训练<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = glmnet(x1, y, family=&quot;binomial&quot;, nlambda=50, alpha=1)</span><br></pre></td></tr></table></figure></p>
-<p><code>family</code>里面是指选择函数的类型：<br><code>family explation</code>,<code>gaussian univariate</code>,<code>mgaussian multivariate</code>,<code>poisson count</code>,<code>binomial binary</code>,<code>multinomial category</code><br>lambda是指随机选择λ，做lambda个模型；alpha是上述讲到的α，选择惩罚函数，正常情况下，1是lasso，0是岭回归<br>这边模型拓展可以交叉检验一下，有内置的函数：<br>cvmodel = cv.glmnet(x1, y, family = “binomial”, type.measure = “class”,nfolds=10)<br>这边会多出来一个<code>type.measure</code>，这个<code>type.measure</code>是指期望最小化的目标参量是什么，换句话说，就是衡量这个模型的指标函数是啥：<br><code>type.measure</code>  details<br><code>deviance</code>:  <em>-2倍的Log-likelihood</em><br><code>mse</code>:<em>mean squred error</em><br><code>mae</code>:<em>mean absolute error</em><br><code>class</code>:<em>missclassification error</em><br><code>auc</code>:<em>area under the ROC curve</em><br>比较常用的是<code>auc</code>，这个就是现在比较主流的衡量一个模型好坏的roc所衍生出来的一个值；我们这边用的是<code>class</code>，也就是模型错误分配的概率，结合我这次业务开发的实际业务场景，这个更合适一点；<code>nfolds</code>是指folds数目，也可以通过foldid数来控制每个fold里面的数据数量。<br>对于glmnet，可以通过<code>plot(model)</code>来观察每个自变量的变化轨迹，<code>cv.glmnet</code>可以通过<code>plot(cvmodel)</code><br>举个<code>plot(cvmodel)</code>的例子：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-6905b27c01038db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>可以通过<code>c(cvfit$lambda.min, cvfit$lambda.1se)</code>来看在所有的<code>λ</code>值中，得到最小目标函数<code>type.measure</code>均值的<code>cvfit$lambda.min</code>，以及其所对应的<code>λ</code>值可接受的一个标准误差之内对应的<code>cvfit$lambda.1se</code>。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-9fb083e9aaa14975.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我们可以<code>print(model)</code>，在实际的选择模型中<code>λ</code>值的过程里，存在三个指标：<code>df</code>：自由度， <code>%Dev</code>：残差被解释的占比，也就是模型的好坏程度，类似于线性模型中的R平方，Lambda也就是<code>λ</code>值所对应的值，然后我们可以通过<code>coef(fit, s=c(fit$lambda[35],0.002))</code>得出当时模型所对应的系数。</p>
-<hr>
-<p>最后，讲一下elastic net<br>elastic net融合了l1范数和l2范数两种正则化的方法，上面的岭回归和lasso回归都可以看做它的特例：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-9d1352f5686c9a37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>elastic net对于p远大于n,或者严重的多重共线性情况有明显的效果，很好理解，当alpha接近1时，elastic net表现很接近lasso，一般来说，elastic net是岭回归和lasso的很好的折中，当alpha从0变化到1，目标函数的稀疏解（部分变量的系数为0）也从0单调增加到lasso的稀疏解。</p>
-<p><strong>特征规约初步总结如下：</strong><br>1）子集选择 这是传统的方法，包括逐步回归和最优子集法等，对可能的部分子集拟合线性模型，利用判别准则 （如AIC,BIC,Cp,调整R2 等）决定最优的模型<br>2）收缩方法（shrinkage method） 收缩方法又称为正则化（regularization）。主要是岭回归（ridge regression）和lasso回归。通过对最小二乘估计加入罚约束，使某些系数的估计为0。（岭回归：消除共线性；模的平方处理；Lasso回归：压缩变量，起降维作用；模处理）<br>(3)维数缩减 主成分回归（PCR）和偏最小二乘回归（PLS）的方法。把p个预测变量投影到m维空间</p>
-<p><em>部分图片转载于：<a href="http://bbs.pinggu.org/thread-3848519-1-1.html" target="_blank" rel="noopener">http://bbs.pinggu.org/thread-3848519-1-1.html</a></em></p>
+<p>更新一下，没想到这个话题还是有高达9个人关注，所以这边我再说一些更细化的过程吧</p>
+<p>在计算排名的时候，我们通常会考虑三个事情</p>
+<p>1.上文讲到的，次数+好评率的分布，次数越多好评率越可靠，好评率越高该项越值得推荐</p>
+<p>2.时间因素，如果一个项目是10天前推送的，一个项目是昨天推送的，很明显前者的次数远大于后者</p>
+<p>3.影响权重，你这边只考虑了喜欢和不喜欢，其实所有的排序不可能只以1个维度考虑，通常会考虑多个维度，比如浏览次数，搜索次数等，你需要考虑每个的重要性或者说权重大小</p>
+<p>1这里就不讲了，其他方法也有很多，比如贝叶斯平均的优化版本、再比如经典的Hacker公式：</p>
+<p>2.时间因素：</p>
+<p>时间越久，代表之前的投票结果对当前的影响越小，这边有很多不同的影响方式，举几个例子：</p>
+<p>比如艾宾浩斯遗忘规律：</p>
+<p>这里的c、k决定下降速度，业务运用过程中，c值一般在[1,2],k值一般在[1.5,2.5]</p>
+<p>比如时效衰减：</p>
+<p>这里就是比较常见的移动窗口式的，永远只看近期某一段时间，而且时间内呈线性下降，不过可以改变变化方式</p>
+<p>3.不同种的属性对于结果的影响自然不同</p>
+<p>举个例子，用户主动搜索和用户浏览相比，用户主动搜索的情况下，用户的需求更为强烈</p>
+<p>通常需要判断这些强烈程度都是通过：</p>
+<p>相关性：看因变量与自变量之间的相关系数，如：cor函数</p>
+<p>importance：看删除或者修改自变量，对应变量的判断影响大小，如：randomForest的重要性</p>
+<p>离散程度：看自变量的数据分布是否足够分散，是否具有判断依据，如：变异系数或者pca</p>
+<p>等等</p>
 
       
     </div>
@@ -471,7 +472,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/正则化问题/" rel="tag"># 正则化问题</a>
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
           
         </div>
       
@@ -484,14 +485,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/21/协同过滤推荐/" rel="next" title="协同过滤推荐">
+                <i class="fa fa-chevron-left"></i> 协同过滤推荐
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/21/协同过滤推荐/" rel="prev" title="协同过滤推荐">
-                协同过滤推荐 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/12/订单需求预估/" rel="prev" title="订单需求预估">
+                订单需求预估 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
