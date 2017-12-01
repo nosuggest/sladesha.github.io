@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="理论解析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点">
+<meta name="keywords" content="理论解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据预处理-异常值识别">
+<meta property="og:url" content="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗R语言中的quantile函数，python中的p">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-51aed3325eb4ffc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0c59a539345df0a5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-85a082d25a621303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d98be861833fd35e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-00335f3bc0d0c60c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-baa6be7f93b82ab9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ec554b00cb9bdd18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-46850d0fc19e37d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1291fad0ed73f044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2f9ebfb4dfec0b7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8245f5bfc8abe382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b3a8ef0320eb1e67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3f1bcac360434516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ec67e22ba3fc0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-81cb8a53026c11ab?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6da2e1a7721d8241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2cfe6252e0b63f75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6289fcc6b49de116.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-bae95319a6b3a967.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6fb1a1e8d80d6f5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-049beb7fea9ff710.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2d72b38a7b3b0d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T15:11:59.592Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据预处理-异常值识别">
+<meta name="twitter:description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗R语言中的quantile函数，python中的p">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-51aed3325eb4ffc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/"/>
+
+
+
+
+
+  <title>数据预处理-异常值识别 | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据预处理-异常值识别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T23:10:40+08:00">
+                2017-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/08/09/数据预处理-异常值识别/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/09/数据预处理-异常值识别/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,537 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>系统总结了常用的异常值识别思路，整理如下：</p>
+<h1 id="空间识别"><a href="#空间识别" class="headerlink" title="空间识别"></a>空间识别</h1><h2 id="分位数识别"><a href="#分位数识别" class="headerlink" title="分位数识别"></a>分位数识别</h2><p>代表的执行方法为<strong>箱式图</strong>：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-51aed3325eb4ffc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="箱式图（来自百度百科）"></p>
+<p>上四分位数Q3，又叫做升序数列的75%位点<br>下四分位数Q1，又叫做升序数列的25%位点<br>箱式图检验就是摘除大于<code>Q3+3/2*（Q3-Q1）</code>，小于<code>Q1-3/2*（Q3-Q1）</code>外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗<br>R语言中的<code>quantile</code>函数，python中的<code>percentile</code>函数可以直接实现。</p>
+<h2 id="距离识别"><a href="#距离识别" class="headerlink" title="距离识别"></a>距离识别</h2><p>最常用的就是<strong>欧式距离</strong>，<br>比如：两个n维向量a(x11,x12,…,x1n)与 b(x21,x22,…,x2n)间的欧氏距离：<br> <a href="http://photo.blog.sina.com.cn/showpic.html#blogid=52510b1d01015nrg&amp;url=http://s16.sinaimg.cn/orignal/52510b1dt7bf041c28faf" target="_blank" rel="noopener"><img src="http://upload-images.jianshu.io/upload_images/1129359-0c59a539345df0a5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="欧式距离"></a></p>
+<p>可以直观感受的到，图中，距离蓝色B点距离为基准衡量的话，红色A1，红色A2，红色A3为距离较近点，A4为距离较远的异常点。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-85a082d25a621303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>但是这样看问题会有一个隐患，我们犯了“就点论点”的错误没有考虑到全局的问题，让我在看下面这张图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-d98be861833fd35e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>还是刚才那张图，橙色背景为原始数据集分布，这样看来A4的位置反而比A1、A3相对更靠近基准点B，所以在存在纲量不一致且数据分布异常的情况下，可以使用<strong>马氏距离</strong>代替<strong>欧式距离</strong>判断数据是否离群。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-00335f3bc0d0c60c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="马氏距离"><br>其中，<code>μ</code>为feature的均值，<code>X</code>为观察值，<code>Σ</code>为feature的协方差矩阵<br>马氏距离除了用来判断点是否异常，也可以用来判断两个数据集相识度，在图像识别，反欺诈识别中应用的也是非常普遍；问题在于太过于依赖<code>Σ</code>，不同的base case对应的<code>Σ</code>都是不一致的，不是很稳定</p>
+<h2 id="密度识别"><a href="#密度识别" class="headerlink" title="密度识别"></a>密度识别</h2><p>密度识别的方式方法比较多，这边就提供其中比较经典的，首先我们可以通过密度聚类中大名鼎鼎的<code>dbscan</code>入手，这边只讲思路，详细的算法过程另行介绍。<br>简单的来讲，下面这张图可以协助理解</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-baa6be7f93b82ab9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>我们可以通过随机选择联通点，人为设置联通点附近最小半径a，半径内最小容忍点个数b，再考虑密度可达，形成蓝色方框内的正常数据区域，剩下的黄色区域内的点即为异常点。</p>
+<p>除此之外，密度识别里面还有一种方式，是参考单点附近的<strong>点密度</strong>判断，伪代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.从特征集合中任选历史上没有被选择过的两维</span><br><span class="line">2.将原始点集映射到该两维平面上，刻画点集中心a</span><br><span class="line">3.以点集中心a，x为半径画圆，不断扩大x的值，直到被覆盖的点集数/原始点集数的最低阈值</span><br><span class="line">4.没有被覆盖到的点集打上outlier_label</span><br><span class="line">5.repeat 1-4</span><br><span class="line">6.统计点对应的outlier_label个数</span><br><span class="line">7.排序高则优先为异常点</span><br></pre></td></tr></table></figure></p>
+<p>这边参考了<code>Clique</code>的映射+<code>Denclue</code>的密度分布函数的思路，注意问题就是计算量大，所以对小样本的适用程度更高一些，针对大样本多特征的数据可以考虑对样本进行子集抽样，再根据子集进行1-5，汇总后整体进行6-7步骤，实际检验效果仍然可以达到不抽样的85%以上</p>
+<h2 id="拉依达准则"><a href="#拉依达准则" class="headerlink" title="拉依达准则"></a>拉依达准则</h2><p>这个方法更加偏统计一些，设计到一些距离的计算，勉强放在空间识别里面</p>
+<p>这种判别处理原理及方法仅局限于对<strong>正态或近似正态分布的样本</strong>数据处理，它是以<strong>数据充分大</strong>为前提的，当数据较少的情况下，最好不要选用该准则。</p>
+<p>正态分布（高斯分布）是最常用的一种概率分布，通常正态分布有两个参数μ和σ为标准差。N(0,1)即为标准正态分布。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-ec554b00cb9bdd18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>从上面这张图可以看出，当数据对象值偏离均值3倍标准差的时候，该数据合理的出现可能性小于3‰，所以可以直接认定，数据偏离均值±3倍标准差时，为异常点。但是最后再次强调一遍：<strong>它是以数据充分大为前提的，当数据较少的情况下，最好不要选用该准则。</strong></p>
+<h1 id="计量识别"><a href="#计量识别" class="headerlink" title="计量识别"></a>计量识别</h1><h2 id="G-test或者说是likelihood-Ratio方法"><a href="#G-test或者说是likelihood-Ratio方法" class="headerlink" title="G-test或者说是likelihood Ratio方法"></a>G-test或者说是likelihood Ratio方法</h2><p>G-test这类方法运用在医学方面较多，常用于检验观测变量值是否符合理论期望的比值。现在也用在电商、出行、搜索领域检验一些无监督模型的质量、数据质量。</p>
+<p>当我们新上一个模型，部分用户的反馈特别异常，我们不知道是不是异常数据，在接下来的分析中需不需要剔除，我们可以用统计学方法予以取舍。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-46850d0fc19e37d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中O为观测值，E为期望值，假如我们的网站每天24个小时的订单量分布稳定，分时段计算出一个均值，E1，E2，..E24，新模型产出后，我们问题用户群对应的24个小时的订单分布值O1,O2,…..O24,套用上面的公式，我们就可以计算出一个G值出来。</p>
+<p>然后在根据G-test的base值，观察目标用户可信的最大置信度，判断置信度是否符合我们的最低要求；likelihood Ratio方法类似，相关论文可以直接搜索。</p>
+<h2 id="模型拟合"><a href="#模型拟合" class="headerlink" title="模型拟合"></a>模型拟合</h2><p>这类方法属于简单有监督识别，常见的包括贝叶斯识别，决策树识别，线性回归识别等等。</p>
+<p>需要提前知道两组数据：正常数据及非正常类数据，再根据它们所对应的特征，去拟合一条尽可能符合的曲线，后续直接用该条曲线去判断新增的数据是否正常。<br>举个例子：<br>金融借贷中，我们事先活动一批正常借贷用户，和逾期不还用户，我们通过<strong>打分卡模型</strong>去识别已知用户的特征，假设得到芝麻分、手机使用时长、是否为男性为关键特征。接下来判断未知标签的新增数据是否为正常用户的话，直接根据之前判断出来的拟合打分卡曲线去做0-1概率预估就行了。</p>
+<p>但是模型拟合的方式使用情况较为局限，绝大多数异常识别问题是无法拿到前置的历史区分数据，或者已分好的数据不能够覆盖全量可能，导致时间判断误差较大，顾一般只做emsemble model的其中一种组合模块，不建议做主要依赖标注。</p>
+<p>明尼苏达州大学有过一篇异常论文识别的总结，里面关于有监督模型、半监督模型、无监督模型等模型拟合讲的非常细致，如果感兴趣可以研究一下，附上论文Survey：<a href="http://cucis.ece.northwestern.edu/projects/DMS/publications/AnomalyDetection.pdf" target="_blank" rel="noopener">http://cucis.ece.northwestern.edu/projects/DMS/publications/AnomalyDetection.pdf</a></p>
+<h2 id="变维识别"><a href="#变维识别" class="headerlink" title="变维识别"></a>变维识别</h2><p>首先，我们来看一下PCA的伪代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.去除平均值,方便后续协方差，方差矩阵的计算</span><br><span class="line">2.计算协方差矩阵及其特征值和特征向量</span><br><span class="line">3.将特征值从大到小排序，特征值可以反映方差贡献度，特征值越大，方差贡献度越大</span><br><span class="line">4.保留最大的N个特征值以及它们的所对应的特征向量</span><br><span class="line">5.将数据映射到上述 N 个特征向量构造的新空间中</span><br></pre></td></tr></table></figure></p>
+<p>pca的核心思路在于<strong>尽可能通过feature的组合代替原始feature，使得原始数据的方差最大化</strong>。<br>通过pca可以得到第一主成分、第二主成分…。<br>对于正常数据集来说，正常数据量远远大于异常数据，所以正常数据所贡献的方差远远大于异常数据；通过pca得到的排名靠前的主成分解释了原始数据较大的方差占比，所以理论上讲，<strong>第一主成分反映了正常值的方差，最后一个主成分反映了异常点的方差。</strong>通过第一主成分对原始数据进行映射后，原始数据中的正常样本和异常样本的属性不会随之改变。</p>
+<p>存在一个p个维度的数据集orgin_data，X为其协方差矩阵，通过<strong>奇异值分解</strong>可以得到：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-1291fad0ed73f044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，D为对角阵，其每一个值为X所对应的特征值；P的每一列为X的所对应的特征向量，并将D中的特征值从大到小排列，相应的改变P所对应的列向量。<br>我们选取top(j)个D中的特征值，及其P所对应的特征向量构成(p,j) 维的矩阵 pj ，再将目标数据集orgin_data进行映射：<code>new_data = orgin_data*pj</code>；new_data是一个 (N,j) 维的矩阵。如果考虑拉回映射的话（也就是从主成分空间映射到原始空间），重构之后的数据集合是:<code>back_data=transpose(pj*transpose(new_data))=new_data*transpose(pj)</code>,是使用 top-j 的主成分进行重构之后形成的数据集，是一个 (N,p) 维的矩阵。</p>
+<p>所以，我们有如下的outlier socres的定义：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-2f9ebfb4dfec0b7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>ev(j) subject to.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-8245f5bfc8abe382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>解释一下上面两个公式，先计算score中orgindata的列减去前j个主成分映射回原空间的newdata下的欧式范数值；再考虑不同主成分所需乘以的权重，这边，我们认为，第一主成分所代表的数据中正常数据更多，所以权重越小；当j取到最后一维的主成分下，我们认为权重最高，达到1。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-b3a8ef0320eb1e67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>对于outlier socres过高的点，即为异常点。</p>
+<h2 id="神经网络识别"><a href="#神经网络识别" class="headerlink" title="神经网络识别"></a>神经网络识别</h2><p>之前比较火的神经网络分析，同样可以用来做有监督的异常点识别，这边介绍一下Replicator Neural Networks (RNNs)。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-3f1bcac360434516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这边我们通过图像可以看出：<br>1.输入层中，输入变量个数与输出层中，输出变量一致<br>2.中间层的节点数小于输入输出层节点<br>3.整个训练过程是一个先压缩后解压的过程</p>
+<p>常规的，我们通过mse来看模型的误差<br><img src="http://upload-images.jianshu.io/upload_images/1129359-ec67e22ba3fc0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我们来大致了解一下RNN的运行逻辑，首先，最左边的为输入层即为原始数据，最右层的为输出层即为输出数据。中间各层的激活函数不同，入参经过激活函数所得到的出参的值也不一致，但是在同一层激活函数都是一致的。<br>对于我们异常识别而言，第二层和第四层 (k=2,4)，激活函数选择为<br><img src="http://upload-images.jianshu.io/upload_images/1129359-81cb8a53026c11ab?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>tanh图像如下，可以将原始数据压缩在-1到1之间，使得原始数据有界。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-6da2e1a7721d8241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p>对于中间层 (k=3) 而言，激活函数是一个类阶梯 (step-like) 函数。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-2cfe6252e0b63f75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，N为阶梯分层数，a3为提升的效率。N的个数越多，层次分的更多。</p>
+<p>比如N=5的形式下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-6289fcc6b49de116.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="N=5"></p>
+<p>比如N=3的形式下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-bae95319a6b3a967.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="N=3"><br>这样做的好处就是，随着N的增加可以将异常点或者异常点群集中在某一个离散阶梯范围内。<br>通过对RNN的有监督训练，构造异常样本分类器，进行异常值识别。</p>
+<h2 id="isolation-forest"><a href="#isolation-forest" class="headerlink" title="isolation forest"></a>isolation forest</h2><p>2010年南大的周志华教授提出了一个基于二叉树的异常值识别算法，在工业界来说，效果是非常不错的，最近我也做了一个流失用户模型，实测效果优秀。</p>
+<p>和random forest一样，isolation forest是由isolation tree构成，先看一下isolation tree的逻辑：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">method:</span><br><span class="line">1.从原始数据中随机选择一个属性feature；</span><br><span class="line">2.从原始数据中随机选择该属性的下的一个样本值value；</span><br><span class="line">3.根据feature下的value对每条记录进行分类，把小于value的记录放在左子集，把大于等于value的记录放在右子集；</span><br><span class="line">4.repeat 1-3 until：</span><br><span class="line">　　　　4.1.传入的数据集只有一条记录或者多条一样的记录；</span><br><span class="line">　　　　4.2.树的高度达到了限定高度；</span><br></pre></td></tr></table></figure></p>
+<p>大致的思路如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-6fb1a1e8d80d6f5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>理论上，异常数据一般都是离群数据，非常容易在早期就被划分到最终子节点。所以，通过计算每个子节点的深度h(x)，来判断数据为异常数据的可能性。论文中，以s(x,n)为判断数据是否异常的衡量指标。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-049beb7fea9ff710.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-2d72b38a7b3b0d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。</p>
+<p>单棵树的可信性不足，所以我们通过用emsemble model的思路，去构造一个forest的树群来提高准确性。<br>但是作为isolation forest的时候，需要对原s(x,n)的公式有所更改，通过E(h(x))来替代h(x),其中E(h(x))为数据x在各棵树上的h(x)的平均。<br>同时，<br>1.因为树的个数大大增加，所以需要控制计算的开销，所以每个棵树我们可以采取数据抽样的方式，使得抽样数据集远远小于原始数据集，且根据周志华老师的论文，采样大小超过256效果就提升不大了。<br>2.我们可以控制深度，使得没棵树的最大深度limit length=ceiling(log2(样本大小))，当树深度大于最大深度时，其产生的子节点绝大多数均为正常数据节点，失去异常检验的意义。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有你们的支持，我们一定会不会停息</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesal 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesal 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/15/基于自然语言识别下的流失用户预警/" rel="prev" title="基于自然语言识别下的流失用户预警">
+                基于自然语言识别下的流失用户预警 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#空间识别"><span class="nav-number">1.</span> <span class="nav-text">空间识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分位数识别"><span class="nav-number">1.1.</span> <span class="nav-text">分位数识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#距离识别"><span class="nav-number">1.2.</span> <span class="nav-text">距离识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密度识别"><span class="nav-number">1.3.</span> <span class="nav-text">密度识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉依达准则"><span class="nav-number">1.4.</span> <span class="nav-text">拉依达准则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计量识别"><span class="nav-number">2.</span> <span class="nav-text">计量识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#G-test或者说是likelihood-Ratio方法"><span class="nav-number">2.1.</span> <span class="nav-text">G-test或者说是likelihood Ratio方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型拟合"><span class="nav-number">2.2.</span> <span class="nav-text">模型拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变维识别"><span class="nav-number">2.3.</span> <span class="nav-text">变维识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络识别"><span class="nav-number">2.4.</span> <span class="nav-text">神经网络识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isolation-forest"><span class="nav-number">2.5.</span> <span class="nav-text">isolation forest</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">45.6k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytllX3jJ';
+      var conf = 'df80cce337485e83adcdb34af93e3dbb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
