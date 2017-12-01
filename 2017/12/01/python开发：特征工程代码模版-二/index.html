@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="转载请注明文章来源：python开发：特征工程代码模版（二），你们免费转我文章，不标注来源就算了，现在还开始写“原创”，这就过分了～ 正题开始：这篇文章是入门级的特征处理的打包解决方案的python实现汇总，如果想get一些新鲜血液的朋友可以叉了，只是方便玩数据的人进行数据特征筛选的代码集合，话不多说，让我们开始。  ">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python开发：特征工程代码模版(二)">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/python开发：特征工程代码模版-二/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="转载请注明文章来源：python开发：特征工程代码模版（二），你们免费转我文章，不标注来源就算了，现在还开始写“原创”，这就过分了～ 正题开始：这篇文章是入门级的特征处理的打包解决方案的python实现汇总，如果想get一些新鲜血液的朋友可以叉了，只是方便玩数据的人进行数据特征筛选的代码集合，话不多说，让我们开始。  首先，让我们看一张入门级别的数据预处理的基本操作图，网上有很多版本，这个是我自己">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-bee94e391963d055.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-7d2c84374876a9ba.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2fdb0c0cdefc876f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T10:18:28.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python开发：特征工程代码模版(二)">
+<meta name="twitter:description" content="转载请注明文章来源：python开发：特征工程代码模版（二），你们免费转我文章，不标注来源就算了，现在还开始写“原创”，这就过分了～ 正题开始：这篇文章是入门级的特征处理的打包解决方案的python实现汇总，如果想get一些新鲜血液的朋友可以叉了，只是方便玩数据的人进行数据特征筛选的代码集合，话不多说，让我们开始。  首先，让我们看一张入门级别的数据预处理的基本操作图，网上有很多版本，这个是我自己">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-bee94e391963d055.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/python开发：特征工程代码模版-二/"/>
+
+
+
+
+
+  <title>python开发：特征工程代码模版(二) | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/python开发：特征工程代码模版-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python开发：特征工程代码模版(二)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T18:16:42+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>转载请注明文章来源：<a href="http://www.jianshu.com/writer#/notebooks/14156301/notes/20406464/preview" target="_blank" rel="noopener">python开发：特征工程代码模版（二）</a>，你们免费转我文章，不标注来源就算了，现在还开始写“原创”，这就过分了～</strong></p>
+<p>正题开始：<br>这篇文章是入门级的特征处理的打包解决方案的python实现汇总，如果想get一些新鲜血液的朋友可以叉了，只是方便玩数据的人进行数据<strong>特征筛选</strong>的代码集合，话不多说，让我们开始。</p>
+<hr>
+<p>首先，让我们看一张入门级别的数据预处理的基本操作图，网上有很多版本，这个是我自己日常干活的时候必操作的行为罗列，其中<a href="http://www.jianshu.com/p/1f2f887f0811" target="_blank" rel="noopener">数据整理部分</a>已经在上一篇文章中给出了，下面我们讲一起来看看特征筛选这块。<strong>此图请尊重一下我，别拿出去传播，纯属个人的方法论，大家看看就行，谢谢。</strong>网上有其他版本的，你们去传播那些就ok了～<br><img src="http://upload-images.jianshu.io/upload_images/1129359-bee94e391963d055.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="特征工程.png"></p>
+<hr>
+<h3 id="方差选择法"><a href="#方差选择法" class="headerlink" title="方差选择法"></a>方差选择法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">var_filter</span><span class="params">(data, k=None)</span>:</span></span><br><span class="line">    var_data = data.var().sort_values()</span><br><span class="line">    <span class="keyword">if</span> k <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        new_data = VarianceThreshold(threshold=k).fit_transform(data)</span><br><span class="line">        <span class="keyword">return</span> var_data, new_data</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> var_data</span><br></pre></td></tr></table></figure>
+<p>这个方法的思路很明确，我们筛掉方差过小的feature，也很好理解，一列值完全或者几乎完全一致的feature对于我们去训练最后的模型没有任何好处。熵理论也同样印证了这一点。</p>
+<h3 id="线性相关系数衡量"><a href="#线性相关系数衡量" class="headerlink" title="线性相关系数衡量"></a>线性相关系数衡量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pearson_value</span><span class="params">(data, label, k=None)</span>:</span></span><br><span class="line">    label = str(label)</span><br><span class="line">    <span class="comment"># k为想删除的feature个数</span></span><br><span class="line">    Y = data[label]</span><br><span class="line">    x = data[[x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x != label]]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x.shape[<span class="number">1</span>]):</span><br><span class="line">        data_res = np.c_[Y, x.iloc[:, i]].T</span><br><span class="line">        cor_value = np.abs(np.corrcoef(data_res)[<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">        res.append([label, x.columns[i], cor_value])</span><br><span class="line">    res = sorted(np.array(res), key=<span class="keyword">lambda</span> x: x[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">if</span> k <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">if</span> k &lt; len(res):</span><br><span class="line">            new_c = []  <span class="comment"># 保留的feature</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(res) - k):</span><br><span class="line">                new_c.append(res[i][<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">return</span> res, new_c</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'feature个数越界～'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>当你明确了自变量与因变量之间存在线性关系的时候，你就需要剔除掉一些关心比较弱的变量，奥卡姆剃刀原理告诉我们，在尽可能压缩feature个数大小的情况下去得到效果最优的模型才是合理模型。</p>
+<h3 id="共线性检验"><a href="#共线性检验" class="headerlink" title="共线性检验"></a>共线性检验</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vif_test</span><span class="params">(data, label, k=None)</span>:</span></span><br><span class="line">    label = str(label)</span><br><span class="line">    <span class="comment"># k为想删除的feature个数</span></span><br><span class="line">    x = data[[x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x != label]]</span><br><span class="line">    res = np.abs(np.corrcoef(x.T))</span><br><span class="line">    vif_value = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(res.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(res.shape[<span class="number">0</span>]):</span><br><span class="line">            <span class="keyword">if</span> j &gt; I:</span><br><span class="line">                vif_value.append([x.columns[i], x.columns[j], res[i, j]])</span><br><span class="line">    vif_value = sorted(vif_value, key=<span class="keyword">lambda</span> x: x[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">if</span> k <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">if</span> k &lt; len(vif_value):</span><br><span class="line">            new_c = []  <span class="comment"># 保留的feature</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">                <span class="keyword">if</span> vif_value[-i][<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> new_c:</span><br><span class="line">                    new_c.append(vif_value[-i][<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    new_c.append(vif_value[-i][<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">if</span> len(new_c) == k:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            out = [x <span class="keyword">for</span> x <span class="keyword">in</span> x.columns <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> new_c]</span><br><span class="line">            <span class="keyword">return</span> vif_value, out</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'feature个数越界～'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> vif_value</span><br></pre></td></tr></table></figure>
+<p>2-3年前面试必考题，什么叫做共线性？如何解决共线性？答案之一就是共线性检验啊，判断feature之间的相关性，剔除相关性较高的feature，在R语言里面有个VIF函数可以直接求的。除此之外，采用非线性函数做特征拆解也是很好的方法。共线性严重的情况下，会导致泛化误差异常大，需着重注意～</p>
+<h3 id="Mutual-Information互信息"><a href="#Mutual-Information互信息" class="headerlink" title="Mutual Information互信息"></a>Mutual Information互信息</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MI</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    <span class="comment"># len(X) should be equal to len(Y)</span></span><br><span class="line">    <span class="comment"># X,Y should be the class feature</span></span><br><span class="line">    total = len(X)</span><br><span class="line">    X_set = set(X)</span><br><span class="line">    Y_set = set(Y)</span><br><span class="line">    <span class="keyword">if</span> len(X_set) &gt; <span class="number">10</span>:</span><br><span class="line">        print(<span class="string">'%s非分类变量，请检查后再输入'</span> % X_set)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">elif</span> len(Y_set) &gt; <span class="number">10</span>:</span><br><span class="line">        print(<span class="string">'%s非分类变量，请检查后再输入'</span> % Y_set)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment"># Mutual information</span></span><br><span class="line">    MI = <span class="number">0</span></span><br><span class="line">    eps = <span class="number">1.4e-45</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> X_set:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> Y_set:</span><br><span class="line">            indexi = np.where(X == i)</span><br><span class="line">            indexj = np.where(Y == j)</span><br><span class="line">            ijinter = np.intersect1d(indexi, indexj)</span><br><span class="line">            px = <span class="number">1.0</span> * len(indexi[<span class="number">0</span>]) / total</span><br><span class="line">            py = <span class="number">1.0</span> * len(indexj[<span class="number">0</span>]) / total</span><br><span class="line">            pxy = <span class="number">1.0</span> * len(ijinter) / total</span><br><span class="line">            MI = MI + pxy * np.log2(pxy / (px * py) + eps)</span><br><span class="line">    <span class="keyword">return</span> MI</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mic_entroy</span><span class="params">(data, label, k=None)</span>:</span></span><br><span class="line">    <span class="comment"># mic_value值越小，两者相关性越弱</span></span><br><span class="line">    label = str(label)</span><br><span class="line">    <span class="comment"># k为想删除的feature个数</span></span><br><span class="line">    x = data[[x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x != label]]</span><br><span class="line">    Y = data[label]</span><br><span class="line">    mic_value = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> len(set(x.iloc[:, i])) &lt;= <span class="number">10</span>:</span><br><span class="line">            res = MI(Y, x.iloc[:, I])</span><br><span class="line">            mic_value.append([x.columns[i], res])</span><br><span class="line">        mic_value = sorted(mic_value, key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">return</span> mic_value</span><br></pre></td></tr></table></figure>
+<p>本来我想偷懒，直接<code>import minepy</code>然后就得了，发现真的是特么难装，各种报错，一怒之下自己写了，这边求大佬告知，为什么<code>pip install minepy</code>会有这样的问题：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</span><br><span class="line">error: command <span class="string">'/usr/bin/clang'</span> failed <span class="keyword">with</span> exit status <span class="number">1</span></span><br><span class="line"> ----------------------------------------</span><br><span class="line">Command <span class="string">"/Users/slade/anaconda3/bin/python -u -c "</span></span><br><span class="line"><span class="keyword">import</span> setuptools, tokenize;__file__=<span class="string">'/private/var/folders/hv/kfb7n4lj06590hqxjv6f3dd00000gn/T/pip-build-hr9ej0lw/minepy/setup.py'</span>;</span><br><span class="line">f=getattr(tokenize, <span class="string">'open'</span>, open)(__file__);</span><br><span class="line">code=f.read().replace(<span class="string">'\r\n'</span>, <span class="string">'\n'</span>);f.close();</span><br><span class="line">exec(compile(code, __file__, <span class="string">'exec'</span>))<span class="string">" install --record /var/folders/hv/kfb7n4lj06590hqxjv6f3dd00000gn/T/pip-30cn7rbs-record/install-record.txt --single-version-externally-managed --compile"</span> failed <span class="keyword">with</span> error code <span class="number">1</span> <span class="keyword">in</span> /private/var/folders/hv/kfb7n4lj06590hqxjv6f3dd00000gn/T/pip-build-hr9ej0lw/minepy/</span><br></pre></td></tr></table></figure></p>
+<p>回到正题，互信息其实很简单，我们看个公式I(X;Y)=H(X)-H(X|Y)，看完是不是超级清晰了，其实就是X发生的概率中去掉Y发生后X发生的概率，或者说是一个随机变量由于已知另一个随机变量而减少的不肯定性。<br>计算公式如下，你们也可以在上面的代码里找到影子。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-7d2c84374876a9ba.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>最后还是吐槽下，这个minepy太难装了，为了个互信息，不至于不至于～</p>
+<h3 id="递归特征消除法"><a href="#递归特征消除法" class="headerlink" title="递归特征消除法"></a>递归特征消除法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wrapper_way</span><span class="params">(data, label, k=<span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="comment"># k 为要保留的数据feature个数</span></span><br><span class="line">    label = str(label)</span><br><span class="line">    label_data = data[label]</span><br><span class="line">    col = [x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x != label]</span><br><span class="line">    train_data = data[col]</span><br><span class="line">    res = pd.DataFrame(</span><br><span class="line">        RFE(estimator=LogisticRegression(), n_features_to_select=k).fit_transform(train_data, label_data))</span><br><span class="line">    res_c = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(res.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(data.shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> (res.iloc[:, i] - data.iloc[:, j]).sum() == <span class="number">0</span>:</span><br><span class="line">                res_c.append(data.columns[j])</span><br><span class="line">    res.columns = res_c</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>这边开始的代码就基本上是方法梳理了，没啥亮点，我就大概和大家聊聊，递归特征消除法，用R语言里面的step()函数是一毛一样的东西，都是循环sample特征，选一个对于当前模型，特征组合最好的结果。如果数据量大，你会有非一般的感觉，这边就有小trick了，以后有空可以和大家分享～</p>
+<h3 id="l1-l2正则方法"><a href="#l1-l2正则方法" class="headerlink" title="l1/l2正则方法"></a>l1/l2正则方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">embedded_way</span><span class="params">(data, label, way=<span class="string">'l2'</span>, C_0=<span class="number">0.1</span>)</span>:</span></span><br><span class="line">    label = str(label)</span><br><span class="line">    label_data = data[label]</span><br><span class="line">    col = [x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x != label]</span><br><span class="line">    train_data = data[col]</span><br><span class="line">    res = pd.DataFrame(SelectFromModel(LogisticRegression(penalty=way, C=C_0)).fit_transform(train_data, label_data))</span><br><span class="line">    res_c = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(res.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(data.shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> (res.iloc[:, i] - data.iloc[:, j]).sum() == <span class="number">0</span>:</span><br><span class="line">                res_c.append(data.columns[j])</span><br><span class="line">    res.columns = res_c</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>正则理论参考：<a href="http://www.jianshu.com/p/4f91f0dcba95" target="_blank" rel="noopener">总结：常见算法工程师面试题目整理(二)</a>，这边要提一点，并不是所有情况下都需要正则预处理的，很多算法自带正则，比如logistic啊，比如我们自己去写tensorflow神经网络啊，模型会针对性的解决问题，而这边单纯用的logstic方法来筛选，相对而言内嵌的效果会更好的。</p>
+<h3 id="基于树模型特征选择"><a href="#基于树模型特征选择" class="headerlink" title="基于树模型特征选择"></a>基于树模型特征选择</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tree_way</span><span class="params">(data,label)</span>:</span></span><br><span class="line">    label = str(label)</span><br><span class="line">    label_data = data[label]</span><br><span class="line">    col = [x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x != label]</span><br><span class="line">    train_data = data[col]</span><br><span class="line">    res = pd.DataFrame(SelectFromModel(GradientBoostingClassifier()).fit_transform(train_data, label_data))</span><br><span class="line">    res_c = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(res.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(data.shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> (res.iloc[:, i] - data.iloc[:, j]).sum() == <span class="number">0</span>:</span><br><span class="line">                res_c.append(data.columns[j])</span><br><span class="line">    res.columns = res_c</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>这边用的是决策树每次分支下，如果改变一列值为随机值，观察对整体数据效果的影响。举个通俗易懂的例子，看看你在公司的重要性，就去和你老板提离职，要是老板疯狂给你加工资做你的思想工作，代表你很重要；如果你的老板让你去财务结账，代表你没啥意义。这里你就是这个feature，你老板就是数据效果的检验指标，常见的就是oob之类的。</p>
+<p>这边facebook有个非常好的拓展的思路，但是大家都吹的多实际应用很少，我最近在搞这事情，等下更完这边的特征工程和下面一个nlp的case后，我想专门聊聊这个事情，用的就是决策树的另一角度，以叶子结点代替原feature，做到了非线性的特征融入线性模型，虽然很老套，但是我稍稍做了测试，效果斐然：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-2fdb0c0cdefc876f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>最后的最后，感谢大家阅读，希望能够给大家带来收获，谢谢～</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/python开发：特征工程代码模版-一/" rel="next" title="python开发：特征工程代码模版(一)">
+                <i class="fa fa-chevron-left"></i> python开发：特征工程代码模版(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方差选择法"><span class="nav-number">1.</span> <span class="nav-text">方差选择法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性相关系数衡量"><span class="nav-number">2.</span> <span class="nav-text">线性相关系数衡量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共线性检验"><span class="nav-number">3.</span> <span class="nav-text">共线性检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutual-Information互信息"><span class="nav-number">4.</span> <span class="nav-text">Mutual Information互信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归特征消除法"><span class="nav-number">5.</span> <span class="nav-text">递归特征消除法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#l1-l2正则方法"><span class="nav-number">6.</span> <span class="nav-text">l1/l2正则方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于树模型特征选择"><span class="nav-number">7.</span> <span class="nav-text">基于树模型特征选择</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
