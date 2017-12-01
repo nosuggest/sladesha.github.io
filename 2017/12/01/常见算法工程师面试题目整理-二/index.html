@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 #11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbd">
+<meta name="description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt">
 <meta name="keywords" content="面试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常见算法工程师面试题目整理(二)">
 <meta property="og:url" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-二/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 #11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：不足：1.adaboost存在异常点敏感的">
+<meta property="og:description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：不足：1.adaboost存在异常点敏感的问">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-101787a9248e8b84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-db72ac347e04a8ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-18726e7041c3c6ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5ea3175e0b14244b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a20815f21ca9231b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T12:56:06.659Z">
+<meta property="og:updated_time" content="2017-12-01T13:12:30.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见算法工程师面试题目整理(二)">
-<meta name="twitter:description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 #11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：不足：1.adaboost存在异常点敏感的">
+<meta name="twitter:description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：不足：1.adaboost存在异常点敏感的问">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-101787a9248e8b84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -371,22 +371,21 @@
 
       
         <p>接着上回写的《<a href="http://www.jianshu.com/p/c3c921dca07b" target="_blank" rel="noopener">总结：常见算法工程师面试题目整理(1)</a>》,继续填接下来的坑。</p>
-<p>#11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？<br>答：<br>boost的核心思想不同于bagging，<strong>它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。</strong></p>
+<h1 id="11-boost算法的思路是什么样的？讲一下你对adaboost-和-gbdt的了解？"><a href="#11-boost算法的思路是什么样的？讲一下你对adaboost-和-gbdt的了解？" class="headerlink" title="11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？"></a>11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？</h1><p>答：<br>boost的核心思想不同于bagging，<strong>它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。</strong></p>
 <p>我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：<br>不足：<br>1.adaboost存在异常点敏感的问题<br>2.gbdt一定程度上优化了adaboost异常点敏感的问题，但是存在难以并行的缺点<br>3.两者的目标都是优化bias，必然导致训练出来的数据var的不稳定</p>
 <p>亮点：<br>1.发现非线性的特征关系，网格化的切分feature<br>2.拟合的效果相较于其他分类器更加精准，且训练参数较少</p>
-<p>#####Adaboost:<br><img src="http://upload-images.jianshu.io/upload_images/1129359-101787a9248e8b84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>adaboost初始数据权重都是1/M，然后通过训练每一个弱分类器Classifier使得在每一次y_pred误差最小，得到每一个弱Classifier的权重方法对：（αi，yi）然后提高错分了的数据的权重，降低正确分类的数据权重，循环训练，最后组合最后若干次的训练弱Classifier对，得到强分类器。<br>其中，αi由误差决定：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-db72ac347e04a8ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>该弱分类器分类错误率em越大，则该若分类器作用越小。<br><strong>1.剖析了原理之后，我们发现，这样做对异常点非常敏感，异常点非常容易错分，会影响后续若干个弱分类器</strong></p>
-<p>#####gbdt:<br>gbdt的核心在于下面这个公式：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-f0506e7f16596d85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>L（y，y_pred）：预测值与实际值间的误差<br>F(x):前若干个弱分类器的组合<br>关键的在于当前预测结果=对前若干个弱分类器+当前弱分类器修正，所以对前若干个分类器组合求偏导的方向进行梯度处理，保证L（x）出来的值最小。<br>这边结果在于你选取什么样的误差函数：</p>
+<h2 id="Adaboost"><a href="#Adaboost" class="headerlink" title="Adaboost:"></a>Adaboost:</h2><p><img src="http://upload-images.jianshu.io/upload_images/1129359-101787a9248e8b84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>adaboost初始数据权重都是1/M，然后通过训练每一个弱分类器Classifier使得在每一次y_pred误差最小，得到每一个弱Classifier的权重方法对：（αi，yi）然后提高错分了的数据的权重，降低正确分类的数据权重，循环训练，最后组合最后若干次的训练弱Classifier对，得到强分类器。<br>其中，αi由误差决定：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-db72ac347e04a8ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>该弱分类器分类错误率em越大，则该若分类器作用越小。<br><strong>1.剖析了原理之后，我们发现，这样做对异常点非常敏感，异常点非常容易错分，会影响后续若干个弱分类器</strong></p>
+<h2 id="gbdt"><a href="#gbdt" class="headerlink" title="gbdt:"></a>gbdt:</h2><p>gbdt的核心在于下面这个公式：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-f0506e7f16596d85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>L（y，y_pred）：预测值与实际值间的误差<br>F(x):前若干个弱分类器的组合<br>关键的在于当前预测结果=对前若干个弱分类器+当前弱分类器修正，所以对前若干个分类器组合求偏导的方向进行梯度处理，保证L（x）出来的值最小。<br>这边结果在于你选取什么样的误差函数：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-f8b8d6a6a931db42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>Loss即为损失函数，Derivative即为导数<br>除此之外，在每一步弱分类器构建的同时，它还考虑了正则化：<br><strong>Ω=入T+μ<code>*</code>linalg.norm(f(xi))</strong><br>T为子叶节点数目，同时也对预测结果得分的值进行了l1或者l2压缩，避免过拟合。</p>
 <p>我个人更喜欢用xgboost，在求解速度上，对异常值处理上面都要比gbdt要快，而且基于R、python版本都有package。</p>
-<p>#12.听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity Q？<br>1.我用的是Jaccard相关。<br>比如，用户1一共收过150个红包，发了100个红包，其中20个被用户2抢过<br>用户2一共收过100个红包，发了50个红包，其中30个被用户1抢过<br>similarity(user1=&gt;user2)=(30+20)/(150+100)<br>similarity(user2=&gt;user1)=(30+20)/(50+100)<br>similarity(user2=&gt;user1)=(30+20+30+20)/(150+100+50+100)</p>
+<h1 id="12-听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity-Q？"><a href="#12-听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity-Q？" class="headerlink" title="12.听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity Q？"></a>12.听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity Q？</h1><p>1.我用的是Jaccard相关。<br>比如，用户1一共收过150个红包，发了100个红包，其中20个被用户2抢过<br>用户2一共收过100个红包，发了50个红包，其中30个被用户1抢过<br>similarity(user1=&gt;user2)=(30+20)/(150+100)<br>similarity(user2=&gt;user1)=(30+20)/(50+100)<br>similarity(user2=&gt;user1)=(30+20+30+20)/(150+100+50+100)</p>
 <p>2.社区算法主要是用来衡量用户关系网中，不同用户、链接、信息之间的相似程度。<br>本来这边我准备讲pagerank的，结果被打断了，说需要讲内部结构相关的，其实我觉得PageRank这边来描述更加合适。不过，无所谓，我这边谈的是一个很基本的叫做：Kernighan-Lin算法（后面简称了KL算法）<br>KL算法中，先随机切分原数据集群，得到不同社区集，随机交换不同社区集内的不同点，观察优化值得变化程度是否为正向，循环即可。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-bde455f1e1c70512.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>共需执行次数：循环次数x集群A内点的个数x集群B内点的个数</p>
 <p>感觉这边答的不行，被嫌弃了，有知道的大神可以自行去研究一下相关的社区算法，我这边只了解PageRank和LK。</p>
 <p>3.Q-modularity：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-1d7ee9f81d493838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这个简单，E：关系点连接线之间的个数，I：关系点连接线两端都在社群内的数量，O：关系点连接线有至少一端在社群外的连接线的数量</p>
 <p>这个指标是用来衡量社群划分的稳定性的，讲真我也没用过，只是在周志华的算法的书上看过。</p>
-<p>#13.如果让你设计一套推荐算法，请说出你的思路？</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-e76e3b1badb3efac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>讲真，这个点，我起码说了有25分种，对面的面试管也很耐心的听完了，并且还给予了很多点的反馈，个人觉得非常受到尊重，我下面细节梳理一下。<br>首先，我个人非常赞同阿里现在的推荐算法这边的设计思路：<br><strong>推荐＝人＋场景＋物</strong><br>其中，<br><strong>人＝新用户＋老用户＋综合特征＋…</strong><br><strong>场景＝属性偏好＋周期属性＋黏度偏好＋…</strong><br><strong>物＝相关性＋物品价值＋特殊属性＋…</strong><br>接下来，我简单的剖析三个最常见也最重要的问题：</p>
+<h1 id="13-如果让你设计一套推荐算法，请说出你的思路？"><a href="#13-如果让你设计一套推荐算法，请说出你的思路？" class="headerlink" title="13.如果让你设计一套推荐算法，请说出你的思路？"></a>13.如果让你设计一套推荐算法，请说出你的思路？</h1><p><img src="http://upload-images.jianshu.io/upload_images/1129359-e76e3b1badb3efac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>讲真，这个点，我起码说了有25分种，对面的面试管也很耐心的听完了，并且还给予了很多点的反馈，个人觉得非常受到尊重，我下面细节梳理一下。<br>首先，我个人非常赞同阿里现在的推荐算法这边的设计思路：<br><strong>推荐＝人＋场景＋物</strong><br>其中，<br><strong>人＝新用户＋老用户＋综合特征＋…</strong><br><strong>场景＝属性偏好＋周期属性＋黏度偏好＋…</strong><br><strong>物＝相关性＋物品价值＋特殊属性＋…</strong><br>接下来，我简单的剖析三个最常见也最重要的问题：</p>
 <ul>
 <li>冷启动<br>很多人有一种错觉，只要业务上线时间长了就不存在所谓的冷启动问题，实则不是，新用户是持续进入的、流失用户也是在增长的、很多盲目用户（没有有价值行为）等等都可以归纳为冷启动问题，这类问题的核心在于你可用的数据很少，甚至没有，我这边采取的是热门推荐的方法。<br>然而在热门推荐的算法中，我这边推荐一些方法：<br><strong>威尔逊区间法</strong>：综合考虑总的行为用户中，支持率与支持总数的平衡<br><strong>hacker new排序</strong>：综合考虑时间对支持率的影响<br><strong>pagerank排序</strong>：考虑用户流向下的页面权重排序<br><strong>梯度效率排序</strong>：考虑商品增速下的支持率的影响<br>…<br>方法很多，但是核心的一点是热门推荐是冷启动及实时推荐必不可少的一环，优化好实时推荐的算法是占到一个好的推荐算法的30%以上的权重的，<strong>切忌0推荐</strong>。</li>
 </ul>
@@ -398,14 +397,14 @@
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-9fc5d1bcf3320e27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>最上方的橙黄色的横条中，橙色代表原始的目标用户，黄色代表非目标用户，假设我们知道黑色方框所框选的用户的转化率达到最小置信度的时候，我们可以通过特征映射、非线性分解、用户画像刻画等不同方法得到左右完全不同的新的用户分布，在同样的用户框选占比下，效果也是完全不同的。<br>真实推荐中，比如针对用户冬装推荐，我不仅仅以用户近期的搜索、浏览、购买商品等行为判断用户的偏好，我也根据他夏天的购买风格款式、他的年龄、生理性别、浏览性别等综合判断他可能会买什么。推荐算法才不会是冷漠的。</p>
 <p>至于想要了解具体实现算法及创新的一些想法可以看上方的脑图，但是我觉得那并不是最重要。</p>
-<p>#14.什么是P、NP、NP-Hard、NP-Complete问题？<br>P：很快可以得出解的问题<br>NP：一定有解，但可很快速验证答案的问题</p>
+<h1 id="14-什么是P、NP、NP-Hard、NP-Complete问题？"><a href="#14-什么是P、NP、NP-Hard、NP-Complete问题？" class="headerlink" title="14.什么是P、NP、NP-Hard、NP-Complete问题？"></a>14.什么是P、NP、NP-Hard、NP-Complete问题？</h1><p>P：很快可以得出解的问题<br>NP：一定有解，但可很快速验证答案的问题</p>
 <p>后面两个我没答出来，网上搜了下，分享下：<br>NP-Hard：比所有的NP问题都难的问题<br>NP-Complete：满足两点：</p>
 <ol>
 <li>是NP-Hard的问题</li>
 <li>是NP问题</li>
 </ol>
 <p>个人不喜欢这种问题。</p>
-<p>#15.常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？<br>当被问了第一个问题的时候，我愣了下，因为我觉得挺简单的，为什么要问这个，我感觉接下来有坑。<br>我回答的是：<br>先甩出了下面的图解释了一波欠拟合、正常、过拟合：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-1643201efb9b1212.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>然后举了几个例子：</p>
+<h1 id="15-常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？"><a href="#15-常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？" class="headerlink" title="15.常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？"></a>15.常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？</h1><p>当被问了第一个问题的时候，我愣了下，因为我觉得挺简单的，为什么要问这个，我感觉接下来有坑。<br>我回答的是：<br>先甩出了下面的图解释了一波欠拟合、正常、过拟合：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-1643201efb9b1212.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>然后举了几个例子：</p>
 <ul>
 <li>针对error递归的问题，l1，l2正则化</li>
 <li>扩充数据量，使得数据更加符合真实分布</li>
@@ -517,8 +516,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -604,6 +612,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#11-boost算法的思路是什么样的？讲一下你对adaboost-和-gbdt的了解？"><span class="nav-number">1.</span> <span class="nav-text">11.boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaboost"><span class="nav-number">1.1.</span> <span class="nav-text">Adaboost:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gbdt"><span class="nav-number">1.2.</span> <span class="nav-text">gbdt:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity-Q？"><span class="nav-number">2.</span> <span class="nav-text">12.听说你做过用户关系，你用的什么方法？社群算法有了解，讲讲什么叫做Modularity Q？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-如果让你设计一套推荐算法，请说出你的思路？"><span class="nav-number">3.</span> <span class="nav-text">13.如果让你设计一套推荐算法，请说出你的思路？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-什么是P、NP、NP-Hard、NP-Complete问题？"><span class="nav-number">4.</span> <span class="nav-text">14.什么是P、NP、NP-Hard、NP-Complete问题？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？"><span class="nav-number">5.</span> <span class="nav-text">15.常见的防止过拟合的方法是什么？为什么l1、l2正则会防止过拟合？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

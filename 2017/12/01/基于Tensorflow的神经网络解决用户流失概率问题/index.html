@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="##前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网">
+<meta name="description" content="前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对">
 <meta name="keywords" content="CRM预估">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Tensorflow的神经网络解决用户流失概率问题">
 <meta property="og:url" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="##前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适">
+<meta property="og:description" content="前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-af497cd5850f8704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1ef9c397a42a4bc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d922490c0d06a489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f8b60db1e8df00b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b533576543101323.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T12:55:41.558Z">
+<meta property="og:updated_time" content="2017-12-01T13:17:15.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Tensorflow的神经网络解决用户流失概率问题">
-<meta name="twitter:description" content="##前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适">
+<meta name="twitter:description" content="前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-af497cd5850f8704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -361,9 +361,9 @@
       
 
       
-        <p>##前言：<br>用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：<a href="https://www.kaggle.com/c/kkbox-churn-prediction-challenge" target="_blank" rel="noopener">KKBOX的会员流失预测算法竞赛</a>，如何能够搭建一个精准的模型成了大家探索的重要问题。<br>本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。</p>
+        <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：<a href="https://www.kaggle.com/c/kkbox-churn-prediction-challenge" target="_blank" rel="noopener">KKBOX的会员流失预测算法竞赛</a>，如何能够搭建一个精准的模型成了大家探索的重要问题。<br>本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。</p>
 <hr>
-<p>##行业做法：<br>通常的行业预测用户流失大概分以下几种思路：</p>
+<h1 id="行业做法："><a href="#行业做法：" class="headerlink" title="行业做法："></a>行业做法：</h1><p>通常的行业预测用户流失大概分以下几种思路：</p>
 <ul>
 <li>利用线性模型(比如Logistic)＋非线性模型Xgboost判断用户是否回流逝</li>
 </ul>
@@ -378,8 +378,7 @@
 <p>这个方法比较依赖于公司业务的特征，如果公司业务有部分依赖于评论，可以做文本分析，比如我上次写的<a href="http://www.jianshu.com/p/413cff5b9f3a" target="_blank" rel="noopener">基于word2vec下的用户流失概率分析</a>。如果业务有部分依赖于登录打卡，可以做时间线上的频次预估。这些都是比较偏奇门易巧，不属于通用类别的，不过当第一种方法达到上线的时候，这种方法补充收益会非常的大。</p>
 <p>其实还有很多其它方法，我这边也不一一列出了，这个领域的方法论还是很多的。</p>
 <hr>
-<p>##神经网络</p>
-<ul>
+<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><ul>
 <li><strong>核心</strong><br><img src="http://upload-images.jianshu.io/upload_images/1129359-af497cd5850f8704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="神经网络流程"><br>上面这张图片诠释了神经网络正向传播的流程，先通过线性变换(上图左侧)Σxw+b将线性可分的数据分离，再通过非线性变换(上图右侧)Sigmoid函数将非线性可分的数据分离，最后将输入空间投向另一个输出空间。</li>
 </ul>
 <p>根据上面所说，我们可以知道，通过增加左侧线性节点的个数，我们可以强化线性变换的力度；而通过增加层数，多做N次激活函数(比如上面提到的Sigmoid)可以增强非线性变换的能力。</p>
@@ -396,7 +395,7 @@
 </ul>
 <p>这边只是简单介绍了神经网络的基础知识，针对有一定基础的朋友唤醒记忆，如果纯小白用户，建议从头开始认真阅读理解一遍过程，避免我讲的有偏颇的地方对你进行误导。</p>
 <hr>
-<p>##TensorFlow<br>理论上讲，TensorFlow工具可以单独写一本书，用法很多而且技巧性的东西也非常的复杂，这边我们主要作为工具进行使用，遇到新技巧会在code中解释，但不做全书的梳理，建议去买一本《TensorFlow实战Google深度学习框架》，简单易懂。</p>
+<h1 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h1><p>理论上讲，TensorFlow工具可以单独写一本书，用法很多而且技巧性的东西也非常的复杂，这边我们主要作为工具进行使用，遇到新技巧会在code中解释，但不做全书的梳理，建议去买一本《TensorFlow实战Google深度学习框架》，简单易懂。</p>
 <p>TensorFlow是谷歌于2015年11月9日正式开源的计算框架，由Jeff Dean领导的谷歌大脑团队改编的DistBelief得到的，在ImageNet2014、YouTube视频学习，语言识别错误率优化，街景识别，广告，电商等等都有了非常优秀的产出，是我个人非常喜欢的工具。</p>
 <p>除此之外，我在列出一些其他的框架工具供读者使用：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-fbb0b53b95e3791e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -423,7 +422,7 @@
 </li>
 </ul>
 <hr>
-<p>##用户流失分析<br>说了那么多前置的铺垫，让我们来真实的面对我们需要解决的问题：</p>
+<h1 id="用户流失分析"><a href="#用户流失分析" class="headerlink" title="用户流失分析"></a>用户流失分析</h1><p>说了那么多前置的铺垫，让我们来真实的面对我们需要解决的问题：</p>
 <p>首先，我们拿到了用户是否流失的历史数据集20724条，流失与飞流失用户占比在1:4，这部分数据需要进行一下预处理，这边就不细讲预处理过程了，包含缺失值填充(分层填充)，异常值处理(isolation foest)，数据平衡(tomek link)，特征选择(xgboost importance)，特征变形(normalizing)，特征分布优化等等，工程技巧我之前的文章都有讲解过，不做本文重点。</p>
 <p><strong>taiking is cheap,show me the code.</strong><br><img src="http://upload-images.jianshu.io/upload_images/1129359-b533576543101323.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#author:shataowei</span><br><span class="line">#time:20170924</span><br><span class="line">#基础包加载</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import tensorflow as tf</span><br><span class="line">import math</span><br><span class="line">from sklearn.cross_validation import train_test_split</span><br></pre></td></tr></table></figure>
@@ -549,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -636,6 +644,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行业做法："><span class="nav-number">2.</span> <span class="nav-text">行业做法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">3.</span> <span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow"><span class="nav-number">4.</span> <span class="nav-text">TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户流失分析"><span class="nav-number">5.</span> <span class="nav-text">用户流失分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
