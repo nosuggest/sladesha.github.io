@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="图像识别," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上一节粗略的描述了如何关于图像识别，抠图，分类的理论相关，本节主要用代码，来和大家一起分析每一步骤。看完本节，希望你也能独立完成自己的图片、视频的内容实时定位。 首先，我们需要安装TensorFlow环境，建议利用conda进行安装，配置，90%尝试单独安装的人最后都挂了。 其次，我们需要安装从git上下载训练好的模型">
+<meta name="keywords" content="图像识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于SSD下的图像内容识别（二）">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/基于SSD下的图像内容识别（二）/index.html">
+<meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
+<meta property="og:description" content="上一节粗略的描述了如何关于图像识别，抠图，分类的理论相关，本节主要用代码，来和大家一起分析每一步骤。看完本节，希望你也能独立完成自己的图片、视频的内容实时定位。 首先，我们需要安装TensorFlow环境，建议利用conda进行安装，配置，90%尝试单独安装的人最后都挂了。 其次，我们需要安装从git上下载训练好的模型，git clone https://github.com/balancap/S">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-203d6cf8cdd0268f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-01T10:24:41.129Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于SSD下的图像内容识别（二）">
+<meta name="twitter:description" content="上一节粗略的描述了如何关于图像识别，抠图，分类的理论相关，本节主要用代码，来和大家一起分析每一步骤。看完本节，希望你也能独立完成自己的图片、视频的内容实时定位。 首先，我们需要安装TensorFlow环境，建议利用conda进行安装，配置，90%尝试单独安装的人最后都挂了。 其次，我们需要安装从git上下载训练好的模型，git clone https://github.com/balancap/S">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-203d6cf8cdd0268f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/基于SSD下的图像内容识别（二）/"/>
+
+
+
+
+
+  <title>基于SSD下的图像内容识别（二） | Sladesal's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sladesal's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">复盘是最锋利的剑</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/基于SSD下的图像内容识别（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sladesal's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于SSD下的图像内容识别（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T18:23:40+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上一节粗略的描述了如何关于图像识别，抠图，分类的理论相关，本节主要用代码，来和大家一起分析每一步骤。<br>看完本节，希望你也能独立完成自己的图片、视频的内容实时定位。</p>
+<p>首先，我们需要安装TensorFlow环境，建议利用<a href="https://www.anaconda.com/downloads" target="_blank" rel="noopener">conda</a>进行安装，配置，90%尝试单独安装的人最后都挂了。</p>
+<p>其次，我们需要安装从git上下载训练好的模型，git clone <a href="https://github.com/balancap/SSD-Tensorflow" target="_blank" rel="noopener">https://github.com/balancap/SSD-Tensorflow</a><br>如果没有安装git的朋友，请自行百度安装。</p>
+<p>最后找到你下载的位置进行解压，unzip ./SSD-Tensorflow/checkpoints/ssd_300_vgg.ckpt.zip<br><strong>这边务必注意，网上90%的教程这边就结束了，其实你这样是最后跑不通代码的，你需要把解压的文件进行移动到checkpoint的文件夹下面</strong>，这个问题git上这个同学解释了，详细的去看下<a href="https://github.com/balancap/SSD-Tensorflow/issues/150" target="_blank" rel="noopener">https://github.com/balancap/SSD-Tensorflow/issues/150</a></p>
+<p>最后的最后，下载你需要检测的网路图片，就ok了</p>
+<p>预处理步骤完成了，下面让我们看代码。<br><strong>加载相关的包：</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.cm <span class="keyword">as</span> mpcm</span><br><span class="line">sys.path.append(<span class="string">'./SSD-Tensorflow/'</span>)</span><br><span class="line"><span class="keyword">from</span> nets <span class="keyword">import</span> ssd_vgg_300, ssd_common, np_methods</span><br><span class="line"><span class="keyword">from</span> preprocessing <span class="keyword">import</span> ssd_vgg_preprocessing</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>配置相关TensorFlow环境</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gpu_options = tf.GPUOptions(allow_growth=<span class="keyword">True</span>)</span><br><span class="line">config = tf.ConfigProto(log_device_placement=<span class="keyword">False</span>, gpu_options=gpu_options)</span><br><span class="line">isess = tf.InteractiveSession(config=config)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>做图片的格式的处理，使他满足input的条件</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我们用的TensorFlow下的一个集成包slim，比tensor要更加轻便</span></span><br><span class="line">slim = tf.contrib.slim</span><br><span class="line"><span class="comment">#训练数据中包含了一下已知的类别，也就是我们可以识别出以下的东西，不过后续我们将自己自己训练自己的模型，来识别自己想识别的东西</span></span><br><span class="line">l_VOC_CLASS = [</span><br><span class="line">                <span class="string">'aeroplane'</span>,   <span class="string">'bicycle'</span>, <span class="string">'bird'</span>,  <span class="string">'boat'</span>,      <span class="string">'bottle'</span>,</span><br><span class="line">                <span class="string">'bus'</span>,         <span class="string">'car'</span>,     <span class="string">'cat'</span>,   <span class="string">'chair'</span>,     <span class="string">'cow'</span>,</span><br><span class="line">                <span class="string">'diningTable'</span>, <span class="string">'dog'</span>,     <span class="string">'horse'</span>, <span class="string">'motorbike'</span>, <span class="string">'person'</span>,</span><br><span class="line">                <span class="string">'pottedPlant'</span>, <span class="string">'sheep'</span>,   <span class="string">'sofa'</span>,  <span class="string">'train'</span>,     <span class="string">'TV'</span></span><br><span class="line">]</span><br><span class="line"><span class="comment"># 定义数据格式</span></span><br><span class="line">net_shape = (<span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line">data_format = <span class="string">'NHWC'</span>  <span class="comment"># [Number, height, width, color]，Tensorflow backend 的格式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理将输入图片大小改成 300x300，作为下一步输入</span></span><br><span class="line">img_input = tf.placeholder(tf.uint8, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>, <span class="number">3</span>))</span><br><span class="line">image_pre, labels_pre, bboxes_pre, bbox_img = ssd_vgg_preprocessing.preprocess_for_eval(</span><br><span class="line">    img_input,</span><br><span class="line">    <span class="keyword">None</span>,</span><br><span class="line">    <span class="keyword">None</span>,</span><br><span class="line">    net_shape,</span><br><span class="line">    data_format,</span><br><span class="line">    resize=ssd_vgg_preprocessing.Resize.WARP_RESIZE</span><br><span class="line">)</span><br><span class="line">image_4d = tf.expand_dims(image_pre, <span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>下面我们来载入SSD作者已经搞定的模型</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义 SSD 模型结构</span></span><br><span class="line">reuse = <span class="keyword">True</span> <span class="keyword">if</span> <span class="string">'ssd_net'</span> <span class="keyword">in</span> locals() <span class="keyword">else</span> <span class="keyword">None</span></span><br><span class="line">ssd_net = ssd_vgg_300.SSDNet()</span><br><span class="line"><span class="keyword">with</span> slim.arg_scope(ssd_net.arg_scope(data_format=data_format)):</span><br><span class="line">    predictions, localisations, _, _ = ssd_net.net(image_4d, is_training=<span class="keyword">False</span>, reuse=reuse)</span><br><span class="line"><span class="comment"># 导入官方给出的 SSD 模型参数</span></span><br><span class="line"><span class="comment">#这边修改成你自己的路径</span></span><br><span class="line">ckpt_filename = <span class="string">'/Users/slade/SSD-Tensorflow/checkpoints/ssd_300_vgg.ckpt'</span></span><br><span class="line">isess.run(tf.global_variables_initializer())</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line">saver.restore(isess, ckpt_filename)</span><br><span class="line">ssd_anchors = ssd_net.anchors(net_shape)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>下面让我们把SSD识别出来的结果在图片中表示出来</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#不同类别，我们以不同的颜色表示</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">colors_subselect</span><span class="params">(colors, num_classes=<span class="number">21</span>)</span>:</span></span><br><span class="line">    dt = len(colors) // num_classes</span><br><span class="line">    sub_colors = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_classes):</span><br><span class="line">        color = colors[I*dt]</span><br><span class="line">        <span class="keyword">if</span> isinstance(color[<span class="number">0</span>], float):</span><br><span class="line">            sub_colors.append([int(c * <span class="number">255</span>) <span class="keyword">for</span> c <span class="keyword">in</span> color])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sub_colors.append([c <span class="keyword">for</span> c <span class="keyword">in</span> color])</span><br><span class="line">    <span class="keyword">return</span> sub_colors</span><br><span class="line"><span class="comment">#画出在图中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bboxes_draw_on_img</span><span class="params">(img, classes, scores, bboxes, colors, thickness=<span class="number">5</span>)</span>:</span></span><br><span class="line">    shape = img.shape</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(bboxes.shape[<span class="number">0</span>]):</span><br><span class="line">        bbox = bboxes[I]</span><br><span class="line">        color = colors[classes[I]]</span><br><span class="line">        <span class="comment"># Draw bounding box...</span></span><br><span class="line">        p1 = (int(bbox[<span class="number">0</span>] * shape[<span class="number">0</span>]), int(bbox[<span class="number">1</span>] * shape[<span class="number">1</span>]))</span><br><span class="line">        p2 = (int(bbox[<span class="number">2</span>] * shape[<span class="number">0</span>]), int(bbox[<span class="number">3</span>] * shape[<span class="number">1</span>]))</span><br><span class="line">        cv2.rectangle(img, p1[::<span class="number">-1</span>], p2[::<span class="number">-1</span>], color, thickness)</span><br><span class="line">        <span class="comment"># Draw text...</span></span><br><span class="line">        s = <span class="string">'%s:%.3f'</span> % ( l_VOC_CLASS[int(classes[i])<span class="number">-1</span>], scores[I])</span><br><span class="line">        p1 = (p1[<span class="number">0</span>]<span class="number">-5</span>, p1[<span class="number">1</span>])</span><br><span class="line">        cv2.putText(img, s, p1[::<span class="number">-1</span>], cv2.FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, color, <span class="number">2</span>)</span><br><span class="line">colors_plasma = colors_subselect(mpcm.plasma.colors, num_classes=<span class="number">21</span>)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>让我们开始训练吧</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_image</span><span class="params">(img, select_threshold=<span class="number">0.3</span>, nms_threshold=<span class="number">.8</span>, net_shape=<span class="params">(<span class="number">300</span>, <span class="number">300</span>)</span>)</span>:</span></span><br><span class="line">    <span class="comment">#先获取SSD网络的层相关的参数</span></span><br><span class="line">    rimg, rpredictions, rlocalisations, rbbox_img = isess.run([image_4d, predictions, localisations, bbox_img],</span><br><span class="line">                                                              feed_dict=&#123;img_input: img&#125;)</span><br><span class="line">    <span class="comment">#获取分类结果，位置</span></span><br><span class="line">    rclasses, rscores, rbboxes = np_methods.ssd_bboxes_select(</span><br><span class="line">            rpredictions, rlocalisations, ssd_anchors,</span><br><span class="line">            select_threshold=select_threshold, img_shape=net_shape, num_classes=<span class="number">21</span>, decode=<span class="keyword">True</span>)</span><br><span class="line">    rbboxes = np_methods.bboxes_clip(rbbox_img, rbboxes)</span><br><span class="line">    rclasses, rscores, rbboxes = np_methods.bboxes_sort(rclasses, rscores, rbboxes, top_k=<span class="number">400</span>)</span><br><span class="line">    rclasses, rscores, rbboxes = np_methods.bboxes_nms(rclasses, rscores, rbboxes, nms_threshold=nms_threshold)</span><br><span class="line">    <span class="comment"># 让我们在图中画出来就行了</span></span><br><span class="line">    rbboxes = np_methods.bboxes_resize(rbbox_img, rbboxes)</span><br><span class="line">    bboxes_draw_on_img(img, rclasses, rscores, rbboxes, colors_plasma, thickness=<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>预处理的函数都写完了，我们就可以执行了。</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取数据</span></span><br><span class="line">img = cv2.imread(<span class="string">"/Users/slade/Documents/Yoho/picture_recognize/test7.jpg"</span>)</span><br><span class="line">img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">plt.imshow(process_image(img))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p>img的数据形式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">In [8]: img</span><br><span class="line">Out[8]:</span><br><span class="line">array([[[ 35,  59,  43],</span><br><span class="line">        [ 37,  60,  44],</span><br><span class="line">        [ 38,  61,  45],</span><br><span class="line">        ...,</span><br><span class="line">        [ 73,  99,  62],</span><br><span class="line">        [ 74,  99,  60],</span><br><span class="line">        [ 72,  97,  57]],</span><br><span class="line"></span><br><span class="line">       [[ 37,  60,  44],</span><br><span class="line">        [ 37,  60,  44],</span><br><span class="line">        [ 37,  60,  44],</span><br><span class="line">        ...,</span><br><span class="line">        [ 66,  92,  57],</span><br><span class="line">        [ 67,  93,  56],</span><br><span class="line">        [ 67,  92,  53]],</span><br><span class="line"></span><br><span class="line">       [[ 37,  60,  44],</span><br><span class="line">        [ 36,  59,  43],</span><br><span class="line">        [ 37,  58,  43],</span><br><span class="line">        ...,</span><br><span class="line">        [ 56,  83,  48],</span><br><span class="line">        [ 60,  86,  51],</span><br><span class="line">        [ 61,  87,  50]],</span><br><span class="line"></span><br><span class="line">       ...,</span><br><span class="line">       [[ 96, 101,  95],</span><br><span class="line">        [107, 109, 104],</span><br><span class="line">        [ 98,  97,  95],</span><br><span class="line">        ...,</span><br><span class="line">        [ 84, 126,  76],</span><br><span class="line">        [ 72, 118,  72],</span><br><span class="line">        [ 78, 126,  86]],</span><br><span class="line"></span><br><span class="line">       [[ 98, 103,  96],</span><br><span class="line">        [114, 116, 111],</span><br><span class="line">        [112, 113, 108],</span><br><span class="line">        ...,</span><br><span class="line">        [ 94, 137,  84],</span><br><span class="line">        [ 87, 133,  86],</span><br><span class="line">        [105, 153, 111]],</span><br><span class="line"></span><br><span class="line">       [[ 99, 105,  95],</span><br><span class="line">        [110, 113, 106],</span><br><span class="line">        [134, 135, 129],</span><br><span class="line">        ...,</span><br><span class="line">        [127, 170, 116],</span><br><span class="line">        [121, 167, 118],</span><br><span class="line">        [131, 180, 135]]], dtype=uint8)</span><br></pre></td></tr></table></figure></p>
+<p>处理后的结果如下：<img src="http://upload-images.jianshu.io/upload_images/1129359-203d6cf8cdd0268f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>是不是非常无脑，上面的代码直接复制就可以完成。</p>
+<p>下面在拓展一下视频的处理方式，其实相关的内容是一致的。<br>利用moviepy.editor包里面的VideoFileClip的切片的功能，然后对每一次切片的结果进行process_image过程就可以了，这边就不贴代码了，需要的朋友私密我。</p>
+<p>最后感谢大家阅读。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图像识别/" rel="tag"># 图像识别</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/基于SSD下的图像内容识别（一）/" rel="next" title="基于SSD下的图像内容识别（一）">
+                <i class="fa fa-chevron-left"></i> 基于SSD下的图像内容识别（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesal" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesal</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，hp实验室研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/seven_xi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesal</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
