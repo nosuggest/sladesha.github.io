@@ -80,14 +80,13 @@
 
 
 
-<meta name="description" content="17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的python开发：特征工程代码模版 ，进入页面后ctrl+F搜smote就行，请自取  之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote">
 <meta name="keywords" content="理论解析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SMOTE算法">
 <meta property="og:url" content="http://sladesha.github.io/2017/12/01/SMOTE算法/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的python开发：特征工程代码模版 ，进入页面后ctrl+F搜smote就行，请自取  之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote，网上也没有搜到，所以就当做一个小练手来做一下。 首先，看下Smote算法之前">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-39082690b83df2b7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f498eba11b0aa678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5782835263511a07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9fa8ec63346c4684.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -96,11 +95,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-051da4d8b859bbb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b603de85fc0748e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5a51fae31eb2d1ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T18:06:25.047Z">
+<meta property="og:updated_time" content="2017-12-02T10:15:16.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SMOTE算法">
-<meta name="twitter:description" content="17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的python开发：特征工程代码模版 ，进入页面后ctrl+F搜smote就行，请自取  之前一直没有用过python，最近做了一些数量级比较大的项目，觉得有必要熟悉一下python，正好用到了smote，网上也没有搜到，所以就当做一个小练手来做一下。 首先，看下Smote算法之前">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-f498eba11b0aa678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-39082690b83df2b7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -428,7 +426,8 @@
       
 
       
-        <hr>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-39082690b83df2b7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a></p>
+<hr>
 <p>17.11.28更新一下：最近把这个算法集成到了数据预处理的python工程代码中了，不想看原理想直接用的，有简易版的<a href="https://sladesha.github.io/2017/12/01/python开发：特征工程代码模版-一/">python开发：特征工程代码模版
 </a>，进入页面后ctrl+F搜smote就行，请自取</p>
 <hr>

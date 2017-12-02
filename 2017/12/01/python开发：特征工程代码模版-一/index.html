@@ -80,18 +80,17 @@
 
 
 
-<meta name="description" content="作为一个算法工程师，我们接的业务需求不会比数据分析挖掘工程师少，作为一个爱偷懒的人，总机械重复的完成一样的预处理工作，我是不能忍的，所以在最近几天，我正在完善一些常规的、通用的预处理的code，方便我们以后在每次分析之前直接import快速搞定，省的每次都要去做一样的事情。 如果大家有什么想实现但是懒得去弄的预处理的步">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python开发：特征工程代码模版(一)">
 <meta property="og:url" content="http://sladesha.github.io/2017/12/01/python开发：特征工程代码模版-一/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="作为一个算法工程师，我们接的业务需求不会比数据分析挖掘工程师少，作为一个爱偷懒的人，总机械重复的完成一样的预处理工作，我是不能忍的，所以在最近几天，我正在完善一些常规的、通用的预处理的code，方便我们以后在每次分析之前直接import快速搞定，省的每次都要去做一样的事情。 如果大家有什么想实现但是懒得去弄的预处理的步骤也可以私信我，我相对而言闲暇还是有的（毕竟工资少工作也不多，摊手：《），我开发">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T16:15:55.196Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-668f1333cc550910.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-02T10:18:10.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python开发：特征工程代码模版(一)">
-<meta name="twitter:description" content="作为一个算法工程师，我们接的业务需求不会比数据分析挖掘工程师少，作为一个爱偷懒的人，总机械重复的完成一样的预处理工作，我是不能忍的，所以在最近几天，我正在完善一些常规的、通用的预处理的code，方便我们以后在每次分析之前直接import快速搞定，省的每次都要去做一样的事情。 如果大家有什么想实现但是懒得去弄的预处理的步骤也可以私信我，我相对而言闲暇还是有的（毕竟工资少工作也不多，摊手：《），我开发">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-668f1333cc550910.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -419,7 +418,7 @@
       
 
       
-        <p>作为一个算法工程师，我们接的业务需求不会比数据分析挖掘工程师少，作为一个爱偷懒的人，总机械重复的完成一样的预处理工作，我是不能忍的，所以在最近几天，我正在完善一些常规的、通用的预处理的code，方便我们以后在每次分析之前直接import快速搞定，省的每次都要去做一样的事情。</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-668f1333cc550910.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a><br>作为一个算法工程师，我们接的业务需求不会比数据分析挖掘工程师少，作为一个爱偷懒的人，总机械重复的完成一样的预处理工作，我是不能忍的，所以在最近几天，我正在完善一些常规的、通用的预处理的code，方便我们以后在每次分析之前直接import快速搞定，省的每次都要去做一样的事情。</p>
 <p><strong>如果大家有什么想实现但是懒得去弄的预处理的步骤也可以私信我，我相对而言闲暇还是有的（毕竟工资少工作也不多，摊手：《），我开发完成后直接贴出来，大家以后一起用就行了</strong></p>
 <p>我们需要预加载这些包，而且接下来所有的操作均在dataframe格式下完成，所以我们需要将数据先处理成dataframe格式<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">from</span> sklearn.cross_validation <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> NearestNeighbors</span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">'slade_sal'</span></span><br><span class="line">__time__ = <span class="string">'20171128'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_data_format</span><span class="params">(data)</span>:</span></span><br><span class="line">    <span class="comment"># 以下预处理都是基于dataframe格式进行的</span></span><br><span class="line">    data_new = pd.DataFrame(data)</span><br><span class="line">    <span class="keyword">return</span> data_new</span><br></pre></td></tr></table></figure></p>
 <hr>

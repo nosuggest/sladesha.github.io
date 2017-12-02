@@ -80,14 +80,13 @@
 
 
 
-<meta name="description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的">
 <meta name="keywords" content="面试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常见算法工程师面试题目整理(二)">
 <meta property="og:url" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-二/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：不足：1.adaboost存在异常点敏感的问题2.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a71634d4d108e922.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-101787a9248e8b84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-db72ac347e04a8ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f0506e7f16596d85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -103,11 +102,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-18726e7041c3c6ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-5ea3175e0b14244b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a20815f21ca9231b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T13:23:37.077Z">
+<meta property="og:updated_time" content="2017-12-02T10:20:10.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见算法工程师面试题目整理(二)">
-<meta name="twitter:description" content="接着上回写的《总结：常见算法工程师面试题目整理(1)》,继续填接下来的坑。 boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？答：boost的核心思想不同于bagging，它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。 我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：不足：1.adaboost存在异常点敏感的问题2.">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-101787a9248e8b84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-a71634d4d108e922.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -435,7 +433,7 @@
       
 
       
-        <p>接着上回写的《<a href="http://www.jianshu.com/p/c3c921dca07b" target="_blank" rel="noopener">总结：常见算法工程师面试题目整理(1)</a>》,继续填接下来的坑。</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-a71634d4d108e922.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a><br>接着上回写的《<a href="http://www.jianshu.com/p/c3c921dca07b" target="_blank" rel="noopener">总结：常见算法工程师面试题目整理(1)</a>》,继续填接下来的坑。</p>
 <h1 id="boost算法的思路是什么样的？讲一下你对adaboost-和-gbdt的了解？"><a href="#boost算法的思路是什么样的？讲一下你对adaboost-和-gbdt的了解？" class="headerlink" title="boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？"></a>boost算法的思路是什么样的？讲一下你对adaboost 和 gbdt的了解？</h1><p>答：<br>boost的核心思想不同于bagging，<strong>它在基于样本预测结果对照与真实值得差距，进行修正，再预测再修正，逐步靠近正确值。</strong></p>
 <p>我对adaboost和gbdt了解的也不算很全面：大概的梳理如下：<br>不足：<br>1.adaboost存在异常点敏感的问题<br>2.gbdt一定程度上优化了adaboost异常点敏感的问题，但是存在难以并行的缺点<br>3.两者的目标都是优化bias，必然导致训练出来的数据var的不稳定</p>
 <p>亮点：<br>1.发现非线性的特征关系，网格化的切分feature<br>2.拟合的效果相较于其他分类器更加精准，且训练参数较少</p>
