@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="树划分问题," />
+  <meta name="keywords" content="理论解析," />
 
 
 
@@ -80,18 +80,29 @@
 
 
 
-<meta name="description" content="一、常用的决策树节点枝剪的衡量指标： 熵： 如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k） 该事情的信息量： 熵越大，随机变量的不确定性越大。 信息增益： 特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差 换句话说，就是原信息集下的信">
-<meta name="keywords" content="树划分问题">
+<meta name="keywords" content="理论解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="决策树及衍射指标">
-<meta property="og:url" content="http://sladesha.github.io/2017/06/02/决策树及衍射指标/index.html">
+<meta property="og:title" content="FM理论解析及应用">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/04/FM理论解析及应用/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="一、常用的决策树节点枝剪的衡量指标： 熵： 如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k） 该事情的信息量： 熵越大，随机变量的不确定性越大。 信息增益： 特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差 换句话说，就是原信息集下的信息量－在A特征条件下的信息集的信息量 信息增益越大，信息增多，不确定性减小 信息">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T16:15:17.081Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f646c1374cd3b448.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8e4559a2b8c1b86a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-4e4c82d43369e00d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-488bb2f5753b96c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-cd709e31357a24fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-684ef06884231e1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-16e706bd5a47e97c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1dfbf750b55c52e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3b28c05949f9ab20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d10cb2f750ac538f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c499f0432bc2e84e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-766b935c8df6f7de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d33d6e92b488b655.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-04T14:27:27.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="决策树及衍射指标">
-<meta name="twitter:description" content="一、常用的决策树节点枝剪的衡量指标： 熵： 如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k） 该事情的信息量： 熵越大，随机变量的不确定性越大。 信息增益： 特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差 换句话说，就是原信息集下的信息量－在A特征条件下的信息集的信息量 信息增益越大，信息增多，不确定性减小 信息">
+<meta name="twitter:title" content="FM理论解析及应用">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-f646c1374cd3b448.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/06/02/决策树及衍射指标/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/04/FM理论解析及应用/"/>
 
 
 
 
 
-  <title>决策树及衍射指标 | Sladesal's Algorithm World</title>
+  <title>FM理论解析及应用 | Sladesal's Algorithm World</title>
   
 
 
@@ -288,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/02/决策树及衍射指标/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/04/FM理论解析及应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -305,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">决策树及衍射指标</h1>
+          <h1 class="post-title" itemprop="name headline">FM理论解析及应用</h1>
         
 
         <div class="post-meta">
@@ -317,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:14:31+08:00">
-                2017-06-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T22:15:50+08:00">
+                2017-12-04
               </time>
             
 
@@ -359,8 +370,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/06/02/决策树及衍射指标/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/02/决策树及衍射指标/" itemprop="commentsCount"></span>
+                <a href="/2017/12/04/FM理论解析及应用/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/04/FM理论解析及应用/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -382,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,365 字
+                  2,103 字
                 </span>
               
 
@@ -398,7 +409,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -419,65 +430,20 @@
       
 
       
-        <p>一、常用的决策树节点枝剪的衡量指标：</p>
-<p>熵：</p>
-<p>如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k）</p>
-<p>该事情的信息量：</p>
-<p>熵越大，随机变量的不确定性越大。</p>
-<p>信息增益：</p>
-<p>特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差</p>
-<p>换句话说，就是原信息集下的信息量－在A特征条件下的信息集的信息量</p>
-<p>信息增益越大，信息增多，不确定性减小</p>
-<p>信息增益率：</p>
-<p>信息增益率定义:特征A对训练数据集D的信息增益比定义为其信息增益与训练数据D关于特征A的值的熵HA(D)之比</p>
-<p>注：p：每个唯独上，每个变量的个数／总变量个数</p>
-<p>二、常用的决策树介绍：</p>
-<p>ID3算法：</p>
-<p>ID3算法的核心是在决策树各个子节点上应用信息增益准则选择特征，递归的构建决策树，具体方法是:从根节点开始，对节点计算所有可能的特征的信息增益，选择信息增益最大的特征作为节点的特征，由该特征的不同取值建立子节点；再对子节点递归调用以上方法，构建决策树。</p>
-<p>解释：在做每次选择差分枝的时候，以不确定性最小点作为loss fuction，直到无法细分</p>
-<p>缺点：</p>
-<p>1.ID3算法只有树的生成，所以该算法生成的树容易产生过拟合，分得太细，考虑条件太多。</p>
-<p>2.不能处理连续属性</p>
-<p>3.选择具有较多分枝的属性，而分枝多的属性不一定是最优的选择。</p>
-<p>4.局部最优化，整体熵值最小，贪心算法算子节点的分支</p>
-<p>C4.5算法：</p>
-<p>基于ID3算法，用信息增益比来选择属性，对非离散数据也能处理，能够对不完整数据进行处理。</p>
-<p>采用增益率（GainRate）来选择分裂属性。计算方式如下：</p>
-<p>CART算法：</p>
-<p>CART算法选择分裂属性的方式是比较有意思的，首先计算不纯度，然后利用不纯度计算Gini指标。</p>
-<p>计算每个子集最小的Gini指标作为分裂指标。</p>
-<p>不纯度的计算方式为：</p>
-<p>pi表示按某个变量划分中，目标变量不同类别的概率。</p>
-<p>某个自变量的Gini指标的计算方式如下：</p>
-<p>计算出每个每个子集的Gini指标，选取其中最小的Gini指标作为树的分支（Gini（D）越小，则数据集D的纯度越高）。连续型变量的离散方式与信息增益中的离散方式相同。</p>
-<p>三、基于决策树的一些集成算法：</p>
-<p>随机森林：</p>
-<p>随机生成n颗树，树之间不存在关联，取结果的时候，以众数衡量分类结果；除了分类，变量分析，无监督学习，离群点分析也可以。</p>
-<p>生成过程：</p>
-<p>1.n个样本，随机选择n个样本（有放回），训练一颗树</p>
-<p>从原始训练数据集中,应用bootstrap方法有放回地随机抽取 K个新的自助样本集,并由此构建 K棵分类回归树,每次未被抽到的样本组成了 K个袋外数据(Out-of-bag,OOB)</p>
-<p>2.每个样本有M个属性，随机选m个，采取校验函数（比如信息增益、熵啊之类的），选择最佳分类点</p>
-<p>3.注意，每个树不存在枝剪</p>
-<p>4.将生成的多棵树组成随机森林,用随机森林对新的数据进行分类,分类结果按树分类器的投票多少而定</p>
-<p>树的个数随机选取，一般500，看三个误差函数是否收敛；变量的个数一般取均方作为mtry</p>
-<p>GBDT：</p>
-<p>DT步骤：</p>
-<p>GBDT里面的树是回归树！</p>
-<p>GBDT做每个节点上的分支的时候，都会以最小均方误差作为衡量（真实值－预测值）的平方和／N，换句话说，就是存在真实线l1，预测线l2，两条线之间的间距越小越好。</p>
-<p>BT步骤：</p>
-<p>GBDT的核心就在于，每一棵树学的是之前所有树结论和的残差，这个残差就是一个加预测值后能得真实值的累加量。</p>
-<p>换句话说，就是第一次预测的差值记为下一次预测的初始值，一直到某一次计算出的差值为0，把前n次的结果相加，就是一个真实预测。</p>
-<p>Adaboost：</p>
-<p>步骤：</p>
-<p>1.初始化所有训练样例的权重为1 / N,其中N是样本数</p>
-<p>2.对其中第1~m个样本:</p>
-<p>a.训练m个弱分类器，使其最小化bias：</p>
-<p>b.接下来计算该弱分类器的权重α，降低错判的分类器的权重，：</p>
-<p>c.更新权重：</p>
-<p>3.最后得到组合分类器：</p>
-<p>核心的思想如下图：</p>
-<p>全量数据集在若干次训练后，降低训练正确的样本的权重，提高训练错误样本的权重，得到若干个Y对应的分类器，在组合投票得到最终的分类器</p>
-<p>四、惠普实验室-集成并行化的随机森林：</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-f646c1374cd3b448.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a></p>
+<h1 id="FM的产生背景"><a href="#FM的产生背景" class="headerlink" title="FM的产生背景"></a>FM的产生背景</h1><p>我其实没有做过很多ctr预估的事情，但是我在工作中常常遇到CRM流失预估、订单预估这些依赖于特征工程的事情，其中就涉及到特征的组合问题。</p>
+<h1 id="one-hot过程"><a href="#one-hot过程" class="headerlink" title="one-hot过程"></a>one-hot过程</h1><p>在feature选取过程中，不可避免的会出现，学历这种高中、大学、研究生等多分类的feature，在实际应用中，我们对单个feature需要进行一种one hot过程，就是将原来的学历拆解为 是否为高中，是否为大学，注意，可以不用加是否为研究生一列，因为是否为高中，是否为大学的两列已经可以推导这个用户是否为研究生，加上这一列有时候反而会共线性。但是这样做，看起来没什么问题，想想看要是100个这样的特征，每个特征有100个这样单独的feature value的话，整体数据将是一个非常庞大的稀疏矩阵，无论是计算还是分析都是会存在巨大的问题的，所以看看我们能不能组合一些特征降低维度。</p>
+<h1 id="什么叫做组合问题"><a href="#什么叫做组合问题" class="headerlink" title="什么叫做组合问题"></a>什么叫做组合问题</h1><p>现在有一组数据，其中特征包含性别（男女），学历（高中，大学，研究生），想要判断这两个feature对是否对化妆品感谢兴趣。单独的观察性别这一栏，发现有一定相关性，但是比较弱，并不是所有的女性都对化妆品感兴趣；单独的观察学历这一栏也发现，学历与对化妆品感兴趣的程度并没有显著的相关性。其实，我们可以从自己的感知理解，首先，数据中女生可能比男生对化妆品更感兴趣，但是女生数据中存在大量的高中生，相对于高中生而言，大学生和研究生可能对化妆品更加感兴趣一点，所以原来的两个feature：性别，学历就组合成了是否为性别女+学历大于高中一个feature，这就是特征组合的过程。如果feature总个数少还可以，要是要有上千上万个，光两两组和就有n*(n-1)/2种可能，所以我们需要想一个其他办法。</p>
+<h1 id="组合特征后的表达形式"><a href="#组合特征后的表达形式" class="headerlink" title="组合特征后的表达形式"></a>组合特征后的表达形式</h1><p>首先，我们都知道一般的线性模型为：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-8e4559a2b8c1b86a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>为了考虑组合特征的作用，我们采用多项式来代表，形如特征xi与xj的组合用xixj表示，具体的表达式如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-4e4c82d43369e00d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，wij为组合特征xixj的权重，n表示样本的feature个数，xi为第I个feature。</p>
+<h1 id="方程定义完成了，下面就要开始数学定义"><a href="#方程定义完成了，下面就要开始数学定义" class="headerlink" title="方程定义完成了，下面就要开始数学定义"></a>方程定义完成了，下面就要开始数学定义</h1><p> 对每一个特征xi引入辅助向量Vi=(vi1,vi2,…vik),这边的k就是矩阵拆解的规模值，利用Vi<em>Vj.T对交叉项的系数wij进行估计,<br>及<img src="http://upload-images.jianshu.io/upload_images/1129359-488bb2f5753b96c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>则<br><img src="http://upload-images.jianshu.io/upload_images/1129359-cd709e31357a24fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><em>*这边需要注意一点，k理论上讲，越大越能强化拟合的能力，但是实际在运算过程中，一来受限于计算能力，二来受限于数据量，过大的k只会带来过拟合的问题。我实测了40w作用的数据，观察到k值在6-8左右，valid集合数据拟合效果最优，仅供参考</em></em></p>
+<p>很明显，上面这么多未知数：1+n是线性未知数个数，nfeature是组合特征的未知数个数，常规求解的效率可想而知。但是看到xixj这样的形式，我们很容易联想到：2ab = (a+b)^2 -a^2 -b^2，所以在解决这个wij、xi、xj点积的问题上，我们采用了：1/2 * ( (a+b+c)^2  -  a^2  -  b^2  -  c^2)的方式<br><img src="http://upload-images.jianshu.io/upload_images/1129359-684ef06884231e1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="下面让我们来解这个式子"><a href="#下面让我们来解这个式子" class="headerlink" title="下面让我们来解这个式子"></a>下面让我们来解这个式子</h1><p>这边需要一点导数功底，我们先来看对w0也就是bias求导，这个毫无意外，梯度为1；再对wi求导，这个也很简单，xi即可，这个也很简单，少许繁琐的就是wij求导，让我来仔细看看：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-16e706bd5a47e97c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>ok，我知道我的字很丑，别说话，看问题，所以我们可以总结为下面这个网上到处都有的式子：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-1dfbf750b55c52e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这个式子就是上面这么来的。<br>把上面的那个点积形式代入求解及为：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-3b28c05949f9ab20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="引深一个FFM概念"><a href="#引深一个FFM概念" class="headerlink" title="引深一个FFM概念"></a>引深一个FFM概念</h1><p>在FM模型中，每一个特征会对应一个隐变量，但在FFM模型中，认为应该将特征分为多个field，每个特征对应每个field分别有一个隐变量。</p>
+<p>举个例子，我们的样本有3种类型的字段：qualifications, age, gender，分别可以代表学历，年龄段，性别。其中qualifications有3种数据，age有5种数据，gender有男女2种，经过one-hot编码以后，每个样本有7个特征，其中只有3个特征非空。<br>如果使用FM模型，则7个特征，每个特征对应一个隐变量。<br>如果使用FFM模型，则7个特征，每个特征对应3个隐变量，即每个类型对应一个隐变量，及对应qualifications, age, gender各占一个。</p>
+<p>我看了Yu-Chin Juan实现了一个C++版的FFM模型的源码，倒过来想他的表达式应该是这样的：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d10cb2f750ac538f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其他模块都与fm差不多，主要看Vj1f2Vj2f1这个东西。我们假设j1特征属于f1这个field，j2特征属于f2这个feild，则Vj1f2表示j1这个特征对应j2所属的field的隐变量。很恶心的解释，通俗的来讲就是，性别为女与学历这个field的组合有个隐变量，性别女与年龄这个field的组合又有一个不一样的隐变量，而却不考虑到底是什么学历是啥，年龄具体到什么细节。<br>Yu-Chin Juan大神在实际写code的过程中，干掉来常数和一次项，可能是为了方便计算，保留的如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-c499f0432bc2e84e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>整理的最优化损失函数如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-766b935c8df6f7de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>前面为l2正则，后面为交互熵形式，注意这边的y属于{-1，1}<br>这边的求导，我算了一个小时都没搞出来，等哪天有空了，再仔细的去算一下，最后的迭代形式如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d33d6e92b488b655.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>η是常规的速率，V是初始均匀分布即可</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>我这边完成了FM的代码实现，详细见我的github：<a href="https://github.com/sladesha/machine_learning/tree/master/FM" target="_blank" rel="noopener">fm代码</a><br>为了方便不想看细节，只想撸代码的同学，我打包上传到了pypi，你只需要pip install fm_easy_run即可体验<br>至于ffm，我下午实在没写出来，对不起彭老师，给你教的数分丢脸了，后续看什么时候有空再研究一下。<br>demo如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">import sys</span><br><span class="line">sys.path.append(&apos;/Users/slade/Documents/GitHub/machine_learning/FM/script/&apos;)</span><br><span class="line"></span><br><span class="line">from fm import fm</span><br><span class="line">#local path</span><br><span class="line">path = &apos;/Users/slade/Documents/GitHub/machine_learning/data/data_all.txt&apos;</span><br><span class="line"></span><br><span class="line">#create model</span><br><span class="line">model = fm(iter = 1)</span><br><span class="line"></span><br><span class="line">#fit</span><br><span class="line">model.fit(path)</span><br><span class="line"># In [11]: model.fit(a)</span><br><span class="line"># the no 0 times, the loss arrach 正方向</span><br><span class="line"></span><br><span class="line">#predict</span><br><span class="line">X = pd.read_table(path)</span><br><span class="line">#第一列是手机号，第二列是因变量，都去掉</span><br><span class="line">X = np.array(X.iloc[:,2:])</span><br><span class="line">model.predict(X)</span><br><span class="line"># [0.0068623909053069695,</span><br><span class="line"># 0.03070660744280522,</span><br><span class="line"># 0.62197610204590048,</span><br><span class="line"># 0.11532505686311838,</span><br><span class="line"># 0.020968338370392487,</span><br><span class="line"># 0.017638116663948621,</span><br><span class="line"># 0.01831564127277888,</span><br><span class="line"># 0.10688694669470335,</span><br><span class="line">#  ...]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#_w</span><br><span class="line">model._w</span><br><span class="line"># array([[-1.08728341],</span><br><span class="line">#        [ 0.11213358],</span><br><span class="line">#        [ 0.05307469],</span><br><span class="line">#        [-1.68175973],</span><br><span class="line">#        [-0.01022176],</span><br><span class="line">#        [-0.0144888 ],</span><br><span class="line">#        [-1.37021031],</span><br><span class="line">#        [-1.13095253],</span><br><span class="line">#        [-0.12314619]])</span><br><span class="line"></span><br><span class="line">#_v</span><br><span class="line">model._v</span><br><span class="line"># array([[ 0.0764419 ,  0.0764419 ,  0.0764419 ,  0.0764419 ,  0.0764419 ,</span><br><span class="line">#          0.0764419 ,  0.0764419 ,  0.0764419 ],</span><br><span class="line">#        [ 0.3254763 ,  0.3254763 ,  0.3254763 ,  0.3254763 ,  0.3254763 ,</span><br><span class="line">#          0.3254763 ,  0.3254763 ,  0.3254763 ],</span><br><span class="line">#        [ 0.35334494,  0.35334494,  0.35334494,  0.35334494,  0.35334494,</span><br><span class="line">#          0.35334494,  0.35334494,  0.35334494],</span><br><span class="line">#        [-0.1346388 , -0.1346388 , -0.1346388 , -0.1346388 , -0.1346388 ,</span><br><span class="line">#         -0.1346388 , -0.1346388 , -0.1346388 ],</span><br><span class="line">#        [ 0.34120166,  0.34120166,  0.34120166,  0.34120166,  0.34120166,</span><br><span class="line">#          0.34120166,  0.34120166,  0.34120166],</span><br><span class="line">#        [ 0.34007967,  0.34007967,  0.34007967,  0.34007967,  0.34007967,</span><br><span class="line">#          0.34007967,  0.34007967,  0.34007967],</span><br><span class="line">#        [ 0.05097865,  0.05097865,  0.05097865,  0.05097865,  0.05097865,</span><br><span class="line">#          0.05097865,  0.05097865,  0.05097865],</span><br><span class="line">#        [ 0.12091724,  0.12091724,  0.12091724,  0.12091724,  0.12091724,</span><br><span class="line">#          0.12091724,  0.12091724,  0.12091724],</span><br><span class="line">#        [ 0.28326789,  0.28326789,  0.28326789,  0.28326789,  0.28326789,</span><br><span class="line">#          0.28326789,  0.28326789,  0.28326789]])</span><br><span class="line"></span><br><span class="line">#_w_0</span><br><span class="line">model._w_0</span><br><span class="line">#-1.8927186959057687</span><br></pre></td></tr></table></figure></p>
+<p>最后，着重提示，本文很多思路很解析都参考的Yu-Chin Juan的源代码，附上<a href="https://github.com/guestwalk/libffm" target="_blank" rel="noopener">github地址</a>，欢迎去关注原作者的内容，感谢大神带路，谢谢大家阅读。</p>
 
       
     </div>
@@ -524,7 +490,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/树划分问题/" rel="tag"># 树划分问题</a>
+            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
           
         </div>
       
@@ -537,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/02/因子分析原理剖析/" rel="next" title="因子分析原理剖析">
-                <i class="fa fa-chevron-left"></i> 因子分析原理剖析
+              <a href="/2017/12/01/SMOTE算法/" rel="next" title="SMOTE算法">
+                <i class="fa fa-chevron-left"></i> SMOTE算法
               </a>
             
           </div>
@@ -546,10 +512,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/19/常用R语言包介绍/" rel="prev" title="常用R语言包介绍">
-                常用R语言包介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -606,8 +568,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -705,6 +676,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FM的产生背景"><span class="nav-number">1.</span> <span class="nav-text">FM的产生背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#one-hot过程"><span class="nav-number">2.</span> <span class="nav-text">one-hot过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么叫做组合问题"><span class="nav-number">3.</span> <span class="nav-text">什么叫做组合问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组合特征后的表达形式"><span class="nav-number">4.</span> <span class="nav-text">组合特征后的表达形式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方程定义完成了，下面就要开始数学定义"><span class="nav-number">5.</span> <span class="nav-text">方程定义完成了，下面就要开始数学定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下面让我们来解这个式子"><span class="nav-number">6.</span> <span class="nav-text">下面让我们来解这个式子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引深一个FFM概念"><span class="nav-number">7.</span> <span class="nav-text">引深一个FFM概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">8.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
