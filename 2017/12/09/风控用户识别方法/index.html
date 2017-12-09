@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f9c66d9af7c9e9c7.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ace0365bb889a260.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b94d630636497494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-09T11:40:55.079Z">
+<meta property="og:updated_time" content="2017-12-09T11:44:26.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="风控用户识别方法.md">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-1850208d6c0e8500.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,094 字
+                  2,118 字
                 </span>
               
 
@@ -467,8 +467,8 @@
 <p>切分完成数据之后，我们要做寻找差异约束切割逻辑。从最上面的扇面图，我们很容易发现，正常数据与异常数据之间的密度差异很明显，所以如何识别密度差异的算法就是我们需要的，这边我大概找了6、7种常见的切分方法，这边主要讲三种：isolation forest，lof，distance similarity。理论我之前也讲过，贴上地址，不废话了：<a href="http://shataowei.com/2017/12/01/多算法识别撞库刷券等异常用户/" target="_blank" rel="noopener">密度算法</a>。这边主要展示效果差异：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-ace0365bb889a260.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>通过68个数据集，很明显的可以看出LOF的识别出来的用户的异常用户异常程度是低于Isolation Forest和Distince Similarity的，起码在我们这些数据集样本中，Isolation Forest和Distince Similarity识别效果差异不大，所以，我们再考虑了另一个性能问题：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-b94d630636497494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我们用了CV=10的交叉检验，发现，平均下来，Isolation Forest识别速度是Distince Similarity的1/3以下。综合上述，还有一些其他因素，最后我们选择了Isoation Forest的方法。</p>
 <h1 id="当前的设计下存在哪些问题？"><a href="#当前的设计下存在哪些问题？" class="headerlink" title="当前的设计下存在哪些问题？"></a>当前的设计下存在哪些问题？</h1><p>上面说的都是比较正面的问题，让我们看看，有哪些缺点。<br>首先，从头到尾，我们一直在围绕密度差异这个问题，但是就我平时做的一些小爬虫都知道，降低暴力获取的速度，慢慢搞，这时候就以上的方法就无法做到有效的识别。除此之外，因为我们用了切比雪夫不等式，所以对其有概念的同学知道，算马氏距离的时候需要算协方差矩阵，当数据量异常异常大(我测算的是12mx100)的时候计算资源紧张，可能算不出来；数据量异常异常小的时候feature严重共线性，也可能计算不出来。</p>
 <h1 id="未来的方向会在哪边？"><a href="#未来的方向会在哪边？" class="headerlink" title="未来的方向会在哪边？"></a>未来的方向会在哪边？</h1><p>所以，后续我们会新增其他算法，支持过大过小情况下的识别方法，过小的识别情况，我在V0.0.3版本下更新了一个简单识别的方法，之后会优化更好的算法替代掉的。只要数据量太大无法计算的问题，我之后会采取矩阵切割分块计算的方法，这个是后话了。</p>
-<p>最后，我们以一个例子结束整片介绍：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">pip install fast_risk_control</span><br></pre></td></tr></table></figure></p>
-<p>自动识别过程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fast_risk_control <span class="keyword">import</span> fast_risk_control</span><br><span class="line">fast_risk_control.transform(data)</span><br></pre></td></tr></table></figure></p>
+<p>最后，我们以一个例子结束整篇介绍：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">pip install fast_risk_control</span><br></pre></td></tr></table></figure></p>
+<p>自动识别过程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fast_risk_control <span class="keyword">import</span> fast_risk_control</span><br><span class="line">data = pd.read_table(<span class="string">'../路径'</span>)<span class="comment">#数据可以在https://github.com/sladesha/machine_learning/tree/master/data下的data_all.csv获取</span></span><br><span class="line">fast_risk_control.transform(data)</span><br></pre></td></tr></table></figure></p>
 <p>相关的结果显示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Attributes: </span></span><br><span class="line"><span class="comment">#正常用户的各feature的状态，用来对比异常数据的结果</span></span><br><span class="line">fast_risk_control.heavy_point </span><br><span class="line"><span class="comment">#识别出来的outlier及对应的feature值，prob越小代表越异常</span></span><br><span class="line">fast_risk_control.outlier_details</span><br></pre></td></tr></table></figure></p>
 <p>以上部分内容截取自我的<a href="https://github.com/sladesha/machine_learning/tree/master/fast_risk_control" target="_blank" rel="noopener">github</a>，希望对大家有一些帮助。</p>
 <p>最后，谢谢大家的阅读，欢迎大家关注我的<a href="http://shataowei.com" target="_blank" rel="noopener">个人博客</a>。。</p>
