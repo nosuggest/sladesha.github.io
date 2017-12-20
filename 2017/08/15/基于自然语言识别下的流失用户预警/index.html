@@ -80,22 +80,23 @@
 
 
 
-<meta name="description" content="在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券安慰”，”特权享受”等行为，有效的降低了用户的流失。根据实际的业务营销效果，在模型上线后，abtest">
+<meta name="description" content="update:17.12.20 : 关于IDF处描述，经@余海跃同学提醒，细化了解释内容，感谢！   在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券">
 <meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于自然语言识别下的流失用户预警">
 <meta property="og:url" content="http://sladesha.github.io/2017/08/15/基于自然语言识别下的流失用户预警/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券安慰”，”特权享受”等行为，有效的降低了用户的流失。根据实际的业务营销效果，在模型上线后，abtest检验下模型识别用户人群进行营销后的流失率比随意营销下降9.2%，效果显著。">
+<meta property="og:description" content="update:17.12.20 : 关于IDF处描述，经@余海跃同学提醒，细化了解释内容，感谢！   在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券安慰”，”特权享受”等行为，有效的降低了用户的流失。根据实际的业务营销效果，在模">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-44f62ac8f31504a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-685ed65594d6c27b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-4ddfbc29106f0767.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c2eca9e5da73375b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e20c4b10905b9090.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-05T01:13:23.704Z">
+<meta property="og:updated_time" content="2017-12-20T03:26:44.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于自然语言识别下的流失用户预警">
-<meta name="twitter:description" content="在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券安慰”，”特权享受”等行为，有效的降低了用户的流失。根据实际的业务营销效果，在模型上线后，abtest检验下模型识别用户人群进行营销后的流失率比随意营销下降9.2%，效果显著。">
+<meta name="twitter:description" content="update:17.12.20 : 关于IDF处描述，经@余海跃同学提醒，细化了解释内容，感谢！   在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券安慰”，”特权享受”等行为，有效的降低了用户的流失。根据实际的业务营销效果，在模">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-44f62ac8f31504a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -387,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,565 字
+                  4,055 字
                 </span>
               
 
@@ -403,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15 分钟
+                  17 分钟
                 </span>
               
             </div>
@@ -424,7 +425,9 @@
       
 
       
-        <blockquote>
+        <p><strong>update:</strong><br><strong>17.12.20 : 关于IDF处描述，经@余海跃同学提醒，细化了解释内容，感谢！</strong></p>
+<hr>
+<blockquote>
 <p>在电商运营过程中，会有大量的用户反馈留言，包括吐槽的差评，商品不满的地方等等，在用户运营生态中，这部分用户是最有可能流失也是最影响nps的人群，<strong>通过对其评价的语义分析，每日找出潜在的流失人群进行包括”电话回访”,”补券安慰”，”特权享受”等行为，有效的降低了用户的流失。</strong>根据实际的业务营销效果，在模型上线后，<strong>abtest检验下模型识别用户人群进行营销后的流失率比随意营销下降9.2%，效果显著。</strong></p>
 </blockquote>
 <p>当前文本文义识别存在一些问题：<br>（1）准确率而言，很多线上数据对特征分解的过程比较粗糙，<strong>很多直接基于df或者idf结果进行排序</strong>，在算法设计过程中，<strong>也是直接套用模型</strong>，只是工程上的实现，缺乏统计意义上的分析；</p>
@@ -448,6 +451,7 @@
 <p>TF = 某词在文章中出现的次数/文章包含的总词数（或者文章有价值词次数）<br>DF = （包含某词的文档数）/（语料库的文档总数）<br>IDF = log（（语料库的文档总数）/（包含某词的文档数+1））<br>这边的+1是为了避免（语料库的文档总数）/（包含某词的文档数）=1，log(1)=0，使得最后的重要性中出现0的情况，与有意义的前提相互驳斥。<br>TF-IDF = TF*IDF</p>
 <p>分别看下，里面的每一项的意义：<br>TF，我们可以看出，<strong>在同一个评论中，词数出现的越多，代表这个词越能成为这篇文章的代表</strong>，当然前提是非无意义的助词等。</p>
 <p>IDF，我们可以看出，<strong>所以评论中，包含目标词的评论的占比，占比数越高，目标词的意义越大</strong>，假设1000条评论中，“丧心病狂”在一条评论里面重复了10次，但是其他999条里面一次也没有出现，那就算“丧心病狂”非常能代表这条评论，但是在做文本集特征考虑的情况下，它的价值也是不大的。</p>
+<p><strong>注意，经@余海跃同学提醒，这边的IDF解释不清晰，详细剖析如下：</strong><br>首先idf的定义是如下这样的：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-4ddfbc29106f0767.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>（D为所有文章，d为单篇文章）<br>通常，会考虑类似近拉普拉斯平滑（+1）这样的方法修正idf值，在NLP领域，真正的意思如你所理解的：随着single word出现在的doc数量的增加，idf值应该是下降的，我们认为，一个词在越多文档中出现，该词代表文章的概述的能力越弱。其实，我在《应用：基于自然语言识别下的流失用户预警》实际R代码编写过程中也是这么去做的，但是当时我考虑了另一个方面：电商的评论与传统的文学文本差异还是很大的，单条评论中独特的词（只出现过一次的词或者短句）非常之多。这意味着：如果原封不动的按照idf去计算的话，最后识别出来的判别标签，也就是’文本分词特征值’会变得非常多，而且对泛化情况的识别能力非常的差。体现在对做后续的有监督分类的时候，如果不做处理会造成异常过拟合的问题。所以，我这边表述的想法是将idf值过大的一些词，也就是single word出现的doc过少的一些词剔除，再根据剩余的其他特征词计算idf提取关键特征词，我这边设定的阈值范围是：特征词至少在3.5%以上的评论中出现过。当然，你完全可以选择另外一种方法，完全按照idf计算，在最后做特分类之前，做特征筛选，去除掉一些冗余特征词变量。</p>
 <p>下面，我们来看代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#tfidf_partone 为对应的tf</span><br><span class="line">tdidf_partone=whole_words_set_sequence</span><br><span class="line">for (i in 1:key_word)&#123;</span><br><span class="line">tmp1=as.data.frame(prop.table(table(whole_words_set_sequence[[i]])))</span><br><span class="line">tdidf_partone[[i]]=tmp1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#tdidf_partfour 为对应的idf</span><br><span class="line">tdidf_parttwo=unique(unlist(whole_words_set_sequence))</span><br><span class="line">tdidf_max=length(tdidf_parttwo)</span><br><span class="line">tdidf_partthree=tdidf_parttwo</span><br><span class="line">for (i in 1:tdidf_max)&#123;</span><br><span class="line">tmp=0</span><br><span class="line">aimed_word=tdidf_parttwo[i]</span><br><span class="line">    for (j in 1:key_word)&#123;</span><br><span class="line">    tmp=tmp+sum(tdidf_parttwo[i] %in% whole_words_set_sequence[[j]])</span><br><span class="line">    &#125;</span><br><span class="line">tdidf_partthree[i]=log(as.numeric(key_word)/(tmp+1))</span><br><span class="line">&#125;</span><br><span class="line">tdidf_partfour=cbind(tdidf_parttwo,tdidf_partthree)</span><br><span class="line">tdidf_partfive=tdidf_partone</span><br><span class="line">colnames(tdidf_partfour)&lt;-c(&apos;Var1&apos;,&apos;Freq1&apos;)</span><br><span class="line">for (i in 1:key_word)&#123;</span><br><span class="line">tdidf_partfive[[i]]=merge(tdidf_partone[[i]],tdidf_partfour,by=c(&quot;Var1&quot;))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#计算tf-idf结果，并排序key_word</span><br><span class="line">tdidf_partsix=tdidf_partfive</span><br><span class="line">for (i in 1:key_word)&#123;</span><br><span class="line">tmp=tdidf_partfive[[i]][,2:3]</span><br><span class="line">tdidf_partsix[[i]][,2]=as.numeric(tmp[,1])*as.numeric(tmp[,2])</span><br><span class="line">tdidf_partsix[[i]]=tdidf_partsix[[i]][order(tdidf_partsix[[i]][,2],decreasing=T),][]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">key_word=c()</span><br><span class="line">for (i in 1:key_word)&#123;</span><br><span class="line">tmp=tdidf_partsix[[i]][1:5,1]</span><br><span class="line">key_word=rbind(key_word,as.character(tmp))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>理论上讲，如果这边数据存储方式用的是data.frame的话，可以利用spply、apply等批量处理函数，这边用得是list的方式，对lpply不是很熟悉的我，选择了for的循环，后续这边会优化一下，这样太消耗资源了。</p>
 <h1 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h1><p>这边，我最后采取的是概率模型naive bayes+非线性模型random forest先做标签训练，最后用nerual network对结果进行重估方式，但是在训练过程中，我还有几种模型的尝试，这边也一并贴出来给大家做参考。</p>
@@ -743,7 +747,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72.4k</span>
+    <span title="Site words total count">72.9k</span>
   
 </div>
 
