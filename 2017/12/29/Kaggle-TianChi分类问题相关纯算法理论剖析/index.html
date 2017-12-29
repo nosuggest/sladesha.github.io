@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-29T10:20:56.865Z">
+<meta property="og:updated_time" content="2017-12-29T10:34:09.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -334,7 +334,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T18:20:56+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T18:34:09+08:00">
                 2017-12-29
               </time>
             
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,180 字
+                  5,259 字
                 </span>
               
 
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18 分钟
+                  19 分钟
                 </span>
               
             </div>
@@ -439,12 +439,12 @@
         <p><img src="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <a id="more"></a>
 <p>更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过stw386@sina.com联系我，知无不答。</p>
-<h1 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h1><p>在<a href="http://shataowei.com/2017/12/28/Kaggle-TianChi分类问题相关算法快速实现/" target="_blank" rel="noopener">上一次的文章</a>中，我们讲了，如何快速的利用bagging、boosting、stacking、ensemble的形式实现一个分类算法，当时我们直接看了代码以及核心的理论注意点。如果需要有更加优异的结果表现，对整套算法的设计及理论了解是必不可少的。本文将从数学、工程、领域经验的角度去剖析如何用好bagging、boosting、stacking、ensemble去训练一个完善的模型。</p>
+<h1 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h1><p>在<a href="http://shataowei.com/2017/12/28/Kaggle-TianChi分类问题相关算法快速实现/" target="_blank" rel="noopener">上一次的文章</a>中，我们讲了，如何快速的利用bagging、boosting、stacking、ensemble的形式实现一个分类算法，当时我们直接看了代码以及核心的理论注意点。如果需要有更加优异的结果表现，对整套算法的设计及相关的理论了解是必不可少的。本文将从数学、工程、领域经验的角度去剖析如何用好bagging、boosting、stacking、ensemble去训练一个相对完善的模型。</p>
 <p>再次提醒，本文中的数据公式较多，抽象概念较多，需要一定的高等代数、泛函分析、机器学习基础作为前置条件。如果你只需要知道如何运行或者完成分类识别，请参考<a href="http://shataowei.com/2017/12/28/Kaggle-TianChi分类问题相关算法快速实现/" target="_blank" rel="noopener">Kaggle-TianChi分类问题相关算法快速实现</a>。如果需要更详尽的理论解析或者有哪些地方不明白的同学，建议私下联系我stw386@sina.com。如果你想skip read本文，请直接阅读最后一个小节：调参流程梳理。</p>
 <p>那么接下来让我们开始正文，虽然本文写的很冗长，我依旧建议阅读完此文，即便是处于懵懂的状态，对后续模型调整的理解也是有一定益处的，而且我会尽可能的用通俗易懂的语言来讲，很多地方会存在解释不严谨的地方但是更易于理解。</p>
-<h1 id="Bias-Variance-Tradeof"><a href="#Bias-Variance-Tradeof" class="headerlink" title="Bias-Variance-Tradeof"></a>Bias-Variance-Tradeof</h1><p>在上次的文章中，我们就提到了一个好的模型应该有着非常好的拟合能力，就是说我的偏差要尽可能的小；同时，也要保证方差尽可能的小，这样我们才能在泛化能力上很很不错的表现。</p>
-<p>设样本容量为n的训练集为随机变量的集合(X1, X2, …, Xn)，那么模型是以这些随机变量为输入的随机变量函数（这边的F虽然上函数，但是也是随机变化的）：F(X1, X2, …, Xn)。抽样的随机性带来了模型的随机性。那如何定义一个模型的Bias和Variance呢？这边我们采取的是基模型的加权均值E(F)=E(∑(γ<code>*</code>fi))替代bias、基模型的加权方差Var(F)=Var(∑(γ<code>*</code>fi))替代Variance，更详细的数学定义如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-88d0bf85411e1177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这边在Variance推导过程中用到了这个性质：<br>Cov(X<code>*</code>Y) = E(X<code>*</code>Y) - E(X)<code>*</code>E(Y)，同时将方差拆分成协方差的形式。我们可以看到，组合后的模型的Bias和基模型的Bias的权重γ相关，组合后的模型的Var和基模型的权重γ、基模型个数m、基模型相关性ρ相关。<br><strong>请务必深刻的记得上述bias和var的数学式子，在后续无论是调参数还是模型设计，我们都是围绕着，降低bias和var的角度去做的。</strong></p>
-<h2 id="Bagging-Bias-and-Variance"><a href="#Bagging-Bias-and-Variance" class="headerlink" title="Bagging Bias and Variance"></a>Bagging Bias and Variance</h2><p><strong>很多同学在没看这篇文章之前就知道，bagging算法和stacking算法是需要基模型保持强基模型（偏差低方差高）的</strong>，但是不知道大家有没有想过为什么？阿里15年校园面试的时候，我有幸回答过一个题目就是这个问题，下面让我们看看为什么是这样的？</p>
+<h1 id="Bias-Variance-Tradeof"><a href="#Bias-Variance-Tradeof" class="headerlink" title="Bias-Variance-Tradeof"></a>Bias-Variance-Tradeof</h1><p>在上次的文章中，我们就提到了一个好的模型应该有着非常好的拟合能力，就是说我的偏差要尽可能的小；同时，也要保证方差尽可能的小，这样我们才能在泛化能力上有很不错的表现。</p>
+<p>设样本容量为n的训练集为随机变量的集合(X1, X2, …, Xn)，那么模型是以这些随机变量为输入的随机变量函数（这边的F虽然上函数，但是也是随机变化的）：F(X1, X2, …, Xn)。抽样的随机性带来了模型的随机性。那如何定义一个模型的Bias和Variance呢？这边我们采取的是基模型的加权均值E(F)=E(∑(γ<code>*</code>fi))移动来替代bias、基模型的加权方差Var(F)=Var(∑(γ<code>*</code>fi))替代Variance，更详细的数学定义如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-88d0bf85411e1177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这边在Variance推导过程中用到了这个性质：<br>Cov(X<code>*</code>Y) = E(X<code>*</code>Y) - E(X)<code>*</code>E(Y)，同时将方差拆分成协方差的形式。我们可以看到，组合后的模型的Bias和基模型的Bias的权重γ相关，组合后的模型的Var和基模型的权重γ、基模型个数m、基模型相关性ρ相关。<br><strong>请务必深刻的记得上述bias和var的数学式子，在后续无论是调参数还是模型设计，我们都是围绕着，降低bias和var的角度去做的。</strong></p>
+<h2 id="Bagging-Bias-and-Variance"><a href="#Bagging-Bias-and-Variance" class="headerlink" title="Bagging Bias and Variance"></a>Bagging Bias and Variance</h2><p><strong>很多同学在没看这篇文章之前就知道，bagging算法和stacking算法是需要基模型保持强基模型（偏差低方差高）的</strong>，但是不知道大家有没有想过为什么？阿里15年校招的时候，我有幸回答过一个题目就是这个问题，下面让我们看看为什么是这样的？</p>
 <p>对于bagging算法而言，每次的抽样都是以尽可能使得基模型相互独立为前提的，为了维持这样的假设，我们做了三件事：</p>
 <ul>
 <li>样本抽样：整体模型F(X1, X2, …, Xn)中各输入随机变量（X1, X2, …, Xn）对样本的抽样</li>
@@ -495,11 +495,11 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>则有第i轮损失函数：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这货就是adaboost的损失函数的非归一化的结果，是不是很有趣，虽然知道了没啥用，但是起码得到了我们在用gbdt的时候，loss=’exponential’即为adaboost的结论啊，哈哈～所以说，我觉得去推推公式，还是很有意思的。</p>
-<p>到此为止，gbdt是怎么构造得来的就讲完了，其实这个和bias&amp;variance关系不大，但是为了铺垫后续的GBDT实战剖析，我觉得还是非常有必要梳理一遍的，但就比起Bias-Variance-Tradeof这节的内容，我觉得各位还是着重理解Bias-Variance-Tradeof，这节可以看作是甜品缓解下气氛。</p>
+<p>到此为止，gbdt是怎么构造得来的就讲完了，其实这个和bias&amp;variance关系不大，但是为了铺垫后续的GBDT实战剖析，我觉得还是非常有必要梳理一遍的，但就比起Bias-Variance-Tradeof这节的内容，我觉得各位还是着重理解Bias-Variance-Tradeof，这节可以看作是’甜品’缓解下气氛。</p>
 <h1 id="GBDT-实战剖析"><a href="#GBDT-实战剖析" class="headerlink" title="GBDT 实战剖析"></a>GBDT 实战剖析</h1><p>我们以python下的sklearn.ensemble中的GradientBoosting及RandomForest为例子，实战分析一下，如何能够理性的调好参数而并非玄学的gridsearch。</p>
 <p>在Bias-Variance-Tradeof我们提到了参数设置分为两块：a.构建基模型,b.构建组合模型，我们分GradientBoosting参数如下：</p>
 <h2 id="构建组合模型："><a href="#构建组合模型：" class="headerlink" title="构建组合模型："></a>构建组合模型：</h2><p>1) n_estimators:<br>基模型的个数，对于gbdt来说，因为我们需要通过基模型的个数来提升准确率所以n_estimators一般都会大于random forest的n_estimators的个数，实际上RandomForestClassifier默认为10，GradientBoostingClassifier默认为100也证明了这点。</p>
-<p>2）learning_rate：<br>步长，对于gbdt来说，步长依赖于n_estimators，100=2<code>*</code>50=5<code>*</code>20，就是这个道理。而random forest里面不存在步长这个概念。</p>
+<p>2）learning_rate：<br>步长，对于gbdt来说，步长依赖于n_estimators，100=2<code>*</code>50=5<code>*</code>20，就是这个道理。而random forest里面不存在步长这个概念。在gbdt里面，关于步长的优化一般是伴随着基模型的变化而变化的。</p>
 <p>3）subsample：<br>子采样率，还记得我们上面对子采样的描述么？一般来说，降低“子采样率”（subsample），也会造成子模型间的关联度降低，整体模型的方差减小，但是当子采样率低到一定程度时，子模型的偏差增大，将引起整体模型的准确度降低。</p>
 <p>4) init：初始化，更多见GBDT 理论剖析中，我们对初始化的描述。</p>
 <p>5）loss：<br>对于分类模型，有对数似然损失函数”deviance”和指数损失函数”exponential”两者输入选择。默认是对数似然损失函数”deviance”。对于回归模型，有均方差”ls”, 绝对损失”lad”, Huber损失”huber”和分位数损失“quantile”。默认是均方差”ls”。<br>分类模型不说了，刚才在GBDT 理论剖析中讲了，一般用”deviance”比较多；回归模型中，”ls”我们也在GBDT 理论剖析中讲了，异常点多的情况下”huber”,训练集分段预测的话用”quantile”，但是我个人建议异常点或者分段预测还是在数据已处理中完成。</p>
@@ -545,6 +545,7 @@
 <p>除此在外，很多人会选择在以上模型调优结束后再以10<code>*</code>learning_rate进行”鞍点逃逸”，以0.1<code>*</code>learning_rate进行”极限探索”。至于random forest及xgboost的更多调参数的细节与gbdt类似，我就不赘述了，有问题可以问我。</p>
 <p>终于结束了，这篇文章真的是又繁琐又冗长，希望能够给一些同学对gbdt更深刻的理解。</p>
 <p>没啥广告要打，就这样吧。</p>
+<p><em>另求一个比较好的公式编辑器，鬼知道我现在在excel里面写完公式截图过来有多扯淡，而且图片质量超差，谢谢了。</em></p>
 
       
     </div>
