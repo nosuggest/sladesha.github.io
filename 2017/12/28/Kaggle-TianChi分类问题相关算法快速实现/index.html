@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-26457a8a89d1f4af.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3d6d51fa237db7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-70993427d6fd91a2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-28T06:28:41.056Z">
+<meta property="og:updated_time" content="2017-12-29T02:26:40.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关算法快速实现">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,757 字
+                  3,844 字
                 </span>
               
 
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15 分钟
+                  16 分钟
                 </span>
               
             </div>
@@ -443,7 +443,7 @@
 <h2 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h2><p>Stacking通过用初始训练数据学习出若干个基学习器后，将这几个学习器的预测结果作为新的训练集，来学习一个新的学习器。更加形象的理解就是，我们考试，先让学霸去考，然后把每个学霸的答案按照他们历史上这科目考的成绩加权打分，最后确定每个学霸的各科目成绩加权的变化，重复再让学霸去考试修正这个各科目成绩加权。<br>注意：其实，Stacking和Boosting的思想是很近的，其中很大的差异在于Stacking一般用的都是完善的模型中间件结果当作入参，生成了新的数据分布，算法设计核心应该考虑的Bias-Vars-Balance；而Boosting用的简单的模型结果当做权重分布优化原始入参，并没有生成新数据，算法核心的目的还是在考虑降低Bias。<br>所以，在多数情况下，Stacking的模型应该更稳定，有更好的泛化性能。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-38e591ac939fc6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="Ensemble"><a href="#Ensemble" class="headerlink" title="Ensemble"></a>Ensemble</h2><p>Ensemble通过对新的数据实例进行分类的时候，通过训练好多个分类器，把这些分类器的的分类结果进行某种组合（比如投票）决定分类结果。更加形象的理解就是，先让学霸去考试，尽可能的让每个学霸都考好，然后根据历史考的分数高低投票出每个科目对应的考的最好的那个学霸，决定每科抄对应的那个学霸。<br>注意：对的，正如你们所想，Ensemble的思想就和Bagging的思想近似。Bagging的关键集中在，我不管我每个弱鸡的分类器的效果，只要我数量足够多，一定能得到不错的组合效果，相对而言简单，效果稍弱；而我们在Ensemble的时候，设计更加复杂而且要注意：a.尽可能让每个子分类器能识别出不同分布的数据，如果针对同一份数据做再多的子分类器，也只是只能起到堆砌的作用。b.加权方式的不同：简单平均（Simple Average），加权平均（Weight Average），概率投票（Soft vote）等等。</p>
 <p><strong>说了这么多，我们其实有个前提，就是加权或者组合或者堆砌能够提升准确度，不然等于以上都不合理，下面简单证明下：</strong></p>
-<p>假设，我们有5个分类器的正例率分别是{0.7,0.7,0.7,0.9,0.9}：<br>a.如果直接判断的话，最好的一个子分类器的准确率也只能达到0.9<br>b.采用简单投票方法（必须有三个以上分类正确），那么根据二项分布：<br>    3个分类器正确：0.73<em>0.1</em>0.1+3<em>0.72</em>2<em>0.9</em>0.1+3<em>0.7</em>0.32<em>0.9</em>0.9<br>    4个分类器正确：0.73<em>0.9</em>0.1<em>2+3</em>0.72<em>0.3</em>0.92<br>    5个分类器正确：0.73*0.92<br>把这几个相加可得p≈0.933&gt;0.9。</p>
+<p>假设，我们有5个分类器的正例率分别是{0.7,0.7,0.7,0.9,0.9}：<br>a.如果直接判断的话，最好的一个子分类器的准确率也只能达到0.9<br>b.采用简单投票方法（必须有三个以上分类正确），那么根据二项分布：<br>    3个分类器正确：0.73<code>*</code>0.1<code>*</code>0.1+3<code>*</code>0.72<code>*</code>2<code>*</code>0.9<code>*</code>0.1+3<code>*</code>0.7<code>*</code>0.32<code>*</code>0.9<code>*</code>0.9<br>    4个分类器正确：0.73<code>*</code>0.9<code>*</code>0.1<code>*</code>2+3<code>*</code>0.72<code>*</code>0.3<code>*</code>0.92<br>    5个分类器正确：0.73<code>*</code>0.92<br>把这几个相加可得p≈0.933&gt;0.9。</p>
 <p>这些都是是非常基础的，也不是本文的重点，如果有任何疑问，请自行百度了解或者邮件我。</p>
 <p>Bagging的代表作有randomforest，Boosting的代表作有Adaboost及GBDT，Stacking和Ensemble就需要我们自己设计了。</p>
 <h1 id="如何设计一个Stacking-Ensemble的模型？"><a href="#如何设计一个Stacking-Ensemble的模型？" class="headerlink" title="如何设计一个Stacking|Ensemble的模型？"></a>如何设计一个Stacking|Ensemble的模型？</h1><p>先看一个Stacking的经典之作：<a href="http://www.cbdio.com/BigData/2015-08/27/content_3750170.htm" target="_blank" rel="noopener">FaceBook基于gbdt+lr下stacking的CTR预估</a>。不得不说，虽然实测下来对Valid的准确率提升只有2-3pp，但是在泛化性能上稳定程度上升了若干个档次，后面我们细讲。Ensemble就更不用举例子了，随便打开一个互联网公司的算法库，99.9%的都已经有完善的成功案例了。我呆过的滴滴、电信、hp等等，还没有一个公司不用的。</p>
@@ -479,6 +479,7 @@
 </ul>
 <p>简单易上手，实现了下图的流：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-70993427d6fd91a2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>顺带附上ks值计算逻辑：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 算法评估</span></span><br><span class="line"><span class="comment"># ks_xgb_lr = np.c_[Y_test,y_test_lr]</span></span><br><span class="line"><span class="comment"># ks_xgb_lr = sorted(ks_xgb_lr , key = lambda x : x[1],reverse = True)</span></span><br><span class="line"><span class="comment"># ks_xgb_lr = pd.DataFrame(ks_xgb_lr)</span></span><br><span class="line"><span class="comment"># for i in range(9):</span></span><br><span class="line"><span class="comment"># 	end = (i+1)*break_cut</span></span><br><span class="line"><span class="comment"># 	res1 = 1.0*ks_xgb_lr.iloc[:end,:][ks_xgb_lr.iloc[:end,0]==0].shape[0]/ks_xgb_lr[ks_xgb_lr.iloc[:,0]==0].shape[0]</span></span><br><span class="line"><span class="comment"># 	res2 = 1.0*ks_xgb_lr.iloc[:end,:][ks_xgb_lr.iloc[:end,0]==1].shape[0]/ks_xgb_lr[ks_xgb_lr.iloc[:,0]==1].shape[0]</span></span><br><span class="line"><span class="comment"># 	res = res2-res1</span></span><br><span class="line"><span class="comment"># 	print(res1,res2,res)</span></span><br></pre></td></tr></table></figure></p>
+<p>只要重复上述的案例浮现中的code流程，可以快速复刻出一份效果还不错的分类算法，但是如果想能够拿到很好的名次或者有更优秀的表现，等待下一篇文章中的原理剖析。</p>
 <p>最后，给大家分享一下之前和Kaggle大神在算法竞赛或者解决项目问题的时候总结出来需要尤其注意的点：</p>
 <ul>
 <li>请务必重视数据集构造，你能不能上榜或者得到leader的重视，这一点最关键，没有之一</li>
@@ -765,7 +766,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">76.7k</span>
+    <span title="Site words total count">76.8k</span>
   
 </div>
 
