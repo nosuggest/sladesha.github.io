@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-28ccabb9a4a528a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e0b7198aaa081dfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23fbb6bbbd298197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ee939189edddf700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-7177402c111ed38a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-4c3334dca490586a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9bbfb54091d0352c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0abccf32b3847b5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-29T10:34:09.607Z">
+<meta property="og:updated_time" content="2017-12-29T12:42:21.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -334,7 +334,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T18:34:09+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T20:42:21+08:00">
                 2017-12-29
               </time>
             
@@ -465,7 +465,7 @@
 <h1 id="GBDT-理论剖析"><a href="#GBDT-理论剖析" class="headerlink" title="GBDT 理论剖析"></a>GBDT 理论剖析</h1><h2 id="模型过程推导"><a href="#模型过程推导" class="headerlink" title="模型过程推导"></a>模型过程推导</h2><p>其实random forest和gbdt、xgboost都是非常好的Bagging、Boosting、Stacking算法的优化升级版本，我个人用的gbdt稍多，所以就以gbdt为例子给大家梳理一遍，从理论，到调参数，到trick分享。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-23fbb6bbbd298197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我最讨厌很多博主贴个上面的伪代码就跑了，我念书的时候，老师讲题目也是，我靠，我要是看得懂还需要你贴？所以，我们选择一步一步的来看这个伪代码。</p>
 <p>看之前让我们先立理一个思路：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-ee939189edddf700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-7177402c111ed38a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>如果yi代表着第i个基模型，第i+1个基模型其实是基于第i个基模型的结果而追加了一个New function去修正前i个基模型的误差。如果以F代替y，h代替f的话，我们可以得到下面这个迭代函数：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-4c3334dca490586a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>第i个基模型是由i-1个基模型的累计加上第i个修正hi(x)得到的。基于boosting框架的整体模型可以用线性组成式来描述，其中hi(x)为基模型与其权值的乘积，F(x)就是我们最后想要得到的分类器：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-9bbfb54091d0352c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
