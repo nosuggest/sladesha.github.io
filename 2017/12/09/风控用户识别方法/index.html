@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f9c66d9af7c9e9c7.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ace0365bb889a260.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b94d630636497494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-30T06:30:38.263Z">
+<meta property="og:updated_time" content="2017-12-30T13:25:39.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="风控用户识别方法">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-1850208d6c0e8500.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -428,7 +428,7 @@
 <li><a href="http://shataowei.com/2017/12/01/多算法识别撞库刷券等异常用户/" target="_blank" rel="noopener">多算法识别撞库刷券等异常用户</a></li>
 <li><a href="http://shataowei.com/2017/08/09/数据预处理-异常值识别/" target="_blank" rel="noopener">异常值识别与处理</a></li>
 </ul>
-<p>但是在我前几天再回过头去看自己写的这些东西的时候，作为一个老司机来说，我都不想去看一篇又一篇动则上千字的文章，理论交错，文笔粗陋，正巧现在公司内部也有一个风控的项目，所以，我准备做一个开源的项目<strong><a href="https://github.com/sladesha/machine_learning/tree/master/Frcwp" target="_blank" rel="noopener">Frcwp</a></strong>，核心在于：</p>
+<p>但是在我前几天再回过头去看自己写的这些东西的时候，作为一个老司机来说，我都不想去看一篇又一篇动则上千字的文章，理论交错，文笔粗陋，正巧现在公司内部也有一个风控的项目，所以，我准备做一个开源的项目<strong><a href="https://github.com/sladesha/Frcwp" target="_blank" rel="noopener">Frcwp</a></strong>，核心在于：</p>
 <ul>
 <li>简单操作，几乎不用多少调参，自动识别异常点</li>
 <li>理论清晰，支持的方法多，兼容性好</li>
@@ -470,7 +470,7 @@
 <p>最后，我们以当前算法包的使用来结束整篇介绍：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">pip install Frcwp</span><br></pre></td></tr></table></figure></p>
 <p>自动识别过程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Frcwp <span class="keyword">import</span> Frcwp</span><br><span class="line">data = pd.read_table(<span class="string">'../路径'</span>)<span class="comment">#数据可以在https://github.com/sladesha/machine_learning/tree/master/data下的data_all.csv获取</span></span><br><span class="line">Frcwp.transform(data)</span><br></pre></td></tr></table></figure></p>
 <p>相关的结果显示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Attributes: </span></span><br><span class="line"><span class="comment">#正常用户的各feature的状态，用来对比异常数据的结果</span></span><br><span class="line">Frcwp.heavy_point </span><br><span class="line"><span class="comment">#识别出来的outlier及对应的feature值，prob越小代表越异常</span></span><br><span class="line">Frcwp.outlier_details</span><br></pre></td></tr></table></figure></p>
-<p>以上部分内容截取自我的<a href="https://github.com/sladesha/machine_learning/tree/master/Frcwp" target="_blank" rel="noopener">github</a>，希望对大家有一些帮助。</p>
+<p>以上部分内容截取自我的<a href="https://github.com/sladesha/Frcwp" target="_blank" rel="noopener">github</a>，希望对大家有一些帮助。</p>
 <p>最后，谢谢大家的阅读，欢迎大家关注我的<a href="http://shataowei.com" target="_blank" rel="noopener">个人博客</a>。</p>
 <p><strong>本文拒绝任何形式的转载，若要转载请联系stw386@sina.com</strong></p>
 
