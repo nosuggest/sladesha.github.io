@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f9c66d9af7c9e9c7.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ace0365bb889a260.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b94d630636497494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-30T13:25:39.735Z">
+<meta property="og:updated_time" content="2018-01-01T08:15:40.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="风控用户识别方法">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-1850208d6c0e8500.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,155 字
+                  2,212 字
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -468,8 +468,8 @@
 <h1 id="当前的设计下存在哪些问题？"><a href="#当前的设计下存在哪些问题？" class="headerlink" title="当前的设计下存在哪些问题？"></a>当前的设计下存在哪些问题？</h1><p>上面说的都是比较正面的问题，让我们看看，有哪些缺点。<br>首先，从头到尾，我们一直在围绕密度差异这个问题，但是就我平时做的一些小爬虫都知道，降低暴力获取的速度，慢慢搞，这时候就以上的方法就无法做到有效的识别。除此之外，因为我们用了切比雪夫不等式，所以对其有概念的同学知道，算马氏距离的时候需要算协方差矩阵，当数据量异常异常大(我测算的是12mx100)的时候计算资源紧张，可能算不出来；数据量异常异常小的时候feature严重共线性，也可能计算不出来。</p>
 <h1 id="未来的方向会在哪边？"><a href="#未来的方向会在哪边？" class="headerlink" title="未来的方向会在哪边？"></a>未来的方向会在哪边？</h1><p>所以，后续我们会新增其他算法，支持过大过小情况下的识别方法。针对数据量过小的识别情况，我在V0.0.3版本下更新了一个简单识别的方法，之后会优化更好的算法替代掉的。只要数据量太大无法计算的问题，我之后会采取矩阵切割分块计算的方法，这个是后话了。</p>
 <p>最后，我们以当前算法包的使用来结束整篇介绍：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">pip install Frcwp</span><br></pre></td></tr></table></figure></p>
-<p>自动识别过程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Frcwp <span class="keyword">import</span> Frcwp</span><br><span class="line">data = pd.read_table(<span class="string">'../路径'</span>)<span class="comment">#数据可以在https://github.com/sladesha/machine_learning/tree/master/data下的data_all.csv获取</span></span><br><span class="line">Frcwp.transform(data)</span><br></pre></td></tr></table></figure></p>
-<p>相关的结果显示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Attributes: </span></span><br><span class="line"><span class="comment">#正常用户的各feature的状态，用来对比异常数据的结果</span></span><br><span class="line">Frcwp.heavy_point </span><br><span class="line"><span class="comment">#识别出来的outlier及对应的feature值，prob越小代表越异常</span></span><br><span class="line">Frcwp.outlier_details</span><br></pre></td></tr></table></figure></p>
+<p>自动识别过程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Frcwp <span class="keyword">import</span> Frcwp</span><br><span class="line">traindata = pd.read_table(<span class="string">'../路径'</span>)<span class="comment">#数据可以在https://github.com/sladesha/machine_learning/tree/master/data下的data_all.csv获取</span></span><br><span class="line">frc = Frcwp()</span><br><span class="line">traindata = frc.changeformat(traindata, index=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># You can define your own outlier size , the details of these params can be got from ../Frcwp/Frcwp.py:</span></span><br><span class="line">params = &#123;</span><br><span class="line">    <span class="string">'na_rate'</span>: <span class="number">0.4</span>,</span><br><span class="line">    <span class="string">'single_dealed'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'is_scale'</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">'distince_method'</span>: <span class="string">'Maha'</span>,</span><br><span class="line">    <span class="string">'outlier_rate'</span>: <span class="number">0.05</span>,</span><br><span class="line">    <span class="string">'strange_rate'</span>: <span class="number">0.15</span>,</span><br><span class="line">    <span class="string">'nestimators'</span>: <span class="number">150</span>,</span><br><span class="line">    <span class="string">'contamination'</span>: <span class="number">0.2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># train the frc model</span></span><br><span class="line">frc.fit(traindata, **params)</span><br></pre></td></tr></table></figure></p>
+<p>相关的结果显示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># predict outliers with the trained frc model</span></span><br><span class="line">predict_params = &#123;</span><br><span class="line">    <span class="string">'output'</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="string">'is_whole'</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">frc.predict(frc.potentialdata_set, **predict_params)</span><br><span class="line"></span><br><span class="line"><span class="comment"># if you want get the whole probability of your potential outliers</span></span><br><span class="line">frc.similarity_label</span><br></pre></td></tr></table></figure></p>
 <p>以上部分内容截取自我的<a href="https://github.com/sladesha/Frcwp" target="_blank" rel="noopener">github</a>，希望对大家有一些帮助。</p>
 <p>最后，谢谢大家的阅读，欢迎大家关注我的<a href="http://shataowei.com" target="_blank" rel="noopener">个人博客</a>。</p>
 <p><strong>本文拒绝任何形式的转载，若要转载请联系stw386@sina.com</strong></p>
@@ -740,7 +740,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -754,7 +754,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">82.3k</span>
+    <span title="Site words total count">82.4k</span>
   
 </div>
 
