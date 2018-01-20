@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ec17f957709d706c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-baeecda8a600bffd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d433214058f6c073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-20T14:28:22.432Z">
+<meta property="og:updated_time" content="2018-01-20T14:33:10.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提升有监督学习效果的实战解析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-94c929c421976c36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,061 字
+                  4,063 字
                 </span>
               
 
@@ -433,7 +433,8 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-94c929c421976c36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a><br>最近很长时间没有和大家分享东西了，最近一直在忙公司的项目，先说一声抱歉。</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-94c929c421976c36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近很长时间没有和大家分享东西了，最近一直在忙公司的项目，先说一声抱歉。</p>
 <p>之前写过<a href="http://shataowei.com/2017/11/01/交叉销售算法/" target="_blank" rel="noopener">销售预估算法</a>,但是被诸多大佬吐槽有监督学习部分毫无深度，其实我是想写给一些刚入门的朋友看的，这边我boss最近也想让我总结一些相对”上档次”的一点的东西，我做了一些稍微深入一点的总结，希望能够给新人朋友有稍微深入的方法介绍。</p>
 <hr>
 <p>去年年末的那段时间里，看了很多天池大赛里面得高分的选手的算法思路，大概总结了有监督学习中的一些核心流程及重要细节：</p>
@@ -784,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#feature-processing-tricks"><span class="nav-number">1.</span> <span class="nav-text">feature processing tricks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-and-feature-selection"><span class="nav-number">1.1.</span> <span class="nav-text">case and feature selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null-feature-treatment-method"><span class="nav-number">1.2.</span> <span class="nav-text">null-feature treatment method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#single-feature-crossing-feature"><span class="nav-number">2.</span> <span class="nav-text">single feature + crossing feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bagging及stacking的思路架构"><span class="nav-number">3.</span> <span class="nav-text">bagging及stacking的思路架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先，子模块可以有哪些？"><span class="nav-number">3.1.</span> <span class="nav-text">首先，子模块可以有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何训练子模块？"><span class="nav-number">3.2.</span> <span class="nav-text">如何训练子模块？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何组合子模块？"><span class="nav-number">3.3.</span> <span class="nav-text">如何组合子模块？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bagging"><span class="nav-number">3.3.1.</span> <span class="nav-text">bagging</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stacking"><span class="nav-number">3.3.2.</span> <span class="nav-text">stacking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#blending"><span class="nav-number">3.3.3.</span> <span class="nav-text">blending</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feature-processing-tricks"><span class="nav-number">2.</span> <span class="nav-text">feature processing tricks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-and-feature-selection"><span class="nav-number">2.1.</span> <span class="nav-text">case and feature selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null-feature-treatment-method"><span class="nav-number">2.2.</span> <span class="nav-text">null-feature treatment method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#single-feature-crossing-feature"><span class="nav-number">3.</span> <span class="nav-text">single feature + crossing feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bagging及stacking的思路架构"><span class="nav-number">4.</span> <span class="nav-text">bagging及stacking的思路架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先，子模块可以有哪些？"><span class="nav-number">4.1.</span> <span class="nav-text">首先，子模块可以有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何训练子模块？"><span class="nav-number">4.2.</span> <span class="nav-text">如何训练子模块？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何组合子模块？"><span class="nav-number">4.3.</span> <span class="nav-text">如何组合子模块？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bagging"><span class="nav-number">4.3.1.</span> <span class="nav-text">bagging</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stacking"><span class="nav-number">4.3.2.</span> <span class="nav-text">stacking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#blending"><span class="nav-number">4.3.3.</span> <span class="nav-text">blending</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
