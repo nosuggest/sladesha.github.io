@@ -88,7 +88,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-772dffb29dc4d9c0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://pic4.zhimg.com/50/v2-7fce29335f9b43bce1b373daa40cccba_hd.gif">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-47d1b5a6fb64a4f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-071901b190573269.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d2bd2d98ce6fd07d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0ed7c1c4734f9206.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d5b28a58edc73240.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f124151538779717.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9620ea0cbce2fad9.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-07T08:42:13.876Z">
+<meta property="og:updated_time" content="2018-02-07T08:47:25.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅入浅出深度学习理论实践">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -462,7 +462,7 @@
 <p>大概会将全文分为以上几块，大家可以跳读，因为本文理论上应该会冗长无比，肯定也包括数据块+代码块+解析块，很多有基础的同学没有必要从头在了解一遍。好了，让我们正式开始。</p>
 <h1 id="CNN-RNN理解"><a href="#CNN-RNN理解" class="headerlink" title="CNN/RNN理解"></a>CNN/RNN理解</h1><h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><p>CNN，卷积神经网络，让我们先从一个简单的网络结构来梳理一下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-772dffb29dc4d9c0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h3 id="输入层"><a href="#输入层" class="headerlink" title="输入层"></a>输入层</h3><p>假如，我们有car,plane,desk,flower等等<strong>一共十类的图片</strong>，需要让电脑识别图片是哪种的话，自然需要把图片变成电脑理解的了的一种方式，比如：RxGxB（图片的高度、宽度和深度）也就是上面<strong>输入层</strong>32x32x3，至于什么是RGB，请自行阅读<a href="https://baike.baidu.com/item/RGB/342517?fr=aladdin" target="_blank" rel="noopener">RGB百度百科</a>。</p>
-<h3 id="卷积层一-卷积层二"><a href="#卷积层一-卷积层二" class="headerlink" title="卷积层一/卷积层二"></a>卷积层一/卷积层二</h3><p><img src="https://pic4.zhimg.com/50/v2-7fce29335f9b43bce1b373daa40cccba_hd.gif" alt="卷积过程"></p>
+<h3 id="卷积层一-卷积层二"><a href="#卷积层一-卷积层二" class="headerlink" title="卷积层一/卷积层二"></a>卷积层一/卷积层二</h3><p><img src="http://upload-images.jianshu.io/upload_images/1129359-47d1b5a6fb64a4f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这张图片我觉得形象的不能再形象了，让我们结合代码和图形来理解这个卷积到底是什么意思。tensorflow中卷积的集成代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filter_weights = tf.Variable(tf.truncated_normal([window_size, embed_dim, <span class="number">1</span>, filter_num], stddev=<span class="number">0.1</span>),name=<span class="string">"filter_weights"</span>)</span><br><span class="line"></span><br><span class="line">conv_layer = tf.nn.conv2d(item_embed_layer_expand, filter_weights, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">"VALID"</span>,name=<span class="string">"conv_layer"</span>)</span><br></pre></td></tr></table></figure>
 <p>filter_weights的shape是window_sizexembed_dimx1xfilternum，window_sizexembed_dimgx1就是类似于gif图中的黄色区域的大小，这边就可以看作window_size=embed_dim=3，filter_weights第三维的1是指HRG中的第三维度：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-071901b190573269.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
