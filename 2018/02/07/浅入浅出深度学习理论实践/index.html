@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d5b28a58edc73240.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f124151538779717.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9620ea0cbce2fad9.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-07T08:47:25.944Z">
+<meta property="og:updated_time" content="2018-02-07T08:48:21.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅入浅出深度学习理论实践">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -465,7 +465,7 @@
 <h3 id="卷积层一-卷积层二"><a href="#卷积层一-卷积层二" class="headerlink" title="卷积层一/卷积层二"></a>卷积层一/卷积层二</h3><p><img src="http://upload-images.jianshu.io/upload_images/1129359-47d1b5a6fb64a4f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这张图片我觉得形象的不能再形象了，让我们结合代码和图形来理解这个卷积到底是什么意思。tensorflow中卷积的集成代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filter_weights = tf.Variable(tf.truncated_normal([window_size, embed_dim, <span class="number">1</span>, filter_num], stddev=<span class="number">0.1</span>),name=<span class="string">"filter_weights"</span>)</span><br><span class="line"></span><br><span class="line">conv_layer = tf.nn.conv2d(item_embed_layer_expand, filter_weights, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">"VALID"</span>,name=<span class="string">"conv_layer"</span>)</span><br></pre></td></tr></table></figure>
-<p>filter_weights的shape是window_sizexembed_dimx1xfilternum，window_sizexembed_dimgx1就是类似于gif图中的黄色区域的大小，这边就可以看作window_size=embed_dim=3，filter_weights第三维的1是指HRG中的第三维度：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-071901b190573269.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>filter_weights的shape是window_sizexembed_dimx1xfilter_num，window_sizexembed_dimgx1就是类似于gif图中的黄色区域的大小，这边就可以看作window_size=embed_dim=3，filter_weights第三维的1是指HRG中的第三维度：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-071901b190573269.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>filter_weights第三维如果是2的话：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d2bd2d98ce6fd07d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>想到于多了一维的并行处理，接下来看filter_weights的filter_num，最上方的gif的动图解释了卷积层的计算形式：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-0ed7c1c4734f9206.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
