@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-08T03:30:01.175Z">
+<meta property="og:updated_time" content="2018-02-08T03:35:55.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,184 字
+                  5,168 字
                 </span>
               
 
@@ -470,9 +470,9 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-7177402c111ed38a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>如果y(i)代表着第i个基模型，第i+1个基模型其实是基于第i个基模型的结果而追加了一个New function去修正前i个基模型的误差。如果以F代替y，h代替f的话，我们可以得到下面这个递归函数：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-4c3334dca490586a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>第i个基模型是由前i-1个基模型的累计加上第i个修正hi(x)得到的，其中hi(x)为基模型与其权值的乘积，F(x)就是我们最后想要得到的分类器：</p>
+<p>第i个基模型是由前i-1个基模型的累计加上第i个修正hi(x)得到的，F(x)就是我们最后想要得到的分类器：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-9bbfb54091d0352c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>每一轮迭代中，只要集中精力使得每次loss下降的最快即可：每次构建一个残差负梯度作为更新方向的New function(hi(x))，就可以解决这个复杂的递归问题，从而得到F(x)的解析式。</p>
+<p>每一轮迭代中，只要集中精力使得每次loss下降的最快即可：每次构建一个残差负梯度作为更新方向的New function(即hi(x))，就可以解决这个复杂的递归问题，从而得到F(x)的解析式。</p>
 <p>接下来，我们再看看更加详细的做法：</p>
 <ul>
 <li>初始化部分，在这次梳理之前，我也一直认为是随机构造的，这边看完伪代码我才知道，在初始值设置的时候，考虑了直接使得损失函数极小化的常数值，它是只有一个根节点的树，即是一个c常数值。</li>
@@ -484,7 +484,7 @@
 <p><strong>首先，先求整体损失函数的反向梯度。</strong>先举个mse的例子，如果现在我们考虑的是mse的形式，我们要做的就是在每一步的时候让我们的预测值Fi(x)与真实值y的损失函数：1/2<code>*</code>(y-Fi(x))^2最小(前面的1/2是为了方便求导计算加上去的)，如果对梯度下降有了解的朋友就知道，此刻要求它的最小就是去求偏导：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-e4ea5c4265fa8036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>按照这个方向去更新Fi(x)，可以保证，组合模型F(x)的每次都是按照最优的方向去优化。</p>
-<p><strong>但是由于在test集中的y是不存在的，所以我们在训练模型构建的时候，就以每个样本的feature下的反向梯度作为New function的拟合对象</strong>，这样我们每次不需要y依然可以求出反向梯度。</p>
+<p><strong>但是由于在test集中的y是不存在的，所以我们在hi(x)构建的时候，就以每个样本的feature下的反向梯度作为hi(x)的拟合对象</strong>，这样我们每次不需要y依然可以求出反向梯度。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-af589e2cbd6b62b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><strong>再基于已经预估出来的负梯度去计算最优的更新步长，使得预测值与真实值更加靠近</strong>，因为每层的负梯度的方向不固定，所以每层i的步长都是变化的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
