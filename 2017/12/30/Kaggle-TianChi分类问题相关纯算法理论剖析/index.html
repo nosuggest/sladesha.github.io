@@ -98,13 +98,12 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e4ea5c4265fa8036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9fb434ec5c062426.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-af589e2cbd6b62b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-aa057a33897bc93b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d968a672abe8a1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-08T02:38:34.950Z">
+<meta property="og:updated_time" content="2018-02-08T03:09:06.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -398,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,340 字
+                  5,246 字
                 </span>
               
 
@@ -466,13 +465,16 @@
 <li>b.组合模型构建，控制基模型后，如何把这个基模型很好的组合成一个优秀的ensemble模型。</li>
 </ul>
 <h1 id="GBDT-理论剖析"><a href="#GBDT-理论剖析" class="headerlink" title="GBDT 理论剖析"></a>GBDT 理论剖析</h1><h2 id="模型过程推导"><a href="#模型过程推导" class="headerlink" title="模型过程推导"></a>模型过程推导</h2><p>其实random forest和gbdt、xgboost都是非常好的Bagging、Boosting、Stacking算法的优化升级版本，我个人用的gbdt稍多，所以就以gbdt为例子给大家梳理一遍，从理论，到调参数，到trick分享。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-23fbb6bbbd298197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我最讨厌很多博主贴个上面的伪代码就跑了，我念书的时候，老师讲题目也是，我靠，我要是看得懂还需要你贴？所以，我们选择一步一步的来看这个伪代码。</p>
-<p>看之前让我们先立理一个思路：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-23fbb6bbbd298197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>我最讨厌很多博主贴个上面的伪代码就跑了，我念书的时候，老师讲题目也是，我靠，我要是看得懂还需要你贴？所以，我们选择一步一步的来看这个伪代码。</p>
+<p>让我们先概览一下整个流程，有递归设计如下：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-7177402c111ed38a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>如果yi代表着第i个基模型，第i+1个基模型其实是基于第i个基模型的结果而追加了一个New function去修正前i个基模型的误差。如果以F代替y，h代替f的话，我们可以得到下面这个迭代函数：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-4c3334dca490586a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>第i个基模型是由i-1个基模型的累计加上第i个修正hi(x)得到的。基于boosting框架的整体模型可以用线性组成式来描述，其中hi(x)为基模型与其权值的乘积，F(x)就是我们最后想要得到的分类器：</p>
+<p>如果yi代表着第i个基模型，第i+1个基模型其实是基于第i个基模型的结果而追加了一个New function去修正前i个基模型的误差。如果以F代替y，h代替f的话，我们可以得到下面这个迭代函数：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-4c3334dca490586a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>第i个基模型是由i-1个基模型的累计加上第i个修正hi(x)得到的，其中hi(x)为基模型与其权值的乘积，F(x)就是我们最后想要得到的分类器：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-9bbfb54091d0352c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>根据Fi(x)和F(x),我们可以看到，每一轮迭代中，只要集中解决一个基模型的训练问题：使Fi(x)逼近真实值y，就可以解决这个复杂的迭代问题，从而得到F(x)的解析式。接下来，我们再看这个伪代码：</p>
+<p>每一轮迭代中，只要集中精力使得每次loss下降的最快：每次构建一个残差负梯度的更新方向上的基模型，就可以解决这个复杂的迭代问题，从而得到F(x)的解析式。</p>
+<p>接下来，我们再看看更加详细的做法：</p>
 <ul>
 <li>初始化部分，在这次梳理之前，我也一直认为是随机构造的，这边看完伪代码我才知道，在初始值设置的时候，考虑了直接使得损失函数极小化的常数值，它是只有一个根节点的树，即是一个c常数值。</li>
 </ul>
@@ -480,15 +482,17 @@
 <ul>
 <li>构建回归树，这边就少许复杂，让我们拆开一步一步来看：</li>
 </ul>
-<p><strong>首先，它计算损失函数的负梯度在当前模型的值，将它作为残差的估计。</strong>先举个mse的例子，如果现在我们考虑的是mse的形式，我们要做的就是在每一步的时候让我们的预测值Fi(x)与真实值y的1/2<code>*</code>(y-Fi(x))^2最小，如果对对梯度下降有了解的朋友就知道，此刻要求它的最小就是去找它的反向梯度：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-e4ea5c4265fa8036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>按照这个方向去更新Fi(x),可以保证，组合模型F(x)的每次都是按照最优的方向去优化。那如果把这边的mse替换成任何一种其他损失函数，并重写原来的组合模型，就可以得到：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-9fb434ec5c062426.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>首先，它计算损失函数的负梯度在当前模型的值，将它作为残差的估计。</strong>先举个mse的例子，如果现在我们考虑的是mse的形式，我们要做的就是在每一步的时候让我们的预测值Fi(x)与真实值y的1/2<code>*</code>(y-Fi(x))^2最小，如果对梯度下降有了解的朋友就知道，此刻要求它的最小就是去找它的反向梯度：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-e4ea5c4265fa8036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>按照这个方向去更新Fi(x),可以保证，组合模型F(x)的每次都是按照最优的方向去优化。那如果把这边的mse替换成任何一种其他损失函数，并重写原来的组合模型，就可以得到：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-9fb434ec5c062426.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这里的L即为不同的损失函数，称之为泛函，换句人话就是：自变量是从函数空间到数域的映射。不了解也没事，就是个称呼，他叫尼古拉斯·二狗子也好，二狗子也好，不影响我们揍他。</p>
-<p><strong>在求不同损失函数的最优解的时候，这边采取了一个trick，以(xi,方向梯度)替代(xi,yi)去构建回归树。</strong>也就是，先计算出在第i次基模型构建的时候，先算出负梯度：</p>
+<p><strong>由于在测试集中的y是不存在的，所以我们在模型构建的时候，就以每个样本的feature下的反向梯度作为基模型的拟合对象</strong>，这样我们每次只需要通过样本feature:x就能求出方向梯度了.</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-af589e2cbd6b62b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>再下次更新的时候按照负梯度的方向去更新，<br><img src="http://upload-images.jianshu.io/upload_images/1129359-aa057a33897bc93b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>这边的更新步长γi与logistics里面的步长不一致，不是一个固定的值，而是通过计算：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>最后，由于在测试集中的y是不存在的，所以我们在模型构建的时候，就以每个样本的feature下的反向梯度作为基模型的拟合对象</strong>，这样我们每次只需要通过样本feature:x就能求出方向梯度了,同时通过缩减率v（这边就是类似logistics里面的∂）控制速率。</p>
-<p>综上，假设第i轮迭代中，根据新训练集训练出来的基模型为f<a href="x">i</a>，那么最终的迭代公式为：</p>
+<p><strong>在基于已经算出来的负梯度去计算，最优的更新步长，使得预测值与真实值更加靠近</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>同时通过缩减率v（这边就是类似logistics里面的∂）控制速率。</p>
+<p>综上，假设第i轮迭代中，根据新训练集训练出来的基模型为fi(x)，那么最终的迭代公式为：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-d968a672abe8a1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="损失函数介绍"><a href="#损失函数介绍" class="headerlink" title="损失函数介绍"></a>损失函数介绍</h2><p>刚才上面我举了一个mse作为损失函数的例子，其实还有很多其他的，参考如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这边说个有意思的东西，就是如果有兴趣的朋友可以把exponential：指数损失函数计算一下，反向梯度为：</p>
@@ -827,7 +831,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">94.2k</span>
+    <span title="Site words total count">94.1k</span>
   
 </div>
 
