@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-08T02:24:07.959Z">
+<meta property="og:updated_time" content="2018-02-08T02:38:34.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,333 字
+                  5,340 字
                 </span>
               
 
@@ -487,9 +487,9 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-af589e2cbd6b62b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>再下次更新的时候按照负梯度的方向去更新，<br><img src="http://upload-images.jianshu.io/upload_images/1129359-aa057a33897bc93b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这边的更新步长γi与logistics里面的步长不一致，不是一个固定的值，而是通过计算：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>后续是通过缩减率v（这边就是类似logistics里面的∂）控制速率的<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d968a672abe8a1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>最后，由于在测试集中的y是不存在的，需要我们预测的，所以我们在模型构建的时候，就以每个样本的feature下的反向梯度作为y的替代，进行步长、反向梯度等的计算</strong>。</p>
-<p>根据所有的数据xi，重复更新回归树即可，以上所有加粗文字就是构建回归数据的关键点。</p>
+<p><strong>最后，由于在测试集中的y是不存在的，所以我们在模型构建的时候，就以每个样本的feature下的反向梯度作为基模型的拟合对象</strong>，这样我们每次只需要通过样本feature:x就能求出方向梯度了,同时通过缩减率v（这边就是类似logistics里面的∂）控制速率。</p>
+<p>综上，假设第i轮迭代中，根据新训练集训练出来的基模型为f<a href="x">i</a>，那么最终的迭代公式为：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-d968a672abe8a1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="损失函数介绍"><a href="#损失函数介绍" class="headerlink" title="损失函数介绍"></a>损失函数介绍</h2><p>刚才上面我举了一个mse作为损失函数的例子，其实还有很多其他的，参考如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这边说个有意思的东西，就是如果有兴趣的朋友可以把exponential：指数损失函数计算一下，反向梯度为：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
