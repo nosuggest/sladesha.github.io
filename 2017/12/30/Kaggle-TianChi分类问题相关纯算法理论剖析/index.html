@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-08T03:35:55.896Z">
+<meta property="og:updated_time" content="2018-02-08T03:40:25.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -489,7 +489,7 @@
 <p><strong>再基于已经预估出来的负梯度去计算最优的更新步长，使得预测值与真实值更加靠近</strong>，因为每层的负梯度的方向不固定，所以每层i的步长都是变化的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>最后通过缩减率v（这边就是类似logistics里面的∂）控制速率。</p>
-<p>综上，假设test集合第i轮预测中，根据训练集训练出来的New function不妨记为fi(x)、最优步长γi、缩减率v，可得到最终的迭代公式为：</p>
+<p>综上，假设test集合第i轮预测中，根据训练集训练出来的New function不妨记为fi(x)、最优步长γi、缩减率v，可得到最终的递归公式为：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-d968a672abe8a1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="损失函数介绍"><a href="#损失函数介绍" class="headerlink" title="损失函数介绍"></a>损失函数介绍</h2><p>刚才上面我举了一个mse作为损失函数的例子，其实还有很多其他的，参考如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这边说个有意思的东西，就是如果有兴趣的朋友可以把exponential：指数损失函数计算一下，反向梯度为：</p>
