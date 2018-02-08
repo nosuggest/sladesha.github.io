@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-08T03:20:19.553Z">
+<meta property="og:updated_time" content="2018-02-08T03:22:04.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,143 字
+                  5,145 字
                 </span>
               
 
@@ -468,7 +468,7 @@
 <p>我最讨厌很多博主贴个上面的伪代码就跑了，我念书的时候，老师讲题目也是，我靠，我要是看得懂还需要你贴？所以，我们选择一步一步的来看这个伪代码。</p>
 <p>让我们先概览一下整个流程，有递归设计如下：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-7177402c111ed38a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>如果yi代表着第i个基模型，第i+1个基模型其实是基于第i个基模型的结果而追加了一个New function去修正前i个基模型的误差。如果以F代替y，h代替f的话，我们可以得到下面这个迭代函数：</p>
+<p>如果y(i)代表着第i个基模型，第i+1个基模型其实是基于第i个基模型的结果而追加了一个New function去修正前i个基模型的误差。如果以F代替y，h代替f的话，我们可以得到下面这个迭代函数：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-4c3334dca490586a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>第i个基模型是由i-1个基模型的累计加上第i个修正hi(x)得到的，其中hi(x)为基模型与其权值的乘积，F(x)就是我们最后想要得到的分类器：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-9bbfb54091d0352c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
