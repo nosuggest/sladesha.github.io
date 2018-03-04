@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://sladesha.github.io/2018/03/04/yoho注册概率预估/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1f5d8f894af5c1c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-954861aee2783ae1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-78357c2f91ee955a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-33d55d38c5d04bf4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -106,10 +106,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a5d319e44f8c3e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-435e1668201ccd9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-03-04T11:33:24.700Z">
+<meta property="og:updated_time" content="2018-03-04T11:36:53.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yoho注册概率预估">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-1f5d8f894af5c1c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -437,7 +437,8 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a></p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-1f5d8f894af5c1c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<a id="more"></a>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要介绍Yoho大数据团队在深度学习传统应用方向上的一些实践和思考。传统用户行为预估方向上，如何根据用户的行为数据，对用户行为建模，进而预测用户的购买行为，点击行为，注册行为等等一直以来都受到工业界及学术界的关注。相对而言，就用户注册概率的预测受限数据获取的局限性、传统的计算模型的时效性等原因并没有很多可参考的研究案例。我们想和大家分享的「Yoho基于GRU+LR算法下的用户注册概率预估」，基于循环神经网络的框架，充分的利用了用户在app上的行为信息，保证了高效的结果反馈速度，兼备算法框架良好的延拓性能。</p>
 <h1 id="注册概率预估定义"><a href="#注册概率预估定义" class="headerlink" title="注册概率预估定义"></a>注册概率预估定义</h1><p><strong>注册概率预估</strong>，即预估用户下载app后，浏览app过程中主动注册的可能性。通过识别出有注册倾向的人群，辅助以人为介入的方式（优惠、折扣，关怀等），可以提高用户实际注册的概率。</p>
 <p>基本的注册概率预估算法设计的流程如下：</p>
