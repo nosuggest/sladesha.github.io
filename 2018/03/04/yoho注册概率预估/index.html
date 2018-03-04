@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="数据处理," />
+  <meta name="keywords" content="理论解析," />
 
 
 
@@ -80,41 +80,36 @@
 
 
 
-<meta name="description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点">
-<meta name="keywords" content="数据处理">
+<meta name="keywords" content="理论解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据预处理-异常值识别">
-<meta property="og:url" content="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/index.html">
+<meta property="og:title" content="yoho注册概率预估">
+<meta property="og:url" content="http://sladesha.github.io/2018/03/04/yoho注册概率预估/index.html">
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
-<meta property="og:description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗R语言中的quantile函数，python中的p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-51aed3325eb4ffc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0c59a539345df0a5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-85a082d25a621303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d98be861833fd35e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-00335f3bc0d0c60c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-baa6be7f93b82ab9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ec554b00cb9bdd18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-46850d0fc19e37d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1291fad0ed73f044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2f9ebfb4dfec0b7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8245f5bfc8abe382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-b3a8ef0320eb1e67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3f1bcac360434516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ec67e22ba3fc0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-81cb8a53026c11ab?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6da2e1a7721d8241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2cfe6252e0b63f75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6289fcc6b49de116.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-bae95319a6b3a967.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-6fb1a1e8d80d6f5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-049beb7fea9ff710.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2d72b38a7b3b0d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T15:13:27.727Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-954861aee2783ae1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-78357c2f91ee955a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-33d55d38c5d04bf4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-625a85718aef383d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3b55102a75d305f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-89b0193aaabc8944.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2af23ae207a00916.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-dd0f39d85321fcdb.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-355a9a027ddf2356.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1effb405a319dacc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-82be1439fe461cec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-bd1ae2e398f046b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-df402e0da8ebef9c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-8c0680d77dca1e25.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-98e1c9d9a477e759.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-bd348c7ac25ff6ea.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a5d319e44f8c3e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-435e1668201ccd9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-04T11:33:24.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据预处理-异常值识别">
-<meta name="twitter:description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗R语言中的quantile函数，python中的p">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-51aed3325eb4ffc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="yoho注册概率预估">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -144,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/03/04/yoho注册概率预估/"/>
 
 
 
 
 
-  <title>数据预处理-异常值识别 | Sladesal's Algorithm World</title>
+  <title>yoho注册概率预估 | Sladesal's Algorithm World</title>
   
 
 
@@ -311,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/03/04/yoho注册概率预估/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesal">
@@ -328,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据预处理-异常值识别</h1>
+          <h1 class="post-title" itemprop="name headline">yoho注册概率预估</h1>
         
 
         <div class="post-meta">
@@ -340,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T23:10:40+08:00">
-                2017-08-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T19:29:45+08:00">
+                2018-03-04
               </time>
             
 
@@ -363,8 +358,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -382,8 +377,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/08/09/数据预处理-异常值识别/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/09/数据预处理-异常值识别/" itemprop="commentsCount"></span>
+                <a href="/2018/03/04/yoho注册概率预估/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/04/yoho注册概率预估/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -405,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,537 字
+                  4,016 字
                 </span>
               
 
@@ -421,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  13 分钟
+                  14 分钟
                 </span>
               
             </div>
@@ -442,57 +437,178 @@
       
 
       
-        <p>系统总结了常用的异常值识别思路，整理如下：</p>
-<h1 id="空间识别"><a href="#空间识别" class="headerlink" title="空间识别"></a>空间识别</h1><h2 id="分位数识别"><a href="#分位数识别" class="headerlink" title="分位数识别"></a>分位数识别</h2><p>代表的执行方法为<strong>箱式图</strong>：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-51aed3325eb4ffc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="箱式图（来自百度百科）"></p>
-<p>上四分位数Q3，又叫做升序数列的75%位点<br>下四分位数Q1，又叫做升序数列的25%位点<br>箱式图检验就是摘除大于<code>Q3+3/2*（Q3-Q1）</code>，小于<code>Q1-3/2*（Q3-Q1）</code>外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗<br>R语言中的<code>quantile</code>函数，python中的<code>percentile</code>函数可以直接实现。</p>
-<h2 id="距离识别"><a href="#距离识别" class="headerlink" title="距离识别"></a>距离识别</h2><p>最常用的就是<strong>欧式距离</strong>，<br>比如：两个n维向量a(x11,x12,…,x1n)与 b(x21,x22,…,x2n)间的欧氏距离：<br> <a href="http://photo.blog.sina.com.cn/showpic.html#blogid=52510b1d01015nrg&amp;url=http://s16.sinaimg.cn/orignal/52510b1dt7bf041c28faf" target="_blank" rel="noopener"><img src="http://upload-images.jianshu.io/upload_images/1129359-0c59a539345df0a5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="欧式距离"></a></p>
-<p>可以直观感受的到，图中，距离蓝色B点距离为基准衡量的话，红色A1，红色A2，红色A3为距离较近点，A4为距离较远的异常点。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-85a082d25a621303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>但是这样看问题会有一个隐患，我们犯了“就点论点”的错误没有考虑到全局的问题，让我在看下面这张图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-d98be861833fd35e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>还是刚才那张图，橙色背景为原始数据集分布，这样看来A4的位置反而比A1、A3相对更靠近基准点B，所以在存在纲量不一致且数据分布异常的情况下，可以使用<strong>马氏距离</strong>代替<strong>欧式距离</strong>判断数据是否离群。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-00335f3bc0d0c60c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="马氏距离"><br>其中，<code>μ</code>为feature的均值，<code>X</code>为观察值，<code>Σ</code>为feature的协方差矩阵<br>马氏距离除了用来判断点是否异常，也可以用来判断两个数据集相识度，在图像识别，反欺诈识别中应用的也是非常普遍；问题在于太过于依赖<code>Σ</code>，不同的base case对应的<code>Σ</code>都是不一致的，不是很稳定</p>
-<h2 id="密度识别"><a href="#密度识别" class="headerlink" title="密度识别"></a>密度识别</h2><p>密度识别的方式方法比较多，这边就提供其中比较经典的，首先我们可以通过密度聚类中大名鼎鼎的<code>dbscan</code>入手，这边只讲思路，详细的算法过程另行介绍。<br>简单的来讲，下面这张图可以协助理解</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-baa6be7f93b82ab9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>我们可以通过随机选择联通点，人为设置联通点附近最小半径a，半径内最小容忍点个数b，再考虑密度可达，形成蓝色方框内的正常数据区域，剩下的黄色区域内的点即为异常点。</p>
-<p>除此之外，密度识别里面还有一种方式，是参考单点附近的<strong>点密度</strong>判断，伪代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.从特征集合中任选历史上没有被选择过的两维</span><br><span class="line">2.将原始点集映射到该两维平面上，刻画点集中心a</span><br><span class="line">3.以点集中心a，x为半径画圆，不断扩大x的值，直到被覆盖的点集数/原始点集数的最低阈值</span><br><span class="line">4.没有被覆盖到的点集打上outlier_label</span><br><span class="line">5.repeat 1-4</span><br><span class="line">6.统计点对应的outlier_label个数</span><br><span class="line">7.排序高则优先为异常点</span><br></pre></td></tr></table></figure></p>
-<p>这边参考了<code>Clique</code>的映射+<code>Denclue</code>的密度分布函数的思路，注意问题就是计算量大，所以对小样本的适用程度更高一些，针对大样本多特征的数据可以考虑对样本进行子集抽样，再根据子集进行1-5，汇总后整体进行6-7步骤，实际检验效果仍然可以达到不抽样的85%以上</p>
-<h2 id="拉依达准则"><a href="#拉依达准则" class="headerlink" title="拉依达准则"></a>拉依达准则</h2><p>这个方法更加偏统计一些，设计到一些距离的计算，勉强放在空间识别里面</p>
-<p>这种判别处理原理及方法仅局限于对<strong>正态或近似正态分布的样本</strong>数据处理，它是以<strong>数据充分大</strong>为前提的，当数据较少的情况下，最好不要选用该准则。</p>
-<p>正态分布（高斯分布）是最常用的一种概率分布，通常正态分布有两个参数μ和σ为标准差。N(0,1)即为标准正态分布。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-ec554b00cb9bdd18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>从上面这张图可以看出，当数据对象值偏离均值3倍标准差的时候，该数据合理的出现可能性小于3‰，所以可以直接认定，数据偏离均值±3倍标准差时，为异常点。但是最后再次强调一遍：<strong>它是以数据充分大为前提的，当数据较少的情况下，最好不要选用该准则。</strong></p>
-<h1 id="计量识别"><a href="#计量识别" class="headerlink" title="计量识别"></a>计量识别</h1><h2 id="G-test或者说是likelihood-Ratio方法"><a href="#G-test或者说是likelihood-Ratio方法" class="headerlink" title="G-test或者说是likelihood Ratio方法"></a>G-test或者说是likelihood Ratio方法</h2><p>G-test这类方法运用在医学方面较多，常用于检验观测变量值是否符合理论期望的比值。现在也用在电商、出行、搜索领域检验一些无监督模型的质量、数据质量。</p>
-<p>当我们新上一个模型，部分用户的反馈特别异常，我们不知道是不是异常数据，在接下来的分析中需不需要剔除，我们可以用统计学方法予以取舍。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-46850d0fc19e37d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中O为观测值，E为期望值，假如我们的网站每天24个小时的订单量分布稳定，分时段计算出一个均值，E1，E2，..E24，新模型产出后，我们问题用户群对应的24个小时的订单分布值O1,O2,…..O24,套用上面的公式，我们就可以计算出一个G值出来。</p>
-<p>然后在根据G-test的base值，观察目标用户可信的最大置信度，判断置信度是否符合我们的最低要求；likelihood Ratio方法类似，相关论文可以直接搜索。</p>
-<h2 id="模型拟合"><a href="#模型拟合" class="headerlink" title="模型拟合"></a>模型拟合</h2><p>这类方法属于简单有监督识别，常见的包括贝叶斯识别，决策树识别，线性回归识别等等。</p>
-<p>需要提前知道两组数据：正常数据及非正常类数据，再根据它们所对应的特征，去拟合一条尽可能符合的曲线，后续直接用该条曲线去判断新增的数据是否正常。<br>举个例子：<br>金融借贷中，我们事先活动一批正常借贷用户，和逾期不还用户，我们通过<strong>打分卡模型</strong>去识别已知用户的特征，假设得到芝麻分、手机使用时长、是否为男性为关键特征。接下来判断未知标签的新增数据是否为正常用户的话，直接根据之前判断出来的拟合打分卡曲线去做0-1概率预估就行了。</p>
-<p>但是模型拟合的方式使用情况较为局限，绝大多数异常识别问题是无法拿到前置的历史区分数据，或者已分好的数据不能够覆盖全量可能，导致时间判断误差较大，顾一般只做emsemble model的其中一种组合模块，不建议做主要依赖标注。</p>
-<p>明尼苏达州大学有过一篇异常论文识别的总结，里面关于有监督模型、半监督模型、无监督模型等模型拟合讲的非常细致，如果感兴趣可以研究一下，附上论文Survey：<a href="http://cucis.ece.northwestern.edu/projects/DMS/publications/AnomalyDetection.pdf" target="_blank" rel="noopener">http://cucis.ece.northwestern.edu/projects/DMS/publications/AnomalyDetection.pdf</a></p>
-<h2 id="变维识别"><a href="#变维识别" class="headerlink" title="变维识别"></a>变维识别</h2><p>首先，我们来看一下PCA的伪代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.去除平均值,方便后续协方差，方差矩阵的计算</span><br><span class="line">2.计算协方差矩阵及其特征值和特征向量</span><br><span class="line">3.将特征值从大到小排序，特征值可以反映方差贡献度，特征值越大，方差贡献度越大</span><br><span class="line">4.保留最大的N个特征值以及它们的所对应的特征向量</span><br><span class="line">5.将数据映射到上述 N 个特征向量构造的新空间中</span><br></pre></td></tr></table></figure></p>
-<p>pca的核心思路在于<strong>尽可能通过feature的组合代替原始feature，使得原始数据的方差最大化</strong>。<br>通过pca可以得到第一主成分、第二主成分…。<br>对于正常数据集来说，正常数据量远远大于异常数据，所以正常数据所贡献的方差远远大于异常数据；通过pca得到的排名靠前的主成分解释了原始数据较大的方差占比，所以理论上讲，<strong>第一主成分反映了正常值的方差，最后一个主成分反映了异常点的方差。</strong>通过第一主成分对原始数据进行映射后，原始数据中的正常样本和异常样本的属性不会随之改变。</p>
-<p>存在一个p个维度的数据集orgin_data，X为其协方差矩阵，通过<strong>奇异值分解</strong>可以得到：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-1291fad0ed73f044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，D为对角阵，其每一个值为X所对应的特征值；P的每一列为X的所对应的特征向量，并将D中的特征值从大到小排列，相应的改变P所对应的列向量。<br>我们选取top(j)个D中的特征值，及其P所对应的特征向量构成(p,j) 维的矩阵 pj ，再将目标数据集orgin_data进行映射：<code>new_data = orgin_data*pj</code>；new_data是一个 (N,j) 维的矩阵。如果考虑拉回映射的话（也就是从主成分空间映射到原始空间），重构之后的数据集合是:<code>back_data=transpose(pj*transpose(new_data))=new_data*transpose(pj)</code>,是使用 top-j 的主成分进行重构之后形成的数据集，是一个 (N,p) 维的矩阵。</p>
-<p>所以，我们有如下的outlier socres的定义：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-2f9ebfb4dfec0b7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>ev(j) subject to.</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-8245f5bfc8abe382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>解释一下上面两个公式，先计算score中orgindata的列减去前j个主成分映射回原空间的newdata下的欧式范数值；再考虑不同主成分所需乘以的权重，这边，我们认为，第一主成分所代表的数据中正常数据更多，所以权重越小；当j取到最后一维的主成分下，我们认为权重最高，达到1。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-b3a8ef0320eb1e67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>对于outlier socres过高的点，即为异常点。</p>
-<h2 id="神经网络识别"><a href="#神经网络识别" class="headerlink" title="神经网络识别"></a>神经网络识别</h2><p>之前比较火的神经网络分析，同样可以用来做有监督的异常点识别，这边介绍一下Replicator Neural Networks (RNNs)。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-3f1bcac360434516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这边我们通过图像可以看出：<br>1.输入层中，输入变量个数与输出层中，输出变量一致<br>2.中间层的节点数小于输入输出层节点<br>3.整个训练过程是一个先压缩后解压的过程</p>
-<p>常规的，我们通过mse来看模型的误差<br><img src="http://upload-images.jianshu.io/upload_images/1129359-ec67e22ba3fc0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我们来大致了解一下RNN的运行逻辑，首先，最左边的为输入层即为原始数据，最右层的为输出层即为输出数据。中间各层的激活函数不同，入参经过激活函数所得到的出参的值也不一致，但是在同一层激活函数都是一致的。<br>对于我们异常识别而言，第二层和第四层 (k=2,4)，激活函数选择为<br><img src="http://upload-images.jianshu.io/upload_images/1129359-81cb8a53026c11ab?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>tanh图像如下，可以将原始数据压缩在-1到1之间，使得原始数据有界。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-6da2e1a7721d8241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<hr>
-<p>对于中间层 (k=3) 而言，激活函数是一个类阶梯 (step-like) 函数。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-2cfe6252e0b63f75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，N为阶梯分层数，a3为提升的效率。N的个数越多，层次分的更多。</p>
-<p>比如N=5的形式下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-6289fcc6b49de116.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="N=5"></p>
-<p>比如N=3的形式下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-bae95319a6b3a967.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="N=3"><br>这样做的好处就是，随着N的增加可以将异常点或者异常点群集中在某一个离散阶梯范围内。<br>通过对RNN的有监督训练，构造异常样本分类器，进行异常值识别。</p>
-<h2 id="isolation-forest"><a href="#isolation-forest" class="headerlink" title="isolation forest"></a>isolation forest</h2><p>2010年南大的周志华教授提出了一个基于二叉树的异常值识别算法，在工业界来说，效果是非常不错的，最近我也做了一个流失用户模型，实测效果优秀。</p>
-<p>和random forest一样，isolation forest是由isolation tree构成，先看一下isolation tree的逻辑：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">method:</span><br><span class="line">1.从原始数据中随机选择一个属性feature；</span><br><span class="line">2.从原始数据中随机选择该属性的下的一个样本值value；</span><br><span class="line">3.根据feature下的value对每条记录进行分类，把小于value的记录放在左子集，把大于等于value的记录放在右子集；</span><br><span class="line">4.repeat 1-3 until：</span><br><span class="line">　　　　4.1.传入的数据集只有一条记录或者多条一样的记录；</span><br><span class="line">　　　　4.2.树的高度达到了限定高度；</span><br></pre></td></tr></table></figure></p>
-<p>大致的思路如下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-6fb1a1e8d80d6f5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>理论上，异常数据一般都是离群数据，非常容易在早期就被划分到最终子节点。所以，通过计算每个子节点的深度h(x)，来判断数据为异常数据的可能性。论文中，以s(x,n)为判断数据是否异常的衡量指标。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-049beb7fea9ff710.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-2d72b38a7b3b0d12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。</p>
-<p>单棵树的可信性不足，所以我们通过用emsemble model的思路，去构造一个forest的树群来提高准确性。<br>但是作为isolation forest的时候，需要对原s(x,n)的公式有所更改，通过E(h(x))来替代h(x),其中E(h(x))为数据x在各棵树上的h(x)的平均。<br>同时，<br>1.因为树的个数大大增加，所以需要控制计算的开销，所以每个棵树我们可以采取数据抽样的方式，使得抽样数据集远远小于原始数据集，且根据周志华老师的论文，采样大小超过256效果就提升不大了。<br>2.我们可以控制深度，使得没棵树的最大深度limit length=ceiling(log2(样本大小))，当树深度大于最大深度时，其产生的子节点绝大多数均为正常数据节点，失去异常检验的意义。</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-c6cc20032d7d0314.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><a id="more"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要介绍Yoho大数据团队在深度学习传统应用方向上的一些实践和思考。传统用户行为预估方向上，如何根据用户的行为数据，对用户行为建模，进而预测用户的购买行为，点击行为，注册行为等等一直以来都受到工业界及学术界的关注。相对而言，就用户注册概率的预测受限数据获取的局限性、传统的计算模型的时效性等原因并没有很多可参考的研究案例。我们想和大家分享的「Yoho基于GRU+LR算法下的用户注册概率预估」，基于循环神经网络的框架，充分的利用了用户在app上的行为信息，保证了高效的结果反馈速度，兼备算法框架良好的延拓性能。</p>
+<h1 id="注册概率预估定义"><a href="#注册概率预估定义" class="headerlink" title="注册概率预估定义"></a>注册概率预估定义</h1><p><strong>注册概率预估</strong>，即预估用户下载app后，浏览app过程中主动注册的可能性。通过识别出有注册倾向的人群，辅助以人为介入的方式（优惠、折扣，关怀等），可以提高用户实际注册的概率。</p>
+<p>基本的注册概率预估算法设计的流程如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-954861aee2783ae1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>数据整理节点：在于收集用户行为信息，包括地理位置，当时的时间，用户来源的渠道，用户点击行为等等；模型计算节点：在于根据数据整理节点的结果判断用户的注册概率高低；计算结果推送节点：在于根据不同注册概率用户采取不同的营销策略，个性化引导用户注册。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-78357c2f91ee955a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>目前注册概率预估主要有两大难点：</p>
+<ul>
+<li>用户app停留时效约束（<strong>实效性</strong>）：因为缺乏平台忠诚度，用户第一次也有可能是最后一次登陆app之前这段时间是相对暂短，如何压缩用户每一次步操作下的模型计算时间，提高反馈频率是需要考虑的重要问题。</li>
+<li>用户数据完整性约束（<strong>准确性</strong>）：因为用户可能是第一次接触app，在没有注册信息，历史行为信息，完成订单信息等等数据下，如何能在大量缺乏数据的情况下利用好有限信息是需要考虑的重要问题。</li>
+</ul>
+<p>我们通过以Recurrent Neural Network 及 Logistic Regression为基模型，通过Stacking方式，针对性的尝试去解决以上两个注册预估中的难点。</p>
+<h1 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h1><h2 id="Recurrent-Neural-Network基模型"><a href="#Recurrent-Neural-Network基模型" class="headerlink" title="Recurrent Neural Network基模型"></a>Recurrent Neural Network基模型</h2><h3 id="数据整理部分"><a href="#数据整理部分" class="headerlink" title="数据整理部分"></a>数据整理部分</h3><p>无论在Kaggle还是天池大赛上，数据特征工程是非常重要而且繁琐的一个过程：<br>关于预处理，通常我们会采取：</p>
+<ul>
+<li>数据检查，提出异常字符、乱码等数据</li>
+<li>缺失值处理，剔除、填充、拟合构造等</li>
+<li>方差衡量，剔除方差低的低贡献特征</li>
+<li>共线性检查，提高泛化能力</li>
+<li>异常检验，剔除错误异常数据</li>
+<li>…</li>
+</ul>
+<p>在数据预处理结束之后，我们还会在更新完的数据集上进行特征筛选：</p>
+<ul>
+<li>基于自变量与因变量之间的交互熵</li>
+<li>基于模型中的特征贡献程度（Xgboost里面的importance/Lasso、Ridge中的参数绝对大小）</li>
+<li>基于预训练模型中的特征参数的显著性</li>
+<li>基于自变量之间的相关性</li>
+<li>…</li>
+</ul>
+<p>在数据特征筛选结束之后，我们还需要进行特征组合寻找最大方差下的新的特征，还会通过PCA/LDA/t-SNE/FM等寻找是否可以进行降维或者升维，交叉特征构造等等。通常无论是在离线训练还是线上预测中，对特征的加工处理过程都是非常耗时的，极有可能在用户已经离开app后，用户的注册概率还没有算出来。</p>
+<p>我们利用Recurrent Neural Network来解决注册预估的时候，我们需要做的数据整理就非常的轻松，只需根据用户浏览的顺序，将用户浏览的页面编号Item_Page,同时记录用户浏览的先后顺序Time_Rank：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-33d55d38c5d04bf4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>构造如下的数据形式：</p>
+<table>
+<thead>
+<tr>
+<th>User_Imme</th>
+<th style="text-align:center">Item_Page</th>
+<th>Time_Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>012939003331092</td>
+<td style="text-align:center">92374573284354</td>
+<td>1518422132</td>
+</tr>
+<tr>
+<td>012939003331092</td>
+<td style="text-align:center">82374573771273</td>
+<td>1518422142</td>
+</tr>
+<tr>
+<td>012939003331092</td>
+<td style="text-align:center">92374573284354</td>
+<td>1518422147</td>
+</tr>
+<tr>
+<td>078939002221093</td>
+<td style="text-align:center">66774573284354</td>
+<td>1518422247</td>
+</tr>
+<tr>
+<td>078939002221093</td>
+<td style="text-align:center">66774573284442</td>
+<td>1518422249</td>
+</tr>
+<tr>
+<td>…</td>
+<td style="text-align:center">…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>数据处理过程，只需要按照用户的浏览先后顺序进行排序即可，大大的降低了耗时，对整体算法的实效性上不会产生任何影响。因此，我们甚至可以在用户每一次产生动作之后就对其的注册概率进行重新判定，得到用户的浏览流对应的注册概率波动情况。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-625a85718aef383d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>一旦用户的注册概率值大于我们设置的目标阈值的时候，我们可以人为干预推送营销策略，提高用户注册率。与此同时，我们也可以根据全站所有页面或者商品页的实时用户注册概率的高低，选出促进用户高频注册的关键商品，作为新客推送的主打商品等等。</p>
+<h3 id="模型计算部分"><a href="#模型计算部分" class="headerlink" title="模型计算部分"></a>模型计算部分</h3><p>整体的模型框架概览如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-3b55102a75d305f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>我们试图通过循环网络部分提取出用户的浏览行为的汇总信息，再通过Logistic Regression部分融合用户基础信息，以行为特点+基础特征猜测用户每次浏览是属于随便点点还是认真挑选。</p>
+<h4 id="Recurrent-Neural-Network部分"><a href="#Recurrent-Neural-Network部分" class="headerlink" title="Recurrent Neural Network部分"></a>Recurrent Neural Network部分</h4><p><strong>1.循环单元结构</strong></p>
+<p>在循环神经网络模块中，我们采取了Gated Recurrent Unit (GRU)代替普通RNN作为最小循环单元进行计算，以此来避免梯度消失等问题：</p>
+<p>隐藏状态计算如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-89b0193aaabc8944.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1129359-2af23ae207a00916.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1129359-dd0f39d85321fcdb.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/1129359-355a9a027ddf2356.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>对比LSTM，GRU只用了两个gates，将LSTM中的输入门和遗忘门合并成了更新门。并且并不把线性自更新建立在额外的memory cell上，而是直接线性累积建立在隐藏状态上，并靠gates来调控，这样就可以大大的加快离线训练的速度，同时在RNN的官方论文中，我们看到了实测的效果如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-1effb405a319dacc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>很明显的可以看到:虽然GRU减少了一个门的存在，但是效果与LSTM相当，但是几乎每次测试的test效果都要优秀于传统方法，同时GRU是真的肉眼可见的比LSTM快。综合考虑了计算速度及最后计算结果的准确程度，我们选择了多层GRU模型而并非是以输入门、输出门、遗忘门为信息传递的LSTM模型。</p>
+<p><strong>2.循环网络结构</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-82be1439fe461cec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>整体上看，网络结构也是非常简单的。如上图，先将用户浏览的所有商品进行embedding操作，然后根据用户每个商品的浏览顺序构建时序序列，进行多层的GRU模型训练，最后再以前馈网络传递，softmax后得到用户下次点击每个商品的概率，再根据预测结果Output Second Items 和 Real Second Items修正多层GRU layer中的参数。</p>
+<p>通过已经训练好的循环网络，我们根据新用户浏览商品的顺序，得到用户每次浏览的后一次浏览每个商品的概率（output scores）及用户前N次浏览信息的trend，seasonality的汇总（隐藏状态GRU States）。与此同时，我们可以通过控制GRU layer的层数及优化多次隐藏状态GRU States的拼接方式控制整体模型框架的复杂程度。</p>
+<p><strong>3.用户数据构造</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-bd1ae2e398f046b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>用户数据训练过程常常采用如上图这样的最小批处理。每一个Session就可以看作是一个用户，每一个i可以看作是一个商品，商品i的下标代表着商品的浏览顺序。</p>
+<p>input中，每一行表示的为多个用户正常的浏览顺序中的起始商品，比如Session1用户浏览顺序：i1.1–&gt;i1.2–&gt;i1.3–&gt;1.4中的i1.1，i1.2，i1.3；对应的，在output中，每一行代表多个用户在input位置的下一次浏览内容，比如Session1用户浏览顺序：i1.1–&gt;i1.2，i1.2–i1.3，i1.3–&gt;i1.4中的i1.2，i1.3，i1.4；当input中的一个的用户或者说是一个的Session的点击信息被全部使用后，追加一个新的用户或者说是Session的点击信息，同时通过控制同时计算的用户或者说Session的个数，直到所有的Session信息都被使用完一遍，这样就构造完成了一个由用户的上次点击结果预测用户的下次点击结果的循环神经网络。</p>
+<p>这样设计避免了通常的神经网络构造在用户行为上应用中的两个问题：</p>
+<ul>
+<li>固定滑动窗口导致大量用户信息不能获取完整</li>
+<li>拆分用户的浏览行为计算导致循环网络在信息理解上的歧义</li>
+</ul>
+<p><strong>4.损失函数选取</strong></p>
+<p>关于损失函数的选取，我们这边主要推荐两种方案：基于贝叶斯后验优化(BayesianPersonalizedRanking,BPR)和第一准则(TOP1)：</p>
+<ul>
+<li>贝叶斯后验优化(BayesianPersonalizedRanking,BPR)是一个近似矩阵分解的方法，我们分别选取当前用户当前商品的下一个真实浏览的商品作为Positive Item，随机抽样的商品作为Negative Item，具体表达形如：<img src="http://upload-images.jianshu.io/upload_images/1129359-df402e0da8ebef9c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>，其中Ns即为随机采样个数，<img src="http://upload-images.jianshu.io/upload_images/1129359-8c0680d77dca1e25.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>中k为i时对应Positive Item的真实计算得分，K为j时对应Negative Item，保持i=Positive Item不变，计算所有抽样出来的Negative Item作为j进行计算即可。</li>
+<li>第一准则(TOP1)是我们自己设计的一个近似排序的方法，我们想要真实的Positive Item所计算出来的结果尽可能的接近1，Negative Item计算出来的结果尽可能的接近0，所以我们要保证采样出来的Negative Item比Positive Item在当前计算方式下的得分要低，所以，我们可以设计损失函数如下：<img src="http://upload-images.jianshu.io/upload_images/1129359-98e1c9d9a477e759.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>，最末项增加了个正则项修正拟合程度。</li>
+</ul>
+<p>除此之外，《SESSION-BASED RECOMMENDATIONS WITH RECURRENT NEURAL NETWORKS》中还提到了POP，S-POP，Item-KNN，BPR-MF等方法，可单独了解。</p>
+<h4 id="Logistics-Regression部分"><a href="#Logistics-Regression部分" class="headerlink" title="Logistics Regression部分"></a>Logistics Regression部分</h4><p>整个Recurrent Neural Network部分在一定程度上帮助我们获取到了用户的浏览操作行为中的trend和seasonality（隐藏状态GRU States），但是缺乏考虑外部信息，比如热点爆品，用户区域，用户性别，用户需求等等。最典型的一个例子就是，我们不能向一个浏览了多个中性黑色太阳眼镜的正在试图走酷雅风格的东北女性推送潮牌男性短裤优惠券作为注册激励，很多时候会起到相反的作用。所以通过Logistics Regression部分进行一次重排序的操作，个性化的提供用户的注册激励也是非常重要的一环。</p>
+<p><strong>数据应用</strong></p>
+<p>在文章最开始的时候，我们就指出了在注册预估中非常重要的一点：数据实效性和准确性，包括如何快速汇总及利用在用户没有填写大量基础信息的情况下的特征工程问题。</p>
+<table>
+<thead>
+<tr>
+<th>数据类别</th>
+<th style="text-align:center">数据详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础用户画像</td>
+<td style="text-align:center">人口属性，地点，性别，消费力等</td>
+</tr>
+<tr>
+<td>主动行为数据</td>
+<td style="text-align:center">品类偏好、品牌偏好、行为性别等</td>
+</tr>
+<tr>
+<td>文本偏好数据</td>
+<td style="text-align:center">浏览商品文字描述特征</td>
+</tr>
+<tr>
+<td>反馈数据</td>
+<td style="text-align:center">停留时长，复停留行为，当前时间段等</td>
+</tr>
+<tr>
+<td>…</td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>基础用户画像&amp;主动行为数据：我们可以在用户原始日志中快速清洗出用户的地址，环境，设备等基础信息，结合用户浏览商品的性别+价格+品牌加权预估出用户的性别，消费力等价值属性，品类偏好、品牌偏好、行为性别等基础汇总属性。</li>
+<li><p>文本偏好数据：根据用户的浏览商品，去匹配是否命中了我们预先提取出的注册用户浏览高频关键词，比如“鬼洗”，“典藏”等等及当前的一些热点词汇“小白鞋”，“华莱士”等。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-bd348c7ac25ff6ea.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+</li>
+<li><p>反馈数据：在整个Recurrent Neural Network部分我们考虑的是用户的浏览顺序，但是忽略了用户的浏览质量，用户进入平台后的15s内，A商品重复浏览了3次，停留了9S，B商品重复浏览了1次，停留了1S，商品A的注册激励价值是远远高于商品B的。</p>
+</li>
+</ul>
+<p>通过以上的方式获取到的“用户画像”好处在于快速，再扩充了用户基本属性的同时还能够在规定的时间内完成所有的重排序计算，但是缺点在于一定程度上降低了用户特征刻画的精度。</p>
+<p><strong>数据构造</strong></p>
+<p>在实际的应用过程中，我们发现，在一定程度上交叉部分高价值的用户特征有助于提高最后的预测结果的准确性，构造的框架图如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这边借鉴但是没有完全采用wide&amp;deep的方法，借鉴了对原始用户特征需要通过embedding layer进行处理，比如通过简单的one hot encoding的形式，然后采取特征交叉的方式获取新的用户特征，最后再进行前向传播或者logistics regression；但是此处，在embedding layer的过程中会采取人为限制分箱逻辑去噪（剔除了比如地点归属000ex00f这样的错误数据），在交叉过程中只选取了部分对最后的用户注册影响较大的因素进行交叉，在提升了模型对用户拟合的能力的同时也保证了模型的实效性。</p>
+<p><strong>数据流</strong></p>
+<p>简单的数据执行流如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-a5d319e44f8c3e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="其他同事做的，有待考证"></p>
+<p>主要步骤如下：</p>
+<ul>
+<li>Storm解析实时点击、搜索、浏览日志流，在线写特征向量到Hbase中</li>
+<li>解析基础用户日志，获取环境特征：手机型号，网络，地址等，在线写特征向量到Hbase中</li>
+<li>根据存储在Hbase中的用户数据和用户是否注册的结果离线更新循环网络及LR模型参数</li>
+<li>将新的模型参数应用于线上用户数据的预测</li>
+</ul>
+<p>最后可得到个人及全站的注册概率变化可视化如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-435e1668201ccd9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="可优化方向"><a href="#可优化方向" class="headerlink" title="可优化方向"></a>可优化方向</h1><ul>
+<li>GRU卷积神经网络的层数优化，由多层隐藏层替代单层隐藏层提高对用户行为的汇总效果</li>
+<li>Logistics Regression部分可以由多模型bagging替换，降低过拟合的可能</li>
+<li>反馈数据清洗，对于有强烈意愿注册的用户进行识别，避免干扰正样本池</li>
+<li>推荐内容干扰，那些热门爆款更多的用户看到，而且“被看到”这个行为也加深了它接下去被接连看到的可能性</li>
+<li>GRU卷积神经网络的构造中，修改上一次点击预测下一次点击为上一次点击预测目标行为（常停留时长的点击、收藏点击等等）</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>传统的机器学习方案给用户行为预估的项目一个基准水平线，而深度学习的出现，一定程度上使得这个上限有所提高，但是以数据为基础，用算法去雕琢，只有将二者有机结合，才会带来更好的效果提升。</p>
+<p>以上是Yoho！团队在实践中的一点总结，当然我们还有还多事情要做，keep learning！最后感谢项目推进过程中所有合作方和项目组同学的付出和努力，感谢各个团队各位老大们的支持！</p>
 
       
     </div>
@@ -539,7 +655,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据处理/" rel="tag"># 数据处理</a>
+            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
           
         </div>
       
@@ -552,8 +668,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/20/如何校验用户画像的准确性？/" rel="next" title="如何校验用户画像的准确性？">
-                <i class="fa fa-chevron-left"></i> 如何校验用户画像的准确性？
+              <a href="/2018/02/22/18年的自我约束及目标期望/" rel="next" title="18年的自我约束及目标期望">
+                <i class="fa fa-chevron-left"></i> 18年的自我约束及目标期望
               </a>
             
           </div>
@@ -562,8 +678,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/15/基于自然语言识别下的流失用户预警/" rel="prev" title="基于自然语言识别下的流失用户预警">
-                基于自然语言识别下的流失用户预警 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -739,7 +855,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#空间识别"><span class="nav-number">1.</span> <span class="nav-text">空间识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分位数识别"><span class="nav-number">1.1.</span> <span class="nav-text">分位数识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#距离识别"><span class="nav-number">1.2.</span> <span class="nav-text">距离识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密度识别"><span class="nav-number">1.3.</span> <span class="nav-text">密度识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉依达准则"><span class="nav-number">1.4.</span> <span class="nav-text">拉依达准则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计量识别"><span class="nav-number">2.</span> <span class="nav-text">计量识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#G-test或者说是likelihood-Ratio方法"><span class="nav-number">2.1.</span> <span class="nav-text">G-test或者说是likelihood Ratio方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型拟合"><span class="nav-number">2.2.</span> <span class="nav-text">模型拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变维识别"><span class="nav-number">2.3.</span> <span class="nav-text">变维识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络识别"><span class="nav-number">2.4.</span> <span class="nav-text">神经网络识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isolation-forest"><span class="nav-number">2.5.</span> <span class="nav-text">isolation forest</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册概率预估定义"><span class="nav-number">2.</span> <span class="nav-text">注册概率预估定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法设计"><span class="nav-number">3.</span> <span class="nav-text">算法设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recurrent-Neural-Network基模型"><span class="nav-number">3.1.</span> <span class="nav-text">Recurrent Neural Network基模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据整理部分"><span class="nav-number">3.1.1.</span> <span class="nav-text">数据整理部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型计算部分"><span class="nav-number">3.1.2.</span> <span class="nav-text">模型计算部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recurrent-Neural-Network部分"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">Recurrent Neural Network部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logistics-Regression部分"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Logistics Regression部分</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可优化方向"><span class="nav-number">4.</span> <span class="nav-text">可优化方向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
