@@ -88,10 +88,17 @@
 <meta property="og:site_name" content="Sladesal&#39;s Algorithm World">
 <meta property="og:description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution） 理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T16:07:50.431Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-78770ea87c96e973?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-3289e7d441caba8b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e504e21e6de0ead2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-1f90301d0b434c42?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-90b0f891dd921c9d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-703c8acb28927fcb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-07T07:51:16.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="推荐系统-威尔逊区间法">
 <meta name="twitter:description" content="我推荐一种之前在惠普做过一种排序方法：威尔逊区间法 我们先做如下设定： （1）每个用户的打分都是独立事件。 （2）用户只有两个选择，要么投喜欢’1’，要么投不喜欢’0’。 （3）如果总人数为n，其中喜欢的为k，那么喜欢的比例p就等于k/n。 这是一种统计分布，叫做”二项分布”（binomial distribution） 理论上讲，p越大应该越好，但是n的不同，导致p的可信性有差异。100个人投票">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-78770ea87c96e973?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -436,8 +443,11 @@
 <p>第一步，计算每个case的p（好评率）。</p>
 <p>第二步，计算每个”好评率”的置信区间（参考z Test或者t Test，以95%的概率来处理）。</p>
 <p>第三步，根据置信区间的下限值，进行排名。这个值越大，排名就越高。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-78770ea87c96e973?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-3289e7d441caba8b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>解释一下，n为评价数，p为好评率，z为对应检验对应概率区间下的统计量</p>
 <p>比如t-分布：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-e504e21e6de0ead2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>可以看到，当n的值足够大时，这个下限值会趋向p，如果n非常小，这个下限值会大大小于p，更加符合实际。</p>
 <p>Reddit的评论排名，目前就使用这个算法。国内的化，滴滴也有部分业务涉及，效果也不错。</p>
 <hr>
@@ -447,11 +457,14 @@
 <p>2.时间因素，如果一个项目是10天前推送的，一个项目是昨天推送的，很明显前者的次数远大于后者</p>
 <p>3.影响权重，你这边只考虑了喜欢和不喜欢，其实所有的排序不可能只以1个维度考虑，通常会考虑多个维度，比如浏览次数，搜索次数等，你需要考虑每个的重要性或者说权重大小</p>
 <p>1这里就不讲了，其他方法也有很多，比如贝叶斯平均的优化版本、再比如经典的Hacker公式：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-1f90301d0b434c42?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>2.时间因素：</p>
 <p>时间越久，代表之前的投票结果对当前的影响越小，这边有很多不同的影响方式，举几个例子：</p>
 <p>比如艾宾浩斯遗忘规律：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-90b0f891dd921c9d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这里的c、k决定下降速度，业务运用过程中，c值一般在[1,2],k值一般在[1.5,2.5]</p>
 <p>比如时效衰减：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-703c8acb28927fcb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这里就是比较常见的移动窗口式的，永远只看近期某一段时间，而且时间内呈线性下降，不过可以改变变化方式</p>
 <p>3.不同种的属性对于结果的影响自然不同</p>
 <p>举个例子，用户主动搜索和用户浏览相比，用户主动搜索的情况下，用户的需求更为强烈</p>
