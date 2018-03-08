@@ -104,9 +104,9 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-98e1c9d9a477e759.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-bd348c7ac25ff6ea.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-a5d319e44f8c3e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-43d4fd5e6b0aa3c0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-435e1668201ccd9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-03-04T11:36:53.654Z">
+<meta property="og:updated_time" content="2018-03-08T09:22:11.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yoho注册概率预估">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-1f5d8f894af5c1c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,016 字
+                  4,078 字
                 </span>
               
 
@@ -439,6 +439,9 @@
       
         <p><img src="http://upload-images.jianshu.io/upload_images/1129359-1f5d8f894af5c1c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <a id="more"></a>
+<hr>
+<p>GRU 部分的demo代码：<a href="https://github.com/sladesha/deep_learning/tree/master/RNN_applied_classification/src" target="_blank" rel="noopener">model.py</a>，注意，其中上传的lr_classification.py并没有做wide&amp;deep设计</p>
+<hr>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要介绍Yoho大数据团队在深度学习传统应用方向上的一些实践和思考。传统用户行为预估方向上，如何根据用户的行为数据，对用户行为建模，进而预测用户的购买行为，点击行为，注册行为等等一直以来都受到工业界及学术界的关注。相对而言，就用户注册概率的预测受限数据获取的局限性、传统的计算模型的时效性等原因并没有很多可参考的研究案例。我们想和大家分享的「Yoho基于GRU+LR算法下的用户注册概率预估」，基于循环神经网络的框架，充分的利用了用户在app上的行为信息，保证了高效的结果反馈速度，兼备算法框架良好的延拓性能。</p>
 <h1 id="注册概率预估定义"><a href="#注册概率预估定义" class="headerlink" title="注册概率预估定义"></a>注册概率预估定义</h1><p><strong>注册概率预估</strong>，即预估用户下载app后，浏览app过程中主动注册的可能性。通过识别出有注册倾向的人群，辅助以人为介入的方式（优惠、折扣，关怀等），可以提高用户实际注册的概率。</p>
 <p>基本的注册概率预估算法设计的流程如下：</p>
@@ -591,12 +594,12 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这边借鉴但是没有完全采用wide&amp;deep的方法，借鉴了对原始用户特征需要通过embedding layer进行处理，比如通过简单的one hot encoding的形式，然后采取特征交叉的方式获取新的用户特征，最后再进行前向传播或者logistics regression；但是此处，在embedding layer的过程中会采取人为限制分箱逻辑去噪（剔除了比如地点归属000ex00f这样的错误数据），在交叉过程中只选取了部分对最后的用户注册影响较大的因素进行交叉，在提升了模型对用户拟合的能力的同时也保证了模型的实效性。</p>
 <p><strong>数据流</strong></p>
-<p>简单的数据执行流如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-a5d319e44f8c3e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="其他同事做的，有待考证"></p>
+<p>简单的数据执行流如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-43d4fd5e6b0aa3c0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>主要步骤如下：</p>
 <ul>
-<li>Storm解析实时点击、搜索、浏览日志流，在线写特征向量到Hbase中</li>
-<li>解析基础用户日志，获取环境特征：手机型号，网络，地址等，在线写特征向量到Hbase中</li>
-<li>根据存储在Hbase中的用户数据和用户是否注册的结果离线更新循环网络及LR模型参数</li>
+<li>Kafka+Flume解析实时点击、搜索、浏览等用户操作日志流，在线进行用户操作数据的抽取</li>
+<li>实时解析基础用户环境信息，获取环境特征：手机型号，网络，地址等，实时写入到线上Hadoop/Spark中的HDFS里</li>
+<li>根据离线存储在HDFS中的用户操作数据、用户点击流数据和用户是否真实注册的结果离线更新循环网络GRU及LR模型参数</li>
 <li>将新的模型参数应用于线上用户数据的预测</li>
 </ul>
 <p>最后可得到个人及全站的注册概率变化可视化如下：</p>
@@ -606,7 +609,7 @@
 <li>Logistics Regression部分可以由多模型bagging替换，降低过拟合的可能</li>
 <li>反馈数据清洗，对于有强烈意愿注册的用户进行识别，避免干扰正样本池</li>
 <li>推荐内容干扰，那些热门爆款更多的用户看到，而且“被看到”这个行为也加深了它接下去被接连看到的可能性</li>
-<li>GRU卷积神经网络的构造中，修改上一次点击预测下一次点击为上一次点击预测目标行为（常停留时长的点击、收藏点击等等）</li>
+<li>GRU卷积神经网络的构造中，修改上一次操作预测下一次操作为上一次操作预测<strong>目标行为</strong>（常停留时长的点击、收藏点击等等高价值的行为节点）</li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>传统的机器学习方案给用户行为预估的项目一个基准水平线，而深度学习的出现，一定程度上使得这个上限有所提高，但是以数据为基础，用算法去雕琢，只有将二者有机结合，才会带来更好的效果提升。</p>
 <p>以上是Yoho！团队在实践中的一点总结，当然我们还有还多事情要做，keep learning！最后感谢项目推进过程中所有合作方和项目组同学的付出和努力，感谢各个团队各位老大们的支持！</p>
@@ -891,7 +894,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">98.1k</span>
+    <span title="Site words total count">98.2k</span>
   
 </div>
 
