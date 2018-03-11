@@ -96,13 +96,13 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9bbfb54091d0352c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0abccf32b3847b5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-e4ea5c4265fa8036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-af589e2cbd6b62b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-d1eb6f0b22148026.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d968a672abe8a1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-23c75255580052e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-ffb42cd379a99aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9f94653a00797a4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-08T05:55:42.207Z">
+<meta property="og:updated_time" content="2018-03-11T03:13:40.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-c27f2beeada396e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,183 字
+                  5,291 字
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18 分钟
+                  19 分钟
                 </span>
               
             </div>
@@ -470,11 +470,11 @@
 <ul>
 <li>构建回归树，这边就稍许复杂，让我们拆开一步一步来看：</li>
 </ul>
-<p><strong>首先，先求整体损失函数的反向梯度。</strong>先举个mse的例子，如果现在我们考虑的是mse的形式，我们要做的就是在每一步的时候让我们的预测值Fi(x)与真实值y的损失函数：1/2<code>*</code>(y-Fi(x))^2最小(前面的1/2是为了方便求导计算加上去的)，如果对梯度下降有了解的朋友就知道，此刻要求它的最小就是去求偏导：</p>
+<p><strong>首先，先求整体损失函数的反向梯度。</strong>先举个mse的例子，如果现在我们考虑的是<strong>mse(着重注意，只有mse的情况下以下的梯度才是这样的)</strong>的形式，我们要做的就是在每一步的时候让我们的预测值Fi(x)与真实值y的损失函数：1/2<code>*</code>(y-Fi(x))^2最小(前面的1/2是为了方便求导计算加上去的)，如果对梯度下降有了解的朋友就知道，此刻要求它的最小就是去求偏导：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-e4ea5c4265fa8036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>按照这个方向去更新Fi(x)，可以保证，组合模型F(x)的每次都是按照最优的方向去优化。</p>
-<p><strong>但是由于在test集中的y是不存在的，所以我们在hi(x)构建的时候，就以每个样本的feature下的反向梯度作为hi(x)的拟合对象</strong>，这样我们在预测test结果的时候，在没有y的情况下依然可以求出反向梯度。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-af589e2cbd6b62b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>MSE的损失函数确实是残差形式，不代表所有的损失函数下更新的方向都满足这样的残差形式。<strong>kaggle master 在<a href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/" target="_blank" rel="noopener">blog</a>里面提到Although we can minimize this function directly, gradient descent will let us minimize more complicated loss functions that we can’t minimize directly</strong>，我们就需要设计出一种更快速能提升泛化能力且不失一般性的解决方案，所以有大神提出了以梯度下降的值直接代替因变量y，也就是我每次预测不去比预测值与真实值y的差异，我们比较的是预测的梯度方向与真实的梯度方向。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1129359-d1eb6f0b22148026.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><strong>再基于已经预估出来的负梯度去计算最优的更新步长，使得预测值与真实值更加靠近</strong>，因为每层的负梯度的方向不固定，所以每层i的步长都是变化的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-ff25bf429c4ace25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>最后通过缩减率v（这边就是类似logistics里面的∂）控制速率。</p>
@@ -819,7 +819,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">98.2k</span>
+    <span title="Site words total count">98.3k</span>
   
 </div>
 
