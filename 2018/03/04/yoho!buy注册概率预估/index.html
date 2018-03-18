@@ -106,7 +106,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-43d4fd5e6b0aa3c0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-14193240a2245604.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-03-18T14:21:21.448Z">
+<meta property="og:updated_time" content="2018-03-18T14:27:18.742Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yoho!buy注册概率预估">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-2ceb68e1dc8bcc14.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,249 字
+                  4,269 字
                 </span>
               
 
@@ -537,9 +537,8 @@
 <li>第一准则(TOP1)是我们自己设计的一个近似排序的方法，我们想要真实的Positive Item所计算出来的结果尽可能的接近1，Negative Item计算出来的结果尽可能的接近0，所以我们要保证采样出来的Negative Item比Positive Item在当前计算方式下的得分要低，所以，我们可以设计损失函数如下：<img src="http://upload-images.jianshu.io/upload_images/1129359-98e1c9d9a477e759.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>，最末项增加了个正则项修正拟合程度。</li>
 </ul>
 <p>除此之外，《SESSION-BASED RECOMMENDATIONS WITH RECURRENT NEURAL NETWORKS》中还提到了POP，S-POP，Item-KNN，BPR-MF等方法，可单独了解。</p>
-<h4 id="Logistics-Regression部分"><a href="#Logistics-Regression部分" class="headerlink" title="Logistics Regression部分"></a>Logistics Regression部分</h4><p>整个Recurrent Neural Network部分在一定程度上帮助我们获取到了用户的浏览操作行为中的trend和seasonality（隐藏状态GRU States），但是缺乏考虑外部信息，比如热点爆品，用户区域，用户性别，用户需求等等。最典型的一个例子就是，我们不能向一个浏览了多个中性黑色太阳眼镜的正在试图走酷雅风格的东北女性推送潮牌男性短裤优惠券作为注册激励，很多时候会起到相反的作用。所以通过Logistics Regression部分进行一次重排序的操作，个性化的提供用户的注册激励也是非常重要的一环。</p>
-<p><strong>数据应用</strong></p>
-<p>如何兼顾Recurrent Neural Network部分的潜藏数据与为数不多的用户基础特征数据，并加以融合快速反馈出结果，是需要多方面考虑的：</p>
+<h4 id="Logistics-Regression部分"><a href="#Logistics-Regression部分" class="headerlink" title="Logistics Regression部分"></a>Logistics Regression部分</h4><p><strong>通过Logistics Regression部分提高融合Recurrent Neural Network的潜藏层和传统的用户基础特征，进行一次重排序的操作，个性化的提供用户的注册激励也是非常重要的一环。</strong><br>整个Recurrent Neural Network部分在一定程度上帮助我们获取到了用户的浏览操作行为中的trend和seasonality（隐藏状态GRU States），但是缺乏考虑外部信息，比如热点爆品，用户区域，用户性别，用户需求等等。最典型的一个例子就是，我们不能向一个浏览了多个中性黑色太阳眼镜的正在试图走酷雅风格的东北女性推送潮牌男性短裤优惠券作为注册激励，很多时候会起到相反的作用。</p>
+<p>如何兼顾Recurrent Neural Network部分的潜藏数据与为数不多的用户基础特征数据，并加以融合快速反馈出结果，是需要多方面考虑的：<br><strong>数据应用</strong></p>
 <table>
 <thead>
 <tr>
@@ -572,17 +571,18 @@
 </table>
 <ul>
 <li>基础用户画像&amp;主动行为数据：我们可以在用户原始日志中快速清洗出用户的地址，环境，设备等基础信息，结合用户浏览商品的性别+价格+品牌加权预估出用户的性别，消费力等价值属性，品类偏好、品牌偏好、行为性别等基础汇总属性。</li>
-<li><p>文本偏好数据：根据用户的浏览商品，去匹配是否命中了我们预先提取出的注册用户浏览高频关键词，比如“鬼洗”，“典藏”等等及当前的一些热点词汇“小白鞋”，“华莱士”等。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-bd348c7ac25ff6ea.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-</li>
-<li><p>反馈数据：在整个Recurrent Neural Network部分我们考虑的是用户的浏览顺序，但是忽略了用户的浏览质量，用户进入平台后的15s内，A商品重复浏览了3次，停留了9S，B商品重复浏览了1次，停留了1S，商品A的注册激励价值是远远高于商品B的。</p>
-</li>
+<li>文本偏好数据：根据用户的浏览商品，去匹配是否命中了我们预先提取出的注册用户浏览高频关键词，比如“鬼洗”，“典藏”等等及当前的一些热点词汇“小白鞋”，“华莱士”等。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1129359-bd348c7ac25ff6ea.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>反馈数据：在整个Recurrent Neural Network部分我们考虑的是用户的浏览顺序，但是忽略了用户的浏览质量，用户进入平台后的15s内，A商品重复浏览了3次，停留了9S，B商品重复浏览了1次，停留了1S，商品A的注册激励价值是远远高于商品B的。</li>
 </ul>
 <p>通过以上的方式获取到的“用户画像”好处在于快速，再扩充了用户基本属性的同时还能够在规定的时间内完成所有的重排序计算，但是缺点在于一定程度上降低了用户特征刻画的精度。</p>
-<p><strong>数据构造</strong></p>
+<p><strong>数据融合</strong></p>
 <p>在实际的应用过程中，我们发现，在一定程度上交叉部分高价值的用户特征有助于提高最后的预测结果的准确性，构造的框架图如下：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-2016870376517d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>这边借鉴但是没有完全采用wide&amp;deep的方法，借鉴了对原始用户特征需要通过embedding layer进行处理，比如通过简单的one hot encoding的形式，然后采取特征交叉的方式获取新的用户特征，最后再进行前向传播或者logistics regression；但是此处，在embedding layer的过程中会采取人为限制分箱逻辑去噪（剔除了比如地点归属000ex00f这样的错误数据），在交叉过程中只选取了部分对最后的用户注册影响较大的因素进行交叉，在提升了模型对用户拟合的能力的同时也保证了模型的实效性。</p>
-<p><strong>数据流</strong></p>
+<p><strong>数据流设计</strong></p>
 <p>简单的数据执行流如下：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-43d4fd5e6b0aa3c0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>主要步骤如下：</p>
 <ul>
