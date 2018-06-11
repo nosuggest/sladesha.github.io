@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/2018/06/11/Tensorflow%E4%B8%93%E9%A2%98tf.nn.embedding_lookup/</loc>
+    
+    <lastmod>2018-06-11T02:44:57.408Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2018/06/04/Tensorflow%E4%B8%93%E9%A2%98tf.scan/</loc>
     
     <lastmod>2018-06-06T03:11:20.911Z</lastmod>

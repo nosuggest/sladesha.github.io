@@ -12,6 +12,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[tf.nn.embedding_lookup]]></title>
+    <url>%2F2018%2F06%2F11%2FTensorflow%E4%B8%93%E9%A2%98tf.nn.embedding_lookup%2F</url>
+    <content type="text"><![CDATA[我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。 1tf.nn.embedding_lookup(params, ids, partition_strategy='mod', name=None, validate_indices=True, max_norm=None) 官方文档位置，其中，params是我们给出的，可以通过：1.tf.get_variable(&quot;item_emb_w&quot;, [self.item_count, self.embedding_size])等方式生产服从[0,1]的均匀分布或者标准分布2.tf.convert_to_tensor转化我们现有的array然后，ids是我们要找的params中对应位置。 举个例子：123456import numpy as npimport tensorflow as tfdata = np.array([[[2],[1]],[[3],[4]],[[6],[7]]])lk = [[0,1],[1,0],[0,0]]lookup_data = tf.nn.embedding_lookup(data,lk)init = tf.global_variables_initializer() 先让我们看下不同数据对应的维度：123456In [76]: data.shapeOut[76]: (3, 2, 1)In [77]: np.array(lk).shapeOut[77]: (3, 2)In [78]: lookup_dataOut[78]: &lt;tf.Tensor 'embedding_lookup_8:0' shape=(3, 2, 2, 1) dtype=int64&gt; 这个是怎么做到的呢？关键的部分来了，看下图：lk中的值，在要寻找的embedding数据中下找对应的index下的vector进行拼接。永远是look(lk)部分的维度+embedding(data)部分的除了第一维后的维度拼接。很明显，我们也可以得到，lk里面值是必须要小于等于embedding(data)的最大维度减一的。 以上的结果就是：12345678910111213141516171819202122232425262728293031323334353637In [79]: dataOut[79]:array([[[2], [1]], [[3], [4]], [[6], [7]]])In [80]: lkOut[80]: [[0, 1], [1, 0], [0, 0]]# lk[0]也就是[0,1]对应着下面sess.run(lookup_data)的结果恰好是把data中的[[2],[1]],[[3],[4]]In [81]: sess.run(lookup_data)Out[81]:array([[[[2], [1]], [[3], [4]]], [[[3], [4]], [[2], [1]]], [[[2], [1]], [[2], [1]]]]) 最后，partition_strategy是用于当len(params) &gt; 1，params的元素分割不能整分的话，则前(max_id + 1) % len(params)多分一个id.当partition_strategy = ‘mod’的时候，13个ids划分为5个分区：[[0, 5, 10], [1, 6, 11], [2, 7, 12], [3, 8], [4, 9]]，也就是是按照数据列进行映射，然后再进行look_up操作。当partition_strategy = ‘div’的时候，13个ids划分为5个分区：[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10], [11, 12]]，也就是是按照数据先后进行排序标序，然后再进行look_up操作。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>tensorflow代码解析</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[tf.scan]]></title>
     <url>%2F2018%2F06%2F04%2FTensorflow%E4%B8%93%E9%A2%98tf.scan%2F</url>
     <content type="text"><![CDATA[tf.scan(fn, elems, initializer=None, parallel_iterations=10, back_prop=True, swap_memory=False, infer_shape=True, name=None) fn：计算函数elems：以elems的第一维度的变量list作函数计算直到遍历完整个elemsinitializer：fn计算的初始值，替代elems做第一次计算 举个好理解的例子：123456789101112131415x = [1,2,3]z = 10x = tf.convert_to_tensor(x)z = tf.convert_to_tensor(z)def f(x,y): return x+yg = tf.scan(fn=f,elems = x,initializer=z)sess = tf.Session()sess.run(tf.global_variables_initializer)sess.run(g) 会得到：12In [97]: sess.run(g)Out[97]: array([11, 13, 16], dtype=int32) 详细的计算逻辑如下：11 = 10(初始值initializer)+ 1(x[0])13 = 11(上次的计算结果)+2(x[1])16 = 13(上次的计算结果)+3(x[2])]]></content>
