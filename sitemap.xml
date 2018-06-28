@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/2018/06/04/Tensorflow%E4%B8%93%E9%A2%98tf.scan/</loc>
+    
+    <lastmod>2018-06-28T02:09:38.279Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sladesha.github.io/2018/06/11/Tensorflow%E4%B8%93%E9%A2%98tf.nn.embedding_lookup/</loc>
+    
+    <lastmod>2018-06-28T02:09:01.419Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2018/06/28/Tensorflow%E5%9C%A8GPU%E4%B8%8B%E7%9A%84Poolallocator%20Message/</loc>
     
-    <lastmod>2018-06-28T01:49:15.897Z</lastmod>
+    <lastmod>2018-06-28T02:08:49.319Z</lastmod>
     
   </url>
   
@@ -12,20 +26,6 @@
     <loc>http://sladesha.github.io/2018/06/26/%E5%85%B3%E4%BA%8E'Deep%20Neural%20Networks%20for%20YouTube%20Recommendations'%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2018-06-26T05:28:01.373Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/2018/06/11/Tensorflow%E4%B8%93%E9%A2%98tf.nn.embedding_lookup/</loc>
-    
-    <lastmod>2018-06-11T03:44:41.453Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/2018/06/04/Tensorflow%E4%B8%93%E9%A2%98tf.scan/</loc>
-    
-    <lastmod>2018-06-06T03:11:20.911Z</lastmod>
     
   </url>
   

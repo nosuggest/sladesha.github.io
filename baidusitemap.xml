@@ -4,8 +4,48 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2018/06/04/Tensorflow%E4%B8%93%E9%A2%98tf.scan/</loc>
+    <lastmod>2018-06-28T02:09:38.279Z</lastmod>
+    <data>
+        <display>
+        <title>tf.scan</title>
+        <pubTime>2018-06-04T11:29:45.000Z</pubTime>
+        
+        <tag>tensorflow代码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sladesha.github.io/2018/06/11/Tensorflow%E4%B8%93%E9%A2%98tf.nn.embedding_lookup/</loc>
+    <lastmod>2018-06-28T02:09:01.419Z</lastmod>
+    <data>
+        <display>
+        <title>tf.nn.embedding_lookup</title>
+        <pubTime>2018-06-11T01:29:45.000Z</pubTime>
+        
+        <tag>tensorflow代码解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2018/06/28/Tensorflow%E5%9C%A8GPU%E4%B8%8B%E7%9A%84Poolallocator%20Message/</loc>
-    <lastmod>2018-06-28T01:49:15.897Z</lastmod>
+    <lastmod>2018-06-28T02:08:49.319Z</lastmod>
     <data>
         <display>
         <title>Tensorflow在GPU下的Poolallocator Message</title>
@@ -32,46 +72,6 @@
         <pubTime>2018-06-26T03:29:45.000Z</pubTime>
         
         <tag>论文解析</tag>
-         
-         
-           
-             
-              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2018/06/11/Tensorflow%E4%B8%93%E9%A2%98tf.nn.embedding_lookup/</loc>
-    <lastmod>2018-06-11T03:44:41.453Z</lastmod>
-    <data>
-        <display>
-        <title>tf.nn.embedding_lookup</title>
-        <pubTime>2018-06-11T01:29:45.000Z</pubTime>
-        
-        <tag>tensorflow代码解析</tag>
-         
-         
-           
-             
-              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2018/06/04/Tensorflow%E4%B8%93%E9%A2%98tf.scan/</loc>
-    <lastmod>2018-06-06T03:11:20.911Z</lastmod>
-    <data>
-        <display>
-        <title>tf.scan</title>
-        <pubTime>2018-06-04T11:29:45.000Z</pubTime>
-        
-        <tag>tensorflow代码解析</tag>
          
          
            
