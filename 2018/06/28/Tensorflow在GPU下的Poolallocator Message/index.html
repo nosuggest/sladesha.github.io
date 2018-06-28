@@ -80,21 +80,18 @@
 
 
 
-<meta name="description" content="我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。 1tf.nn.embedding_lookup(params, ids, partition_strategy=&apos;mod&apos;, name=None, ">
+<meta name="description" content="我在在用GPU跑我一个深度模型的时候，发生了以下的问题：1234567891011121314151617...2018-06-27 18:09:11.701458: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: A">
 <meta name="keywords" content="tensorflow代码解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tf.nn.embedding_lookup">
-<meta property="og:url" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf.nn.embedding_lookup/index.html">
+<meta property="og:title" content="Tensorflow在GPU下的Poolallocator Message">
+<meta property="og:url" content="http://sladesha.github.io/2018/06/28/Tensorflow在GPU下的Poolallocator Message/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。 1tf.nn.embedding_lookup(params, ids, partition_strategy=&apos;mod&apos;, name=None, validate_indices=True, max_norm=None) 官方文档位置，其中，pa">
+<meta property="og:description" content="我在在用GPU跑我一个深度模型的时候，发生了以下的问题：1234567891011121314151617...2018-06-27 18:09:11.701458: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: After 63521 get requests, put_count=63521">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-51ec3c90c272f132.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-8e165a26604451b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-06-11T03:44:41.453Z">
+<meta property="og:updated_time" content="2018-06-28T01:49:15.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tf.nn.embedding_lookup">
-<meta name="twitter:description" content="我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。 1tf.nn.embedding_lookup(params, ids, partition_strategy=&apos;mod&apos;, name=None, validate_indices=True, max_norm=None) 官方文档位置，其中，pa">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-51ec3c90c272f132.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Tensorflow在GPU下的Poolallocator Message">
+<meta name="twitter:description" content="我在在用GPU跑我一个深度模型的时候，发生了以下的问题：1234567891011121314151617...2018-06-27 18:09:11.701458: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: After 63521 get requests, put_count=63521">
 
 
 
@@ -124,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2018/06/11/Tensorflow专题tf.nn.embedding_lookup/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/06/28/Tensorflow在GPU下的Poolallocator Message/"/>
 
 
 
 
 
-  <title>tf.nn.embedding_lookup | SladeSha's Algorithm World</title>
+  <title>Tensorflow在GPU下的Poolallocator Message | SladeSha's Algorithm World</title>
   
 
 
@@ -291,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/06/11/Tensorflow专题tf.nn.embedding_lookup/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/06/28/Tensorflow在GPU下的Poolallocator Message/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -308,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">tf.nn.embedding_lookup</h1>
+          <h1 class="post-title" itemprop="name headline">Tensorflow在GPU下的Poolallocator Message</h1>
         
 
         <div class="post-meta">
@@ -320,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T09:29:45+08:00">
-                2018-06-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T09:29:45+08:00">
+                2018-06-28
               </time>
             
 
@@ -374,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  571 字
+                  657 字
                 </span>
               
 
@@ -390,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -411,14 +408,12 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-51ec3c90c272f132.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.embedding_lookup(params, ids, partition_strategy=<span class="string">'mod'</span>, name=<span class="keyword">None</span>, validate_indices=<span class="keyword">True</span>, max_norm=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
-<p><strong><a href="https://www.tensorflow.org/api_docs/python/tf/nn/embedding_lookup" target="_blank" rel="noopener">官方文档位置</a></strong>，其中，params是我们给出的，可以通过：<br>1.<code>tf.get_variable(&quot;item_emb_w&quot;, [self.item_count, self.embedding_size])</code>等方式生产服从[0,1]的均匀分布或者标准分布<br>2.<code>tf.convert_to_tensor</code>转化我们现有的array<br>然后，ids是我们要找的params中对应位置。</p>
-<p>举个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">data = np.array([[[<span class="number">2</span>],[<span class="number">1</span>]],[[<span class="number">3</span>],[<span class="number">4</span>]],[[<span class="number">6</span>],[<span class="number">7</span>]]])</span><br><span class="line">data = tf.convert_to_tensor(data)</span><br><span class="line">lk = [[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">lookup_data = tf.nn.embedding_lookup(data,lk)</span><br><span class="line">init = tf.global_variables_initializer()</span><br></pre></td></tr></table></figure></p>
-<p>先让我们看下不同数据对应的维度：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">76</span>]: data.shape</span><br><span class="line">Out[<span class="number">76</span>]: (<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">In [<span class="number">77</span>]: np.array(lk).shape</span><br><span class="line">Out[<span class="number">77</span>]: (<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">In [<span class="number">78</span>]: lookup_data</span><br><span class="line">Out[<span class="number">78</span>]: &lt;tf.Tensor <span class="string">'embedding_lookup_8:0'</span> shape=(<span class="number">3</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>) dtype=int64&gt;</span><br></pre></td></tr></table></figure></p>
-<p>这个是怎么做到的呢？关键的部分来了，看下图：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-8e165a26604451b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>lk中的值，在要寻找的embedding数据中下找对应的index下的vector进行拼接。永远是look(lk)部分的维度+embedding(data)部分的除了第一维后的维度拼接。很明显，我们也可以得到，<strong>lk里面值是必须要小于等于embedding(data)的最大维度减一的</strong>。</p>
-<p>以上的结果就是：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">79</span>]: data</span><br><span class="line">Out[<span class="number">79</span>]:</span><br><span class="line">array([[[<span class="number">2</span>],</span><br><span class="line">        [<span class="number">1</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">3</span>],</span><br><span class="line">        [<span class="number">4</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">6</span>],</span><br><span class="line">        [<span class="number">7</span>]]])</span><br><span class="line"></span><br><span class="line">In [<span class="number">80</span>]: lk</span><br><span class="line">Out[<span class="number">80</span>]: [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># lk[0]也就是[0,1]对应着下面sess.run(lookup_data)的结果恰好是把data中的[[2],[1]],[[3],[4]]</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">81</span>]: sess.run(lookup_data)</span><br><span class="line">Out[<span class="number">81</span>]:</span><br><span class="line">array([[[[<span class="number">2</span>],</span><br><span class="line">         [<span class="number">1</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">3</span>],</span><br><span class="line">         [<span class="number">4</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       [[[<span class="number">3</span>],</span><br><span class="line">         [<span class="number">4</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">2</span>],</span><br><span class="line">         [<span class="number">1</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       [[[<span class="number">2</span>],</span><br><span class="line">         [<span class="number">1</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="number">2</span>],</span><br><span class="line">         [<span class="number">1</span>]]]])</span><br></pre></td></tr></table></figure></p>
-<p>最后，partition_strategy是用于当len(params) &gt; 1，params的元素分割不能整分的话，则前(max_id + 1) % len(params)多分一个id.<br>当partition_strategy = ‘mod’的时候，13个ids划分为5个分区：[[0, 5, 10], [1, 6, 11], [2, 7, 12], [3, 8], [4, 9]]，也就是是按照数据列进行映射，然后再进行look_up操作。<br>当partition_strategy = ‘div’的时候，13个ids划分为5个分区：[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10], [11, 12]]，也就是是按照数据先后进行排序标序，然后再进行look_up操作。</p>
+        <p>我在在用GPU跑我一个深度模型的时候，发生了以下的问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">2018-06-27 18:09:11.701458: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: After 63521 get requests, put_count=63521 evicted_count=1000 eviction_rate=0.0157428 and unsatisfied allocation rate=0.0173171</span><br><span class="line">2018-06-27 18:09:11.701503: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:259] Raising pool_size_limit_ from 100 to 110</span><br><span class="line">Global_step 2000        Train_loss: 0.0758</span><br><span class="line">Global_step 3000        Train_loss: 0.0618</span><br><span class="line">Global_step 4000        Train_loss: 0.0564</span><br><span class="line">Global_step 5000        Train_loss: 0.0521</span><br><span class="line">Global_step 6000        Train_loss: 0.0492</span><br><span class="line">Global_step 7000        Train_loss: 0.0468</span><br><span class="line">Global_step 8000        Train_loss: 0.0443</span><br><span class="line">Global_step 9000        Train_loss: 0.0422</span><br><span class="line">Global_step 10000       Train_loss: 0.0410</span><br><span class="line">Global_step 11000       Train_loss: 0.0397</span><br><span class="line">Global_step 12000       Train_loss: 0.0383</span><br><span class="line">2018-06-27 18:13:59.743133: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: After 71532 get requests, put_count=71532 evicted_count=1000 eviction_rate=0.0139798 and unsatisfied allocation rate=0.0143013</span><br><span class="line">2018-06-27 18:13:59.743167: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:259] Raising pool_size_limit_ from 256 to 281</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>除了常规的loss数据之外，我看到穿插在之间的warming informations ，虽然最后的结果没有任何问题，但是我抱着好奇的心态在stackoverflow找到了原因：</p>
+<blockquote>
+<p>TensorFlow has multiple memory allocators, for memory that will be used in different ways. Their behavior has some adaptive aspects.<br><strong>In your particular case, since you’re using a GPU, there is a PoolAllocator for CPU memory that is pre-registered with the GPU for fast DMA. A tensor that is expected to be transferred from CPU to GPU, e.g., will be allocated from this pool.</strong><br>The PoolAllocators attempt to amortize the cost of calling a more expensive underlying allocator by keeping around a pool of allocated then freed chunks that are eligible for immediate reuse. Their default behavior is to grow slowly until the eviction rate drops below some constant. (The eviction rate is the proportion of free calls where we return an unused chunk from the pool to the underlying pool in order not to exceed the size limit.) In the log messages above, you see <strong>“Raising pool_size<em>limit</em>“ lines that show the pool size growing. Assuming that your program actually has a steady state behavior with a maximum size collection of chunks it needs, the pool will grow to accommodate it, and then grow no more.</strong> It behaves this way rather than simply retaining all chunks ever allocated so that sizes needed only rarely, or only during program startup, are less likely to be retained in the pool.<br>These messages should only be a cause for concern <strong>if you run out of memory</strong>. In such a case the log messages may help diagnose the problem. Note also that peak execution speed may only be attained after the memory pools have grown to the proper size.</p>
+</blockquote>
+<p>加粗部分解释机制、处理方式和原因。总结起来就是，PoolAllocator会有一个内存分配机制，GPU和CPU之间不是独立的可以相互传输，如果你使用的空间太多，他就会提高原有的预设的空间大小，如果够用了，就没有什么影响了，但是，需要注意的是，兄弟你的数据加载量太大了，看看是不是改改batch size，一次性少加载点数据，或者干掉隔壁同事的任务。</p>
 
       
     </div>
@@ -478,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/04/Tensorflow专题tf.scan/" rel="next" title="tf.scan">
-                <i class="fa fa-chevron-left"></i> tf.scan
+              <a href="/2018/06/26/关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现/" rel="next" title="关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现">
+                <i class="fa fa-chevron-left"></i> 关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现
               </a>
             
           </div>
@@ -488,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/26/关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现/" rel="prev" title="关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现">
-                关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
