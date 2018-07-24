@@ -80,22 +80,22 @@
 
 
 
-<meta name="description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最">
+<meta name="description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最">
 <meta name="keywords" content="数据处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="伪标签半监督学习">
 <meta property="og:url" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
+<meta property="og:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a7e4d6b2c9db3ae4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a9eb354ba8a80ecc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f828d9680ca4ec86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-24T02:43:15.308Z">
+<meta property="og:updated_time" content="2018-07-24T02:53:33.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伪标签半监督学习">
-<meta name="twitter:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
+<meta name="twitter:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-a7e4d6b2c9db3ae4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -413,7 +413,7 @@
       
 
       
-        <p>之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。</p>
+        <p>之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。</p>
 <p>其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：</p>
 <ul>
 <li>均值、众数填充<br>最简单的填充，效果也惨不忍睹</li>
@@ -492,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/19/量化评估推荐系统效果/" rel="next" title="量化评估推荐系统效果">
-                <i class="fa fa-chevron-left"></i> 量化评估推荐系统效果
+              <a href="/2018/07/19/热传导:物质扩散算法应用于推荐/" rel="next" title="热传导/物质扩散算法应用于推荐">
+                <i class="fa fa-chevron-left"></i> 热传导/物质扩散算法应用于推荐
               </a>
             
           </div>

@@ -14,23 +14,12 @@
   <entry>
     <title><![CDATA[伪标签半监督学习]]></title>
     <url>%2F2018%2F07%2F24%2F%E4%BC%AA%E6%A0%87%E7%AD%BE%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%2F</url>
-    <content type="text"><![CDATA[之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过： 均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错误，填充的不好就没价值，很矛盾 剔除丢失信息量 设置哑变量会造成数据分布有偏 smote连续值有效，离散值就无法实施了 我在Google上看imbalance问题的时候，偶然看到了这个视频教程，上面讲了图像的缺失处理，提到了伪标签处理的半监督学习方式。我就在国内的论坛上找了下，阿里云技术论坛也同样注意到了这个问题，但是只给出了如下的粗糙的构思图： 有一份整理了的流程图，具体执行步骤总结，和大家一起看一下： 将有标签部分数据分为两份：train_set&amp;validation_set，并训练出最优的model1 用model1对未知标签数据(test_set)进行预测，给出伪标签结果pseudo-labeled 将train_set中抽取一部分做新的validation_set，把剩余部分与pseudo-labeled部分融合作为新的train_set，训练出最优的model2 再用model21对未知标签数据(test_set)进行预测，得到最终的final result label 我利用了已知标签的数据对这个方法进行测试，用了最简单的mixed logistic regression模型作为Basic Model，得到结果如下：利用伪标签半监督的方式，同样的mixed logistic regression模型AUC值会提高0.1pp左右，效果还不错，而且实施并不复杂，大家可以在缺失值处理或者分类问题中应用尝试一下。 欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。]]></content>
+    <content type="text"><![CDATA[之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过： 均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错误，填充的不好就没价值，很矛盾 剔除丢失信息量 设置哑变量会造成数据分布有偏 smote连续值有效，离散值就无法实施了 我在Google上看imbalance问题的时候，偶然看到了这个视频教程，上面讲了图像的缺失处理，提到了伪标签处理的半监督学习方式。我就在国内的论坛上找了下，阿里云技术论坛也同样注意到了这个问题，但是只给出了如下的粗糙的构思图： 有一份整理了的流程图，具体执行步骤总结，和大家一起看一下： 将有标签部分数据分为两份：train_set&amp;validation_set，并训练出最优的model1 用model1对未知标签数据(test_set)进行预测，给出伪标签结果pseudo-labeled 将train_set中抽取一部分做新的validation_set，把剩余部分与pseudo-labeled部分融合作为新的train_set，训练出最优的model2 再用model21对未知标签数据(test_set)进行预测，得到最终的final result label 我利用了已知标签的数据对这个方法进行测试，用了最简单的mixed logistic regression模型作为Basic Model，得到结果如下：利用伪标签半监督的方式，同样的mixed logistic regression模型AUC值会提高0.1pp左右，效果还不错，而且实施并不复杂，大家可以在缺失值处理或者分类问题中应用尝试一下。 欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。]]></content>
       <categories>
         <category>特征刻画</category>
       </categories>
       <tags>
         <tag>数据处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[量化评估推荐系统效果]]></title>
-    <url>%2F2018%2F07%2F19%2F%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C%2F</url>
-    <content type="text"><![CDATA[推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。4）冷启动5）Exploration 和 Exploitation问题 离线模型之间的评估召回集测试 recall命中skn个数/用户真实点击skn个数 precision命中skn个数/所有预测出来的skn总数 F1-Measure2/(1/recall+1/precison) 交互熵 MAE RMSE 相关性常见的比如：Pearson、Spearman和Kendall’s Tau相关，其中Pearson是更具数值之间的相似度，Spearman是根据数值排序之间的相似度，Kendall’s Tau是加权下的数值排序之间的相似度。 基尼系数 信息熵 排序部分测试 NDCG（Normalize DCG） RBP（rank-biased precision） RBP和NDCG指标的唯一不同点在于RBP把推荐列表中商品的浏览概率p按等比数列递减，而ND CG则是按照log调和级数形式。 离线模型与在线模型之间的评估很多时候，我们需要确定离线模型的效果足够的健壮才能允许上线进行线上测试，那如何进行离线模型与线上模型的评估对比就是一个比较复杂的问题。 难点 缺乏公平的测试数据实际处理过程中，我们发现，所有的已知点击都是来自线上模型推荐的结果，所以极端情况下，线上的recall是100% 缺乏公认的衡量指标在线下对比中，我们发现比如recall、precision、F1-Measure等指标都是大家约定俗成的，不存在很大的争议，而离线在线模型对比却没有一个准确公认的衡量指标 指标设计 online_offline_cover_rate&amp;first_click_hit_rate 这一组指标是结合在一起看的，其中online_offline_cover_rate是指针对每一个用户计算理线模型推荐的商品与在线模型推荐的商品的重合个数/在线模型的推荐商品个数，online_offline_cover_rate越低代表离线模型相对在线模型越独立；first_click_hit_rate是指offline模型对用户每天第一次点击的命中率，也就是命中次数/总统计用户数。结合这两个指标，我们可以得到在online_offline_cover_rate越低的情况下，却能覆盖线上用户真实点击的次数越多，代表offline模型的效果优于线上模型。 online_precision_rate/offline_precision_rate 离线模型的准确率和在线模型的准确率。这边在实际计算的时候采取了一个技巧，针对某个推荐位计算在线模型准确率的时候，用的是从来没有浏览过这个推荐位的用户的浏览历史匹配这个用户这个推荐位的推荐结果。这样可以避免用户的点击结果受到推荐位推荐结果影响的问题。 举个例子：用户在推荐位A上没有浏览过，他的点击是不受推荐位A推荐的商品影响的，拿这个用户推荐位A我们给他线上推荐的结果作为线上模型的推荐结果去计算，这样才更加合理。 online_recall_rate/offline_recall_rate 离线模型的召回率和在线模型的召回率。同上解释。 roi_reall/roi_precision 同上解释，只是把未来的点击作为match源更换成了加购物车、购买、收藏这些数据。 其他评估方向覆盖率推荐覆盖率越高， 系统给用户推荐的商品种类就越多 ，推荐多样新颖的可能性就越大。如果一个推荐算法总是推荐给用户流行的商品，那么它的覆盖率往往很低，通常也是多样性和新颖性都很低的推荐。 多样性采用推荐列表间的相似度（hamming distance、Cosine Method），也就是用户的推荐列表间的重叠度来定义整体多样性。 新颖性计算推荐列表中物品的平均流行度。 其他用户满意度、用户问卷、信任度、鲁棒性、实时性、 评测维度最后说一下评测维度分为如下3种，多角度评测： 用户维度主要包括用户的人口统计学信息、活跃度以及是不是新用户等。 物品维度包括物品的属性信息、流行度、平均分以及是不是新加入的物品等。 时间维度包括季节，是工作日还是周末，是白天还是晚上等。 附常规评价指标的整理结果(来自论文Evaluation Metrics for Recommender Systems)： 欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>推荐评估方法</tag>
       </tags>
   </entry>
   <entry>
@@ -42,6 +31,17 @@
       </categories>
       <tags>
         <tag>推荐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[量化评估推荐系统效果]]></title>
+    <url>%2F2018%2F07%2F19%2F%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C%2F</url>
+    <content type="text"><![CDATA[推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。4）冷启动5）Exploration 和 Exploitation问题 离线模型之间的评估召回集测试 recall命中skn个数/用户真实点击skn个数 precision命中skn个数/所有预测出来的skn总数 F1-Measure2/(1/recall+1/precison) 交互熵 MAE RMSE 相关性常见的比如：Pearson、Spearman和Kendall’s Tau相关，其中Pearson是更具数值之间的相似度，Spearman是根据数值排序之间的相似度，Kendall’s Tau是加权下的数值排序之间的相似度。 基尼系数 信息熵 排序部分测试 NDCG（Normalize DCG） RBP（rank-biased precision） RBP和NDCG指标的唯一不同点在于RBP把推荐列表中商品的浏览概率p按等比数列递减，而ND CG则是按照log调和级数形式。 离线模型与在线模型之间的评估很多时候，我们需要确定离线模型的效果足够的健壮才能允许上线进行线上测试，那如何进行离线模型与线上模型的评估对比就是一个比较复杂的问题。 难点 缺乏公平的测试数据实际处理过程中，我们发现，所有的已知点击都是来自线上模型推荐的结果，所以极端情况下，线上的recall是100% 缺乏公认的衡量指标在线下对比中，我们发现比如recall、precision、F1-Measure等指标都是大家约定俗成的，不存在很大的争议，而离线在线模型对比却没有一个准确公认的衡量指标 指标设计 online_offline_cover_rate&amp;first_click_hit_rate 这一组指标是结合在一起看的，其中online_offline_cover_rate是指针对每一个用户计算理线模型推荐的商品与在线模型推荐的商品的重合个数/在线模型的推荐商品个数，online_offline_cover_rate越低代表离线模型相对在线模型越独立；first_click_hit_rate是指offline模型对用户每天第一次点击的命中率，也就是命中次数/总统计用户数。结合这两个指标，我们可以得到在online_offline_cover_rate越低的情况下，却能覆盖线上用户真实点击的次数越多，代表offline模型的效果优于线上模型。 online_precision_rate/offline_precision_rate 离线模型的准确率和在线模型的准确率。这边在实际计算的时候采取了一个技巧，针对某个推荐位计算在线模型准确率的时候，用的是从来没有浏览过这个推荐位的用户的浏览历史匹配这个用户这个推荐位的推荐结果。这样可以避免用户的点击结果受到推荐位推荐结果影响的问题。 举个例子：用户在推荐位A上没有浏览过，他的点击是不受推荐位A推荐的商品影响的，拿这个用户推荐位A我们给他线上推荐的结果作为线上模型的推荐结果去计算，这样才更加合理。 online_recall_rate/offline_recall_rate 离线模型的召回率和在线模型的召回率。同上解释。 roi_reall/roi_precision 同上解释，只是把未来的点击作为match源更换成了加购物车、购买、收藏这些数据。 其他评估方向覆盖率推荐覆盖率越高， 系统给用户推荐的商品种类就越多 ，推荐多样新颖的可能性就越大。如果一个推荐算法总是推荐给用户流行的商品，那么它的覆盖率往往很低，通常也是多样性和新颖性都很低的推荐。 多样性采用推荐列表间的相似度（hamming distance、Cosine Method），也就是用户的推荐列表间的重叠度来定义整体多样性。 新颖性计算推荐列表中物品的平均流行度。 其他用户满意度、用户问卷、信任度、鲁棒性、实时性、 评测维度最后说一下评测维度分为如下3种，多角度评测： 用户维度主要包括用户的人口统计学信息、活跃度以及是不是新用户等。 物品维度包括物品的属性信息、流行度、平均分以及是不是新加入的物品等。 时间维度包括季节，是工作日还是周末，是白天还是晚上等。 附常规评价指标的整理结果(来自论文Evaluation Metrics for Recommender Systems)： 欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>推荐评估方法</tag>
       </tags>
   </entry>
   <entry>
