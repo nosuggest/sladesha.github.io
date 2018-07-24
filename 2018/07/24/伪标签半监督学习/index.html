@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a9eb354ba8a80ecc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f828d9680ca4ec86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-24T02:53:33.785Z">
+<meta property="og:updated_time" content="2018-07-24T02:55:33.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伪标签半监督学习">
 <meta name="twitter:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
@@ -428,7 +428,7 @@
 <li>将有标签部分数据分为两份：train_set&amp;validation_set，并训练出最优的model1</li>
 <li>用model1对未知标签数据(test_set)进行预测，给出伪标签结果pseudo-labeled</li>
 <li>将train_set中抽取一部分做新的validation_set，把剩余部分与pseudo-labeled部分融合作为新的train_set，训练出最优的model2</li>
-<li>再用model21对未知标签数据(test_set)进行预测，得到最终的final result label</li>
+<li>再用model2对未知标签数据(test_set)进行预测，得到最终的final result label</li>
 </ul>
 <p>我利用了已知标签的数据对这个方法进行测试，用了最简单的mixed logistic regression模型作为Basic Model，得到结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-f828d9680ca4ec86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>利用伪标签半监督的方式，同样的mixed logistic regression模型AUC值会提高0.1pp左右，效果还不错，而且实施并不复杂，大家可以在缺失值处理或者分类问题中应用尝试一下。</p>
 <hr>
