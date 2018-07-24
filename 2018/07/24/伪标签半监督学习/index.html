@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="面试题," />
+  <meta name="keywords" content="数据处理," />
 
 
 
@@ -80,18 +80,23 @@
 
 
 
-<meta name="description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。">
-<meta name="keywords" content="面试题">
+<meta name="description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最">
+<meta name="keywords" content="数据处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态最优化经典面试题">
-<meta property="og:url" content="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/index.html">
+<meta property="og:title" content="伪标签半监督学习">
+<meta property="og:url" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta property="og:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T15:57:08.374Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a7e4d6b2c9db3ae4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a9eb354ba8a80ecc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f828d9680ca4ec86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-07-24T02:43:15.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态最优化经典面试题">
-<meta name="twitter:description" content="最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目： 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？ 先形象的理解一下这道题目，假设第一个蛋我们放在了">
+<meta name="twitter:title" content="伪标签半监督学习">
+<meta name="twitter:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-a7e4d6b2c9db3ae4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/07/24/伪标签半监督学习/"/>
 
 
 
 
 
-  <title>动态最优化经典面试题 | SladeSha's Algorithm World</title>
+  <title>伪标签半监督学习 | SladeSha's Algorithm World</title>
   
 
 
@@ -288,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/07/24/伪标签半监督学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -305,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">动态最优化经典面试题</h1>
+          <h1 class="post-title" itemprop="name headline">伪标签半监督学习</h1>
         
 
         <div class="post-meta">
@@ -317,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:22:22+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T09:12:58+08:00">
+                2018-07-24
               </time>
             
 
@@ -340,8 +345,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/特征刻画/" itemprop="url" rel="index">
+                    <span itemprop="name">特征刻画</span>
                   </a>
                 </span>
 
@@ -371,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836 字
+                  591 字
                 </span>
               
 
@@ -387,7 +392,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -408,16 +413,26 @@
       
 
       
-        <p>最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目：</p>
-<p><strong>一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鸡蛋不会碎？</strong></p>
-<p>先形象的理解一下这道题目，假设第一个蛋我们放在了i层，有两种case，碎或者不碎。<br>先看简单的结果，<br>case1:如果碎了，为了求出层数，那么我接下来的那颗蛋需要从第1层开始尝试i-1次，因为我们不允许冒第二次碎的风险了，这很好理解。<br>case2:如果没碎，我们得知一条新的信息，那就是我们要求的目标层在i层之上，但是我们依旧不知道是哪一层，假设是m层（m&gt;i）,那么同样的，和第i层一样，面临2个case，碎或者不碎。</p>
-<p>这时候，我们的前提是在最恶劣的情况下，保证我们的每次的风险都尽可能的小，至少要少于上一次的风险。</p>
-<p>我们可以让新的m的高度为i+i-1,其中，i是第一次我们放的层数，i-1是我们选择的风险若于第一次风险的层数高度，类推下去：i+i-1+i-2+i-3+…+1=200，得到i=20，就是我们第一次应该放的位置，同理第二次如果没有碎应该放的就是39…</p>
-<p><strong>我个人对这道题目的理解中，其实就为了平分风险，让每次碎的高度都相等，也就是i-1 = m-i-1+1==&gt;m=2i-1</strong></p>
-<p>这边的python代码网上也有很多，这边我罗列一个我写的，可能和别人的不一样，实现效率也可能较慢，建议大家在网上搜完善版本的，仅供大家熟悉上述的描述：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#n为层数，m为蛋数，f函数为求最优层数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n, m)</span>:</span></span><br><span class="line"><span class="comment">#如果是0层的，返回最优层数为0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="comment">#如果只有一个鸡蛋，必须要从最低层开始试，所以为当前最安全层n</span></span><br><span class="line">    <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line"><span class="comment">#这边我们来看，f(i - 1, m - 1)是如果i层碎了，我们需要计算i-1层下的情况，同时减少一颗蛋；</span></span><br><span class="line"><span class="comment">#f(n - i, m)是i层没碎，那相当于安全层从0变成了n，要计算的就是相当于有 f(n, m)变成了 f(n - i, m)</span></span><br><span class="line"><span class="comment">#最后在最大化风险下找出其中风险最小的层数即可</span></span><br><span class="line">    best_floor = min([max([f(i - <span class="number">1</span>, m - <span class="number">1</span>), f(n - i, m)]) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>)] + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> best_floor</span><br></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">74</span>]:print(f(<span class="number">100</span>, <span class="number">2</span>))</span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure></p>
-<p>这边f(200,2)实在没跑出来，时间太久了，所以跑了100，2的结果，迭代次数超多，具体我没有算过，建议优化一下计算的代码再执行。</p>
-<p>最后谢谢大家阅读。</p>
+        <p>之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保重既不能太复杂太耗时，也要有足够好的效果。</p>
+<p>其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：</p>
+<ul>
+<li>均值、众数填充<br>最简单的填充，效果也惨不忍睹</li>
+<li>根据没有缺失的数据线性回归填充<br>填充的好会造成共线性错误，填充的不好就没价值，很矛盾</li>
+<li>剔除<br>丢失信息量</li>
+<li>设置哑变量<br>会造成数据分布有偏</li>
+<li>smote<br>连续值有效，离散值就无法实施了</li>
+</ul>
+<p>我在Google上看imbalance问题的时候，偶然看到了这个<a href="http://course.fast.ai/?spm=a2c4e.11153940.blogcont215222.9.378a3aadIvrayn" target="_blank" rel="noopener">视频教程</a>，上面讲了图像的缺失处理，提到了伪标签处理的半监督学习方式。我就在国内的论坛上找了下，阿里云技术论坛也同样注意到了这个问题，但是只给出了如下的粗糙的构思图：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-a7e4d6b2c9db3ae4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>有一份整理了的流程图，具体执行步骤总结，和大家一起看一下：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-a9eb354ba8a80ecc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>将有标签部分数据分为两份：train_set&amp;validation_set，并训练出最优的model1</li>
+<li>用model1对未知标签数据(test_set)进行预测，给出伪标签结果pseudo-labeled</li>
+<li>将train_set中抽取一部分做新的validation_set，把剩余部分与pseudo-labeled部分融合作为新的train_set，训练出最优的model2</li>
+<li>再用model21对未知标签数据(test_set)进行预测，得到最终的final result label</li>
+</ul>
+<p>我利用了已知标签的数据对这个方法进行测试，用了最简单的mixed logistic regression模型作为Basic Model，得到结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-f828d9680ca4ec86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>利用伪标签半监督的方式，同样的mixed logistic regression模型AUC值会提高0.1pp左右，效果还不错，而且实施并不复杂，大家可以在缺失值处理或者分类问题中应用尝试一下。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -464,7 +479,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+            <a href="/tags/数据处理/" rel="tag"># 数据处理</a>
           
         </div>
       
@@ -477,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/02/用户生命周期/" rel="next" title="用户生命周期">
-                <i class="fa fa-chevron-left"></i> 用户生命周期
+              <a href="/2018/07/19/量化评估推荐系统效果/" rel="next" title="量化评估推荐系统效果">
+                <i class="fa fa-chevron-left"></i> 量化评估推荐系统效果
               </a>
             
           </div>
@@ -487,8 +502,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/01/基于SSD下的图像内容识别（一）/" rel="prev" title="基于SSD下的图像内容识别（一）">
-                基于SSD下的图像内容识别（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
