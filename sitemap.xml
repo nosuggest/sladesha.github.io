@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/about/index.html</loc>
+    
+    <lastmod>2018-07-30T09:12:00.756Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2018/07/30/%E5%9F%BA%E4%BA%8ETensorflow%E5%AE%9E%E7%8E%B0DeepFM/</loc>
     
-    <lastmod>2018-07-30T06:31:07.081Z</lastmod>
+    <lastmod>2018-07-30T06:32:18.438Z</lastmod>
     
   </url>
   
@@ -33,13 +40,6 @@
     <loc>http://sladesha.github.io/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC:%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</loc>
     
     <lastmod>2018-07-19T02:13:16.938Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/about/index.html</loc>
-    
-    <lastmod>2018-07-09T01:46:35.996Z</lastmod>
     
   </url>
   
