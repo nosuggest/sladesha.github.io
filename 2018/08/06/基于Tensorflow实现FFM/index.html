@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-b616b073a55fa7d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a21ba103967da4b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-08-06T03:46:00.889Z">
+<meta property="og:updated_time" content="2018-08-07T03:17:40.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Tensorflow实现FFM">
 <meta name="twitter:description" content="没错，这次登场的是FFM。各大比赛中的“种子”算法，中国台湾大学Yu-Chin Juan荣誉出品，美团技术团队背书，Michael Jahrer的论文的field概念灵魂升华，土豪公司鉴别神器。通过引入field的概念，FFM把相同性质的特征归于同一个field，相当于把FM中已经细分的feature再次拆分，可不可怕，厉不厉害？好，让我们来看看怎么一个厉害法。 FFM理论特征交互网上已经说烂了的">
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,019 字
+                  2,152 字
                 </span>
               
 
@@ -441,6 +441,8 @@
 <ul>
 <li>k值不用太大，没啥提升<br><img src="https://upload-images.jianshu.io/upload_images/1129359-b616b073a55fa7d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
 <li>正则项lambda和学习率alpha需要着重调参<br><img src="https://upload-images.jianshu.io/upload_images/1129359-a21ba103967da4b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+<li>epoch别太大，既会拖慢速度，而且造成过拟合；在原论文中甚至要考虑用early-stopping避免过拟合，所以epoch=1，常规的来讲就可以了，论文中提到的early-stopping操作：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> Split the data set into a training set <span class="keyword">and</span> a validation set.</span><br><span class="line"><span class="number">2.</span> At the end of each epoch, use the validation set to calcu-</span><br><span class="line">late the loss.</span><br><span class="line"><span class="number">3.</span> If the loss goes up, record the number of epochs. Stop <span class="keyword">or</span></span><br><span class="line">go to step <span class="number">4.</span></span><br><span class="line"><span class="number">4.</span> If needed, use the full data set to re-train a model <span class="keyword">with</span></span><br><span class="line">the number of epochs obtained <span class="keyword">in</span> step <span class="number">3.</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>FFM是一个细化隐向量非常好的方法，虽然很简单，但还是有很多细节之处值得考虑，比如如何线上应用，如何可解释，如何求稀疏解等等。在部署实现FFM之前，我还是建议大家先上线FM，当效果真的走投无路的时候再考虑FFM，FFM在工业界的影响着实不如学术界那么强大，偷偷说一句，<strong>太慢了，真的是太慢了，慢死了</strong>，我宁可去用deepfm。</p>
 <p>最后，给出代码实现的Github地址<a href="https://github.com/sladesha/machine_learning/tree/master/FFM" target="_blank" rel="noopener">FFM</a>，这边是我自己写的，理解理解算法可以，但是实际用的时候建议参考FFM的实现比较好的项目比如libffm，最近比较火的xlearn。</p>
@@ -727,7 +729,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">114.9k</span>
+    <span title="Site words total count">115.0k</span>
   
 </div>
 
