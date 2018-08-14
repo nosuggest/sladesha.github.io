@@ -80,20 +80,21 @@
 
 
 
-<meta name="description" content="为什么用sigmoid函数?the odds of experiencing an event如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w{0}+w{1}x{1}+w{2}x{2}+…+w{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要">
+<meta name="description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
 <meta name="keywords" content="理论解析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="logistic regression一点理解">
 <meta property="og:url" content="http://sladesha.github.io/2018/08/14/logistic regression一点理解/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="为什么用sigmoid函数?the odds of experiencing an event如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w{0}+w{1}x{1}+w{2}x{2}+…+w{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。 要解决这个问题，我们先理解一个概念the o">
+<meta property="og:description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-6d21efd647f31453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-08-14T05:37:35.235Z">
+<meta property="og:updated_time" content="2018-08-14T06:04:27.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logistic regression一点理解">
-<meta name="twitter:description" content="为什么用sigmoid函数?the odds of experiencing an event如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w{0}+w{1}x{1}+w{2}x{2}+…+w{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。 要解决这个问题，我们先理解一个概念the o">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-6d21efd647f31453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -373,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,208 字
+                  82 字
                 </span>
               
 
@@ -389,7 +390,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -410,23 +411,8 @@
       
 
       
-        <h1 id="为什么用sigmoid函数"><a href="#为什么用sigmoid函数" class="headerlink" title="为什么用sigmoid函数?"></a>为什么用sigmoid函数?</h1><h2 id="the-odds-of-experiencing-an-event"><a href="#the-odds-of-experiencing-an-event" class="headerlink" title="the odds of experiencing an event"></a>the odds of experiencing an event</h2><p>如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。</p>
-<p>要解决这个问题，我们先理解一个概念the odds of experiencing an event：<br>假设我们认为股票涨的概率为p，对于伯努利分布而言，不涨的概率即为1-p。那么我们构造了p/(1-p)，就是the odds of experiencing an event胜率，$ln(\frac{p}{1-p}) $即为对数胜率。当我们坚信它会涨的情况下，p趋向1，$ln(\frac{p}{1-p}) $趋向正无穷，当我们坚信它不会涨的情况下，p趋向0，$ln(\frac{p}{1-p}) $趋向负无穷。这就又转化为可以用线性模型预测的问题了：<br>$ln(\frac{p}{1-p}) = g(x) = w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x_{m}$</p>
-<p>将$ln(\frac{p}{1-p}) = g(x)$展开就可以得到：$p = \frac{1}{1+e^{-g(x)}}$，这就解释了为什么说logistic regression是线性模型，因为它的决策边界是线性的；这就解释了为什么想到了要用sigmoid作为压缩函数。</p>
-<h2 id="exponential-model"><a href="#exponential-model" class="headerlink" title="exponential model"></a>exponential model</h2><p>就这一种办法么？当然不是：<br>假设第i个特征对涨的贡献是$w_{1i}$，则记数据点($x_1, \ldots, x<em>n)$属于涨的概率为$w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n$，正比于$\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x_n)$；</p>
-<p>假设第i个特征对不涨的贡献是$w_{0i}$，则记数据点($x_1, \ldots, x<em>n)$属于不涨的概率为$w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x<em>n$，正比于$\exp(w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x_n)$</p>
-<p>所以，令涨=1则有：<br>$p(y=1)=\frac{\exp(w_{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)}{\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)+\exp(w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x<em>n)}$，上下同除以$\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)$且令$w</em>{0i}-w<em>{1i} = w</em>{2i}$，则依旧得到了$p(y=1)= \frac{1}{1+e^{-h(w_{2i}x)}}$的sigmoid结果。</p>
-<h2 id="exponential-family"><a href="#exponential-family" class="headerlink" title="exponential family"></a>exponential family</h2><p>如果大家对数学有点点研究的话，exponential family指出如果一类分布（a class of distribution）属于exponential family，那么它能写成如下形式：<br>$$p(y;\eta )=b(y)exp(\eta ^{T}T(y)-a(\eta ))$$</p>
-<p>伯努利分布可以写成：$$p(y;\Theta ) = \Theta ^{y}(1-\Theta )^{1-y}$$<br>$$p(y;\Theta ) =exp(ylog( \Theta) +(1-y)log(1-\Theta ))$$<br>把后面的$(1-y)log(1-\Theta )$展开，就有了sigmoid形式出现了：<br>$$p(y;\Theta ) =exp(ylog( \Theta/(1-\Theta)) +log(1-\Theta ))$$<br>对应上方的exponential family的形式，$\eta =log( \Theta/(1-\Theta))$，这不又回到了the odds of experiencing an event胜率的问题了嘛。</p>
-<p>是不是非常有意思？</p>
-<hr>
-<h1 id="为什么要用交互熵做损失函数？"><a href="#为什么要用交互熵做损失函数？" class="headerlink" title="为什么要用交互熵做损失函数？"></a>为什么要用交互熵做损失函数？</h1><h2 id="极大似然角度："><a href="#极大似然角度：" class="headerlink" title="极大似然角度："></a>极大似然角度：</h2><p>我们假设预测结果服从伯努利分布，那么可以把一个case预测结果写成：$$p(y<em>{i}) = \Theta ^{y</em>{i}}(1-\Theta )^{1-y<em>{i}}$$<br>其中$\Theta$为给定前提$p(y</em>{i}=1|x<em>{i}) =1$下$y</em>{i}=1$概率值</p>
-<p>要使当前参数下所有事情发生的概率最大，联合分布为各边缘分布的乘积，得到：<br>$$L(w)=\prod (h(x<em>{i}))^{y</em>{i}}(1-h(x<em>{i}))^{1-y</em>{i}}$$<br>其中$h(x) = w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x<em>{m}$<br>取log后方便计算：<br>$$ln(L(w))=\sum (y</em>{i}lnh(x<em>{i})+(1-y</em>{i})ln(1-x_{i})))$$<br>这个就是我们最初的交互熵的形式。</p>
-<h2 id="信息熵角度："><a href="#信息熵角度：" class="headerlink" title="信息熵角度："></a>信息熵角度：</h2><h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p>用来衡量信息量大小，熵越大，越不稳定，信息量越大。<br>$ S(x) = -\sum<em>{i}P(x</em>{i})logP(x_{i})$</p>
-<h3 id="KL散度"><a href="#KL散度" class="headerlink" title="KL散度"></a>KL散度</h3><p>用来衡量两份数据的相似程度，KL散度越大，越不相似。<br>$\begin{equation<em>} D<em>{KL}(A||B) = \sum</em>{i}P_{A}(x<em>i) log\bigg(\frac{P</em>{A}(x<em>i)}{P</em>{B}(x<em>i)} \bigg) = \sum</em>{i}P_{A}(x<em>i)log(P</em>{A}(x<em>i ))- P</em>{A}(x<em>i)log(P</em>{B}(x_i)) \end{equation</em>}$</p>
-<p>从公式上，我们就可以看出：$D_{KL}(A||B) + S(A)=H(A,B) $</p>
-<p>其实很好理解的，对应训练数据traindata分布，和未知的真实数据分布越一致越好；同理，模型预测的分布，和训练数据traindata分布也是越一致越好，所以用KL散度来度量就是一个不错的方法。</p>
-<p>至于为什么不直接最小化$D_{KL}(A||B) $而是选择了最小化H(A,B)，我是觉得就和交互熵求导前面加上1/2一样，为了简化计算量，本质上是一致的。</p>
+        <p>Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见<a href="https://www.jianshu.com/p/61ac39a57f9d" target="_blank" rel="noopener">logistic regression一点理解</a>。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1129359-6d21efd647f31453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <hr>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
@@ -557,17 +543,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -666,22 +643,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么用sigmoid函数"><span class="nav-number">1.</span> <span class="nav-text">为什么用sigmoid函数?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-odds-of-experiencing-an-event"><span class="nav-number">1.1.</span> <span class="nav-text">the odds of experiencing an event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exponential-model"><span class="nav-number">1.2.</span> <span class="nav-text">exponential model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exponential-family"><span class="nav-number">1.3.</span> <span class="nav-text">exponential family</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要用交互熵做损失函数？"><span class="nav-number">2.</span> <span class="nav-text">为什么要用交互熵做损失函数？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然角度："><span class="nav-number">2.1.</span> <span class="nav-text">极大似然角度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息熵角度："><span class="nav-number">2.2.</span> <span class="nav-text">信息熵角度：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#熵"><span class="nav-number">2.2.1.</span> <span class="nav-text">熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KL散度"><span class="nav-number">2.2.2.</span> <span class="nav-text">KL散度</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -710,7 +671,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">116.2k</span>
+    <span title="Site words total count">115.1k</span>
   
 </div>
 
