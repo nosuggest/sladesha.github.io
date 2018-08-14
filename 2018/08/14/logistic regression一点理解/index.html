@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="树划分问题," />
+  <meta name="keywords" content="理论解析," />
 
 
 
@@ -80,18 +80,20 @@
 
 
 
-<meta name="description" content="一、常用的决策树节点枝剪的衡量指标： 熵： 如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k） 该事情的信息量： 熵越大，随机变量的不确定性越大。 信息增益： 特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差 换句话说，就是原信息集下的信">
-<meta name="keywords" content="树划分问题">
+<meta name="description" content="为什么用sigmoid函数?the odds of experiencing an event如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w{0}+w{1}x{1}+w{2}x{2}+…+w{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要">
+<meta name="keywords" content="理论解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="决策树及衍射指标">
-<meta property="og:url" content="http://sladesha.github.io/2017/06/02/决策树及衍射指标/index.html">
+<meta property="og:title" content="logistic regression一点理解">
+<meta property="og:url" content="http://sladesha.github.io/2018/08/14/logistic regression一点理解/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="一、常用的决策树节点枝剪的衡量指标： 熵： 如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k） 该事情的信息量： 熵越大，随机变量的不确定性越大。 信息增益： 特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差 换句话说，就是原信息集下的信息量－在A特征条件下的信息集的信息量 信息增益越大，信息增多，不确定性减小 信息">
+<meta property="og:description" content="为什么用sigmoid函数?the odds of experiencing an event如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w{0}+w{1}x{1}+w{2}x{2}+…+w{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。 要解决这个问题，我们先理解一个概念the o">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T16:15:17.081Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-08-14T05:37:35.235Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="决策树及衍射指标">
-<meta name="twitter:description" content="一、常用的决策树节点枝剪的衡量指标： 熵： 如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k） 该事情的信息量： 熵越大，随机变量的不确定性越大。 信息增益： 特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差 换句话说，就是原信息集下的信息量－在A特征条件下的信息集的信息量 信息增益越大，信息增多，不确定性减小 信息">
+<meta name="twitter:title" content="logistic regression一点理解">
+<meta name="twitter:description" content="为什么用sigmoid函数?the odds of experiencing an event如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w{0}+w{1}x{1}+w{2}x{2}+…+w{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。 要解决这个问题，我们先理解一个概念the o">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/06/02/决策树及衍射指标/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/08/14/logistic regression一点理解/"/>
 
 
 
 
 
-  <title>决策树及衍射指标 | SladeSha's Algorithm World</title>
+  <title>logistic regression一点理解 | SladeSha's Algorithm World</title>
   
 
 
@@ -288,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/02/决策树及衍射指标/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/14/logistic regression一点理解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -305,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">决策树及衍射指标</h1>
+          <h1 class="post-title" itemprop="name headline">logistic regression一点理解</h1>
         
 
         <div class="post-meta">
@@ -317,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:14:31+08:00">
-                2017-06-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T09:12:58+08:00">
+                2018-08-14
               </time>
             
 
@@ -340,8 +342,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -371,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,365 字
+                  1,208 字
                 </span>
               
 
@@ -408,65 +410,25 @@
       
 
       
-        <p>一、常用的决策树节点枝剪的衡量指标：</p>
-<p>熵：</p>
-<p>如果一件事有k种可的结果，每种结果的概率为 pi（i＝1…k）</p>
-<p>该事情的信息量：</p>
-<p>熵越大，随机变量的不确定性越大。</p>
-<p>信息增益：</p>
-<p>特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下的经验条件熵H(D|A)之差</p>
-<p>换句话说，就是原信息集下的信息量－在A特征条件下的信息集的信息量</p>
-<p>信息增益越大，信息增多，不确定性减小</p>
-<p>信息增益率：</p>
-<p>信息增益率定义:特征A对训练数据集D的信息增益比定义为其信息增益与训练数据D关于特征A的值的熵HA(D)之比</p>
-<p>注：p：每个唯独上，每个变量的个数／总变量个数</p>
-<p>二、常用的决策树介绍：</p>
-<p>ID3算法：</p>
-<p>ID3算法的核心是在决策树各个子节点上应用信息增益准则选择特征，递归的构建决策树，具体方法是:从根节点开始，对节点计算所有可能的特征的信息增益，选择信息增益最大的特征作为节点的特征，由该特征的不同取值建立子节点；再对子节点递归调用以上方法，构建决策树。</p>
-<p>解释：在做每次选择差分枝的时候，以不确定性最小点作为loss fuction，直到无法细分</p>
-<p>缺点：</p>
-<p>1.ID3算法只有树的生成，所以该算法生成的树容易产生过拟合，分得太细，考虑条件太多。</p>
-<p>2.不能处理连续属性</p>
-<p>3.选择具有较多分枝的属性，而分枝多的属性不一定是最优的选择。</p>
-<p>4.局部最优化，整体熵值最小，贪心算法算子节点的分支</p>
-<p>C4.5算法：</p>
-<p>基于ID3算法，用信息增益比来选择属性，对非离散数据也能处理，能够对不完整数据进行处理。</p>
-<p>采用增益率（GainRate）来选择分裂属性。计算方式如下：</p>
-<p>CART算法：</p>
-<p>CART算法选择分裂属性的方式是比较有意思的，首先计算不纯度，然后利用不纯度计算Gini指标。</p>
-<p>计算每个子集最小的Gini指标作为分裂指标。</p>
-<p>不纯度的计算方式为：</p>
-<p>pi表示按某个变量划分中，目标变量不同类别的概率。</p>
-<p>某个自变量的Gini指标的计算方式如下：</p>
-<p>计算出每个每个子集的Gini指标，选取其中最小的Gini指标作为树的分支（Gini（D）越小，则数据集D的纯度越高）。连续型变量的离散方式与信息增益中的离散方式相同。</p>
-<p>三、基于决策树的一些集成算法：</p>
-<p>随机森林：</p>
-<p>随机生成n颗树，树之间不存在关联，取结果的时候，以众数衡量分类结果；除了分类，变量分析，无监督学习，离群点分析也可以。</p>
-<p>生成过程：</p>
-<p>1.n个样本，随机选择n个样本（有放回），训练一颗树</p>
-<p>从原始训练数据集中,应用bootstrap方法有放回地随机抽取 K个新的自助样本集,并由此构建 K棵分类回归树,每次未被抽到的样本组成了 K个袋外数据(Out-of-bag,OOB)</p>
-<p>2.每个样本有M个属性，随机选m个，采取校验函数（比如信息增益、熵啊之类的），选择最佳分类点</p>
-<p>3.注意，每个树不存在枝剪</p>
-<p>4.将生成的多棵树组成随机森林,用随机森林对新的数据进行分类,分类结果按树分类器的投票多少而定</p>
-<p>树的个数随机选取，一般500，看三个误差函数是否收敛；变量的个数一般取均方作为mtry</p>
-<p>GBDT：</p>
-<p>DT步骤：</p>
-<p>GBDT里面的树是回归树！</p>
-<p>GBDT做每个节点上的分支的时候，都会以最小均方误差作为衡量（真实值－预测值）的平方和／N，换句话说，就是存在真实线l1，预测线l2，两条线之间的间距越小越好。</p>
-<p>BT步骤：</p>
-<p>GBDT的核心就在于，每一棵树学的是之前所有树结论和的残差，这个残差就是一个加预测值后能得真实值的累加量。</p>
-<p>换句话说，就是第一次预测的差值记为下一次预测的初始值，一直到某一次计算出的差值为0，把前n次的结果相加，就是一个真实预测。</p>
-<p>Adaboost：</p>
-<p>步骤：</p>
-<p>1.初始化所有训练样例的权重为1 / N,其中N是样本数</p>
-<p>2.对其中第1~m个样本:</p>
-<p>a.训练m个弱分类器，使其最小化bias：</p>
-<p>b.接下来计算该弱分类器的权重α，降低错判的分类器的权重，：</p>
-<p>c.更新权重：</p>
-<p>3.最后得到组合分类器：</p>
-<p>核心的思想如下图：</p>
-<p>全量数据集在若干次训练后，降低训练正确的样本的权重，提高训练错误样本的权重，得到若干个Y对应的分类器，在组合投票得到最终的分类器</p>
-<p>四、惠普实验室-集成并行化的随机森林：</p>
+        <h1 id="为什么用sigmoid函数"><a href="#为什么用sigmoid函数" class="headerlink" title="为什么用sigmoid函数?"></a>为什么用sigmoid函数?</h1><h2 id="the-odds-of-experiencing-an-event"><a href="#the-odds-of-experiencing-an-event" class="headerlink" title="the odds of experiencing an event"></a>the odds of experiencing an event</h2><p>如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。</p>
+<p>要解决这个问题，我们先理解一个概念the odds of experiencing an event：<br>假设我们认为股票涨的概率为p，对于伯努利分布而言，不涨的概率即为1-p。那么我们构造了p/(1-p)，就是the odds of experiencing an event胜率，$ln(\frac{p}{1-p}) $即为对数胜率。当我们坚信它会涨的情况下，p趋向1，$ln(\frac{p}{1-p}) $趋向正无穷，当我们坚信它不会涨的情况下，p趋向0，$ln(\frac{p}{1-p}) $趋向负无穷。这就又转化为可以用线性模型预测的问题了：<br>$ln(\frac{p}{1-p}) = g(x) = w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x_{m}$</p>
+<p>将$ln(\frac{p}{1-p}) = g(x)$展开就可以得到：$p = \frac{1}{1+e^{-g(x)}}$，这就解释了为什么说logistic regression是线性模型，因为它的决策边界是线性的；这就解释了为什么想到了要用sigmoid作为压缩函数。</p>
+<h2 id="exponential-model"><a href="#exponential-model" class="headerlink" title="exponential model"></a>exponential model</h2><p>就这一种办法么？当然不是：<br>假设第i个特征对涨的贡献是$w_{1i}$，则记数据点($x_1, \ldots, x<em>n)$属于涨的概率为$w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n$，正比于$\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x_n)$；</p>
+<p>假设第i个特征对不涨的贡献是$w_{0i}$，则记数据点($x_1, \ldots, x<em>n)$属于不涨的概率为$w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x<em>n$，正比于$\exp(w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x_n)$</p>
+<p>所以，令涨=1则有：<br>$p(y=1)=\frac{\exp(w_{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)}{\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)+\exp(w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x<em>n)}$，上下同除以$\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)$且令$w</em>{0i}-w<em>{1i} = w</em>{2i}$，则依旧得到了$p(y=1)= \frac{1}{1+e^{-h(w_{2i}x)}}$的sigmoid结果。</p>
+<h2 id="exponential-family"><a href="#exponential-family" class="headerlink" title="exponential family"></a>exponential family</h2><p>如果大家对数学有点点研究的话，exponential family指出如果一类分布（a class of distribution）属于exponential family，那么它能写成如下形式：<br>$$p(y;\eta )=b(y)exp(\eta ^{T}T(y)-a(\eta ))$$</p>
+<p>伯努利分布可以写成：$$p(y;\Theta ) = \Theta ^{y}(1-\Theta )^{1-y}$$<br>$$p(y;\Theta ) =exp(ylog( \Theta) +(1-y)log(1-\Theta ))$$<br>把后面的$(1-y)log(1-\Theta )$展开，就有了sigmoid形式出现了：<br>$$p(y;\Theta ) =exp(ylog( \Theta/(1-\Theta)) +log(1-\Theta ))$$<br>对应上方的exponential family的形式，$\eta =log( \Theta/(1-\Theta))$，这不又回到了the odds of experiencing an event胜率的问题了嘛。</p>
+<p>是不是非常有意思？</p>
+<hr>
+<h1 id="为什么要用交互熵做损失函数？"><a href="#为什么要用交互熵做损失函数？" class="headerlink" title="为什么要用交互熵做损失函数？"></a>为什么要用交互熵做损失函数？</h1><h2 id="极大似然角度："><a href="#极大似然角度：" class="headerlink" title="极大似然角度："></a>极大似然角度：</h2><p>我们假设预测结果服从伯努利分布，那么可以把一个case预测结果写成：$$p(y<em>{i}) = \Theta ^{y</em>{i}}(1-\Theta )^{1-y<em>{i}}$$<br>其中$\Theta$为给定前提$p(y</em>{i}=1|x<em>{i}) =1$下$y</em>{i}=1$概率值</p>
+<p>要使当前参数下所有事情发生的概率最大，联合分布为各边缘分布的乘积，得到：<br>$$L(w)=\prod (h(x<em>{i}))^{y</em>{i}}(1-h(x<em>{i}))^{1-y</em>{i}}$$<br>其中$h(x) = w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x<em>{m}$<br>取log后方便计算：<br>$$ln(L(w))=\sum (y</em>{i}lnh(x<em>{i})+(1-y</em>{i})ln(1-x_{i})))$$<br>这个就是我们最初的交互熵的形式。</p>
+<h2 id="信息熵角度："><a href="#信息熵角度：" class="headerlink" title="信息熵角度："></a>信息熵角度：</h2><h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p>用来衡量信息量大小，熵越大，越不稳定，信息量越大。<br>$ S(x) = -\sum<em>{i}P(x</em>{i})logP(x_{i})$</p>
+<h3 id="KL散度"><a href="#KL散度" class="headerlink" title="KL散度"></a>KL散度</h3><p>用来衡量两份数据的相似程度，KL散度越大，越不相似。<br>$\begin{equation<em>} D<em>{KL}(A||B) = \sum</em>{i}P_{A}(x<em>i) log\bigg(\frac{P</em>{A}(x<em>i)}{P</em>{B}(x<em>i)} \bigg) = \sum</em>{i}P_{A}(x<em>i)log(P</em>{A}(x<em>i ))- P</em>{A}(x<em>i)log(P</em>{B}(x_i)) \end{equation</em>}$</p>
+<p>从公式上，我们就可以看出：$D_{KL}(A||B) + S(A)=H(A,B) $</p>
+<p>其实很好理解的，对应训练数据traindata分布，和未知的真实数据分布越一致越好；同理，模型预测的分布，和训练数据traindata分布也是越一致越好，所以用KL散度来度量就是一个不错的方法。</p>
+<p>至于为什么不直接最小化$D_{KL}(A||B) $而是选择了最小化H(A,B)，我是觉得就和交互熵求导前面加上1/2一样，为了简化计算量，本质上是一致的。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -513,7 +475,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/树划分问题/" rel="tag"># 树划分问题</a>
+            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
           
         </div>
       
@@ -526,8 +488,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/02/因子分析原理剖析/" rel="next" title="因子分析原理剖析">
-                <i class="fa fa-chevron-left"></i> 因子分析原理剖析
+              <a href="/2018/08/06/基于Tensorflow实现FFM/" rel="next" title="基于Tensorflow实现FFM">
+                <i class="fa fa-chevron-left"></i> 基于Tensorflow实现FFM
               </a>
             
           </div>
@@ -536,8 +498,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/19/常用R语言包介绍/" rel="prev" title="常用R语言包介绍">
-                常用R语言包介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -595,8 +557,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -694,6 +665,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么用sigmoid函数"><span class="nav-number">1.</span> <span class="nav-text">为什么用sigmoid函数?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-odds-of-experiencing-an-event"><span class="nav-number">1.1.</span> <span class="nav-text">the odds of experiencing an event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exponential-model"><span class="nav-number">1.2.</span> <span class="nav-text">exponential model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exponential-family"><span class="nav-number">1.3.</span> <span class="nav-text">exponential family</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要用交互熵做损失函数？"><span class="nav-number">2.</span> <span class="nav-text">为什么要用交互熵做损失函数？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然角度："><span class="nav-number">2.1.</span> <span class="nav-text">极大似然角度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息熵角度："><span class="nav-number">2.2.</span> <span class="nav-text">信息熵角度：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#熵"><span class="nav-number">2.2.1.</span> <span class="nav-text">熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KL散度"><span class="nav-number">2.2.2.</span> <span class="nav-text">KL散度</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

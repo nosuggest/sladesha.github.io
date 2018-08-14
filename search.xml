@@ -52,6 +52,45 @@
     </entry>
     
     <entry>
+      <title><![CDATA[logistic regression一点理解]]></title>
+      <url>/2018/08/14/logistic%20regression%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<h1 id="为什么用sigmoid函数"><a href="#为什么用sigmoid函数" class="headerlink" title="为什么用sigmoid函数?"></a>为什么用sigmoid函数?</h1><h2 id="the-odds-of-experiencing-an-event"><a href="#the-odds-of-experiencing-an-event" class="headerlink" title="the odds of experiencing an event"></a>the odds of experiencing an event</h2><p>如果我们想预测每天股票涨多少，可以假设线性模型$f(x)=w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x_{m}$，然后通过MSE进行模型更新；但是如果我们想要预测每天是否涨这样就不行了，因为f(x)对于的结果要么是1要么是0（要么涨要么不涨）。</p>
+<p>要解决这个问题，我们先理解一个概念the odds of experiencing an event：<br>假设我们认为股票涨的概率为p，对于伯努利分布而言，不涨的概率即为1-p。那么我们构造了p/(1-p)，就是the odds of experiencing an event胜率，$ln(\frac{p}{1-p}) $即为对数胜率。当我们坚信它会涨的情况下，p趋向1，$ln(\frac{p}{1-p}) $趋向正无穷，当我们坚信它不会涨的情况下，p趋向0，$ln(\frac{p}{1-p}) $趋向负无穷。这就又转化为可以用线性模型预测的问题了：<br>$ln(\frac{p}{1-p}) = g(x) = w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x_{m}$</p>
+<p>将$ln(\frac{p}{1-p}) = g(x)$展开就可以得到：$p = \frac{1}{1+e^{-g(x)}}$，这就解释了为什么说logistic regression是线性模型，因为它的决策边界是线性的；这就解释了为什么想到了要用sigmoid作为压缩函数。</p>
+<h2 id="exponential-model"><a href="#exponential-model" class="headerlink" title="exponential model"></a>exponential model</h2><p>就这一种办法么？当然不是：<br>假设第i个特征对涨的贡献是$w_{1i}$，则记数据点($x_1, \ldots, x<em>n)$属于涨的概率为$w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n$，正比于$\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x_n)$；</p>
+<p>假设第i个特征对不涨的贡献是$w_{0i}$，则记数据点($x_1, \ldots, x<em>n)$属于不涨的概率为$w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x<em>n$，正比于$\exp(w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x_n)$</p>
+<p>所以，令涨=1则有：<br>$p(y=1)=\frac{\exp(w_{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)}{\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)+\exp(w</em>{01}x<em>1 + w</em>{02}x<em>2 + \ldots + w</em>{0n}x<em>n)}$，上下同除以$\exp(w</em>{11}x<em>1 + w</em>{12}x<em>2 + \ldots + w</em>{1n}x<em>n)$且令$w</em>{0i}-w<em>{1i} = w</em>{2i}$，则依旧得到了$p(y=1)= \frac{1}{1+e^{-h(w_{2i}x)}}$的sigmoid结果。</p>
+<h2 id="exponential-family"><a href="#exponential-family" class="headerlink" title="exponential family"></a>exponential family</h2><p>如果大家对数学有点点研究的话，exponential family指出如果一类分布（a class of distribution）属于exponential family，那么它能写成如下形式：<br>$$p(y;\eta )=b(y)exp(\eta ^{T}T(y)-a(\eta ))$$</p>
+<p>伯努利分布可以写成：$$p(y;\Theta ) = \Theta ^{y}(1-\Theta )^{1-y}$$<br>$$p(y;\Theta ) =exp(ylog( \Theta) +(1-y)log(1-\Theta ))$$<br>把后面的$(1-y)log(1-\Theta )$展开，就有了sigmoid形式出现了：<br>$$p(y;\Theta ) =exp(ylog( \Theta/(1-\Theta)) +log(1-\Theta ))$$<br>对应上方的exponential family的形式，$\eta =log( \Theta/(1-\Theta))$，这不又回到了the odds of experiencing an event胜率的问题了嘛。</p>
+<p>是不是非常有意思？</p>
+<hr>
+<h1 id="为什么要用交互熵做损失函数？"><a href="#为什么要用交互熵做损失函数？" class="headerlink" title="为什么要用交互熵做损失函数？"></a>为什么要用交互熵做损失函数？</h1><h2 id="极大似然角度："><a href="#极大似然角度：" class="headerlink" title="极大似然角度："></a>极大似然角度：</h2><p>我们假设预测结果服从伯努利分布，那么可以把一个case预测结果写成：$$p(y<em>{i}) = \Theta ^{y</em>{i}}(1-\Theta )^{1-y<em>{i}}$$<br>其中$\Theta$为给定前提$p(y</em>{i}=1|x<em>{i}) =1$下$y</em>{i}=1$概率值</p>
+<p>要使当前参数下所有事情发生的概率最大，联合分布为各边缘分布的乘积，得到：<br>$$L(w)=\prod (h(x<em>{i}))^{y</em>{i}}(1-h(x<em>{i}))^{1-y</em>{i}}$$<br>其中$h(x) = w<em>{0}+w</em>{1}x<em>{1}+w</em>{2}x<em>{2}+…+w</em>{m}x<em>{m}$<br>取log后方便计算：<br>$$ln(L(w))=\sum (y</em>{i}lnh(x<em>{i})+(1-y</em>{i})ln(1-x_{i})))$$<br>这个就是我们最初的交互熵的形式。</p>
+<h2 id="信息熵角度："><a href="#信息熵角度：" class="headerlink" title="信息熵角度："></a>信息熵角度：</h2><h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p>用来衡量信息量大小，熵越大，越不稳定，信息量越大。<br>$ S(x) = -\sum<em>{i}P(x</em>{i})logP(x_{i})$</p>
+<h3 id="KL散度"><a href="#KL散度" class="headerlink" title="KL散度"></a>KL散度</h3><p>用来衡量两份数据的相似程度，KL散度越大，越不相似。<br>$\begin{equation<em>} D<em>{KL}(A||B) = \sum</em>{i}P_{A}(x<em>i) log\bigg(\frac{P</em>{A}(x<em>i)}{P</em>{B}(x<em>i)} \bigg) = \sum</em>{i}P_{A}(x<em>i)log(P</em>{A}(x<em>i ))- P</em>{A}(x<em>i)log(P</em>{B}(x_i)) \end{equation</em>}$</p>
+<p>从公式上，我们就可以看出：$D_{KL}(A||B) + S(A)=H(A,B) $</p>
+<p>其实很好理解的，对应训练数据traindata分布，和未知的真实数据分布越一致越好；同理，模型预测的分布，和训练数据traindata分布也是越一致越好，所以用KL散度来度量就是一个不错的方法。</p>
+<p>至于为什么不直接最小化$D_{KL}(A||B) $而是选择了最小化H(A,B)，我是觉得就和交互熵求导前面加上1/2一样，为了简化计算量，本质上是一致的。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 理论解析 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[基于Tensorflow实现FFM]]></title>
       <url>/2018/08/06/%E5%9F%BA%E4%BA%8ETensorflow%E5%AE%9E%E7%8E%B0FFM/</url>
       <content type="html"><![CDATA[<p>没错，这次登场的是FFM。各大比赛中的“种子”算法，中国台湾大学Yu-Chin Juan荣誉出品，美团技术团队背书，Michael Jahrer的论文的field概念灵魂升华，土豪公司鉴别神器。通过引入field的概念，FFM把相同性质的特征归于同一个field，相当于把FM中已经细分的feature再次拆分，可不可怕，厉不厉害？好，让我们来看看怎么一个厉害法。</p>
@@ -246,37 +285,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[热传导/物质扩散算法应用于推荐]]></title>
-      <url>/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC:%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</url>
-      <content type="html"><![CDATA[<p>没有大量的数据，没有大量的人力就不能做好推荐么？当然不是，热传导/物质扩散推荐算法就是作为冷启动及小规模团队非常实用的推荐召回部分的算法。</p>
-<p>目标是为a图中标有星号（不妨记为用户1）的用户推荐商品，该用户已经购买过的两件商品是我们可以利用的信息，用来给目标用户进行推荐。</p>
-<p>物质扩散算法：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-bf349c9f9f40a333.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>初始，我们认为每件被目标用户购买过的商品的信息量为1。<br>商品把自己的信息平均分给所有购买过它的用户，用户的信息值则是从所有商品所得到的信息值得总和，比如上图(b)中的第一个节点的信息就等于第一个商品平均分给三个用户的的平均信息1/3，再加上第四个商品平均分给两个用户的平均信息1/2，即为1/3+1/2=5/6；接下来，每一个用户再把自己的信息平均分给所有购买过的商品，商品的信息则是从所有用户收到的信息值得总和，如对于图(c)中的第一个商品，它的信息值就等于第一个用户信息值的一半，为5/12，加上第二个用户信息值的1/4，为5/24，再加上第三个用户信息值得一半，为1/6，总的能量值即为:5/12+5/24+1/6=19/24。</p>
-<p>以上两个步骤加起来为从商品到商品信息扩散一步。针对大规模系统的推荐，为了保持实时性和效率，往往只需扩散三步以内。如果以一步为界，基于图(c)中的结果，则在目标用户没有购买过的所有商品中，第三个商品的信息值最大，因此基于物质扩散算法的推荐系统则会将此商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。值得注意的是物质扩散这种算法得到的所有商品最后的信息值之和就等于初始时所有商品的信息值，即能量是守恒的，图(c)中所有商品的信息之和仍为2。</p>
-<p>热传导算法：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-ca61938a51cbaf11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>初始，我们认为目标用户购买过的每件商品的信息量为1。<br>目标用户的信息等于所有他购买过的商品信息的平均值，如图(d)所示，目标用户购买了商品1和商品4，则该用户的信息值即为(1 + 1) / 2 = 1。再根据目标用户浏览过的商品给所以商品计算信息，第一个商品、第四个商品信息量为1/2，其他商品的信息量为0（因为目标用户没有买过），接下来根据每一个商品的信息计算其他的用户的信息，如图(d)中的第二个用户的信息就为商品1,2,3,4的信息的平均值（1/2 + 1/2）/4 = 1/2；再根据每个用户的信息量平均分配信息到每个商品，如图(e)中的第一个商品来自第一个、第二个、第三个用户的信息的和，即为1/2<em>1/2+1/2</em>1/3+1/2*/12=2/3。</p>
-<p>以上两个步骤加起来为从商品到商品热传导一步。因此基于热传导算法的推荐系统则会将此信息量大的商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。与物质扩散不同的是这种算法得到的所有商品最后的信息值之和就不一定等于初始时所有商品的信息值，即不满足守恒定律，这是因为在信息传到的第二步过程中，有的用户的信息可能会被多次计算，从而导致不守恒。</p>
-<p>基于物质扩散和基于热传导的推荐算法的区别在于： 基于物质扩散的方法在进行个性化推荐时，系统的总信息是守恒的；而热传导在推荐过程中，目标用户（即被推荐用户）的收藏品将被视作信息初始点，负责提供能量，所以系统的总信息量随着传递步骤的增加是在不断增加的。</p>
-<p>如果对物理比较熟悉的朋友很容易联想到凸透镜和凹透镜，是的，我个人在理解的时候也是这样迁移理解，原理上确实一致。 基于物质扩散的方法相当于凸透镜一样把用户历史点击的信息聚焦到了少量优势的skn上了； 基于热传导的方法相当于是凹透镜一样把用户的历史点击信息发散到了那些较不流行的物品上，从而提高了推荐的新颖多样性。</p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 推荐 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[量化评估推荐系统效果]]></title>
       <url>/2018/07/19/%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C/</url>
       <content type="html"><![CDATA[<p>推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：<br>1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。<br>2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。<br>3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。<br>4）冷启动<br>5）Exploration 和 Exploitation问题</p>
@@ -347,6 +355,37 @@
         <tags>
             
             <tag> 推荐评估方法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[热传导/物质扩散算法应用于推荐]]></title>
+      <url>/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC:%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</url>
+      <content type="html"><![CDATA[<p>没有大量的数据，没有大量的人力就不能做好推荐么？当然不是，热传导/物质扩散推荐算法就是作为冷启动及小规模团队非常实用的推荐召回部分的算法。</p>
+<p>目标是为a图中标有星号（不妨记为用户1）的用户推荐商品，该用户已经购买过的两件商品是我们可以利用的信息，用来给目标用户进行推荐。</p>
+<p>物质扩散算法：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-bf349c9f9f40a333.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>初始，我们认为每件被目标用户购买过的商品的信息量为1。<br>商品把自己的信息平均分给所有购买过它的用户，用户的信息值则是从所有商品所得到的信息值得总和，比如上图(b)中的第一个节点的信息就等于第一个商品平均分给三个用户的的平均信息1/3，再加上第四个商品平均分给两个用户的平均信息1/2，即为1/3+1/2=5/6；接下来，每一个用户再把自己的信息平均分给所有购买过的商品，商品的信息则是从所有用户收到的信息值得总和，如对于图(c)中的第一个商品，它的信息值就等于第一个用户信息值的一半，为5/12，加上第二个用户信息值的1/4，为5/24，再加上第三个用户信息值得一半，为1/6，总的能量值即为:5/12+5/24+1/6=19/24。</p>
+<p>以上两个步骤加起来为从商品到商品信息扩散一步。针对大规模系统的推荐，为了保持实时性和效率，往往只需扩散三步以内。如果以一步为界，基于图(c)中的结果，则在目标用户没有购买过的所有商品中，第三个商品的信息值最大，因此基于物质扩散算法的推荐系统则会将此商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。值得注意的是物质扩散这种算法得到的所有商品最后的信息值之和就等于初始时所有商品的信息值，即能量是守恒的，图(c)中所有商品的信息之和仍为2。</p>
+<p>热传导算法：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-ca61938a51cbaf11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>初始，我们认为目标用户购买过的每件商品的信息量为1。<br>目标用户的信息等于所有他购买过的商品信息的平均值，如图(d)所示，目标用户购买了商品1和商品4，则该用户的信息值即为(1 + 1) / 2 = 1。再根据目标用户浏览过的商品给所以商品计算信息，第一个商品、第四个商品信息量为1/2，其他商品的信息量为0（因为目标用户没有买过），接下来根据每一个商品的信息计算其他的用户的信息，如图(d)中的第二个用户的信息就为商品1,2,3,4的信息的平均值（1/2 + 1/2）/4 = 1/2；再根据每个用户的信息量平均分配信息到每个商品，如图(e)中的第一个商品来自第一个、第二个、第三个用户的信息的和，即为1/2<em>1/2+1/2</em>1/3+1/2*/12=2/3。</p>
+<p>以上两个步骤加起来为从商品到商品热传导一步。因此基于热传导算法的推荐系统则会将此信息量大的商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。与物质扩散不同的是这种算法得到的所有商品最后的信息值之和就不一定等于初始时所有商品的信息值，即不满足守恒定律，这是因为在信息传到的第二步过程中，有的用户的信息可能会被多次计算，从而导致不守恒。</p>
+<p>基于物质扩散和基于热传导的推荐算法的区别在于： 基于物质扩散的方法在进行个性化推荐时，系统的总信息是守恒的；而热传导在推荐过程中，目标用户（即被推荐用户）的收藏品将被视作信息初始点，负责提供能量，所以系统的总信息量随着传递步骤的增加是在不断增加的。</p>
+<p>如果对物理比较熟悉的朋友很容易联想到凸透镜和凹透镜，是的，我个人在理解的时候也是这样迁移理解，原理上确实一致。 基于物质扩散的方法相当于凸透镜一样把用户历史点击的信息聚焦到了少量优势的skn上了； 基于热传导的方法相当于是凹透镜一样把用户的历史点击信息发散到了那些较不流行的物品上，从而提高了推荐的新颖多样性。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 推荐 </tag>
             
         </tags>
         
