@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="理论解析," />
+  <meta name="keywords" content="NLP," />
 
 
 
@@ -80,21 +80,20 @@
 
 
 
-<meta name="description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
-<meta name="keywords" content="理论解析">
+<meta name="description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Sta">
+<meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="logistic regression一点理解">
-<meta property="og:url" content="http://sladesha.github.io/2018/08/14/logistic regression一点理解/index.html">
+<meta property="og:title" content="Stanford Word Segmenter问题整理">
+<meta property="og:url" content="http://sladesha.github.io/2018/08/27/Stanford Word Segmenter问题整理/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
+<meta property="og:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-6d21efd647f31453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-08-14T06:04:27.907Z">
+<meta property="og:updated_time" content="2018-08-27T02:27:37.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="logistic regression一点理解">
-<meta name="twitter:description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-6d21efd647f31453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Stanford Word Segmenter问题整理">
+<meta name="twitter:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -124,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2018/08/14/logistic regression一点理解/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/08/27/Stanford Word Segmenter问题整理/"/>
 
 
 
 
 
-  <title>logistic regression一点理解 | SladeSha's Algorithm World</title>
+  <title>Stanford Word Segmenter问题整理 | SladeSha's Algorithm World</title>
   
 
 
@@ -291,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/14/logistic regression一点理解/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/27/Stanford Word Segmenter问题整理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -308,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">logistic regression一点理解</h1>
+          <h1 class="post-title" itemprop="name headline">Stanford Word Segmenter问题整理</h1>
         
 
         <div class="post-meta">
@@ -320,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T09:12:58+08:00">
-                2018-08-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T09:12:58+08:00">
+                2018-08-27
               </time>
             
 
@@ -343,8 +342,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/代码集合/" itemprop="url" rel="index">
+                    <span itemprop="name">代码集合</span>
                   </a>
                 </span>
 
@@ -374,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  82 字
+                  399 字
                 </span>
               
 
@@ -390,7 +389,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -411,10 +410,47 @@
       
 
       
-        <p>Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见<a href="https://www.jianshu.com/p/61ac39a57f9d" target="_blank" rel="noopener">logistic regression一点理解</a>。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1129359-6d21efd647f31453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+        <p>最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Item</th>
+<th style="text-align:center">time(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">jieba</td>
+<td style="text-align:center">0.4</td>
+</tr>
+<tr>
+<td style="text-align:center">snownlp</td>
+<td style="text-align:center">7.4</td>
+</tr>
+<tr>
+<td style="text-align:center">pynlpir</td>
+<td style="text-align:center">0.8</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>StanfordCoreNLP</strong></td>
+<td style="text-align:center"><strong>21.5</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">pyltp</td>
+<td style="text-align:center">5.3</td>
+</tr>
+</tbody>
+</table>
+<p>因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能，所以尝试只用它的切词部分功能，但是在做的过程中发现一些问题，整理如下：</p>
+<p>官网给出的方法<a href="http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.stanford_segmenter" target="_blank" rel="noopener">nltk.tokenize.stanford_segmenter module</a>是这么写的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.tokenize.stanford_segmenter <span class="keyword">import</span> StanfordSegmenter</span><br><span class="line">seg = StanfordSegmenter()</span><br><span class="line">seg.default_config(<span class="string">'zh'</span>)</span><br></pre></td></tr></table></figure>
+<p>但是这个缺少各种数据路径的，是完全不通的。</p>
+<p>然后度娘的top1的答案给出的解决方案是：<a href="http://www.52nlp.cn/python自然语言处理实践-在nltk中使用斯坦福中文分词器" target="_blank" rel="noopener"></a>`<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">segmenter = StanfordSegmenter(path_to_jar=<span class="string">"stanford-segmenter-3.4.1.jar"</span>, path_to_sihan_corpora_dict=<span class="string">"./data"</span>, path_to_model=<span class="string">"./data/pku.gz"</span>, path_to_dict=<span class="string">"./data/dict-chris6.ser.gz"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果你的nltk的版本比较新，恭喜你，你会遇到下面这个问题：<br><code>TypeError: expected str, bytes or os.PathLike object, not NoneType</code></p>
+<p>我在<a href="https://stackoverflow.com/questions/45663121/about-stanford-word-segmenter/45668849" target="_blank" rel="noopener">stackoverflow</a>上找了半天，发现有如下的解决方案：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.parse.corenlp <span class="keyword">import</span> CoreNLPParser </span><br><span class="line">corenlp_parser = CoreNLPParser(<span class="string">'http://localhost:9001'</span>, encoding=<span class="string">'utf8'</span>)</span><br><span class="line">result = corenlp_parser.api_call(text, &#123;<span class="string">'annotators'</span>: <span class="string">'tokenize,ssplit'</span>&#125;)</span><br><span class="line">tokens = [token[<span class="string">'originalText'</span>] <span class="keyword">or</span> token[<span class="string">'word'</span>] <span class="keyword">for</span> sentence <span class="keyword">in</span> result[<span class="string">'sentences'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>可以完美解决，原因之前作者也说了，据称升级版本后不兼容，各位看看就好<a href="https://github.com/nltk/nltk/issues/1808" target="_blank" rel="noopener">“TypeError: expected str, bytes or os.PathLike object, not NoneType” about Stanford NLP </a>。</p>
+<p>这个坑花了我两个多小时（主要在下载各种gz包），希望大家能够避免。</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -461,7 +497,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
           
         </div>
       
@@ -474,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/06/基于Tensorflow实现FFM/" rel="next" title="基于Tensorflow实现FFM">
-                <i class="fa fa-chevron-left"></i> 基于Tensorflow实现FFM
+              <a href="/2018/08/14/logistic regression一点理解/" rel="next" title="logistic regression一点理解">
+                <i class="fa fa-chevron-left"></i> logistic regression一点理解
               </a>
             
           </div>
@@ -484,8 +520,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/27/Stanford Word Segmenter问题整理/" rel="prev" title="Stanford Word Segmenter问题整理">
-                Stanford Word Segmenter问题整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
