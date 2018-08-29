@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="预测," />
+  <meta name="keywords" content="论文解析," />
 
 
 
@@ -80,20 +80,21 @@
 
 
 
-<meta name="description" content="之前写了一篇以基于elastic的需求预估的文章，只不过用的是R语言开发的，最近在学python，就仿照逻辑写了一篇python的，主要修改点如下：  用决策树替换了elastic算法 用分层抽样替换了组合抽样  需要看详细理论及思考过程参考链接：商品需求预估 python code如下：123456789# -*- ">
-<meta name="keywords" content="预测">
+<meta name="description" content="很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总：  如何进行负采样的？  构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过">
+<meta name="keywords" content="论文解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="订单需求预估">
-<meta property="og:url" content="http://sladesha.github.io/2017/07/12/订单需求预估/index.html">
+<meta property="og:title" content="Google团队在DNN的实际应用方式的整理">
+<meta property="og:url" content="http://sladesha.github.io/2018/08/29/Google团队在DNN的实际应用方式的整理/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="之前写了一篇以基于elastic的需求预估的文章，只不过用的是R语言开发的，最近在学python，就仿照逻辑写了一篇python的，主要修改点如下：  用决策树替换了elastic算法 用分层抽样替换了组合抽样  需要看详细理论及思考过程参考链接：商品需求预估 python code如下：123456789# -*- coding:utf-8 -*-import pandas as pdimpor">
+<meta property="og:description" content="很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总：  如何进行负采样的？  构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-2f786208ac1617c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-01T15:54:00.927Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-7024ecbe0d385070.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-08-29T06:00:32.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="订单需求预估">
-<meta name="twitter:description" content="之前写了一篇以基于elastic的需求预估的文章，只不过用的是R语言开发的，最近在学python，就仿照逻辑写了一篇python的，主要修改点如下：  用决策树替换了elastic算法 用分层抽样替换了组合抽样  需要看详细理论及思考过程参考链接：商品需求预估 python code如下：123456789# -*- coding:utf-8 -*-import pandas as pdimpor">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-2f786208ac1617c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Google团队在DNN的实际应用方式的整理">
+<meta name="twitter:description" content="很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总：  如何进行负采样的？  构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-7024ecbe0d385070.gif?imageMogr2/auto-orient/strip">
 
 
 
@@ -123,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/07/12/订单需求预估/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/08/29/Google团队在DNN的实际应用方式的整理/"/>
 
 
 
 
 
-  <title>订单需求预估 | SladeSha's Algorithm World</title>
+  <title>Google团队在DNN的实际应用方式的整理 | SladeSha's Algorithm World</title>
   
 
 
@@ -290,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/07/12/订单需求预估/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/29/Google团队在DNN的实际应用方式的整理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -307,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">订单需求预估</h1>
+          <h1 class="post-title" itemprop="name headline">Google团队在DNN的实际应用方式的整理</h1>
         
 
         <div class="post-meta">
@@ -319,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T23:52:58+08:00">
-                2017-07-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T14:12:58+08:00">
+                2018-08-29
               </time>
             
 
@@ -342,8 +343,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -373,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,555 字
+                  802 字
                 </span>
               
 
@@ -389,7 +390,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -410,43 +411,45 @@
       
 
       
-        <p>之前写了一篇以基于elastic的需求预估的文章，只不过用的是R语言开发的，最近在学python，就仿照逻辑写了一篇python的，主要修改点如下：</p>
+        <p>很荣幸有机会和论文作者<a href="https://www.linkedin.com/in/mehmet-emre-sargin-0665047/" target="_blank" rel="noopener">Emre Sargin</a>关于之前发的<a href="https://zhuanlan.zhihu.com/p/38638747" target="_blank" rel="noopener">Deep Neural Networks for YouTube Recommendations</a>进行交流，梳理如下：</p>
+<p><strong>提问对话汇总：</strong></p>
 <ul>
-<li>用决策树替换了elastic算法</li>
-<li>用分层抽样替换了组合抽样</li>
+<li>如何进行负采样的？</li>
 </ul>
-<p><strong>需要看详细理论及思考过程参考链接：<a href="http://www.jianshu.com/p/e932b9744da6" target="_blank" rel="noopener">商品需求预估</a></strong></p>
-<p>python code如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">import random as rd</span><br><span class="line">from sklearn import tree</span><br><span class="line"></span><br><span class="line"># 读取数据</span><br><span class="line">data_orgin = pd.read_table(&quot;C:/Users/17031877/Desktop/supermarket_second_hair_washing_train.txt&quot;)</span><br><span class="line">data_deal_1 = data_orgin.drop([&apos;aimed_date&apos;, &apos;member_id&apos;, &apos;age&apos;, &apos;gender&apos;, &apos;diff_rgst&apos;], axis=1)</span><br></pre></td></tr></table></figure></p>
-<p>这边是常规的数据读取，删除了不必要的列</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#因变量单列</span><br><span class="line">label = data_deal_1[&apos;label&apos;]</span><br><span class="line"></span><br><span class="line"># 用户分量级</span><br><span class="line">value00 = [&apos;max_date_diff&apos;, &apos;aimed_max_date_diff&apos;]</span><br><span class="line">data00 = data_deal_1[value00]</span><br><span class="line"></span><br><span class="line">value01 = [&apos;max_pay&apos;, &apos;per_pay&apos;, &apos;six_month_max_pay&apos;, &apos;six_month_per_pay&apos;, &apos;three_month_max_pay&apos;, &apos;three_month_per_pay&apos;,</span><br><span class="line">           &apos;one_month_max_pay&apos;, &apos;one_month_per_pay&apos;, &apos;fifteen_day_max_pay&apos;, &apos;fifteen_day_per_pay&apos;, &apos;aimed_max_pay&apos;,</span><br><span class="line">           &apos;aimed_per_pay&apos;, &apos;aimed_six_month_max_pay&apos;, &apos;aimed_six_month_per_pay&apos;, &apos;aimed_three_month_max_pay&apos;,</span><br><span class="line">           &apos;aimed_three_month_per_pay&apos;, &apos;aimed_one_month_max_pay&apos;, &apos;aimed_one_month_per_pay&apos;,</span><br><span class="line">           &apos;aimed_fifteen_day_max_pay&apos;, &apos;aimed_fifteen_day_per_pay&apos;, &apos;qty_drtn_seven&apos;, &apos;qty_drtn_fourteen&apos;]</span><br><span class="line">data01 = data_deal_1[value01]</span><br><span class="line"></span><br><span class="line">value02 = [&apos;cnt_time&apos;, &apos;six_month_cnt_time&apos;, &apos;three_month_cnt_time&apos;, &apos;one_month_cnt_time&apos;, &apos;fifteen_day_cnt_time&apos;,</span><br><span class="line">           &apos;aimed_cnt_time&apos;, &apos;aimed_six_month_cnt_time&apos;, &apos;aimed_three_month_cnt_time&apos;, &apos;aimed_one_month_cnt_time&apos;,</span><br><span class="line">           &apos;aimed_fifteen_day_cnt_time&apos;, &apos;pv_times_seven&apos;, &apos;pv_times_fourteen&apos;, &apos;search_times_seven&apos;,</span><br><span class="line">           &apos;search_times_fourteen&apos;, &apos;clc_times_seven&apos;, &apos;clc_times_fourteen&apos;, &apos;cart2_times_seven&apos;,</span><br><span class="line">           &apos;cart2_times_fourteen&apos;, &apos;cart1_times_seven&apos;, &apos;cart1_times_fourteen&apos;, &apos;unpay_times_seven&apos;,</span><br><span class="line">           &apos;unpay_times_fourteen&apos;]</span><br><span class="line">data02 = data_deal_1[value02]</span><br><span class="line"></span><br><span class="line">value03 = [&apos;pv_visit_last_period&apos;, &apos;search_last_period&apos;, &apos;clc_last_period&apos;, &apos;cart2_last_period&apos;, &apos;cart1_last_period&apos;,</span><br><span class="line">           &apos;unpay_last_period&apos;]</span><br><span class="line">data03 = data_deal_1[value03]</span><br></pre></td></tr></table></figure>
-<p>因为不同量级的数据之后做异常点处理的时候截断位置不同，所有需要分割数据处理</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">def test_function_one(x, l):</span><br><span class="line">    k = x.dropna(how=&apos;any&apos;)</span><br><span class="line">    y = k.quantile(l)</span><br><span class="line">    z = k.max()</span><br><span class="line">    x[x &gt; y] = y</span><br><span class="line">    x = x.fillna(value=z)</span><br><span class="line">    return x</span><br><span class="line">for i in range(len(data00.columns)):</span><br><span class="line">    data00.iloc[:, i] = test_function_one(data00.iloc[:, i], 0.98)</span><br><span class="line"></span><br><span class="line">def test_function_two(x, l):</span><br><span class="line">    k = x.dropna(how=&apos;any&apos;)</span><br><span class="line">    y = k.quantile(l)</span><br><span class="line">    z = 0</span><br><span class="line">    x[x &gt; y] = y</span><br><span class="line">    x = x.fillna(value=z)</span><br><span class="line">    return x</span><br><span class="line">for i in range(len(data01.columns)):</span><br><span class="line">    data01.iloc[:, i] = test_function_two(data01.iloc[:, i], 0.95)</span><br><span class="line">for i in range(len(data02.columns)):</span><br><span class="line">    data02.iloc[:, i] = test_function_two(data02.iloc[:, i], 0.99)</span><br><span class="line"></span><br><span class="line">def test_function_three(x):</span><br><span class="line">    z = 14</span><br><span class="line">    x[x &gt; z] = z</span><br><span class="line">    x = x.fillna(value=z)</span><br><span class="line">    return x</span><br><span class="line">for i in range(len(data03.columns)):</span><br><span class="line">    data03.iloc[:, i] = test_function_three(data03.iloc[:, i])</span><br><span class="line"># 数据合并</span><br><span class="line">data_train = pd.concat([label, data00, data01, data02, data03], axis=1)</span><br></pre></td></tr></table></figure>
-<p>根据数据量的不同做数据分割，跑上面写完的code函数就可以</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#数量级对比</span><br><span class="line">zero_case = data_train[data_train[&apos;label&apos;] == 0][&apos;label&apos;].count()</span><br><span class="line">print &apos;负样本数：%d&apos; % zero_case</span><br><span class="line">one_case = data_train[data_train[&apos;label&apos;] == 1][&apos;label&apos;].count()</span><br><span class="line">print &apos;正样本数: %d&apos; % (one_case)</span><br><span class="line"></span><br><span class="line">负样本数：292936</span><br><span class="line">正样本数: 3973</span><br><span class="line">Backend TkAgg is interactive backend. Turning interactive mode on.</span><br></pre></td></tr></table></figure>
-<p>实际看下来，正负样本的差异的确还是很大，这个其实做多了就有经验，常规的来看，潜在的浏览、搜索到最后的成单，普遍自然转化不到1%，也正是这么低的转化，才需要一些算法来做信息抓去。</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def case_sample(x, y, z):</span><br><span class="line">    diff_case = pd.DataFrame(x[y]).drop_duplicates([y])</span><br><span class="line">    result = []</span><br><span class="line">    result = pd.DataFrame(result)</span><br><span class="line">    for i in range(len(diff_case)):</span><br><span class="line">        k = np.array(diff_case)[i]</span><br><span class="line">        data_set = x[x[y] == k[0]]</span><br><span class="line">        nrow_nb = data_set.iloc[:, 0].count()</span><br><span class="line">        data_set.index = range(nrow_nb)</span><br><span class="line">        index_id = rd.sample(range(nrow_nb), int(nrow_nb * z))</span><br><span class="line">        result = pd.concat([result, data_set.iloc[index_id, :]], axis=0)</span><br><span class="line">    return result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">zero_case = data_train[data_train[&apos;label&apos;] == 0]</span><br><span class="line">one_case = data_train[data_train[&apos;label&apos;] == 1]</span><br><span class="line"># 开始分层抽样</span><br><span class="line">new_zero_case = case_sample(zero_case, &apos;unpay_last_period&apos;, 0.1)</span><br><span class="line"># 新数量级对比</span><br><span class="line">new_zero_case_count = new_zero_case[new_zero_case[&apos;label&apos;] == 0][&apos;label&apos;].count()</span><br><span class="line"># 数据集合并</span><br><span class="line">new_data_train = pd.concat([new_zero_case, one_case], axis=0)</span><br></pre></td></tr></table></figure>
-<p><code>case_sample</code>是一个简单的分层抽样的小函数，<code>x</code>是数据集，<code>y</code>是分层变量，<code>z</code>是抽样占比；新的样本<code>new_data_train</code>中正负样本比例在1:10左右，这边的样本比是我自己设置的，不一定是最合理的；且此处也不一定要求一定用分层抽样，只是我用来练练手的；推荐还是遵从奥卡姆原理，在未知的情况下，尽可能简单的解决问题，比如组合抽样就是很不错的方法。</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#函数设置</span><br><span class="line">clf = tree.DecisionTreeRegressor(criterion=&apos;mse&apos;, max_features=&apos;log2&apos;, random_state=1)</span><br><span class="line"></span><br><span class="line">#函数拟合</span><br><span class="line">y = new_data_train[&apos;label&apos;]</span><br><span class="line">x = new_data_train.drop(&apos;label&apos;, 1)</span><br><span class="line">clf.fit(x, y)</span><br><span class="line"></span><br><span class="line">#数据预测</span><br><span class="line">y_predict = clf.predict(x)</span><br><span class="line"></span><br><span class="line"># 结果对比</span><br><span class="line">y.index = range(len(y))</span><br><span class="line">combined_date = pd.concat([y, pd.DataFrame(y_predict)], axis=1)</span><br><span class="line">combined_date.columns = [&apos;actual&apos;, &apos;predict&apos;]</span><br></pre></td></tr></table></figure>
-<p>这边稍微讲解一下，我认为的<code>sklearn</code>中<code>DecisionTreeRegressor</code>中比较终于的参数设置，<code>criterion</code>这边为模型优化的标准，常规的有<code>mse</code>和<code>mae</code>，建议在数据量差异不大的时候多考虑<code>mse</code>；<code>max_features</code>是每次训练用的特征个数，综合特征量级考虑，一般有<code>log2</code>，<code>sqrt</code>，尽可能是抽取比例在70%；<code>max_depth</code>刚开始可以默认，第一类模型出来后，可在结果附近迭代，寻找<code>out of bag</code>最小的error下的值；<strong>另外，我没有发现有weight设置，可能是我不熟悉，但是如果sklearn这边不提供weight的化，我们在做数据预处理的时候一定要平衡数据，不然当数据集过偏的时候最后的结果会以“牺牲”少类的判断正确率去完善整体正确率。</strong></p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># case 1</span><br><span class="line">x = []</span><br><span class="line">y = []</span><br><span class="line">for i in range(1, 10):</span><br><span class="line">    test_data = combined_date</span><br><span class="line">    i = i / float(10)</span><br><span class="line">    for j in range(combined_date[&apos;actual&apos;].count()):</span><br><span class="line">        if test_data.iloc[j, 1] &gt; i:</span><br><span class="line">            test_data.iloc[j, 1] = 1</span><br><span class="line">        else:</span><br><span class="line">            continue</span><br><span class="line">    z = test_data[test_data[&apos;actual&apos;] == test_data[&apos;predict&apos;]][&apos;actual&apos;].count() / float(test_data[&apos;actual&apos;].count())</span><br><span class="line">    x.append(i)</span><br><span class="line">    y.append(z)</span><br></pre></td></tr></table></figure>
-<p>这边写了检查函数，检查了分别0.1~1，以0.1为间隔的情况下的分割点，每个分割点下<strong>预测正确的数量/所有统计的样本数</strong>，也就是下面的<strong>accuracy</strong>.<br><img src="http://upload-images.jianshu.io/upload_images/1129359-2f786208ac1617c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># case 2</span><br><span class="line">test_data = combined_date</span><br><span class="line">aimed_data = test_data[test_data[&apos;predict&apos;]&gt;0]</span><br><span class="line">k1=aimed_data[aimed_data[&apos;actual&apos;]==1][&apos;predict&apos;].count()</span><br><span class="line">k2=float(aimed_data[&apos;predict&apos;].count())</span><br><span class="line"></span><br><span class="line">print &apos;所有预测可能下单用户中真实下单用户数：%d&apos; %(k1)</span><br><span class="line">print &apos;所有预测可能下单用户数：%d&apos; %(k2)</span><br></pre></td></tr></table></figure>
-<p>因为这边需要对用户营销，所以更关系topN的转化率，需要看一下实际正样本被覆盖了多数，以上即为code，这边的效果值为98.7%，还是比较高的，但是应该是过拟合了，所有一般不建议单纯使用决策树模型</p>
-<hr>
-<p>所有的python code到这里就结束了，后续我做项目的同时会同时更新R及python两种code的思考，和大家讨论分享学习，谢谢。</p>
-<p><em>参考文献：</em></p>
+<p>构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，google的label是一个200万长度的向量，瑟瑟发抖.jpg。）</p>
 <ul>
-<li><em><a href="http://scikitlearn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor" target="_blank" rel="noopener">sklearn.tree.DecisionTreeRegressor</a></em></li>
-<li><em><a href="http://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="noopener">维基百科中对ROC的介绍</a></em></li>
-<li><em><a href="https://www.zhihu.com/question/27205203/answer/148900663" target="_blank" rel="noopener">决策树常见问题及面试关键点介绍</a></em></li>
+<li>推荐算法应用上，有什么评估方式和评估指标？</li>
 </ul>
+<p>主要基于线上进行小批量的abtest进行对比，在考虑ctr指标的同时也会综合全站的信息加以分析，同时对新颖程度和用户兴趣变换也是我们考察的对象。</p>
+<ul>
+<li>冷启动的解决方式？从来没有被点击过的video如何处理？新上的video如何处理？</li>
+</ul>
+<p>google的推荐基于多种推荐算法的组合，YouTubeNet主要解决的是热门商品的一个推荐问题，冷启动或者没有被点击的video会有其他算法进行计算。换句话说，解决不了。</p>
+<ul>
+<li>example age如何定义？</li>
+</ul>
+<p>user+vedio的组合形式，train过程中，是用户点击该vedio的时间距离当前时间的间隔；predict过程中，为0。该部分对模型的鲁棒性非常重要。</p>
+<ul>
+<li>是否遇到神经元死亡的问题？</li>
+</ul>
+<p>有，解决方案很常规，都是大家了解的，降低learning_rate，使用batchnormalization。</p>
+<ul>
+<li>是否预到过拟合？</li>
+</ul>
+<p>没，youtube的用户上亿，可以构造出上千亿的数据，过拟合的情况不明显。但是会存在未登录用户，我们会通过一些其他CRM类的算法补充构造出他们的基本信息，比如gender、age…</p>
+<ul>
+<li>vedio vector在哪边进行构造和修正？</li>
+</ul>
+<p>history click部分进行vedio embedding，并进行修正。另外，50是我们尝试的历史点击长度，20-30也有不错的效果。</p>
+<ul>
+<li>会有工程计算压力么？</li>
+</ul>
+<p>不存在，建议在GPU上计算，后面由于VPN网络信号抖动没听清，大概就说Google在训练模型的时候会有大量GPU支持，每天大概更新2-3模型，没有遇到什么计算瓶颈。</p>
+<p><em>(以上为我个人针对提问结果的理解及总结)</em></p>
+<p><strong>个人感想如下：</strong><br><img src="http://upload-images.jianshu.io/upload_images/1129359-7024ecbe0d385070.gif?imageMogr2/auto-orient/strip" alt="无贬义，只是羡慕"></p>
+<p><strong>最后，我觉得算法还是要适应实际情况，大公司的方法可以借鉴但是可能很多时候抄不来，也没条件抄。</strong></p>
+<p><em>原问题如下（实际有删改）：<br>How to do video embedding?<br>Is there any pre-training?<br>How to use example age in the model?<br>How to deal dead ReLU neurons？<br>How to sample negative classes？<br>How does the video embedding generated？<br>How to recommend the video never been clicked and new uploaded videos？<br>How to do ab testing? What’s the metrics?<br>Have you facing overfitting？How to solve it?<br>There is any difficulty in calculating the embedding for millions of videos and users.<br>During input embedding generation, are they simply averaged?</em></p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -493,7 +496,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/预测/" rel="tag"># 预测</a>
+            <a href="/tags/论文解析/" rel="tag"># 论文解析</a>
           
         </div>
       
@@ -506,8 +509,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/21/推荐系统-威尔逊区间法/" rel="next" title="推荐系统-威尔逊区间法">
-                <i class="fa fa-chevron-left"></i> 推荐系统-威尔逊区间法
+              <a href="/2018/08/27/Stanford Word Segmenter问题整理/" rel="next" title="Stanford Word Segmenter问题整理">
+                <i class="fa fa-chevron-left"></i> Stanford Word Segmenter问题整理
               </a>
             
           </div>
@@ -516,8 +519,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/13/数据抽样平衡方法重写/" rel="prev" title="数据抽样平衡方法重写">
-                数据抽样平衡方法重写 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

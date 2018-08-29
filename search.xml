@@ -12,6 +12,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Google团队在DNN的实际应用方式的整理]]></title>
+    <url>%2F2018%2F08%2F29%2FGoogle%E5%9B%A2%E9%98%9F%E5%9C%A8DNN%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%E7%9A%84%E6%95%B4%E7%90%86%2F</url>
+    <content type="text"><![CDATA[很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总： 如何进行负采样的？ 构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，google的label是一个200万长度的向量，瑟瑟发抖.jpg。） 推荐算法应用上，有什么评估方式和评估指标？ 主要基于线上进行小批量的abtest进行对比，在考虑ctr指标的同时也会综合全站的信息加以分析，同时对新颖程度和用户兴趣变换也是我们考察的对象。 冷启动的解决方式？从来没有被点击过的video如何处理？新上的video如何处理？ google的推荐基于多种推荐算法的组合，YouTubeNet主要解决的是热门商品的一个推荐问题，冷启动或者没有被点击的video会有其他算法进行计算。换句话说，解决不了。 example age如何定义？ user+vedio的组合形式，train过程中，是用户点击该vedio的时间距离当前时间的间隔；predict过程中，为0。该部分对模型的鲁棒性非常重要。 是否遇到神经元死亡的问题？ 有，解决方案很常规，都是大家了解的，降低learning_rate，使用batchnormalization。 是否预到过拟合？ 没，youtube的用户上亿，可以构造出上千亿的数据，过拟合的情况不明显。但是会存在未登录用户，我们会通过一些其他CRM类的算法补充构造出他们的基本信息，比如gender、age… vedio vector在哪边进行构造和修正？ history click部分进行vedio embedding，并进行修正。另外，50是我们尝试的历史点击长度，20-30也有不错的效果。 会有工程计算压力么？ 不存在，建议在GPU上计算，后面由于VPN网络信号抖动没听清，大概就说Google在训练模型的时候会有大量GPU支持，每天大概更新2-3模型，没有遇到什么计算瓶颈。 (以上为我个人针对提问结果的理解及总结) 个人感想如下： 最后，我觉得算法还是要适应实际情况，大公司的方法可以借鉴但是可能很多时候抄不来，也没条件抄。 原问题如下（实际有删改）：How to do video embedding?Is there any pre-training?How to use example age in the model?How to deal dead ReLU neurons？How to sample negative classes？How does the video embedding generated？How to recommend the video never been clicked and new uploaded videos？How to do ab testing? What’s the metrics?Have you facing overfitting？How to solve it?There is any difficulty in calculating the embedding for millions of videos and users.During input embedding generation, are they simply averaged? 欢迎大家关注我的个人bolg，知乎，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>论文解析</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Stanford Word Segmenter问题整理]]></title>
     <url>%2F2018%2F08%2F27%2FStanford%20Word%20Segmenter%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86%2F</url>
     <content type="text"><![CDATA[最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重： Item time(s) jieba 0.4 snownlp 7.4 pynlpir 0.8 StanfordCoreNLP 21.5 pyltp 5.3 因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能，所以尝试只用它的切词部分功能，但是在做的过程中发现一些问题，整理如下： 官网给出的方法nltk.tokenize.stanford_segmenter module是这么写的： 123from nltk.tokenize.stanford_segmenter import StanfordSegmenterseg = StanfordSegmenter()seg.default_config('zh') 但是这个缺少各种数据路径的，是完全不通的。 然后度娘的top1的答案给出的解决方案是：`1segmenter = StanfordSegmenter(path_to_jar="stanford-segmenter-3.4.1.jar", path_to_sihan_corpora_dict="./data", path_to_model="./data/pku.gz", path_to_dict="./data/dict-chris6.ser.gz") 如果你的nltk的版本比较新，恭喜你，你会遇到下面这个问题：TypeError: expected str, bytes or os.PathLike object, not NoneType 我在stackoverflow上找了半天，发现有如下的解决方案：1234from nltk.parse.corenlp import CoreNLPParser corenlp_parser = CoreNLPParser('http://localhost:9001', encoding='utf8')result = corenlp_parser.api_call(text, &#123;'annotators': 'tokenize,ssplit'&#125;)tokens = [token['originalText'] or token['word'] for sentence in result['sentences'] 可以完美解决，原因之前作者也说了，据称升级版本后不兼容，各位看看就好“TypeError: expected str, bytes or os.PathLike object, not NoneType” about Stanford NLP 。 这个坑花了我两个多小时（主要在下载各种gz包），希望大家能够避免。 欢迎大家关注我的个人bolg，知乎，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
