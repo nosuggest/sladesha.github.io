@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/about/index.html</loc>
+    
+    <lastmod>2018-09-07T02:43:21.045Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2018/08/29/Google%E5%9B%A2%E9%98%9F%E5%9C%A8DNN%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%E7%9A%84%E6%95%B4%E7%90%86/</loc>
     
     <lastmod>2018-08-29T06:00:32.181Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://sladesha.github.io/2018/08/14/logistic%20regression%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</loc>
     
     <lastmod>2018-08-14T06:04:27.907Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/about/index.html</loc>
-    
-    <lastmod>2018-08-09T07:06:39.216Z</lastmod>
     
   </url>
   
