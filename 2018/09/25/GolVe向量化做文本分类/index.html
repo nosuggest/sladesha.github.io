@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="风控," />
+  <meta name="keywords" content="NLP," />
 
 
 
@@ -80,35 +80,26 @@
 
 
 
-<meta name="description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。">
-<meta name="keywords" content="风控">
+<meta name="description" content="向量化在之前，我对向量化的方法一直局限在两个点， 第一种是常规方法的one-hot-encoding的方法，常见的比如tf-idf生成的0-1的稀疏矩阵来代表原文本：这种方法简单暴力，直接根据文本中的单词进行one-hot-encoding，但是数据量一但大了，这个单句话的one-hot-encoding结果会异常的长">
+<meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多算法识别撞库刷券等异常用户">
-<meta property="og:url" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/index.html">
+<meta property="og:title" content="GolVe向量化做文本分类">
+<meta property="og:url" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。">
+<meta property="og:description" content="向量化在之前，我对向量化的方法一直局限在两个点， 第一种是常规方法的one-hot-encoding的方法，常见的比如tf-idf生成的0-1的稀疏矩阵来代表原文本：这种方法简单暴力，直接根据文本中的单词进行one-hot-encoding，但是数据量一但大了，这个单句话的one-hot-encoding结果会异常的长，而且没办法得到词与词之间的关系。 第二种是基于神经网络的方法，常见的比如wor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-7b9bc4163991c19e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f32b17059e0e776b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-0d68807163ff6089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-c60ac94e5cc813c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-d406583407427fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-26048e0fbf3736fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-12075db91cef6c5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f0ec3716c8511597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-4b18fea49c38f840.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-039151615db4b747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-f30bdc606e81ad19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-9cbadf3ff359e091.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-dbe05c6368f7f71f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-cc49e1a8115d8a1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-7a4d7306a3ff518d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1129359-77ca366109e16fc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-05T01:24:55.181Z">
+<meta property="og:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537519988479.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537520307157.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537520864857.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537521926560.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537521518763.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537759001384.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-25T02:41:54.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多算法识别撞库刷券等异常用户">
-<meta name="twitter:description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1129359-7b9bc4163991c19e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="GolVe向量化做文本分类">
+<meta name="twitter:description" content="向量化在之前，我对向量化的方法一直局限在两个点， 第一种是常规方法的one-hot-encoding的方法，常见的比如tf-idf生成的0-1的稀疏矩阵来代表原文本：这种方法简单暴力，直接根据文本中的单词进行one-hot-encoding，但是数据量一但大了，这个单句话的one-hot-encoding结果会异常的长，而且没办法得到词与词之间的关系。 第二种是基于神经网络的方法，常见的比如wor">
+<meta name="twitter:image" content="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/1537519988479.png">
 
 
 
@@ -138,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/"/>
 
 
 
 
 
-  <title>多算法识别撞库刷券等异常用户 | SladeSha's Algorithm World</title>
+  <title>GolVe向量化做文本分类 | SladeSha's Algorithm World</title>
   
 
 
@@ -305,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/09/25/GolVe向量化做文本分类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -322,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">多算法识别撞库刷券等异常用户</h1>
+          <h1 class="post-title" itemprop="name headline">GolVe向量化做文本分类</h1>
         
 
         <div class="post-meta">
@@ -334,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T18:11:01+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T10:12:58+08:00">
+                2018-09-25
               </time>
             
 
@@ -388,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,139 字
+                  3,092 字
                 </span>
               
 
@@ -404,7 +395,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12 分钟
+                  14 分钟
                 </span>
               
             </div>
@@ -425,75 +416,43 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/1129359-7b9bc4163991c19e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。<br><a id="more"></a></p>
-<h1 id="问题剖析："><a href="#问题剖析：" class="headerlink" title="问题剖析："></a><strong>问题剖析：</strong></h1><p>此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：</p>
+        <h1 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h1><p>在之前，我对向量化的方法一直局限在两个点，</p>
+<p>第一种是常规方法的one-hot-encoding的方法，常见的比如tf-idf生成的0-1的稀疏矩阵来代表原文本：<br><img src="./1537519988479.png" alt="Alt text"><br>这种方法简单暴力，直接根据文本中的单词进行one-hot-encoding，但是数据量一但大了，这个单句话的one-hot-encoding结果会异常的长，而且没办法得到词与词之间的关系。</p>
+<p>第二种是基于神经网络的方法，常见的比如word2vec，YouTubeNet：<br><img src="./1537520307157.png" alt="Alt text"><br>这种方法（这边以CBOW为例子）都是初始一个固定长度的随机向量作为每个单词的向量，制定一个目标词的向量，以上下文词向量的sum结果作为input进行前向传递，使得传递的结果和目标词向量尽可能一致，以修正初始的随机向量。<br>换句话说，就是刚开始，我随意定义生成一个vector代表一个词，然后通过上下文的联系去修正这个随机的vector。好处就是我们可以得到词与词之间的联系，而且单个词的表示不复杂，坏处就是需要大量的训练样本，毕竟涉及到了神经网络。</p>
+<p>最近，我们突然发现了第三种方法，GolVe向量化。它也是开始的时候随机一个vector作为单词的表示，但是它不利用神经网络去修正，而是利用了一个自己构造的损失函数：<br><img src="./1537520864857.png" alt="Alt text"><br>通过我们已有的文章内容，去是的这个损失函数最小，这就变成了一个机器学习的方法了，相比较暴力的前馈传递，这也高快速和高效的多。同时，它还兼具了word2vec最后结果里面vector方法的优点，得到词与词之间的联系，而且单个词的表示不复杂。</p>
+<p>这边就不展开GolVe算法的细节了，后面有空和大家补充，这个算法的构造非常巧妙，值得大家借鉴一下。</p>
+<h1 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h1><p>刚才开门见山的聊了蛮久向量化，看起来和文本分类没什么关系，确实在通常意义上来讲，我们的最简单最常用的方法并不是向量化的方法，比如通过朴素贝叶斯，N-Grams这些方法来做分类识别。</p>
+<h2 id="tfidf-N-grams"><a href="#tfidf-N-grams" class="headerlink" title="tfidf+N-grams"></a>tfidf+N-grams</h2><p>1.其实很简单，首先对语料库进行切词，维护自己的词典，做高频词的人工复审，将无意词进行stop_words归总<br><img src="./1537521926560.png" alt="Alt text"><br><em>对公司内部信息进行了一下处理，主要看分布趋势</em><br>可以看到，高频词其实是非常非常少的，而且如果你真的去做了，你就会发现，”了”、“的”、“啊”这种语气词，和一些你公司相关的领域词汇会非常靠前，这些词作为stop_words会有效的降低训练成本、提高模型效果。</p>
+<p>2.进行tf-idf，将词进行重赋权，字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降，有效的将向量化中的one hot encoding结果进行了修正。但是依然存在问题：在TFIDF算法中并没有体现出单词的位置信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sublinear_tf：replace tf with 1 + log(tf)</span></span><br><span class="line"><span class="comment"># max_df：用来剔出高于词频0.5的词</span></span><br><span class="line"><span class="comment"># token_pattern：(?u)\b\w+\b是为了匹配出长度为1及以上的词，默认的至少需要词长度为2</span></span><br><span class="line"><span class="comment"># ngram_range：这边我做了3-grams处理，如果只想朴素计算的话(1,1)即可</span></span><br><span class="line"><span class="comment"># max_features：随着我做了各种宽松的条件，最后生成的词维度会异常大，这边限制了前3万</span></span><br><span class="line">vectorizer = TfidfVectorizer(stop_words=stpwrdlst, sublinear_tf=<span class="keyword">True</span>, max_df=<span class="number">0.5</span>, token_pattern=<span class="string">r"(?u)\b\w+\b"</span>,ngram_range=(<span class="number">1</span>, <span class="number">3</span>), max_features=<span class="number">30000</span>)</span><br></pre></td></tr></table></figure>
+<p>不得不说，python处理机器学习，深度学习的便捷程度是异常的高。</p>
+<p>3.在经过TfidfVectorizer处理之后的结果是以稀疏矩阵的形式来存的，如果想看内容的话，可以用todense()转化为matrix来看。接下来，用贝叶斯来训练刚才得到的矩阵结果就可以了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mnb_tri = MultinomialNB(alpha=<span class="number">0.001</span>)</span><br><span class="line">mnb_tri.fit(tri_train_set.tdm, tri_train_set.label)</span><br></pre></td></tr></table></figure>
+<h2 id="tf-idf-n-grams-naive-bayes-lr"><a href="#tf-idf-n-grams-naive-bayes-lr" class="headerlink" title="tf-idf + n-grams + naive-bayes + lr"></a>tf-idf + n-grams + naive-bayes + lr</h2><p>这种方法是上面方法的升级版本，我们先看下架构：<br><img src="./1537521518763.png" alt="Alt text"><br><em>对公司内部信息进行了一下处理，主要看算法架构</em></p>
+<p>其实主要差异在于右侧的算法模型详细部分，我们做了一个由3-grams到3-grams+naive-bayes+lr的扩充，提升精度。</p>
+<p>在模型的过程中，上面的第一步，都是一样的，在第二、三步有所差异：<br>2.在第二步中，我们除了要构造出一个3-grams的sparse matrix也需要构造出一个朴素的sparse matrix</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 朴素结果</span></span><br><span class="line">vectorizerby = TfidfVectorizer(stop_words=stpwrdlst, token_pattern=<span class="string">r"(?u)\b\w+\b"</span>, max_df=<span class="number">0.5</span>, sublinear_tf=<span class="keyword">True</span>,ngram_range=(<span class="number">1</span>, <span class="number">1</span>), max_features=<span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
+<p>3.不仅仅用bayes进行一次分类，而是根据3-grams和朴素情况下的sparse matrix进行预测，再用logistics regression来合并两个的结果做个stack进行0-1压缩。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造出一个3-grams的sparse matrix也需要构造出一个朴素的sparse matrix</span></span><br><span class="line">mnb_tri = MultinomialNB(alpha=<span class="number">0.001</span>)</span><br><span class="line">mnb_tri.fit(tri_train_set.tdm, tri_train_set.label)</span><br><span class="line">mnb_by = MultinomialNB(alpha=<span class="number">0.001</span>)</span><br><span class="line">mnb_by.fit(by_train_set.tdm, by_train_set.label)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加bias，cv选择最优正则结果，lbfgs配合l2正则</span></span><br><span class="line">lr = LogisticRegressionCV(multi_class=<span class="string">"ovr"</span>, fit_intercept=<span class="keyword">True</span>, Cs=np.logspace(<span class="number">-2</span>, <span class="number">2</span>, <span class="number">20</span>), cv=<span class="number">2</span>, penalty=<span class="string">"l2"</span>,solver=<span class="string">"lbfgs"</span>, tol=<span class="number">0.01</span>)</span><br><span class="line">re = lr.fit(adv_data[[<span class="string">'f1'</span>, <span class="string">'f2'</span>]], adv_data[<span class="string">'rep_label'</span>])</span><br></pre></td></tr></table></figure>
+<p>总结一下上面两种方法，我觉得是入门快，效果也不错的小练手，也是完全可以作为我们开始一个项目的时候，用来做baseline的方法，主要是快啊～/斜眼笑</p>
+<h2 id="GolVe-lr"><a href="#GolVe-lr" class="headerlink" title="GolVe+lr"></a>GolVe+lr</h2><p>因为我目前的带标签数据比较少，所以之前一直没有敢用word2vec去向量化作死，但是GolVe不存在这个问题啊，我就美滋滋的进行了一波。<br>首先，先讲下GolVe的使用：</p>
 <ul>
-<li>1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户</li>
-<li>2.维数灾难及交叉指标计算之间的高频计算性能瓶颈</li>
+<li><a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="noopener">https://github.com/stanfordnlp/GloVe</a> 在最大的代码抄袭网站下载(git clone)坦福大佬的代码，友情提醒，不要作死自己看了理论就觉得自己会写，自己搞个GloVe。(别问我是怎么知道的)</li>
+<li>cd到对应目录下，vim demo.sh这个文件<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="comment"># Makes programs, downloads sample data, trains a GloVe model, and then evaluates it.</span></span><br><span class="line"><span class="comment"># One optional argument can specify the language used for eval script: matlab, octave or [default] python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 请把make这边注释掉，这个是让你去下个demo，我们直接改成自己的数据</span></span><br><span class="line"><span class="comment"># make</span></span><br><span class="line"><span class="comment"># if [ ! -e text8 ]; then</span></span><br><span class="line"><span class="comment">#   if hash wget 2&gt;/dev/null; then</span></span><br><span class="line"><span class="comment">#     wget http://mattmahoney.net/dc/text8.zip</span></span><br><span class="line"><span class="comment">#   else</span></span><br><span class="line"><span class="comment">#     curl -O http://mattmahoney.net/dc/text8.zip</span></span><br><span class="line"><span class="comment">#   fi</span></span><br><span class="line"><span class="comment">#   unzip text8.zip</span></span><br><span class="line"><span class="comment">#   rm text8.zip</span></span><br><span class="line"><span class="comment"># fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CORPUS需要对应自己的欲训练的文档</span></span><br><span class="line">CORPUS=content.txt</span><br><span class="line">VOCAB_FILE=vocab.txt</span><br><span class="line">COOCCURRENCE_FILE=cooccurrence.bin</span><br><span class="line">COOCCURRENCE_SHUF_FILE=cooccurrence.shuf.bin</span><br><span class="line">BUILDDIR=build</span><br><span class="line">SAVE_FILE=vectors</span><br><span class="line">VERBOSE=2</span><br><span class="line">MEMORY=4.0</span><br><span class="line"><span class="comment"># 单词至少出现几次</span></span><br><span class="line">VOCAB_MIN_COUNT=3</span><br><span class="line"><span class="comment"># 向量长度</span></span><br><span class="line">VECTOR_SIZE=128</span><br><span class="line"><span class="comment"># 迭代次数</span></span><br><span class="line">MAX_ITER=30</span><br><span class="line"><span class="comment"># 窗口长度</span></span><br><span class="line">WINDOW_SIZE=15</span><br><span class="line">BINARY=2</span><br><span class="line">NUM_THREADS=8</span><br><span class="line">X_MAX=10</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/vocab_count -min-count <span class="variable">$VOCAB_MIN_COUNT</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$VOCAB_FILE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/vocab_count -min-count <span class="variable">$VOCAB_MIN_COUNT</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$VOCAB_FILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/cooccur -memory <span class="variable">$MEMORY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span> -window-size <span class="variable">$WINDOW_SIZE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$COOCCURRENCE_FILE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/cooccur -memory <span class="variable">$MEMORY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span> -window-size <span class="variable">$WINDOW_SIZE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$COOCCURRENCE_FILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/shuffle -memory <span class="variable">$MEMORY</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$COOCCURRENCE_FILE</span> &gt; <span class="variable">$COOCCURRENCE_SHUF_FILE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/shuffle -memory <span class="variable">$MEMORY</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$COOCCURRENCE_FILE</span> &gt; <span class="variable">$COOCCURRENCE_SHUF_FILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/glove -save-file <span class="variable">$SAVE_FILE</span> -threads <span class="variable">$NUM_THREADS</span> -input-file <span class="variable">$COOCCURRENCE_SHUF_FILE</span> -x-max <span class="variable">$X_MAX</span> -iter <span class="variable">$MAX_ITER</span> -vector-size <span class="variable">$VECTOR_SIZE</span> -binary <span class="variable">$BINARY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/glove -save-file <span class="variable">$SAVE_FILE</span> -threads <span class="variable">$NUM_THREADS</span> -input-file <span class="variable">$COOCCURRENCE_SHUF_FILE</span> -x-max <span class="variable">$X_MAX</span> -iter <span class="variable">$MAX_ITER</span> -vector-size <span class="variable">$VECTOR_SIZE</span> -binary <span class="variable">$BINARY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$CORPUS</span>"</span> = <span class="string">'text8'</span> ]; <span class="keyword">then</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">'matlab'</span> ]; <span class="keyword">then</span></span><br><span class="line">matlab -nodisplay -nodesktop -nojvm -nosplash &lt; ./<span class="built_in">eval</span>/matlab/read_and_evaluate.m 1&gt;&amp;2 </span><br><span class="line"><span class="keyword">elif</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">'octave'</span> ]; <span class="keyword">then</span></span><br><span class="line">octave &lt; ./<span class="built_in">eval</span>/octave/read_and_evaluate_octave.m 1&gt;&amp;2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ python eval/python/evaluate.py"</span></span><br><span class="line">python <span class="built_in">eval</span>/python/evaluate.py</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p><strong>算法概述：</strong></p>
+<p>这边多说一下，<code>CORPUS=content.txt</code>这边content.txt里面的格式需要按照空格为分隔符进行存储，我之前一直以为是<code>\t</code>。</p>
 <ul>
-<li>1.图形位置分布</li>
-<li>2.统计方法检测</li>
-<li>3.距离位置检测</li>
-<li>4.密度位置检测</li>
-<li>5.无监督模型识别</li>
+<li><p>直接sh demo.sh，你会得到vectors.txt，这个里面就对应每个词的向量表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">天气 -0.754142 0.386905 -1.200074 -0.587121 0.758316 0.373824 0.342211 -1.275982 -0.300846 0.374902 -0.548544 0.595310 0.906426 0.029255 0.549932 -0.650563 -0.425185 1.689703 -1.063556 -0.790254 -1.191287 0.841529 1.080641 -0.082830 1.062107 -0.667727 0.573955 -0.604460 -0.601102 0.615299 -0.470923 0.039398 1.110345 1.071094 0.195431 -0.155259 -0.781432 0.457884 1.093532 -0.188207 -0.161646 0.246220 -0.346529 0.525458 0.617904 -0.328059 1.374414 1.020984 -0.959817 0.670894 1.091743 0.941185 0.902730 0.609815 0.752452 1.037880 -1.522382 0.085098 0.152759 -0.562690 -0.405502 0.299390 -1.143145 -0.183861 0.383053 -0.013507 0.421024 0.025664 -0.290757 -1.258696 0.913482 -0.967165 -0.131502 -0.324543 -0.385994 0.711393 1.870067 1.349140 -0.541325 -1.060084 0.078870 0.773146 0.358453 0.610744 0.407547 -0.552853 1.663435 0.120006 0.534927 0.219279 0.682160 -0.631311 1.071941 -0.340337 -0.503272 0.150010 1.347857 -1.024009 -0.181186 0.610240 -0.218312 -1.120266 -0.486539 0.264507 0.266192 0.347005 0.172728 0.613503 -0.131925 -0.727304 -0.504488 1.773406 -0.700505 -0.159963 -0.888025 -1.358476 0.540589 -0.243272 -0.236959 0.391855 -0.133703 -0.071120 1.050547 -1.087613 -0.467604 1.779341 -0.449409 0.949411</span><br><span class="line">好了 1.413075 -0.226177 -2.024229 -0.192003 0.628270 -1.227394 -1.054946 -0.900683 -1.958882 -0.133343 -1.014088 -0.434961 0.026207 -0.066139 0.608682 -0.362021 0.314323 0.261955 -0.571414 1.738899 -1.013223 0.503853 -0.536511 -0.212048 0.611990 -0.627851 0.297657 -0.187690 -0.565871 -0.234922 -0.845875 -0.767733 0.032470 1.508012 -0.204894 -0.495031 -0.159262 0.181380 0.050582 -0.333469 0.454832 -2.091174 0.448453 0.940212 0.882077 -0.617093 0.616782 -0.993445 -0.385087 0.251711 0.259918 -0.222614 -0.595131 0.661472 0.194740 0.619222 -1.253610 -0.838179 0.781428 -0.396697 -0.530109 0.022801 -0.558296 -0.656034 0.842634 -0.105293 0.586823 -0.603681 -0.605727 -0.556468 0.924275 -0.299228 -1.121538 0.237787 0.498935 -0.045423 0.171536 -1.026385 -0.262225 0.390662 1.263240 0.352172 0.261121 0.915840 1.522183 -0.498536 2.046169 0.012683 -0.073264 -0.361662 0.759529 -0.713268 0.281747 -0.811104 -0.002061 -0.802508 0.520559 0.092275 -0.623098 0.199694 -0.134896 -1.390617 0.911266 -0.114067 1.274048 1.108440 -0.266002 1.066987 0.514556 0.144796 -0.606461 0.197114 0.340205 -0.400785 -0.957690 -0.327456 1.529557 -1.182615 0.431229 -0.084865 0.513266 -0.022768 -0.092925 -0.553804 -2.269741 -0.078390 1.376199 -1.163337</span><br><span class="line">随意 0.410436 0.776917 -0.381131 0.969900 -0.804778 -0.785379 -0.887346 -1.463543 -1.574851 0.313285 0.685253 -0.918359 0.199073 -0.305374 -0.642721 0.098114 -0.723331 0.353159 0.042807 0.369208 -1.534930 -0.084871 0.020417 -0.384782 0.276833 -0.160028 1.107051 0.884343 -0.204381 -0.459738 -0.387128 0.125867 0.093569 1.192471 -0.473752 -0.314541 -1.029249 0.481447 1.358753 -1.688778 -0.113080 -0.401443 -0.958206 0.605638 1.083126 0.131617 0.092507 0.476506 0.801755 1.096883 -0.102036 0.461804 0.820297 -0.104053 -0.126638 0.957708 -0.722038 0.223686 0.583582 0.201246 -1.254708 0.770717 -1.271523 -0.584094 -1.142426 1.066567 0.071951 -0.182649 0.014365 -0.577141 0.037340 -0.166832 -0.247827 0.165994 1.143665 -0.258421 -0.335195 0.170218 -0.212838 0.013709 0.088847 0.663238 -0.597439 0.632847 0.370871 0.652707 0.306935 0.195127 -0.252443 0.588479 0.191633 -1.587564 0.564600 -0.306158 -0.648177 -0.488595 1.532795 -0.462473 -0.643878 1.292369 -0.051494 -1.032738 0.453587 0.411327 -0.469373 0.428398 -0.020839 0.307422 0.518331 -0.860913 -2.170098 -0.277532 -0.966210 0.615336 -0.924783 0.042679 1.289640 1.272992 1.367773 0.426600 -0.187254 -0.781009 1.331301 -0.088357 -1.113550 -0.262879 0.300137 0.437905</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有了每个词的向量，我们这边采取了借鉴YoutubeNet网络的想法：<br><img src="./1537759001384.png" alt="Alt text"></p>
+</li>
 </ul>
-<h1 id="算法详述："><a href="#算法详述：" class="headerlink" title="算法详述："></a><strong>算法详述：</strong></h1><h2 id="图形位置分布"><a href="#图形位置分布" class="headerlink" title="图形位置分布"></a><strong>图形位置分布</strong></h2><p>当我们不需要长期监控异常用户，只需要少数几次识别异常用户，且精度要求不高的时候，我们可以采取简单方便的图形识别方式，例如：箱式图。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-f32b17059e0e776b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>箱式图判断中，一般我们只需要锁定25%(Q1)分位点的用户特征值，75%(Q3)分位点的用户特征值，Q3与Q1之间的位差即为IQR，一般认定Q3+1.5个IQR外的点即为异常点，对应的用户即为异常用户。这种方法也叫做“盖帽法”，不必人为设定上限阀值，随着用户的数据变化而变化上界，避免了高频修改的问题，只是精度欠缺且绝大多数情况下识别出的异常用户较少。</p>
-<p>方法比较简单，也不多加解释了。</p>
-<h2 id="统计方法检测"><a href="#统计方法检测" class="headerlink" title="统计方法检测"></a><strong>统计方法检测</strong></h2><p>方法也比较简单，上线开发简单。一直是分两步：</p>
-<ul>
-<li>先假设全量数据服从一定的分布，比如常见的正太分布，泊松分布等</li>
-<li>在计算每个点属于这个分布的概率，也就是大家常用的以平均值和方差定密度函数的问题</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-0d68807163ff6089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>因为这边，我们前期无法知道数据服从什么样的分布，所以，我们这边可以用切比雪夫不等式来代替确定的分布形式。除此之外，也就是同时用了马氏距离来衡量了每个具体的点在整体数据集中的位置。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-c60ac94e5cc813c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>核心代码就是下面这个协方差矩阵及矩阵相乘：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两个维度之间协方差矩阵</span></span><br><span class="line">S=np.cov(X)</span><br><span class="line"><span class="comment">#协方差矩阵的逆矩阵</span></span><br><span class="line">SI = np.linalg.inv(S)</span><br><span class="line"><span class="comment">#第一次计算全量用户的维度重心</span></span><br><span class="line">XTmean = XT.mean(axis=<span class="number">0</span>)</span><br><span class="line">d1=[]</span><br><span class="line">n  = XT.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">	delta = XT[i] - XTmean</span><br><span class="line">	d = np.sqrt(np.dot(np.dot(delta,SI),delta.T))</span><br><span class="line">	d1.append(d)</span><br></pre></td></tr></table></figure></p>
-<p>这个方法的最核心的优点就是对全量数据进行了分块，可以理解为将1拆分成了必定有问题的1/m用户，可能有问题的1/n用户，必定没问题的1/w用户（1/m+1/n+1/w=1），这也奠定了后续更好的方法的基础。<br>但是问题也是很明显的，对于1/m，1/n的大小确定无法非常的精准，多了则影响正常用户，少了则无法准确拦截，还是一个划分的算法，并不能给出每个人的好坏程度。</p>
-<h2 id="距离位置检测"><a href="#距离位置检测" class="headerlink" title="距离位置检测"></a><strong>距离位置检测</strong></h2><p>距离探测的方法有一个非常强的假设，正常的用户都比较集中，有较多的邻居，而异常用户都特立独行。<br>在常见的业务问题中都是满足的，比如对爬虫ip的识别，撞库的识别，这些一看那些高频访问的就不是正常用户，但是对于特别稀疏的业务场景，比如企业融资，高深度的敏感页面访问，均不是很适用，它们的频次较低无法构成一个邻居的概念。</p>
-<p>这边非常常用的有2种，一个是连续特征间的欧式距离（标准化下的欧式距离（马氏距离）），另一个是名义变量下的余弦相似度。</p>
-<p>这边只讨论第一种情况，连续特征下如何衡量数据是否为异常数据。前面我们也说到了，切比雪夫不等式的方法能够有效的划分出三个类别正常用户，异常用户，未知用户。所以，相应的，我们只需要在未知用户的集群里面去寻找与正常用户更不相似的，或者和异常用户更相似的用户就可以了。</p>
-<p>对于单变量衡量：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-d406583407427fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>对于多变量衡量：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-26048e0fbf3736fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>核心计算相似度的方式就是以上两个公式，会有一些细节处理的问题及注意点，大家可自行研究。</p>
-<h2 id="密度位置检测"><a href="#密度位置检测" class="headerlink" title="密度位置检测"></a><strong>密度位置检测</strong></h2><p>这边先等下谈原理，较为冗长，先说结论，其实，在能够使用距离位置检测的情况下，优先使用距离位置检测的方法。密度方法的前提几乎与位置方法的前提一致，但是在计算量级上而言，存在较大的差异差别。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-12075db91cef6c5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>上述的图片是Fei Tony Liu, Kai Ming Ting, Zhi-Hua Zhou的一篇论文里面对比的常见的iForest,ORCA,LOF(也就是密度位置检测),RF方法的准确率和耗时情况，也清晰的可以看出，同为距离衡量的ORCA的耗时较大，但是LOF的耗时更高，甚至部分情况下都无法计算出结果。</p>
-<p>下面让我们看下理论先，密度位置检测的方法之一，LOF：<br>概念定义：<br>1) d(p,o)：两点p和o之间的距离；<br>2) k-distance：第k距离<br>　　　　对于点p的第k距离dk(p)定义如下：<br>　　　　dk(p)=d(p,o)，并且满足：<br>　　　　　　a) 在集合中至少有不包括p在内的k个点o,∈C{x≠p}， 满足d(p,o,)≤d(p,o) ；<br>　　　　　　b) 在集合中最多有不包括p在内的k−1个点o,∈C{x≠p}，满足d(p,o,)&lt;d(p,o) ；</p>
-<p>上面两个条件总结起来就是1.距离范围内至少满足一定数量的点数，2.最多允许有一个距离最大的非p点<br>形象的看，距离就是p的第k距离，也就是距离p第k远的点的距离，不包括p，如下图箭头的路径长度。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-f0ec3716c8511597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>3) k-distance neighborhood of p：第k距离邻域<br>　　　　点p的第k距离邻域Nk(p)，就是p的第k距离即以内的所有点，包括第k距离。<br>　　　　因此p的第k邻域点的个数记为 |Nk(p)|，且|Nk(p)|≥k</p>
-<p>我们在定义一些衡量指标，那么LOF就算是完成了：<br>1、可达距离（reach-distance）<br>点o到点p的第k可达距离定义为：<br>reach-distancek(p,o)=max{k−distance(o),d(p,o)}</p>
-<p>2、局部可达密度（local reachablility density）<br>点p处的局部可达密度为：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-4b18fea49c38f840.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>其中，|Nk(p)|为p的第k领域点的个数，∑o∈Nk(p)reach-distk(p,o)计算的是p的k领域内的点到p的可达距离，也就是1中涉及的计算方式。</p>
-<p>3、局部离群因子（local outlier factor）<br>点p的局部离群因子为：<br>LOF（p） = （∑o∈Nk(p)lrdk(o)/lrdk(p)）/|Nk(p)|<br>其中，lrdk(o)/lrdk(p)比值衡量了p点与附近的点之间的密切差异情况，LOF值=1时，代表p与p附近的点密度一致；LOF值<1时，代表p点的密度大于p附近点的密度；lof值>1时，代表p点的密度小于p附近点的密度，也是非常符合我们的前提假设的，异常点总是比较稀疏，正常点总是比较稠密的。</1时，代表p点的密度大于p附近点的密度；lof值></p>
-<p>到此位置LOF的数学理论就完成了，让我们回顾一下它的思想。它其实就是找数据集合中的每一个点及其邻居的点，计算它和它的邻居的密度，当它的密度大于等于它邻居的密度的时候，则认为它是稠密中心，是正常用户数据；否则异常。<br>但是要计算每个点及对应的邻居的LOF值，计算成本也是非常的高的，最初我们也指出了这一点。</p>
-<p>核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_distance</span><span class="params">(k, instance, instances, distance_function=distance_euclidean)</span>:</span></span><br><span class="line">    distances = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> instance2 <span class="keyword">in</span> instances:</span><br><span class="line">        distance_value = distance_function(instance, instance2)</span><br><span class="line">        <span class="keyword">if</span> distance_value <span class="keyword">in</span> distances:</span><br><span class="line">            distances[distance_value].append(instance2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            distances[distance_value] = [instance2]</span><br><span class="line">    distances = sorted(distances.items())</span><br><span class="line">    neighbours = []</span><br><span class="line">    k_sero = <span class="number">0</span></span><br><span class="line">    k_dist = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">for</span> dist <span class="keyword">in</span> distances:</span><br><span class="line">        k_sero += len(dist[<span class="number">1</span>])</span><br><span class="line">        neighbours.extend(dist[<span class="number">1</span>])</span><br><span class="line">        k_dist = dist[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> k_sero &gt;= k:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> k_dist, neighbours</span><br></pre></td></tr></table></figure></p>
-<h2 id="无监督模型识别"><a href="#无监督模型识别" class="headerlink" title="无监督模型识别"></a><strong>无监督模型识别</strong></h2><p>其实这边说完全的无监督，我觉得不是很准确，我觉得叫“半监督”可能更好一些。<br>这边方法很多，我只介绍两种：<br>1.Iforest<br>2.RNN</p>
-<p>先让我们看下Iforest：<br>算法的关键在于:对于一个有若干维的数据集合，对于其中的任一维度，如果该维度是连续属性的话，在若干次随机二分类后，边界稀疏点最容易优先达到子叶节点,如下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-039151615db4b747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>算法实现详细的过程为：<br>假设数据集有N条数据，构建一颗iTree时，从N条数据中均匀抽样(一般是无放回抽样)出m(通常为256)个样本出来，作为这颗树的训练样本。在样本中，随机选一个特征，并在这个特征的所有值范围内(最小值与最大值之间)随机选一个值，对样本进行二叉划分，将样本中小于该值的划分到节点的左边，大于等于该值的划分到节点的右边,重复以上划分步骤，直到达到划分层数上限log(m)或者节点内只有一个样本，一棵树Itree的结果往往是不可信的，所以我们可以训练100-255棵树，最后整合所以树的结果取平均的深度作为输出深度，也叫做Isolation Forest。</p>
-<p>有了算法逻辑，再看衡量指标：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-f30bdc606e81ad19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。（这边需要注意，在sklearn中的Isolation是取得相反的逻辑，score越小数据异常的可能性越大。）</p>
-<p>这边也贴上核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None, sample_weight=None)</span>:</span></span><br><span class="line">       X = check_array(X, accept_sparse=[<span class="string">'csc'</span>], ensure_2d=<span class="keyword">False</span>)</span><br><span class="line">       <span class="keyword">if</span> issparse(X):</span><br><span class="line">           <span class="comment"># Pre-sort indices to avoid that each individual tree of the</span></span><br><span class="line">           <span class="comment"># ensemble sorts the indices.</span></span><br><span class="line">           X.sort_indices()</span><br><span class="line"></span><br><span class="line">       rnd = check_random_state(self.random_state)</span><br><span class="line">       y = rnd.uniform(size=X.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">       <span class="comment"># ensure that max_sample is in [1, n_samples]:</span></span><br><span class="line">       n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (self.max_samples &lt;= n_samples):</span><br><span class="line">           warn(<span class="string">"max_samples is larger than the total number of samples"</span></span><br><span class="line">                <span class="string">" n_samples. Corrected as max_samples=n_samples"</span>)</span><br><span class="line">           self.max_samples = n_samples</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (<span class="number">0</span> &lt; self.max_samples):</span><br><span class="line">           <span class="keyword">raise</span> ValueError(<span class="string">"max_samples has to be positive"</span>)</span><br><span class="line"></span><br><span class="line">       super(IsolationForest, self).fit(X, y, sample_weight=sample_weight)</span><br><span class="line">       <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">_cost</span><span class="params">(self, n)</span>:</span></span><br><span class="line">       <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1.</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           harmonic_number = np.log(n) + <span class="number">0.5772156649</span></span><br><span class="line">           <span class="keyword">return</span> <span class="number">2.</span> * harmonic_number - <span class="number">2.</span> * (n - <span class="number">1.</span>) / n</span><br></pre></td></tr></table></figure></p>
-<p>2.RNN<br>通常我们会以5层的卷积神经网络作为训练网络。我在这边处理之前将切比雪夫不等式划分出来的正常用户作为0-output，异常用户作为1-output，然后尽可能的降低损失函数的误差即可。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-9cbadf3ff359e091.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>第一层是常规层，将不同的input做线性组合：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-dbe05c6368f7f71f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>第二层、第四层是做数据非线性变化：<br>这边选用的是tanh函数</p>
-<p>第三层是做梯度分层下的非线性变化，抹平相似特征间的ouput：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-cc49e1a8115d8a1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中，k为3，N为想要分的梯度的个数，a3为一个阶梯跳跃到另一个阶梯的转换效率，形如：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-7a4d7306a3ff518d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>第五层，也就是最后一层通过sigmoid进行0-1之间的压缩。</p>
-<p>这边的损失函数用的是常见的mse：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1129359-77ca366109e16fc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>当通过测试数据训练完成后，再将未知数据进行模型训练，观察得到结果的大小，越靠近1，越有可能为异常用户。</p>
-<hr>
-<p>以上就是5种常见的只基于数据下的异常用户的识别，更偏方法技术一点，但是无论是算法实现还是业务应用中，同样需要注意输入特征的问题。由于大家运用方向不同，就不细节赘述。</p>
-<p>详细实现demo可以私信我要，最后谢谢大家阅读了。</p>
+<p>举个例子：存在一句话”我爱中国”，“我”的向量是[0.3,0.2,0.3]，”爱”的向量是[0.1,0.2,0.3]，“中国”的向量是[0.6,0.6,0.4]，那么average后就是[0.5,0.5,0.5]，然后这就类似一个特征为三的input。</p>
+<p>这种方法的好处就是快捷，预处理的工作代价要小，随着数据量的增多，模型的效果要更加的好，这边给出一下业务数据对比：<br>| experiment      |    date id | intercepted amount  |intercepted_recall|<br>| :–: | :——–:| :–: |<br>| 3-grams  | 20180915 |  117   |79.3%|<br>| 3-grams     |   20180917 |  100  |78.7%|<br>| 3-grams+bayes+lr      |    20180915 | 117  |83.4%|<br>| 3-grams+bayes+lr      |    20180917 | 100  |88.6%|<br>| gloVe+lr  | 20180915 |  117   |93.1%|<br>| gloVe+lr  | 20180917 |  100   |93.9%|</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -540,7 +499,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/风控/" rel="tag"># 风控</a>
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
           
         </div>
       
@@ -553,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/01/python开发：特征工程代码模版-一/" rel="next" title="python开发：特征工程代码模版(一)">
-                <i class="fa fa-chevron-left"></i> python开发：特征工程代码模版(一)
+              <a href="/2018/08/29/Google团队在DNN的实际应用方式的整理/" rel="next" title="Google团队在DNN的实际应用方式的整理">
+                <i class="fa fa-chevron-left"></i> Google团队在DNN的实际应用方式的整理
               </a>
             
           </div>
@@ -563,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/01/python开发：特征工程代码模版-二/" rel="prev" title="python开发：特征工程代码模版(二)">
-                python开发：特征工程代码模版(二) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -740,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题剖析："><span class="nav-number">1.</span> <span class="nav-text">问题剖析：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法详述："><span class="nav-number">2.</span> <span class="nav-text">算法详述：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图形位置分布"><span class="nav-number">2.1.</span> <span class="nav-text">图形位置分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计方法检测"><span class="nav-number">2.2.</span> <span class="nav-text">统计方法检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#距离位置检测"><span class="nav-number">2.3.</span> <span class="nav-text">距离位置检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密度位置检测"><span class="nav-number">2.4.</span> <span class="nav-text">密度位置检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督模型识别"><span class="nav-number">2.5.</span> <span class="nav-text">无监督模型识别</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#向量化"><span class="nav-number">1.</span> <span class="nav-text">向量化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本分类"><span class="nav-number">2.</span> <span class="nav-text">文本分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tfidf-N-grams"><span class="nav-number">2.1.</span> <span class="nav-text">tfidf+N-grams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-idf-n-grams-naive-bayes-lr"><span class="nav-number">2.2.</span> <span class="nav-text">tf-idf + n-grams + naive-bayes + lr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GolVe-lr"><span class="nav-number">2.3.</span> <span class="nav-text">GolVe+lr</span></a></li></ol></li></ol></div>
             
 
           </div>
