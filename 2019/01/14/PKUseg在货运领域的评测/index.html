@@ -89,12 +89,13 @@
 <meta property="og:description" content="先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上：  默认模型下，jieba效果优于PKUseg PKUseg提供场景精细化的预训练（还没有提供入口），长远来讲适合专业领域使用 PKUseg在特定的场景下有令人惊喜的效果（地址切分）  给大家的建议就是，如果大家赶时间求稳定适应范围需要非常广的时候，目前来说jieba是非常好的选择，如果说在面临一些精细化领域的特殊需求的时候">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-9a8ed1b68b8ee6f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-3425a62474ffcd7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-dadf8619cc1f4c89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f1dd284852235f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-66afc8663d0dac7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-0d85da695b25877c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-14T02:43:48.975Z">
+<meta property="og:updated_time" content="2019-01-14T02:48:45.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PKUseg在货运领域的评测">
 <meta name="twitter:description" content="先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上：  默认模型下，jieba效果优于PKUseg PKUseg提供场景精细化的预训练（还没有提供入口），长远来讲适合专业领域使用 PKUseg在特定的场景下有令人惊喜的效果（地址切分）  给大家的建议就是，如果大家赶时间求稳定适应范围需要非常广的时候，目前来说jieba是非常好的选择，如果说在面临一些精细化领域的特殊需求的时候">
@@ -378,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,060 字
+                  1,047 字
                 </span>
               
 
@@ -425,10 +426,10 @@
 <hr>
 <p>那是一个风和日丽的早上，突然群里老大发出一条消息：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-9a8ed1b68b8ee6f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>我感觉我的心脏有一丝隐隐作痛的感觉，人在办公室坐，活从天上来，虽然身后站着一堆催上线的产品，我还是屈服于老大的正义（淫威），简单测评了新出来的PKUseg与Jieba在公路货运/运输行业上的效果对比。</p>
 <p>在我们的热词数据库中已经有人工切词完成的2万多条货运的词条：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">description	standard</span><br><span class="line">高博集团装货卸宝华	高博 集团 装货 卸 宝华</span><br><span class="line">北安到吉林农安饲料90吨每吨105	北安 到 吉林 农安 饲料 90吨 每吨 105</span><br><span class="line">需要4个车	需要 4个 车</span><br><span class="line">叶张公路装香闵路曲吴路两卸	叶张公路 装 香闵路 曲吴路 两卸</span><br><span class="line">从福通物流到吴滩镇	从 福通 物流 到 吴滩镇</span><br><span class="line">霞浦宏霞路到中通物流	霞浦宏霞路 到 中通物流</span><br><span class="line">石大路3场到德兴西门山	石大路 3场 到 德兴 西门山</span><br><span class="line">公园西路装	公园 西路 装</span><br><span class="line">不押车每吨150	不 押车 每吨 150</span><br><span class="line">速订价钱好商量	速订 价钱 好商量</span><br><span class="line">慈溪胜山装	慈溪 胜山装</span><br><span class="line">好装好卸高价急走	好装好卸 高价急走</span><br><span class="line">九顶山路与东方大道位置装货可以配货	九顶 山路 与 东方 大道 位置 装货 可以 配货</span><br><span class="line">要二部	要 二部</span><br><span class="line">青浦工业园区久远路提货到奉贤新杨公路进仓	青浦 工业园区 久远路 提货 到 奉贤 新杨公路 进仓</span><br><span class="line">园光路装博学南路卸	园光路 装 博学南路 卸</span><br><span class="line">公兴装卸荣昌广顺	公兴 装卸 荣昌 广顺</span><br><span class="line">打备注电话18458331112	打 备注 电话 18458331112</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>首先看，不加任何词库，预训练下的，最后的效果对比：<br>| 结果      |    切词准确率 |<br>| :——– | ——–:|<br>| jieBa  | 79.5% |<br>|  pkuSeg    |   59.79% |<br>可以看到，在默认的分词模型下，jieBa分词还是拥有绝对优势的，但是在pkuSeg的git里面<img src="https://upload-images.jianshu.io/upload_images/1129359-dadf8619cc1f4c89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>首先看，不加任何词库，预训练下的，最后的效果对比：<br><img src="https://upload-images.jianshu.io/upload_images/1129359-3425a62474ffcd7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可以看到，<strong>在默认的分词模型下，jieBa分词还是拥有绝对优势的</strong>，但是在pkuSeg的git里面<img src="https://upload-images.jianshu.io/upload_images/1129359-dadf8619cc1f4c89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>所以我想看看能不能进行一下预训练下后再对比一下，可惜的是我在git（<a href="https://github.com/sladesha/pkuseg-python#相关论文" target="_blank" rel="noopener">git地址传送门</a>）上找了半天也没有找到预训练的入口，只有已经被官方预训练好的词库<br><img src="https://upload-images.jianshu.io/upload_images/1129359-f1dd284852235f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>等有时间了，可以邮件沟通一下再补充这个部分的效果对比，我觉得，应该还是有提升的。</p>
 <p>但是，在我们实际去测的过程中，我们发现了一些差异话的东西比较有意思。我们其实现在在做一个语音发货的产品，涉及到把一串地址切分开的需求：<br>　<img src="https://upload-images.jianshu.io/upload_images/1129359-66afc8663d0dac7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>其中涉及到地址切分的时候，jieba的能力会比如PKUseg要弱不少，比如“山西大同”，“上海浦东”，我们需要把一级二级地址切开的时候，PKUseg可以做到，而jieba并不能按照需求切块。所以，我们已经打算在地址模块切换PKUseg的模型来适应了。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-0d85da695b25877c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其中涉及到<strong>地址切分</strong>的时候，jieba的能力会比如PKUseg要弱不少，比如“山西大同”，“上海浦东”，我们需要把一级二级地址切开的时候，PKUseg可以做到，而jieba并不能按照需求切块。所以，我们已经打算在地址模块切换PKUseg的模型来适应了。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-0d85da695b25877c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>最后吐槽一下，虽然我知道PKUseg需要加载模型，但是一加载就是一二十秒也是有点夸张了。酒浆，各位下回见。</p>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
