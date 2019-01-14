@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2029/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</loc>
+    <lastmod>2019-01-14T03:03:51.113Z</lastmod>
+    <data>
+        <display>
+        <title>博客导读公告(置顶)</title>
+        <pubTime>2029-01-20T14:54:08.000Z</pubTime>
+        
+        <tag>公告</tag>
+         
+         
+           
+             
+              <breadCrumb title="基础" url="http://sladesha.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2019/01/14/PKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B/</loc>
     <lastmod>2019-01-14T02:48:45.020Z</lastmod>
     <data>
@@ -278,26 +298,6 @@
            
              
               <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2019/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</loc>
-    <lastmod>2018-07-04T10:37:18.196Z</lastmod>
-    <data>
-        <display>
-        <title>博客导读公告(置顶)</title>
-        <pubTime>2019-01-20T14:54:08.000Z</pubTime>
-        
-        <tag>公告</tag>
-         
-         
-           
-             
-              <breadCrumb title="基础" url="http://sladesha.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
           
         </display>
     </data>
