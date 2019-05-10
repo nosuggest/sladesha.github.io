@@ -379,6 +379,30 @@
     </entry>
     
     <entry>
+      <title><![CDATA[logistic regression一点理解]]></title>
+      <url>/2018/08/14/regression%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<p>Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见<a href="https://www.jianshu.com/p/61ac39a57f9d" target="_blank" rel="noopener">logistic regression一点理解</a>。</p>
+<p><img src="/2018/08/14/regression一点理解/1.png" alt=""></p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 理论解析 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现]]></title>
       <url>/2018/06/26/%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
       <content type="html"><![CDATA[<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/1.png" alt=""></p>
