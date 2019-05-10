@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="推荐评估方法," />
 
 
 
@@ -80,16 +80,20 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SladeSha&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/tags/论文解析/index.html">
+<meta name="description" content="推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢">
+<meta name="keywords" content="推荐评估方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量化评估推荐系统效果">
+<meta property="og:url" content="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。3) 深度评估指标的缺失。(如点击深度、购">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/1.png">
+<meta property="og:updated_time" content="2019-05-10T07:41:09.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SladeSha&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:title" content="量化评估推荐系统效果">
+<meta name="twitter:description" content="推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。3) 深度评估指标的缺失。(如点击深度、购">
+<meta name="twitter:image" content="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/1.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/tags/论文解析/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/"/>
 
 
 
 
 
-  <title>标签: 论文解析 | SladeSha's Algorithm World</title>
+  <title>量化评估推荐系统效果 | SladeSha's Algorithm World</title>
   
 
 
@@ -144,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,82 +276,288 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>论文解析<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/29/Google团队在DNN的实际应用方式的整理/" itemprop="url">
-              
-                <span itemprop="name">Google团队在DNN的实际应用方式的整理</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">量化评估推荐系统效果</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-29T14:12:58+08:00"
-              content="2018-08-29" >
-          08-29
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T09:29:45+08:00">
+                2018-07-19
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,362 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/" itemprop="url">
-              
-                <span itemprop="name">关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-26T11:29:45+08:00"
-              content="2018-06-26" >
-          06-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <p>推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：<br>1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。<br>2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。<br>3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。<br>4）冷启动<br>5）Exploration 和 Exploitation问题</p>
+<h1 id="离线模型之间的评估"><a href="#离线模型之间的评估" class="headerlink" title="离线模型之间的评估"></a>离线模型之间的评估</h1><h2 id="召回集测试"><a href="#召回集测试" class="headerlink" title="召回集测试"></a>召回集测试</h2><ul>
+<li><p>recall<br>命中skn个数/用户真实点击skn个数</p>
+</li>
+<li><p>precision<br>命中skn个数/所有预测出来的skn总数</p>
+</li>
+<li><p>F1-Measure<br>2/(1/recall+1/precison)</p>
+</li>
+<li><p>交互熵 </p>
+</li>
+<li>MAE</li>
+<li>RMSE</li>
+<li>相关性<br>常见的比如：Pearson、Spearman和Kendall’s Tau相关，其中Pearson是更具数值之间的相似度，Spearman是根据数值排序之间的相似度，Kendall’s Tau是加权下的数值排序之间的相似度。</li>
+<li>基尼系数</li>
+<li>信息熵</li>
+</ul>
+<h2 id="排序部分测试"><a href="#排序部分测试" class="headerlink" title="排序部分测试"></a>排序部分测试</h2><ul>
+<li>NDCG（Normalize DCG）</li>
+<li>RBP（rank-biased precision）</li>
+</ul>
+<p>RBP和NDCG指标的唯一不同点在于RBP把推荐列表中商品的浏览概率p按等比数列递减，而ND CG则是按照log调和级数形式。</p>
+<h1 id="离线模型与在线模型之间的评估"><a href="#离线模型与在线模型之间的评估" class="headerlink" title="离线模型与在线模型之间的评估"></a>离线模型与在线模型之间的评估</h1><p>很多时候，我们需要确定离线模型的效果足够的健壮才能允许上线进行线上测试，那如何进行离线模型与线上模型的评估对比就是一个比较复杂的问题。</p>
+<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><ul>
+<li>缺乏公平的测试数据<br>实际处理过程中，我们发现，所有的已知点击都是来自线上模型推荐的结果，所以极端情况下，线上的recall是100%</li>
+<li>缺乏公认的衡量指标<br>在线下对比中，我们发现比如recall、precision、F1-Measure等指标都是大家约定俗成的，不存在很大的争议，而离线在线模型对比却没有一个准确公认的衡量指标</li>
+</ul>
+<h2 id="指标设计"><a href="#指标设计" class="headerlink" title="指标设计"></a>指标设计</h2><ul>
+<li>online_offline_cover_rate&amp;first_click_hit_rate</li>
+</ul>
+<p>这一组指标是结合在一起看的，其中online_offline_cover_rate是指针对每一个用户计算理线模型推荐的商品与在线模型推荐的商品的重合个数/在线模型的推荐商品个数，online_offline_cover_rate越低代表离线模型相对在线模型越独立；first_click_hit_rate是指offline模型对用户每天第一次点击的命中率，也就是命中次数/总统计用户数。<br>结合这两个指标，我们可以得到在online_offline_cover_rate越低的情况下，却能覆盖线上用户真实点击的次数越多，代表offline模型的效果优于线上模型。</p>
+<ul>
+<li>online_precision_rate/offline_precision_rate</li>
+</ul>
+<p>离线模型的准确率和在线模型的准确率。<br>这边在实际计算的时候采取了一个技巧，针对某个推荐位计算在线模型准确率的时候，用的是从来没有浏览过这个推荐位的用户的浏览历史匹配这个用户这个推荐位的推荐结果。这样可以避免用户的点击结果受到推荐位推荐结果影响的问题。</p>
+<p>举个例子：用户在推荐位A上没有浏览过，他的点击是不受推荐位A推荐的商品影响的，拿这个用户推荐位A我们给他线上推荐的结果作为线上模型的推荐结果去计算，这样才更加合理。</p>
+<ul>
+<li>online_recall_rate/offline_recall_rate</li>
+</ul>
+<p>离线模型的召回率和在线模型的召回率。<br>同上解释。</p>
+<ul>
+<li>roi_reall/roi_precision</li>
+</ul>
+<p>同上解释，只是把未来的点击作为match源更换成了加购物车、购买、收藏这些数据。</p>
+<h1 id="其他评估方向"><a href="#其他评估方向" class="headerlink" title="其他评估方向"></a>其他评估方向</h1><h2 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h2><p>推荐覆盖率越高， 系统给用户推荐的商品种类就越多 ，推荐多样新颖的可能性就越大。如果一个推荐算法总是推荐给用户流行的商品，那么它的覆盖率往往很低，通常也是多样性和新颖性都很低的推荐。</p>
+<h2 id="多样性"><a href="#多样性" class="headerlink" title="多样性"></a>多样性</h2><p>采用推荐列表间的相似度（hamming distance、Cosine Method），也就是用户的推荐列表间的重叠度来定义整体多样性。</p>
+<h2 id="新颖性"><a href="#新颖性" class="headerlink" title="新颖性"></a>新颖性</h2><p>计算推荐列表中物品的平均流行度。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>用户满意度、用户问卷、信任度、鲁棒性、实时性、</p>
+<h1 id="评测维度"><a href="#评测维度" class="headerlink" title="评测维度"></a>评测维度</h1><p>最后说一下评测维度分为如下3种，多角度评测：</p>
+<ul>
+<li>用户维度<br>主要包括用户的人口统计学信息、活跃度以及是不是新用户等。</li>
+<li>物品维度<br>包括物品的属性信息、流行度、平均分以及是不是新加入的物品等。</li>
+<li>时间维度<br>包括季节，是工作日还是周末，是白天还是晚上等。</li>
+</ul>
+<p>附常规评价指标的整理结果(来自论文Evaluation Metrics for Recommender Systems)：<br><img src="/2018/07/19/量化评估推荐系统效果/1.png" alt=""></p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐评估方法/" rel="tag"># 推荐评估方法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/" rel="next" title="关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现">
+                <i class="fa fa-chevron-left"></i> 关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/19/热传导-物质扩散算法应用于推荐/" rel="prev" title="热传导-物质扩散算法应用于推荐">
+                热传导-物质扩散算法应用于推荐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -355,6 +565,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -375,8 +594,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -474,6 +702,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#离线模型之间的评估"><span class="nav-number">1.</span> <span class="nav-text">离线模型之间的评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#召回集测试"><span class="nav-number">1.1.</span> <span class="nav-text">召回集测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序部分测试"><span class="nav-number">1.2.</span> <span class="nav-text">排序部分测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离线模型与在线模型之间的评估"><span class="nav-number">2.</span> <span class="nav-text">离线模型与在线模型之间的评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#难点"><span class="nav-number">2.1.</span> <span class="nav-text">难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指标设计"><span class="nav-number">2.2.</span> <span class="nav-text">指标设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他评估方向"><span class="nav-number">3.</span> <span class="nav-text">其他评估方向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖率"><span class="nav-number">3.1.</span> <span class="nav-text">覆盖率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多样性"><span class="nav-number">3.2.</span> <span class="nav-text">多样性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新颖性"><span class="nav-number">3.3.</span> <span class="nav-text">新颖性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#评测维度"><span class="nav-number">4.</span> <span class="nav-text">评测维度</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -623,6 +867,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
