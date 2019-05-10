@@ -4,6 +4,66 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2018/06/26/%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2019-05-10T06:38:04.504Z</lastmod>
+    <data>
+        <display>
+        <title>关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现</title>
+        <pubTime>2018-06-26T03:29:45.000Z</pubTime>
+        
+        <tag>论文解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sladesha.github.io/2018/08/29/Google%E5%9B%A2%E9%98%9F%E5%9C%A8DNN%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%E7%9A%84%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2019-05-10T06:33:01.991Z</lastmod>
+    <data>
+        <display>
+        <title>Google团队在DNN的实际应用方式的整理</title>
+        <pubTime>2018-08-29T06:12:58.000Z</pubTime>
+        
+        <tag>论文解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sladesha.github.io/2018/10/16/YoutubeNet%E7%9A%84%E6%95%B0%E6%8D%AE%E7%AD%94%E7%96%91/</loc>
+    <lastmod>2019-05-10T06:31:38.768Z</lastmod>
+    <data>
+        <display>
+        <title>YoutubeNet的数据答疑</title>
+        <pubTime>2018-10-16T13:12:58.000Z</pubTime>
+        
+        <tag>推荐</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2018/09/25/GloVe%E5%90%91%E9%87%8F%E5%8C%96%E5%81%9A%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/</loc>
     <lastmod>2019-05-10T05:53:45.192Z</lastmod>
     <data>
