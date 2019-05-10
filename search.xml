@@ -1934,6 +1934,85 @@
     </entry>
     
     <entry>
+      <title><![CDATA[交叉销售算法]]></title>
+      <url>/2017/11/01/%E4%BA%A4%E5%8F%89%E9%94%80%E5%94%AE%E7%AE%97%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p><img src="/2017/11/01/交叉销售算法/1.png" alt=""></p>
+<p>最近做了一个交叉销售的项目，梳理了一些关键点，分享如下，希望对大家有所启发<br>核心目标：在有限资源下，尽可能的提供高转化率的用户群，辅助业务增长<br>初步效果：商家ROI值为50以上，用户日转化率提升10倍以上，用户日最低转化效果5pp以上<br>以下为正文：<br>数据准备：<br>1.商品相关性<br>存在商品A,B,C…，商品之间用户会存在行为信息的关联度，这边可以参考协调过滤算法中的Item-based，这边拓展为用户在不同商品之间的操作行为的差异性。</p>
+<p><img src="/2017/11/01/交叉销售算法/2.png" alt=""></p>
+<p>可以形成如下的特征矩阵：<br><img src="/2017/11/01/交叉销售算法/3.png" alt=""></p>
+<p>这边相关的常见度量方式有以下几种：<br>a.距离衡量<br>包括浏览、点击、搜索等等各种行为的欧式、马氏、闵式、切比雪夫距离、汉明距离计算<br>b.相似度衡量<br>包括余弦相似度、杰卡德相似度衡量<br>c.复杂衡量<br>包括相关性衡量，熵值衡量，互信息量衡量，相关距离衡量<br>2.商品行为信息<br>探求商品及其对应行为信息的笛卡尔积的映射关系，得到一个商品+用户的行为魔方<br>商品集合：{商品A、商品B、…}<br>商品属性集合：{价格、是否打折、相比其他电商平台的比价、是否缺货…}<br>用户行为集合：{浏览次数、浏览时长、末次浏览间隔、搜索次数、末次搜索间隔…}<br>通过商品集合<em>商品属性集合</em>用户行为集合,形成高维的商品信息魔方，再通过探查算法，筛选优秀表现的特征，这里推荐的有pca，randomforest的importance，lasso变量压缩，相关性压缩，逐步回归压缩等方法，根据数据的属性特点可适当选取方法<br>最后，我们会得到如下一个待选特征组：<br><img src="/2017/11/01/交叉销售算法/4.png" alt=""></p>
+<p>3.商品购买周期<br>针对每一件商品，都是有它自身的生命周期的，比如，在三个月内买过冰箱的用户，95%以上的用户是不会选择二次购买的；而在1个月的节点上，会有20%的用户会选择二次购买生活用纸。所以我们需要做的一件事情就是不断更新，平台上面每个类目下面的商品的自身生命周期。除此之外，考虑在过渡时间点，用户的需求变化情况，是否可以提前触发需求；这边利用，艾宾浩斯遗忘曲线和因子衰减规律拟合：</p>
+<p><img src="/2017/11/01/交叉销售算法/5.png" alt="艾宾浩斯曲线"></p>
+<p><img src="/2017/11/01/交叉销售算法/6.png" alt="衰减因子"></p>
+<p>确定lamda和b，计算每个用户对应的每个类目，当前时间下的剩余价值：f(最高价值)<em>lamda</em>b</p>
+<p><img src="/2017/11/01/交叉销售算法/7.png" alt="艾宾浩斯"></p>
+<p><img src="/2017/11/01/交叉销售算法/8.png" alt="衰减因子公式"><br>4.商品挖掘特征，用户挖掘特征<br>业务运营过程中，通过数据常规可以得到1.基础结论，2.挖掘结论。基础结论就是统计结论，比如昨日订单量，昨日销售量 ，昨日用户量；挖掘结论就是深层结论，比如昨日活跃用户数，每日预估销售量，用户生命周期等<br>存在如下的探索形式，这是一个漫长而又非常有价值的过程：</p>
+<p><img src="/2017/11/01/交叉销售算法/9.png" alt="特征分析"></p>
+<p>模型整合<br>再确定以上四大类的数据特征之后，我们通过组合模型的方法，判断用户的交叉销售结果</p>
+<hr>
+<p>1.cart regression<br>确保非线性密度均匀数据拟合效果，针对存在非线性关系且数据可被网格切分的产业用户有高的预测能力<br>2.ridge regression<br>确保可线性拟合及特征繁多数据的效果，针对存在线性关系的产业用户有高的预测能力<br>3.Svm-liner<br>确保线性且存在不可忽视的异常点的数据拟合效果，针对存在异常用户较多的部分产业用户有高的预测能力<br>4.xgboost<br>确保数据复杂高维且无明显关系的数据拟合效果，针对存在维度高、数据杂乱、无模型规律的部分产业用户有高的预测能力<br>以上的组合模型并非固定，也并非一定全部使用，在确定自身产业的特点后，择优选择，然后采取投票、加权、分组等组合方式产出结果即可。</p>
+<hr>
+<p>附上推荐Rcode简述，<br><strong>cart regression：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fit &lt;- rpart(y~x, data=database, method=&quot;class&quot;,control=ct, parms = list(prior = c(0.7,0.3), split = &quot;information&quot;));</span><br><span class="line"># xval是n折交叉验证</span><br><span class="line"># minsplit是最小分支节点数，设置后达不到最小分支节点的话会继续分划下去</span><br><span class="line"># minbucket：叶子节点最小样本数</span><br><span class="line"># maxdepth：树的深度</span><br><span class="line"># cp全称为complexity parameter，指某个点的复杂度，对每一步拆分,模型的拟合优度必须提高的程度</span><br><span class="line"># kyphosis是rpart这个包自带的数据集</span><br><span class="line"># na.action：缺失数据的处理办法，默认为删除因变量缺失的观测而保留自变量缺失的观测。</span><br><span class="line"># method：树的末端数据类型选择相应的变量分割方法:</span><br><span class="line"># 连续性method=“anova”,离散型method=“class”,计数型method=“poisson”,生存分析型method=“exp”</span><br><span class="line">#parms用来设置三个参数:先验概率、损失矩阵、分类纯度的度量方法（gini和information）</span><br><span class="line"># cost我觉得是损失矩阵，在剪枝的时候，叶子节点的加权误差与父节点的误差进行比较，考虑损失矩阵的时候，从将“减少-误差”调整为“减少-损失”</span><br></pre></td></tr></table></figure></p>
+<p><strong>ridge regression：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">library（glmnet）</span><br><span class="line">glmmod&lt;-glmnet(x,y,family = &apos;guassian&apos;,alpha = 0)</span><br><span class="line">最小惩罚：</span><br><span class="line">glmmod.min&lt;-glmnet(x,y,family = &apos;gaussian&apos;,alpha = 0,lambda = glmmod.cv$lambda.min)</span><br><span class="line">1个标准差下的最小惩罚：</span><br><span class="line">glmmod.1se&lt;-glmnet(x,y,family = &apos;gaussian&apos;,alpha = 0,lambda = glmmod.cv$lambda.1se)</span><br></pre></td></tr></table></figure></p>
+<p><strong>Svm-liner ：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">library(e1071)</span><br><span class="line">svm(x, y, scale = TRUE, type = NULL, kernel = &quot;&quot;,degree = 3, gamma = if (is.vector(x)) 1 else 1 / ncol(x),coef0 = 0, cost = 1, nu = 0.5, subset, na.action = na.omit)</span><br><span class="line">#type用于指定建立模型的类别:C-classification、nu-classification、one-classification、eps-regression和nu-regression</span><br><span class="line">#kernel是指在模型建立过程中使用的核函数</span><br><span class="line">#degree参数是指核函数多项式内积函数中的参数，其默认值为3</span><br><span class="line">#gamma参数给出了核函数中除线性内积函数以外的所有函数的参数，默认值为l</span><br><span class="line">#coef0参数是指核函数中多项式内积函数与sigmoid内积函数中的参数，默认值为0</span><br><span class="line">#参数cost就是软间隔模型中的离群点权重</span><br><span class="line">#参数nu是用于nu-regression、nu-classification和one-classification类型中的参数</span><br></pre></td></tr></table></figure></p>
+<p><strong>xgboost:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">library(xgboost)</span><br><span class="line">xgb &lt;- xgboost(data = data.matrix(x[,-1]), label = y, eta = 0.1,max_depth = 15, nround=25, subsample = 0.5,colsample_bytree = 0.5,seed = 1,eval_metric = &quot;merror&quot;,objective = &quot;multi:softprob&quot;,num_class = 12, nthread = 3)</span><br><span class="line">#eta：默认值设置为0.3。步长，控制速度及拟合程度</span><br><span class="line">#gamma:默认值设置为0。子树叶节点个数</span><br><span class="line">#max_depth:默认值设置为6。树的最大深度</span><br><span class="line">#min_child_weight:默认值设置为1。控制子树的权重和</span><br><span class="line">#max_delta_step：默认值设置为0。控制每棵树的权重</span><br><span class="line">#subsample： 默认值设置为1。抽样训练占比</span><br><span class="line">#lambda and alpha：正则化</span><br></pre></td></tr></table></figure></p>
+<p>最后通过组合算法的形式产出最终值：</p>
+<p><img src="/2017/11/01/交叉销售算法/10.png" alt=""><br><strong>典型算法代表：randomforest,adaboost,gbdt</strong></p>
+<p>之前写的没有用markdown，所以看起来很费力，还丢图，这次优化了一下视图，谢谢。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 推荐 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[随机森林-枝剪问题]]></title>
+      <url>/2017/10/02/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E6%9E%9D%E5%89%AA%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>通常情况下， 随机森林不需要后剪枝。</p>
+<p>剪枝的意义是：防止决策树生成过于庞大的子叶，避免实验预测结果过拟合，在实际生产中效果很差</p>
+<p>剪枝通常有两种：</p>
+<p>PrePrune：预剪枝，及早的停止树增长，在每个父节点分支的时候计算是否达到了限制值</p>
+<p>PostPrune：后剪枝，基于完全生长（过拟合）的树上进行剪枝，砍掉一些对衡量函数影响不大的枝叶</p>
+<p>剪枝的依据：</p>
+<p>常见的有错误率校验（判断枝剪是降低了模型预测的正确率），统计学检验，熵值，代价复杂度等等</p>
+<p>总结看来，枝剪的目的是担心全量数据在某棵树上的拟合过程中，过度判断了每个点及其对应类别的关系，有如以下这张图（以rule1&amp;rule2代替了rule3）：</p>
+<hr>
+<p>随机森林：</p>
+<p>定义：它是一种模型组合（常见的Boosting，Bagging等，衍生的有gbdt），这些算法最终的结果是生成N(可能会有几百棵以上）棵树，组合判断最终结果。</p>
+<p>如何组合判断？</p>
+<p>1.通常我们会规定随机森林里面的每棵树的选参个数，常见的有log，sqrt等等，这样的选取是随机选则的，这样有一个好处，让每一棵树上都有了尽可能多的变量组合，降低过拟合程度</p>
+<p>2.树的个数及树的节点的变量个数，通常的来说，最快捷的方式是先确定节点的变量个数为sqrt（变量的个数），然后在根据oob的准确率反过来看多个棵树时最优，确定了树的个数的时候再反过来确定mtry的个数，虽然有局限，但是也并不存在盲目性</p>
+<p>3.我个人理解，随机森林中的每一棵树我们需要它在某一片的数据中有非常好的拟合性，它并不是一个全数据拟合，只需要在它负责那块上有最佳的拟合效果。每次遇到这些数据(特征)的时候，我们在最后汇总N棵树的结果的时候，给这些数据对应的那块模型以最高权重即可</p>
+<p>最后总结一下，就是随机森林里面的每棵树的产生通过选特征参数选数据结构，都已经考虑了避免共线性避免过拟合，剩下的每棵树需要做的就是尽可能的在自己所对应的数据(特征)集情况下尽可能的做到最好的预测结果；如同，公司已经拆分好部门，你不需要考虑这样拆分是不是公司运营最好的一个组合方式，你需要做的就是当公司需要你的时候，尽可能的做好自己的事情，就酱。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 树枝剪问题 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[大数据量下的划分聚类方法]]></title>
       <url>/2017/07/19/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8B%E7%9A%84%E5%88%92%E5%88%86%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/</url>
       <content type="html"><![CDATA[<p>在常规聚类案例中，数据一般都是以iris集或者不足GB级的数据作为测试案例，实际商业运用中，数据量级要远远大于这些。比如滴滴出行15年日均单量就达到1000万单，出行轨迹的数据存储达到上百TB，常规的k均值聚类，二分聚类等无法完成如此量级的数据聚类，这边就提供一个以CLARANS为基础的算法思路。</p>
@@ -1981,6 +2060,42 @@
         <tags>
             
             <tag> 理论解析 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数据抽样平衡方法重写]]></title>
+      <url>/2017/07/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E6%A0%B7%E5%B9%B3%E8%A1%A1%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99/</url>
+      <content type="html"><![CDATA[<p>之前在R里面可以通过调用Rose这个package调用数据平衡函数，这边用python改写了一下，也算是自我学习了。</p>
+<p>R：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设定工作目录</span></span><br><span class="line">setwd(path)</span><br><span class="line"><span class="comment"># 安装包</span></span><br><span class="line">install.packages(<span class="string">"ROSE"</span>)</span><br><span class="line"><span class="keyword">library</span>(ROSE)</span><br><span class="line"><span class="comment"># 检查数据</span></span><br><span class="line">data(hacide)</span><br><span class="line">table(hacide.train$cls)</span><br><span class="line"><span class="number">0</span>     <span class="number">1</span></span><br><span class="line"><span class="number">980</span>    <span class="number">20</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>过抽样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_balanced_over &lt;- ovun.sample(cls ~ ., data = hacide.train, method = &quot;over&quot;,N = 1960)$data</span><br><span class="line">table(data_balanced_over$cls)</span><br><span class="line">0    1</span><br><span class="line">980 980</span><br></pre></td></tr></table></figure></p>
+<p><strong>这边需要注意是<code>ovun</code>不是<code>over</code></strong></p>
+<hr>
+<p>欠采样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_balanced_under &lt;- ovun.sample(cls ~ ., data = hacide.train, method = &quot;under&quot;, N = 40, seed = 1)$data</span><br><span class="line">table(data_balanced_under$cls)</span><br><span class="line">0    1</span><br><span class="line">20  20</span><br></pre></td></tr></table></figure></p>
+<p>这边需要注意的是欠采样是不放回采样，同时对数据信息的损失也是极大的</p>
+<hr>
+<p>组合采样实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_balanced_both &lt;- ovun.sample(cls ~ ., data = hacide.train, method = &quot;both&quot;, p=0.5, N=1000, seed = 1)$data</span><br><span class="line">table(data_balanced_both$cls)</span><br><span class="line">0    1</span><br><span class="line">520 480</span><br></pre></td></tr></table></figure></p>
+<p><code>method</code>的不同值代表着不同的采样方法，p这边是控制正类的占比，seed保证抽取样本的固定，也就是种子值。</p>
+<hr>
+<hr>
+<p>在python上，我也没有发现有现成的package可以import，所以就参考了R的实现逻辑重写了一遍，新增了一个分层抽样<code>group_sample</code>,删除了过采样，重写了组合抽样<code>combine_sample</code>,欠抽样<code>under_sample</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math <span class="keyword">as</span> ma</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sample_s</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="string">''''this is my pleasure'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">group_sample</span><span class="params">(self, data_set, label, percent=<span class="number">0.1</span>)</span>:</span></span><br><span class="line"><span class="comment"># 分层抽样</span></span><br><span class="line"><span class="comment"># data_set:数据集</span></span><br><span class="line"><span class="comment"># label:分层变量</span></span><br><span class="line"><span class="comment"># percent:抽样占比</span></span><br><span class="line"><span class="comment"># q:每次抽取是否随机,null为随机</span></span><br><span class="line"><span class="comment"># 抽样根据目标列分层，自动将样本数较多的样本分层按percent抽样，得到目标列样本较多的特征欠抽样数据</span></span><br><span class="line">x = data_set</span><br><span class="line">y = label</span><br><span class="line">z = percent</span><br><span class="line">diff_case = pd.DataFrame(x[y]).drop_duplicates([y])</span><br><span class="line">result = []</span><br><span class="line">result = pd.DataFrame(result)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(diff_case)):</span><br><span class="line">k = np.array(diff_case)[i]</span><br><span class="line">data_set = x[x[y] == k[<span class="number">0</span>]]</span><br><span class="line">nrow_nb = data_set.iloc[:, <span class="number">0</span>].count()</span><br><span class="line">data_set.index = range(nrow_nb)</span><br><span class="line">index_id = rd.sample(range(nrow_nb), int(nrow_nb * z))</span><br><span class="line">result = pd.concat([result, data_set.iloc[index_id, :]], axis=<span class="number">0</span>)</span><br><span class="line">new_data = pd.Series(result[<span class="string">'label'</span>]).value_counts()</span><br><span class="line">new_data = pd.DataFrame(new_data)</span><br><span class="line">new_data.columns = [<span class="string">'cnt'</span>]</span><br><span class="line">k1 = pd.DataFrame(new_data.index)</span><br><span class="line">k2 = new_data[<span class="string">'cnt'</span>]</span><br><span class="line">new_data = pd.concat([k1, k2], axis=<span class="number">1</span>)</span><br><span class="line">new_data.columns = [<span class="string">'id'</span>, <span class="string">'cnt'</span>]</span><br><span class="line">max_cnt = max(new_data[<span class="string">'cnt'</span>])</span><br><span class="line">k3 = new_data[new_data[<span class="string">'cnt'</span>] == max_cnt][<span class="string">'id'</span>]</span><br><span class="line">result = result[result[y] == k3[<span class="number">0</span>]]</span><br><span class="line"><span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">under_sample</span><span class="params">(self, data_set, label, percent=<span class="number">0.1</span>, q=<span class="number">1</span>)</span>:</span></span><br><span class="line"><span class="comment"># 欠抽样</span></span><br><span class="line"><span class="comment"># data_set:数据集</span></span><br><span class="line"><span class="comment"># label:抽样标签</span></span><br><span class="line"><span class="comment"># percent:抽样占比</span></span><br><span class="line"><span class="comment"># q:每次抽取是否随机</span></span><br><span class="line"><span class="comment"># 抽样根据目标列分层，自动将样本数较多的样本按percent抽样，得到目标列样本较多特征的欠抽样数据</span></span><br><span class="line">x = data_set</span><br><span class="line">y = label</span><br><span class="line">z = percent</span><br><span class="line">diff_case = pd.DataFrame(pd.Series(x[y]).value_counts())</span><br><span class="line">diff_case.columns = [<span class="string">'cnt'</span>]</span><br><span class="line">k1 = pd.DataFrame(diff_case.index)</span><br><span class="line">k2 = diff_case[<span class="string">'cnt'</span>]</span><br><span class="line">diff_case = pd.concat([k1, k2], axis=<span class="number">1</span>)</span><br><span class="line">diff_case.columns = [<span class="string">'id'</span>, <span class="string">'cnt'</span>]</span><br><span class="line">max_cnt = max(diff_case[<span class="string">'cnt'</span>])</span><br><span class="line">k3 = diff_case[diff_case[<span class="string">'cnt'</span>] == max_cnt][<span class="string">'id'</span>]</span><br><span class="line">new_data = x[x[y] == k3[<span class="number">0</span>]].sample(frac=z, random_state=q, axis=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">return</span> new_data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">combine_sample</span><span class="params">(self, data_set, label, number, percent=<span class="number">0.35</span>, q=<span class="number">1</span>)</span>:</span></span><br><span class="line"><span class="comment"># 组合抽样</span></span><br><span class="line"><span class="comment"># data_set:数据集</span></span><br><span class="line"><span class="comment"># label:目标列</span></span><br><span class="line"><span class="comment"># number:计划抽取多类及少类样本和</span></span><br><span class="line"><span class="comment"># percent：少类样本占比</span></span><br><span class="line"><span class="comment"># q:每次抽取是否随机</span></span><br><span class="line"><span class="comment"># 设定总的期待样本数量，及少类样本占比，采取多类样本欠抽样，少类样本过抽样的组合形式</span></span><br><span class="line">x = data_set</span><br><span class="line">y = label</span><br><span class="line">n = number</span><br><span class="line">p = percent</span><br><span class="line">diff_case = pd.DataFrame(pd.Series(x[y]).value_counts())</span><br><span class="line">diff_case.columns = [<span class="string">'cnt'</span>]</span><br><span class="line">k1 = pd.DataFrame(diff_case.index)</span><br><span class="line">k2 = diff_case[<span class="string">'cnt'</span>]</span><br><span class="line">diff_case = pd.concat([k1, k2], axis=<span class="number">1</span>)</span><br><span class="line">diff_case.columns = [<span class="string">'id'</span>, <span class="string">'cnt'</span>]</span><br><span class="line">max_cnt = max(diff_case[<span class="string">'cnt'</span>])</span><br><span class="line">k3 = diff_case[diff_case[<span class="string">'cnt'</span>] == max_cnt][<span class="string">'id'</span>]</span><br><span class="line">k4 = diff_case[diff_case[<span class="string">'cnt'</span>] != max_cnt][<span class="string">'id'</span>]</span><br><span class="line">n1 = p * n</span><br><span class="line">n2 = n - n1</span><br><span class="line">fre1 = n2 / float(x[x[y] == k3[<span class="number">0</span>]][<span class="string">'label'</span>].count())</span><br><span class="line">fre2 = n1 / float(x[x[y] == k4[<span class="number">1</span>]][<span class="string">'label'</span>].count())</span><br><span class="line">fre3 = ma.modf(fre2)</span><br><span class="line">new_data1 = x[x[y] == k3[<span class="number">0</span>]].sample(frac=fre1, random_state=q, axis=<span class="number">0</span>)</span><br><span class="line">new_data2 = x[x[y] == k4[<span class="number">1</span>]].sample(frac=fre3[<span class="number">0</span>], random_state=q, axis=<span class="number">0</span>)</span><br><span class="line">test_data = pd.DataFrame([])</span><br><span class="line"><span class="keyword">if</span> int(fre3[<span class="number">1</span>]) &gt; <span class="number">0</span>:</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; (int(fre3[<span class="number">1</span>])):</span><br><span class="line">data = x[x[y] == k4[<span class="number">1</span>]]</span><br><span class="line">test_data = pd.concat([test_data, data], axis=<span class="number">0</span>)</span><br><span class="line">i += <span class="number">1</span></span><br><span class="line">result = pd.concat([new_data1, new_data2, test_data], axis=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p>
+<p>后续使用，只需要复制上述code，存成<code>.py</code>的文件，后续使用的时候：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加载函数</span></span><br><span class="line"><span class="keyword">import</span> sample_s <span class="keyword">as</span> sa</span><br><span class="line"><span class="comment">#这边可以选择你需要的分层抽样、欠抽样、组合抽样的函数</span></span><br><span class="line">sample = sa.group_sample()</span><br><span class="line"><span class="comment">#直接调用函数即可</span></span><br><span class="line">new_data3 = sample.combine_sample(data_train, <span class="string">'label'</span>, <span class="number">60000</span>, <span class="number">0.4</span>)</span><br><span class="line"><span class="comment">#将data_train里面的label保持正样本（少类样本）达到0.4的占比下，总数抽取到60000个样本</span></span><br></pre></td></tr></table></figure></p>
+<p>其实不是很难的一个过程，只是强化自己对python及R语言的书写方式的记忆，谢谢。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数据平衡 </tag>
             
         </tags>
         
@@ -2098,6 +2213,82 @@
         <categories>
             
             <category> 算法 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 推荐 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[协同过滤推荐]]></title>
+      <url>/2017/06/21/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E6%8E%A8%E8%8D%90/</url>
+      <content type="html"><![CDATA[<p>set.seed ( 1234 )</p>
+<h1 id="加载数据包"><a href="#加载数据包" class="headerlink" title="加载数据包"></a>加载数据包</h1><p>library ( “recommenderlab” )</p>
+<h1 id="构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as-函数转为raringMatrix类型。"><a href="#构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as-函数转为raringMatrix类型。" class="headerlink" title="构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。"></a>构造数据运用recommenderlab包实现协同过滤推荐，其数据类型采用S4类构造，需通过as()函数转为raringMatrix类型。</h1><p>val1&lt;- matrix ( sample ( c ( as.numeric ( 0 : 5 ) ,NA ) ,50 ,replace = TRUE ,prob = c ( rep ( .4 / 6 , 6 ) , .6 ) ) ,ncol = 10 , dimnames = list ( user = paste ( “u” ,1 : 5 ,sep = ‘’ ) ,item = paste ( “i” ,1 : 10 ,sep = ‘’ ) ) )</p>
+<p>val2 &lt;- as ( val1, “realRatingMatrix” )</p>
+<p>数据转换</p>
+<p>val3&lt;- normalize ( val2 )</p>
+<h1 id="二元分类转换，normalize-函数进行标准化处理，标准化的目的是为了去除用户评分的偏差"><a href="#二元分类转换，normalize-函数进行标准化处理，标准化的目的是为了去除用户评分的偏差" class="headerlink" title="二元分类转换，normalize()函数进行标准化处理，标准化的目的是为了去除用户评分的偏差"></a>二元分类转换，normalize()函数进行标准化处理，标准化的目的是为了去除用户评分的偏差</h1><p>val4 &lt;- binarize ( val3 , minRating = 4 )</p>
+<p>val5 &lt;- as ( val4 , “matrix” )</p>
+<p>数据可视化</p>
+<p>接下来，我们采用MovieLense数据集，</p>
+<p>data ( MovieLense )</p>
+<p>key1 &lt;- sample ( MovieLense , 943 , replace = F )<br>image ( MovieLense )</p>
+<p>hist ( getRatings ( normalize ( MovieLense ) ) , breaks = 100 )</p>
+<p>hist ( rowCounts ( key1 ) , breaks = 50 )</p>
+<p>建立模型</p>
+<p>对于realRatingMatrix有六种方法：IBCF(基于物品的推荐)、UBCF（基于用户的推荐）、PCA（主成分分析）、RANDOM（随机推荐）、SVD（矩阵因子化）、POPULAR（基于流行度的推荐）</p>
+<p>建立协同过滤推荐算法模型，主要运用recommender(data=ratingMatrix,method,parameter=NULL)函数，getModel()可查看模型参数</p>
+<p>key1_recom &lt;- Recommender (key1 , method = “IBCF” )</p>
+<p>key1_popul &lt;- Recommender ( key1, method = “POPULAR” )</p>
+<h1 id="查看模型方法"><a href="#查看模型方法" class="headerlink" title="查看模型方法"></a>查看模型方法</h1><p>names ( getModel ( key1_recom ) )</p>
+<p>模型预测</p>
+<p>TOP-N预测</p>
+<p>对模型预测可运用predict()函数，在此分别以TOP-N预测及评分预测为例，预测第940-943位观影者的评分情况。n表示最终为TOP-N的列表推荐，参数type = “ratings”表示运用评分预测观影者对电影评分，模型结果均需转为list或矩阵表示</p>
+<p>pred &lt;- predict ( key1_popul ,key1 [ 940 : 943,] , n = 5 )</p>
+<p>as ( pred , “list” )</p>
+<h1 id="top-N为有序列表，抽取最优推荐子集"><a href="#top-N为有序列表，抽取最优推荐子集" class="headerlink" title="top-N为有序列表，抽取最优推荐子集"></a>top-N为有序列表，抽取最优推荐子集</h1><p>pred3 &lt;- bestN ( pred , n = 3 )</p>
+<p>as ( pred3 , “list” )</p>
+<h1 id="评分预测"><a href="#评分预测" class="headerlink" title="评分预测"></a>评分预测</h1><p>rate &lt;- predict ( key1_popul , key1 [ 940 : 943 ] , type = “ratings” )</p>
+<p>as ( rate , “matrix” ) [ , 1 : 5 ]</p>
+<p>预测模型评价</p>
+<p>评分预测模型评价</p>
+<p>eva &lt;- evaluationScheme (key1 [ 1 : 800 ] , method = “split” , train = 0.9,given = 15)<br>method=”split”&amp;train=0.9为按90%划分训练测试集合,given为评价的类目数</p>
+<p>r_eva1&lt;- Recommender ( getData ( eva , “train” ) , “UBCF” )</p>
+<p>p_eva1&lt;- predict ( r_eva1 , getData ( eva, “known” ) , type = “ratings” )</p>
+<p>r_eva2 &lt;- Recommender ( getData ( eva, “train” ) , “IBCF” )</p>
+<p>p_eva2 &lt;- predict ( r_eva2 , getData ( eva, “known” ) , type = “ratings” )<br>c_eva1 &lt;- calcPredictionAccuracy ( p_eva1 , getData ( eva , “unknown” ) )</p>
+<p>c_eva2 &lt;- calcPredictionAccuracy ( p_eva2 , getData ( eva , “unknown” ) )</p>
+<p>error &lt;- rbind ( c_eva1 , c_eva2 )</p>
+<p>rownames ( error ) &lt;- c ( “UBCF” , “IBCF” )<br>计算预测模型的准确度</p>
+<p>TOP-N预测模型评价</p>
+<p>通过4-fold交叉验证方法分割数据集，运用evaluate()进行TOP-N预测模型评价,评价结果可通过ROC曲线及准确率-召回率曲线展示:</p>
+<h1 id="4-fold交叉验证"><a href="#4-fold交叉验证" class="headerlink" title="4-fold交叉验证"></a>4-fold交叉验证</h1><p>tops &lt;- evaluationScheme ( key1 [ 1 : 800 ] , method = “cross” , k = 4 , given = 3 ,goodRating = 5 )</p>
+<p>results &lt;- evaluate ( tops , method = “POPULAR” , type = “topNList” ,n = c ( 1 , 3 , 5 , 10 ) )</p>
+<h1 id="获得混淆矩阵"><a href="#获得混淆矩阵" class="headerlink" title="获得混淆矩阵"></a>获得混淆矩阵</h1><p>getConfusionMatrix ( results ) [ [ 1 ] ]</p>
+<p>avg ( results )</p>
+<p>推荐算法的比较</p>
+<p>除了对预测模型进行评价，还可以对不同推荐算法进行比较。可首先构建一个推荐算法列表，通过ROC曲线、、准确率-召回率曲线或RMSE直方图进行比较</p>
+<p>TOP-N算法比较</p>
+<p>set.seed ( 2016 )</p>
+<p>scheme &lt;- evaluationScheme ( key1 , method = “split” , train = 0.9 , k = 1 , given = 10 , goodRating = 5 )</p>
+<h1 id="构建不同算法模型"><a href="#构建不同算法模型" class="headerlink" title="构建不同算法模型"></a>构建不同算法模型</h1><p>results &lt;- evaluate ( scheme ,test_data ,n = c ( 1 ,3 ,5 ,10 ,15 ,20 ) )</p>
+<h1 id="模型比较-ROC曲线"><a href="#模型比较-ROC曲线" class="headerlink" title="模型比较#ROC曲线"></a>模型比较#ROC曲线</h1><p>plot ( results , annotate = c ( 1 , 3 ) , legend = “bottomright” )</p>
+<h1 id="准确率-召回率曲线"><a href="#准确率-召回率曲线" class="headerlink" title="准确率-召回率曲线"></a>准确率-召回率曲线</h1><p>plot ( results , “prec/rec” , annotate = c ( 2 , 3 , 4 ) , legend = “topleft” )</p>
+<p>预测评分算法比较</p>
+<p>results2 &lt;- evaluate ( scheme , algorithms , type = “ratings” )</p>
+<p>plot ( results2 , ylim = c ( 0 , 20 ) )</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
             
         </categories>
         
