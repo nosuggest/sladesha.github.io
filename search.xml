@@ -403,6 +403,53 @@
     </entry>
     
     <entry>
+      <title><![CDATA[基于Tensorflow实现FFM]]></title>
+      <url>/2018/08/06/%E5%9F%BA%E4%BA%8ETensorflow%E5%AE%9E%E7%8E%B0FFM/</url>
+      <content type="html"><![CDATA[<p>没错，这次登场的是FFM。各大比赛中的“种子”算法，中国台湾大学Yu-Chin Juan荣誉出品，美团技术团队背书，Michael Jahrer的论文的field概念灵魂升华，土豪公司鉴别神器。通过引入field的概念，FFM把相同性质的特征归于同一个field，相当于把FM中已经细分的feature再次拆分，可不可怕，厉不厉害？好，让我们来看看怎么一个厉害法。</p>
+<h1 id="FFM理论"><a href="#FFM理论" class="headerlink" title="FFM理论"></a>FFM理论</h1><h2 id="特征交互"><a href="#特征交互" class="headerlink" title="特征交互"></a>特征交互</h2><p>网上已经说烂了的美团技术团队给出的那张图：<br><img src="/2018/08/06/基于Tensorflow实现FFM/1.png" alt=""><br>针对Country这个变量，<br>FM的做法是one-hot-encoding，生成country_USA，country_China两个稀疏的变量，再进行embedding向量化。<br>FFM的做法是cross-one-hot-encoding，生成country_USA_Day_26/11/15，country_USA_Ad_type_Movie…M个变量，再进行embedding向量化。<br><img src="/2018/08/06/基于Tensorflow实现FFM/2.png" alt=""><br>就和上图一样，fm做出来的latent factor是二维的，就是给每个特征一个embedding结果；而暴力的ffm做出的latent factor是三维的，出来给特征embedding还考虑不同维度特征给不同的embedding结果，也是FFM中“field-aware”的由来。<br><img src="/2018/08/06/基于Tensorflow实现FFM/3.png" alt=""><br>同时从公式中看，对于xi这个特征为什么embedding的latent factor向量的V是Vifj，其实就是因为xi乘以的是xj，所以latent factor向量的信息提取才是field j，也就是fj。多说一句，网上很多给出的现成的代码，这边都是写错了的，都写着写着变成了vifi，可能是写的顺手。</p>
+<p>都说到这里了，我再多说一句，为什么说ffm是土豪公司鉴别神器呢？我们看下仅仅是二次项，ffm需要计算的参数有 nfk 个，远多于FM模型的 nk个，而且由于每次计算都依赖于乘以的xj的field，所以，无法用fm的那个计算技巧(ab = 1/2(a+b)^2-a^2-b^2)，所以计算复杂度是 O(kn^2)。这种情况下，没有GPU就不要想了，有GPU的特征多于50个，而且又很离散的，没有个三位数的GPU也算了。之前我看美团说他们在用，我想再去看看他们的实际用的过程的时候，发现文章被删了，真的是可惜，我其实一直也想知道如何减轻这个变态的计算量的方法。</p>
+<p>给个实例给大家看下以上的这些的应用：<br>依旧来自美团技术研发团队中给出的案例，有用户数据如下：<br><img src="/2018/08/06/基于Tensorflow实现FFM/4.png" alt=""><br>这条记录可以编码成5个特征，其中“Genre=Comedy”和“Genre=Drama”属于同一个field，“Price”是数值型，不用One-Hot编码转换。为了方便说明FFM的样本格式，我们将所有的特征和对应的field映射成整数编号。<br><img src="/2018/08/06/基于Tensorflow实现FFM/5.png" alt=""><br>红色部分对应的是field，来自于原始特征的个数；蓝色部分对应的是feature，来自于原始特征onehot之后的个数。<br>对于特征Feature:<code>User=YuChin</code>而言，有<code>Movie=3Idiots</code>、<code>Genre=Comedy</code>、<code>Genre=Drama</code>、<code>Price</code>四项要交互：<br><img src="/2018/08/06/基于Tensorflow实现FFM/6.png" alt=""><br><code>User=YuChin</code>与<code>Movie=3Idiots</code>交互是<v1,2,v2,1>·1·1，也就是第一项，为什么是V1,2呢？因为<code>User=YuChin</code>是Featureindex=1，而交互的<code>Movie=3Idiots</code>是Fieldindex=2，同理V2,1也是这样的，以此类推，那么，FFM的组合特征有10项，如下图所示：<br><img src="/2018/08/06/基于Tensorflow实现FFM/7.png" alt=""><br>这就是一个案例的实际操作过程。</v1,2,v2,1></p>
+<h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><p>为什么要把这个单拎出来说呢？我看了网上不少的对于特征的处理过程，版本实在是太多了，而且差异化也蛮大，这边就和大家一起梳理一下：<br>1.feature index * feature value<br>这个就是上面我这个实际案例的方式，对于分类变量采取onehot，对于连续变量之间进行值的点积，不做处理。优点是快速简单，不需要预处理，但是缺点也很明显，离群点影响，值的波动大等。</p>
+<p>2.连续值离散化<br>这个方法借鉴了Cart里面对连续值的处理方式，就是把所有的连续值都当成一个分类变量处理。举例，现在有一个年龄age的连续变量[10,19,20,22,22,34]，这种方法就生成了age_10,age_19,age_20,age_22,age_34这些变量，如果连续值一多，这个方法带来的计算量就直线上升。</p>
+<p>3.分箱下的连续值离散化<br>这种方法优化了第二种方法，举例解释，现在有一个年龄age的连续变量[10,19,20,22,22,34]，我们先建立一个map，[0,10):0,[10,20):1,[20,30):2,[30,100):3。原始的数据就变成了[1,1,2,2,2,3]，再进行2的连续值离散化方法，生成了age_1,age_2,age_3这几个变量，优化了计算量，而且使得结果更具有解释性。</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><h3 id="logisitc-loss"><a href="#logisitc-loss" class="headerlink" title="logisitc loss"></a>logisitc loss</h3><p>这个是官方指定的方法，是-1/1做二分类的时候常用的loss计算方法：<br><img src="/2018/08/06/基于Tensorflow实现FFM/8.png" alt=""><br>这边需要注意的是，在做的时候，需要把label拆分成-1/1而不是0/1，当我们预测正确的时候，pred<em>label&gt;0且越大正确的程度越高，相应的log项是越小的，整体loss越小；相反，如果我们预测的越离谱，pred</em>label&lt;0且越小离谱的程度越高，相应的log项是越大的，整体loss越大。</p>
+<h3 id="交互熵"><a href="#交互熵" class="headerlink" title="交互熵"></a>交互熵</h3><p>我看到很多人的实现依旧用了<code>tf.nn.softmax_cross_entropy_with_logits</code>，其实就是多分类中的损失函数，和大家平时的图像分类、商品推荐召回一模一样：<br><img src="/2018/08/06/基于Tensorflow实现FFM/9.png" alt=""><br>这边需要注意的是，在做的时候，需要把label拆分成[1,0]和[0,1]进行计算。不得不说，大家真的是为了省事很机智(丧心病狂)啊！</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>我这边只给一些关键地方的代码，更多的去GitHub里面看吧。</p>
+<h2 id="embedding-part"><a href="#embedding-part" class="headerlink" title="embedding part"></a>embedding part</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.v = tf.get_variable(<span class="string">'v'</span>, shape=[self.p, self.f, self.k], dtype=<span class="string">'float32'</span>,initializer=tf.truncated_normal_initializer(mean=<span class="number">0</span>, stddev=<span class="number">0.01</span>))</span><br></pre></td></tr></table></figure>
+<p>看到了，这边生成的v就是上面Vffm的形式。</p>
+<h2 id="inference-part"><a href="#inference-part" class="headerlink" title="inference part"></a>inference part</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(self.p):</span><br><span class="line"><span class="comment"># 寻找没有match过的特征，也就是论文中的j = i+1开始</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, self.p):</span><br><span class="line">print(<span class="string">'i:%s,j:%s'</span> % (i, j))</span><br><span class="line"><span class="comment"># vifj</span></span><br><span class="line">vifj = self.v[i, self.feature2field[j]]</span><br><span class="line"><span class="comment"># vjfi</span></span><br><span class="line">vjfi = self.v[j, self.feature2field[I]]</span><br><span class="line"><span class="comment"># vi · vj</span></span><br><span class="line">vivj = tf.reduce_sum(tf.multiply(vifj, vjfi))</span><br><span class="line"><span class="comment"># xi · xj</span></span><br><span class="line">xixj = tf.multiply(self.X[:, i], self.X[:, j])</span><br><span class="line">self.field_cross_interaction += tf.multiply(vivj, xixj)</span><br></pre></td></tr></table></figure>
+<p>我这边强行拆开了写，这样看起来更清晰一点，注意这边的vifj和vjfi的生成，这边也可以看到找对于的field的方法是用了filed这个字典，这就是为什么不能用fm的点击技巧。</p>
+<h2 id="loss-part"><a href="#loss-part" class="headerlink" title="loss part"></a>loss part</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -1/1情况下的logistic loss</span></span><br><span class="line">self.loss = tf.reduce_mean(tf.log(<span class="number">1</span> + tf.exp(-self.y * self.y_out)))</span><br></pre></td></tr></table></figure>
+<p>这边记得论文中的负号，如果有batch的情况下记得求个平均再进行bp过程。</p>
+<h1 id="论文结论"><a href="#论文结论" class="headerlink" title="论文结论"></a>论文结论</h1><p>原始的ffm论文中给出了一些结论，我们在实际使用中值得参考：</p>
+<ul>
+<li>k值不用太大，没啥提升<br><img src="/2018/08/06/基于Tensorflow实现FFM/10.png" alt=""></li>
+<li>正则项lambda和学习率alpha需要着重调参<br><img src="/2018/08/06/基于Tensorflow实现FFM/11.png" alt=""></li>
+<li>epoch别太大，既会拖慢速度，而且造成过拟合；在原论文中甚至要考虑用early-stopping避免过拟合，所以epoch=1，常规的来讲就可以了，论文中提到的early-stopping操作：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> Split the data set into a training set <span class="keyword">and</span> a validation set.</span><br><span class="line"><span class="number">2.</span> At the end of each epoch, use the validation set to calcu-</span><br><span class="line">late the loss.</span><br><span class="line"><span class="number">3.</span> If the loss goes up, record the number of epochs. Stop <span class="keyword">or</span></span><br><span class="line">go to step <span class="number">4.</span></span><br><span class="line"><span class="number">4.</span> If needed, use the full data set to re-train a model <span class="keyword">with</span></span><br><span class="line">the number of epochs obtained <span class="keyword">in</span> step <span class="number">3.</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>FFM是一个细化隐向量非常好的方法，虽然很简单，但还是有很多细节之处值得考虑，比如如何线上应用，如何可解释，如何求稀疏解等等。在部署实现FFM之前，我还是建议大家先上线FM，当效果真的走投无路的时候再考虑FFM，FFM在工业界的影响着实不如学术界那么强大，偷偷说一句，<strong>太慢了，真的是太慢了，慢死了</strong>，我宁可去用deepfm。</p>
+<p>最后，给出代码实现的Github地址<a href="https://github.com/sladesha/machine_learning/tree/master/FFM" target="_blank" rel="noopener">FFM</a>，这边是我自己写的，理解理解算法可以，但是实际用的时候建议参考FFM的实现比较好的项目比如libffm，最近比较火的xlearn。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 特征交叉 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现]]></title>
       <url>/2018/06/26/%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
       <content type="html"><![CDATA[<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/1.png" alt=""></p>
