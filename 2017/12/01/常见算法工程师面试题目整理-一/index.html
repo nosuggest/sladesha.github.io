@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试题," />
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见算法工程师面试题目整理(一)">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/1.jpg">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/3.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/4.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/5.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/6.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=IGain%28S%2CA%29%3DE%28S%29-E%28A%29">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Gain-ratio%3D%5Cfrac%7BIGain%28S%2CA%29%7D%7BInfo%7D+">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Info%3D-%5Csum_%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S_%7Bv%7D%29+%7D%7Bnum%28S%29%7Dlog_2%7B%5Cfrac%7Bnum%28S_%7Bv%7D+%29%7D%7Bnum%28S%29%7D+%7D%7D+">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/7.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/8.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/9.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/10.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/11.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/12.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/13.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/14.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/15.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/16.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/17.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/18.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/19.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/20.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/21.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/22.png">
+<meta property="og:updated_time" content="2019-05-10T11:58:25.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见算法工程师面试题目整理(一)">
+<meta name="twitter:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/"/>
+
+
+
+
+
+  <title>常见算法工程师面试题目整理(一) | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常见算法工程师面试题目整理(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:48:29+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,098 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2017/12/01/常见算法工程师面试题目整理-一/1.jpg" alt=""><br><a id="more"></a><br>最近抽风，出去面试了不少公司，和不少算法工程师招聘的朋友有所交流，整理了相关比较有意思的题目，供大家参考：</p>
+<p>附：每题视情况给出答案或答案简介，如有疑问，欢迎私信</p>
+<h1 id="基于每日用户搜索内容，假设只有少量已知商品的情况下，如何根据用户搜索内容获取平台内没有的新商品？"><a href="#基于每日用户搜索内容，假设只有少量已知商品的情况下，如何根据用户搜索内容获取平台内没有的新商品？" class="headerlink" title="基于每日用户搜索内容，假设只有少量已知商品的情况下，如何根据用户搜索内容获取平台内没有的新商品？"></a>基于每日用户搜索内容，假设只有少量已知商品的情况下，如何根据用户搜索内容获取平台内没有的新商品？</h1><p><img src="/2017/12/01/常见算法工程师面试题目整理-一/2.png" alt=""></p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/3.png" alt=""></p>
+<p>答案：<strong>这是一条类似于分词“新词获取问题”，答案是基于信息熵＋聚合度。</strong></p>
+<p>这边需要考虑排除，首先做stop词库，先去除形容词等。<br>信息熵：比如用户搜索“曲面显示屏 白色”，假设现在我们的商品库中没有显示屏这个商品，我们需要判断“显示屏”是否是潜在的商品，我们需要考虑“显示屏”左词、右词出现的可能。换句话说，如果大家都在搜索“显示屏”商品的话，会出现大量的“便宜显示屏”、“可旋转显示屏”、“显示屏 黑色”等搜索短语，根据信息熵计算公式<code>-p∑logp</code>，“显示屏”前后出现的词语类别越多，信息熵越大，代表用户搜索的需求越旺盛，“显示屏”越有可能是没有的商品。</p>
+<p>聚合度：根据信息熵的理论也会出现“显示”等高频出现的干扰词，再用聚合度，比如先计算出p(“显示”)、p(“屏”)、或p(“显”)、p(“示屏”)的概率，如果“显示”是一个高频合理的搜索词的话，p(“显示”)*p(“屏”)应该远远大于p(“显示屏”)，p(“显”)＊p(“示屏”)应该远远大于p(“显示屏”)的概率，而实际电商搜索中，用户连贯搜索“显示屏”的概率才是远超其它。</p>
+<hr>
+<h1 id="为什么logistic回归的要用sigmoid函数？优缺点？"><a href="#为什么logistic回归的要用sigmoid函数？优缺点？" class="headerlink" title="为什么logistic回归的要用sigmoid函数？优缺点？"></a>为什么logistic回归的要用sigmoid函数？优缺点？</h1><p>答案：优点：<br>1.数据压缩能力，将数据规约在［0，1］之间<br>2.导数形式优秀，方便计算<br>缺点：<br>1.容易梯度消失，x稍大的情况下就趋近一条水平线<br>2.非0中心化，在神经网络算法等情况下，造成反向传播时权重的全正全负的情况。</p>
+<p>为什么要用？<br>答案1:<strong>logistic是基于Bernoulli分布的假设，也就是y|X~Bernoulli分布，而Bernoulli分布的指数族的形式就是1/(1+exp(-z))</strong><br>其实还有一个答案二，我当时没想起来，如就是：<br>对于logistic多分类而言，<br>x1、x2、…、xn，属于k类的概率正比于：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/4.png" alt=""></p>
+<p>我们回到2类：<br>x1、x2、…xn属于1的概率是：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/5.png" alt=""><br>分子分母同除以分子极为1/(1+exp(-z))，z＝w11-w01，个人觉得这样的证明才有说服力</p>
+<hr>
+<h1 id="对比牛顿法、梯度下降法的关系"><a href="#对比牛顿法、梯度下降法的关系" class="headerlink" title="对比牛顿法、梯度下降法的关系"></a>对比牛顿法、梯度下降法的关系</h1><p>讲真，大学学完牛顿法就丢了，一时没回答出来，回来整理如下：<br>答案：<strong>牛顿法快于梯度下降法，且是梯度下降法的极限。</strong></p>
+<p>首先，我们有展开式：<br>f′(x+Δx)=f′(x)+f″(x)∗Δx<br>Δx=−μ∗f′(x)<br>合并两个式子，有：<br>f′(x+Δx)=f′(x)+f″(x)∗(−μ∗f′(x))<br>令f′(x+Δx)＝0，<br>μ＝1/f″(x)，极为牛顿法在随机梯度下降中的μ</p>
+<hr>
+<h1 id="两个盒子，50个红球，50个白球，问如何放球，抽到红球的概率最高？（每个盒子必须有球）"><a href="#两个盒子，50个红球，50个白球，问如何放球，抽到红球的概率最高？（每个盒子必须有球）" class="headerlink" title="两个盒子，50个红球，50个白球，问如何放球，抽到红球的概率最高？（每个盒子必须有球）"></a>两个盒子，50个红球，50个白球，问如何放球，抽到红球的概率最高？（每个盒子必须有球）</h1><p><strong>答案：一个盒子1个红球，另外一个盒子剩余的99个球</strong></p>
+<p>先假设第一个盒子放x个红球，y个白球，另外的一个盒子里面就有50-x红球，50-y个白球.<br>求的目标函数：p＝1/2<em>(x/(x+y))+1/2</em>((50-x)/(100-x-y))<br>subject to. x+y&gt;0 &amp; 100-x-y&gt;0</p>
+<p>常规解法如上，被坑了一手的是，面试的说没有常规解，我回来思考了半天，可能是盒子里面的排练顺序有差异，上层的抽取概率&gt;下层的抽取概率，所以需要通过EM算法，先得到若干次抽取的结果下，每层的最大概率密度函数，再结合上述的结果去回答。</p>
+<hr>
+<h1 id="常见的正则化有是么，有什么作用，为什么l1是会把feature压缩到0而l2做不到？"><a href="#常见的正则化有是么，有什么作用，为什么l1是会把feature压缩到0而l2做不到？" class="headerlink" title="常见的正则化有是么，有什么作用，为什么l1是会把feature压缩到0而l2做不到？"></a>常见的正则化有是么，有什么作用，为什么l1是会把feature压缩到0而l2做不到？</h1><p><strong>答案：<br>(1)l1,l2正则化<br>l1对应python里面numpy.linalg.norm(ord=1)<br>形如|w1|+|w2|+|w3|+…<br>l2对应python里面numpy.linalg.norm(ord=2)<br>形如w1^2+w2^2+w3^2+…</strong></p>
+<p><strong>(2)防止过拟合<br>其它防止过拟合的方法还有：<br>1.增加数据量<br>2.采取bagging算法，抽样训练数据
+</strong><br>(3)画图解决**</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/6.png" alt=""><br><strong>左边的l1，右边的l2，</strong><br><strong>l1在作图只要不是特殊情况下与正方形的边相切，一定是与某个顶点优先相交，那必然存在横纵坐标轴中的一个系数为0，起到对变量的筛选的作用。</strong><br><strong>l2的时候，其实就可以看作是上面这个蓝色的圆，在这个圆的限制下，点可以是圆上的任意一点，所以q＝2的时候也叫做岭回归，岭回归是起不到压缩变量的作用的，在这个图里也是可以看出来的。</strong></p>
+<hr>
+<h1 id="分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble-Classification-model是什么？"><a href="#分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble-Classification-model是什么？" class="headerlink" title="分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble Classification model是什么？"></a>分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble Classification model是什么？</h1><p>我这边参考了《Do we Need Hundreds of Classifiers to Solve Real World Classification Problems》里面的结论，有兴趣的自行去搜<br>答案：<br><strong>整体上讲：数据量越大，神经网络越好；维度越多，bagging算法越优秀；数据量上不多不少的情况下，SVM效果最好；<br>常用判断：roc、auc、ks、f1值、recall等；<br>AUC计算方法：roc曲线下方的面积积分即可，或者大数定律的投点实验</strong></p>
+<p>最熟悉的集成分类模型，我说的是randomforest，详述了原理及实际应用的注意点，后来我问了面试管，主要在这块想了解的是实际解决的相关项目的真实性：<br>1.randomforest是由若干颗cart树构成的，每棵树尽情生长不枝剪，最后采取加权投票或者均值的方式确定输出值<br>2.每棵树的数据是采取bagging式的随机抽取特征及数据样本，两颗树之间的数据有可能会重复<br>3.一般流程会先以sqrt(feature_number)作为每次输入的特征数，采取grid<em>search的方法观察tree的数量由0-500，oob的变化<br>这边被打断了，解释什么叫做oob，也就是out of bag，每次抽取的数据样本进行训练，没有被抽取到的数据作为检验样本，检验样本上的误差就叫做oob<br>4.根据实际要求的精度上后期可以跟进调整：每次输入的特征个数、每棵树的最大深度、每个节点的分支方式（GINI还是信息增益率）、子节点最少数据量、父节点最少数据量等等<br>这边又被打断了，问，什么叫做信息增益率？<br>首先熵的计算如下：<br>![](<a href="https://www.zhihu.com/equation?tex=E%28X%29%3D-%5Csum" target="_blank" rel="noopener">https://www.zhihu.com/equation?tex=E%28X%29%3D-%5Csum</a></em>%7Bi%3D1%7D%5E%7Bn%7D%7Bp<em>%7Bi%7Dlog</em>%7B2%7D%28p<em>%7Bi%7D+%29++%7D+)<br>信息增益如下：<br><img src="https://www.zhihu.com/equation?tex=IGain%28S%2CA%29%3DE%28S%29-E%28A%29" alt=""><br>![](<a href="https://www.zhihu.com/equation?tex=E%28A%29%3D%5Csum" target="_blank" rel="noopener">https://www.zhihu.com/equation?tex=E%28A%29%3D%5Csum</a></em>%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S<em>%7Bv%7D%29+%7D%7Bnum%28S%29%7DE%28S</em>%7Bv%7D+%29+%7D+)<br>比如14个人，好人5个坏人9个。这14个人被通过性别划分开，10个男性中3个坏人，7个好人；4个女性中2个坏人，2个好人。</p>
+<p>信息增益就是:<br>IGain＝(-5/14)<em>log(5/14)+(-9/14)</em>log(9/14)-(10/14<em>(-3/10</em>log(3/10)-7/10<em>log(7/10))+4/14</em>(-1/2<em>log(1/2)-1/2</em>log(1/2)))<br>看到这样的计算方式，必然会存在问题，假设我们身份证为区分类别的化，每个身份证号码都是独一无二的，势必存在存在1/n*log(1)=0这样的最佳划分，但是这样的结果就是将所有的情况分别作为子节点，很明显没有意义，所以引出下面的信息增益率。</p>
+<p>信息增益率就是:<br><img src="https://www.zhihu.com/equation?tex=Gain-ratio%3D%5Cfrac%7BIGain%28S%2CA%29%7D%7BInfo%7D+" alt=""><br><img src="https://www.zhihu.com/equation?tex=Info%3D-%5Csum_%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S_%7Bv%7D%29+%7D%7Bnum%28S%29%7Dlog_2%7B%5Cfrac%7Bnum%28S_%7Bv%7D+%29%7D%7Bnum%28S%29%7D+%7D%7D+" alt=""><br>比如上面分人的例子，Info＝-10/14log(10/14)-4/14log(4/14)<br>很明显也可以看出，当你划分的子类别越多，你的info会越大，Gain_ratio就越小，信息增益率就越低，惩罚了刚才身份证分类这种行为。</p>
+<p>这也是id3和c4.5之间最大的差异，c4.5以信息增益率代替率id3里面的信息增益，除此之外，id3只能对分类变量处理而c4.5既可以分类变量也可以连续变量，还是很强的，同时他们都可以做多分类，而后续的cart等做多分类的成本会增加（叠加的方式）</p>
+<p>其实，这些都很基础但是时间长了，真的很绕人，我也是先自己默默的在纸上画了挺久才和面试管聊，有点出乎我的意料。</p>
+<hr>
+<h1 id="循环神经网络中介绍一个你熟悉的？"><a href="#循环神经网络中介绍一个你熟悉的？" class="headerlink" title="循环神经网络中介绍一个你熟悉的？"></a>循环神经网络中介绍一个你熟悉的？</h1><p>我说的是LSTM。<br>首先，先跑出了循环的机制，同时点明了RNN潜在隐藏节点对output的影响，做了下图：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/7.png" alt=""><br>及当前的预测结果，与input及上次的layer1节点下的结果相关。</p>
+<p>正向循环：<br>节点1的值 = sigmoid(np.dot(输入参数,神经元1) + np.dot(上次节点1的值,潜在神经元))<br>输出值＝sigmoid(np.dot(节点1的值,神经元2))</p>
+<p>误差计算：<br>真实y－输出值</p>
+<p>delta：<br>节点2处的deltas=误差计算*sigmoid(np.dot(节点1的值,神经元2))／(1-sigmoid(np.dot(节点1的值,神经元2)))</p>
+<p>反向修正神经元：<br>神经元2 += (节点1的值).T.dot(节点2处的delta)<br>潜藏神经元 += (上次的节点1的值).T.dot(节点1处的delta)<br>神经元1 += 输入值.T.dot(节点1处的delta)</p>
+<p><strong>核心强调了：sigmoid(np.dot(输入参数,神经元1) + np.dot(上次节点1的值,潜在神经元))，输出值与输出值及上次节点1处的输入值有关。</strong><br>然后讲了简单的在语义识别的实际作用。</p>
+<hr>
+<h1 id="kmeans的原理及如何选择k？如何选择初始点？"><a href="#kmeans的原理及如何选择k？如何选择初始点？" class="headerlink" title="kmeans的原理及如何选择k？如何选择初始点？"></a>kmeans的原理及如何选择k？如何选择初始点？</h1><p>原理是送分题，<br>原理：在给定K值和K个初始类簇中心点的情况下,把每个点(亦即数据记录)分到离其最近的类簇中心点所代表的类簇中，优点在于易于理解和计算，缺点也是很明显，数据一多的情况计算量极大，且标签feature定义距离的难度大。</p>
+<p>K的选择，我答的一般，欢迎大家补充，<br>1.根据具体的业务需求，实际需求确定最后聚成的类的个数<br>2.grid_search去试，看那种距离下，损失函数最小（其实这样回答不好，数据量大的情况下，机会不可能）<br>这边的损失函数类别较多，可能包括组内间距和／组外间距和等<br>3.随机抽样下的层次聚类作为预参考<br>理论上，随机采样的数据分布满足原来的数据集的分布，尤其是大量采样次数下的情况，针对每一个较小的数据集合采取层次聚类确定最后的聚类个数，再针对原始的数据集合进行kmeans聚类</p>
+<p><strong>如何选取初始点？</strong><br>这个问题我被问过好多次，其实，不管是r或者python里面，或者大家日常使用中都是默认的随机选取，然后通过多次k-折等方法不断的去迭代，其实这样存在的问题就是如果初始点随机选取的有误，导致无论这么迭代都得不到最优的点，如：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/8.png" alt="随机初始点"></p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/9.png" alt="修正初始点"><br>在随机初始点的情况下，红色区域的部分点被蓝色和绿色侵占为己点，修正初始点，也就是将随机初始点的聚类中心全部上移的情况下，蓝色点区收回了原属于自己的点区。<br>之前我恶补过一片论文：《K-means 初始聚类中心的选择算法》，里面提出了两个指标来衡量：<br>1.k-dist<br><img src="/2017/12/01/常见算法工程师面试题目整理-一/10.png" alt=""><br>某个点 p 到它的第k 个最近点的距离为点 p 的 k-dist 值。点的 k-dist 半径范围内至少包含k + 1 个点，理论上同一个聚类中改变k值不会引起k-dist值明显变化。将 k-dist 值由小到大排序，a、b、c表示平缓点，d，e，f为跃迁点。<br>2.DK图<br><img src="/2017/12/01/常见算法工程师面试题目整理-一/11.png" alt=""><br>k-dist 图中相邻两点的 k-dist 值之差记为 DK。k-dist 图中相邻两点pm和pm－1的 k-dist的差为DKm=k-distm －k-distm－1 ( m ＞ 1) 。由于 k-distm 非递减，显然 DKm ＞ 0。DK 值接近的连续邻近点处于 k-dist 图的同一条平缓曲线上，即处于<br>同一个密度层次; DK 值大幅跳动的点处于密度转折曲线或噪声曲线上。<br>3.选择<br>对 DK 值从小到大排序，得到 DK 标准范围δ。依据 DK 标准范围内对应的数据点的分布情况，在 k-dist 图中找出 k’ 个平缓曲线，代表 k’ 个主要密度水平。选择每个密度水平的第一个点作为初始聚类中心。<br>重复若干次，得到若干组的优化聚类中心，在根据优化聚类中心组下的组内间距和／组外间距和判断那个点组为最优点组。</p>
+<p>其实这样的开销也挺大的，目前也没有看到其它比较易理解的kmeans的初始点计算的方式。</p>
+<hr>
+<h1 id="大致讲解一下最优化中拉格朗日乘子法的思路？KKT是什么？"><a href="#大致讲解一下最优化中拉格朗日乘子法的思路？KKT是什么？" class="headerlink" title="大致讲解一下最优化中拉格朗日乘子法的思路？KKT是什么？"></a>大致讲解一下最优化中拉格朗日乘子法的思路？KKT是什么？</h1><p>当我们求解一个函数的最小值，且这个函数也被某些确定的限制条件限制的时候：<br><img src="/2017/12/01/常见算法工程师面试题目整理-一/12.png" alt=""></p>
+<p>我们可以将限制条件加入f(x)中一同进行后续的偏导计算：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/13.png" alt=""></p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/14.png" alt=""></p>
+<p>至于KKT我了解的其实不多，也是回来之后恶补了一下，通过例子入手：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/15.png" alt=""><br>求解上面这个问题的化，我们需要考虑构造两个约束变量a1，b1，使得<br>h1(x，a1)＝g1(x)＋a1<code>^</code>2＝a－x＋a1<code>^</code>2=0<br>h2(x，b1)＝g2(x)＋b1<code>^</code>2＝b－x＋b1<code>^</code>2=0<br>在根据普通拉格朗日乘子的方法对下面公式的每一项求偏导：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/16.png" alt=""></p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/17.png" alt=""><br>这个条件就是KKT条件<br>其实我觉得，<a href="http://www.cnblogs.com/zhangchaoyang/articles/2726873.html，这篇文章写的挺好的，想要详细了解的可以仔细参考一下。" target="_blank" rel="noopener">http://www.cnblogs.com/zhangchaoyang/articles/2726873.html，这篇文章写的挺好的，想要详细了解的可以仔细参考一下。</a></p>
+<hr>
+<h1 id="听说你做过风控，异常点检测你用过什么办法？"><a href="#听说你做过风控，异常点检测你用过什么办法？" class="headerlink" title="听说你做过风控，异常点检测你用过什么办法？"></a>听说你做过风控，异常点检测你用过什么办法？</h1><p>之前正好整理过，内心大喜：<br><strong>1.6个西格玛的原理</strong><br><strong>2.箱式图大于3/2QI＋Q3，小于Q1－3/2Qi</strong><br><strong>3.基于距离离群检测（聚类），包括欧式、马氏距离、街道距离</strong><br>这边被打断了，问了马氏距离的细节，好处：<br><img src="/2017/12/01/常见算法工程师面试题目整理-一/18.png" alt=""><br>追问了协方差Sigma怎么算：<br>Cov(X,Y)=E(XY)-E(X)E(Y)<br>追问了什么时候用马氏距离比较好：<br>举例很有名的曲线分布图，如下：</p>
+<p><img src="/2017/12/01/常见算法工程师面试题目整理-一/19.png" alt=""><br><strong>4.pca的基于特征值压缩的方法</strong><br><strong>5.基于isolation forest识别的方法</strong><br>这边被追问了一次原理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">method:</span><br><span class="line">1.从原始数据中随机选择一个属性feature；</span><br><span class="line">2.从原始数据中随机选择该属性的下的一个样本值value；</span><br><span class="line">3.根据feature下的value对每条记录进行分类，把小于value的记录放在左子集，把大于等于value的记录放在右子集；</span><br><span class="line">4.repeat 1-3 until：</span><br><span class="line">　　　　4.1.传入的数据集只有一条记录或者多条一样的记录；</span><br><span class="line">　　　　4.2.树的高度达到了限定高度；</span><br></pre></td></tr></table></figure></p>
+<p>　　　　以s(x,n)为判断数据是否异常的衡量指标。<br>　　　　<img src="/2017/12/01/常见算法工程师面试题目整理-一/20.png" alt=""><br>　　　　<img src="/2017/12/01/常见算法工程师面试题目整理-一/21.png" alt=""><br>　　　　其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。<br>　　　　<img src="/2017/12/01/常见算法工程师面试题目整理-一/22.png" alt=""><br>　　　　详细的可以参见我的另一篇博客：<a href="http://www.jianshu.com/p/ac6418ee8e3f" target="_blank" rel="noopener">http://www.jianshu.com/p/ac6418ee8e3f</a><br>　　　　<br>　　　　本来准备一次写完的，后来写着写着发现真的挺多，准备写个系列，最后谢谢大家的阅读。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/SVM理论解析及python实现/" rel="next" title="SVM理论解析及python实现">
+                <i class="fa fa-chevron-left"></i> SVM理论解析及python实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/01/常见算法工程师面试题目整理-二/" rel="prev" title="常见算法工程师面试题目整理(二)">
+                常见算法工程师面试题目整理(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于每日用户搜索内容，假设只有少量已知商品的情况下，如何根据用户搜索内容获取平台内没有的新商品？"><span class="nav-number">1.</span> <span class="nav-text">基于每日用户搜索内容，假设只有少量已知商品的情况下，如何根据用户搜索内容获取平台内没有的新商品？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么logistic回归的要用sigmoid函数？优缺点？"><span class="nav-number">2.</span> <span class="nav-text">为什么logistic回归的要用sigmoid函数？优缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比牛顿法、梯度下降法的关系"><span class="nav-number">3.</span> <span class="nav-text">对比牛顿法、梯度下降法的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两个盒子，50个红球，50个白球，问如何放球，抽到红球的概率最高？（每个盒子必须有球）"><span class="nav-number">4.</span> <span class="nav-text">两个盒子，50个红球，50个白球，问如何放球，抽到红球的概率最高？（每个盒子必须有球）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的正则化有是么，有什么作用，为什么l1是会把feature压缩到0而l2做不到？"><span class="nav-number">5.</span> <span class="nav-text">常见的正则化有是么，有什么作用，为什么l1是会把feature压缩到0而l2做不到？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble-Classification-model是什么？"><span class="nav-number">6.</span> <span class="nav-text">分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble Classification model是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环神经网络中介绍一个你熟悉的？"><span class="nav-number">7.</span> <span class="nav-text">循环神经网络中介绍一个你熟悉的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kmeans的原理及如何选择k？如何选择初始点？"><span class="nav-number">8.</span> <span class="nav-text">kmeans的原理及如何选择k？如何选择初始点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大致讲解一下最优化中拉格朗日乘子法的思路？KKT是什么？"><span class="nav-number">9.</span> <span class="nav-text">大致讲解一下最优化中拉格朗日乘子法的思路？KKT是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#听说你做过风控，异常点检测你用过什么办法？"><span class="nav-number">10.</span> <span class="nav-text">听说你做过风控，异常点检测你用过什么办法？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">120.8k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
