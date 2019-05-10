@@ -2452,6 +2452,46 @@
     </entry>
     
     <entry>
+      <title><![CDATA[如何校验用户画像的准确性？]]></title>
+      <url>/2017/07/20/%E5%A6%82%E4%BD%95%E6%A0%A1%E9%AA%8C%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E7%9A%84%E5%87%86%E7%A1%AE%E6%80%A7%EF%BC%9F/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>在用户研究的课题中，用户画像是几乎每个公司都会去做的，浅层的包括统计类的：上月购买量，上周活跃天数等；深层的包括洞察类的：潜在需求偏好，生命周期阶段等；前者的校验简单，后者的校验需要通过一些特别的方式。本文就洞察类画像校验做一系列的梳理。</p>
+</blockquote>
+<p><img src="/2017/07/20/如何校验用户画像的准确性？/1.png" alt=""></p>
+<p>省略掉预处理设计的过程，画像校验的步骤主要集中在画像开发，画像上线，画像更新中，并且三个阶段中，每个阶段的校验方式完全不同</p>
+<p><img src="/2017/07/20/如何校验用户画像的准确性？/2.gif" alt=""></p>
+<h1 id="用户画像开发中"><a href="#用户画像开发中" class="headerlink" title="用户画像开发中"></a>用户画像开发中</h1><p>当我们所开发的用户画像是类似于用户的下单需求、用户的购车意愿、用户是否有注册意愿这一类存在<strong>历史的正负样本</strong>的有监督的问题，我们可以利用历史确定的数据来校验我们的画像准确性。比如，银行在设计用户征信的画像前，会有一批外部购买的坏样本和好样本，其实画像问题就转化为分类问题去解决评估了。<br><strong>1.1 Recall、Pecision、K-S、F1曲线、Roc曲线、Confusion Matrix、AUC</strong><br>针对这类问题，已经有较为成熟的理论基础，直接利用测试样本判断的准确程度判断画像是否准确</p>
+<p><img src="/2017/07/20/如何校验用户画像的准确性？/3.png" alt=""></p>
+<p>这张图是一张非常常见也是有效的来总结Recall、Pecision、Lift曲线、Roc曲线、Confusion Matrix的图。<br>FPR = FP/(FP + TN)<br>Recall=TPR=TP/(TP+FN)<br>Precision=TP/(TP+FP)<br>F1曲线:2<code>*</code>Precision<code>*</code>Recall/(Precision+Recall)<br>Roc曲线：TPR vs FPR，也就是Precision vs Recall<br>Auc：area under the roc curve ，也就是roc曲线下面的面积，积分或者投点法均可求解。<br>这边不详细讲细节，需要的可以参考<a href="https://www.zhihu.com/question/30643044" target="_blank" rel="noopener">精确率、召回率、F1 值、ROC、AUC 各自的优缺点是什么？</a></p>
+<p><strong>1.2 交叉验证</strong><br>并不是所有画像都是有监督训练的画像，举个例子，用户的性别画像，是一个无监督的刻画，当你无法通过app端资料填写直接获取到的时候，你只能够通过其他数据特征的对用户进行分群。</p>
+<p><img src="/2017/07/20/如何校验用户画像的准确性？/4.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">input :</span><br><span class="line">Data Set：测试数据集</span><br><span class="line"></span><br><span class="line">output :</span><br><span class="line">model：画像模型</span><br><span class="line">label：0(无效)，1（有效）</span><br><span class="line"></span><br><span class="line">methods：</span><br><span class="line">1.从原始数据集中确定画像模型关键features</span><br><span class="line">2.关键features分层，分为train features、test features</span><br><span class="line">3.train featrues训练画像</span><br><span class="line">4.test freatrues校验画像</span><br><span class="line">5.输出值对（model，label）</span><br><span class="line">6.重复2~5</span><br></pre></td></tr></table></figure>
+<p>首先，我们在总的数据集中筛选出所有关键影响特征，每次将筛选出的特征分为两块，测试特征训练特征，利用训练特征建立模型，再利用测试特征去判断模型是否合理（比如女鞋用户群的女鞋购买次数小于男性用户群，则次模型异常，删除），最后集成所有合理模型。<br>这样的逻辑中，我们将所有异常不合理的模型全部剔除，训练过程中就校验了用户画像的准确性<br><img src="/2017/07/20/如何校验用户画像的准确性？/5.gif" alt=""></p>
+<h1 id="用户画像上线后"><a href="#用户画像上线后" class="headerlink" title="用户画像上线后"></a>用户画像上线后</h1><h2 id="ABTest"><a href="#ABTest" class="headerlink" title="ABTest"></a>ABTest</h2><p><strong>不得不说，abtest是用户画像校验最为直观有效的校验方式。</strong></p>
+<p>用户分流模块：<br><img src="/2017/07/20/如何校验用户画像的准确性？/6.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">methods:</span><br><span class="line">1. 全量用户流量为Users，切分流量为三块Users：A1、Users：A2、Users：B，且满足Users：A1+Users：A2=Users：B</span><br><span class="line"></span><br><span class="line">2. 对流量Users：A1、Users：A2不做任何动作</span><br><span class="line">3. 对流量Users：B做相应的模型预测，保存结果</span><br><span class="line">4. 以用户活跃度为例子，选取观察日期周下平均登陆次数y为代价函数，</span><br><span class="line">if y（Users：A1）=y（Users：A2）then</span><br><span class="line">if  y（Users：B）&gt; y（Users：A1+Users：A2）</span><br><span class="line">then 模型有效（差值越大代表准确越高）</span><br><span class="line">else 模型无效（差值越小代表准确越差）</span><br><span class="line">else    模型无效</span><br><span class="line">5.准确程度量化：K=(p*exp(-(dist(y(Users:B),y(Users:A1+Users:A2)))^2/(2*最小容忍度^2)))^(-1)</span><br></pre></td></tr></table></figure>
+<p>一句话解释，就是A1=A2保证分配随机，A3好于A1+A2的效果检验画像是否准确？多准确？<br><img src="/2017/07/20/如何校验用户画像的准确性？/7.gif" alt=""></p>
+<h1 id="用户画像更新"><a href="#用户画像更新" class="headerlink" title="用户画像更新"></a>用户画像更新</h1><h2 id="用户回访"><a href="#用户回访" class="headerlink" title="用户回访"></a>用户回访</h2><p>在画像刻画完成后，必然会存在画像优化迭代的过程，客服回访是非常常见且有效的方式。<br>比如，我们定义了一波潜在流失用户10万人，随机抽取1000人，进行回访，根据回访结果做文本挖掘，提取关键词，看消极词用户的占比；<br><img src="/2017/07/20/如何校验用户画像的准确性？/8.png" alt="这个图随机找的，别在意"></p>
+<h2 id="机制检测"><a href="#机制检测" class="headerlink" title="机制检测"></a>机制检测</h2><p>再比如，我们定义了一波忠诚用户10万人，随机抽取100人，后台随机获取用户安装app的列表，看用户同类app的下载量数目的分布；</p>
+<p><img src="/2017/07/20/如何校验用户画像的准确性？/9.png" alt=""><br><em>横轴为用户手机中同类竞品安装量的个数，纵轴为对应的随机抽样的100人中的个数</em><br>人群1分布为忠诚用户画像最准确的，同类app下载量集中在1附近，定义的用户极为准确<br>人群2分布杂乱，人群3分布在下降量异常高的数值附近，定义人群不准确<br><img src="/2017/07/20/如何校验用户画像的准确性？/10.gif" alt=""><br><strong>用户画像是数据运营运营的基础，也是做深度挖掘的一个不可或缺的模块，只有先打好画像基础，确保画像质量，后续的深挖行为才有突破的可能</strong>，最后，谢谢大家阅读。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 特征刻画 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 用户画像 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[大数据量下的划分聚类方法]]></title>
       <url>/2017/07/19/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8B%E7%9A%84%E5%88%92%E5%88%86%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/</url>
       <content type="html"><![CDATA[<p>在常规聚类案例中，数据一般都是以iris集或者不足GB级的数据作为测试案例，实际商业运用中，数据量级要远远大于这些。比如滴滴出行15年日均单量就达到1000万单，出行轨迹的数据存储达到上百TB，常规的k均值聚类，二分聚类等无法完成如此量级的数据聚类，这边就提供一个以CLARANS为基础的算法思路。</p>
