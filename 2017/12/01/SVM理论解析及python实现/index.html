@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="超平面分割," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于常见的分类算法在不同数据集上的分类效果，在《Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?》这个篇论文上有比较完善的总结，因为文章内容比较长，这边我总结了下我认为比较关键的一些结论： 仅仅参考论文评价我们">
+<meta name="keywords" content="超平面分割">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVM理论解析及python实现">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:description" content="关于常见的分类算法在不同数据集上的分类效果，在《Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?》这个篇论文上有比较完善的总结，因为文章内容比较长，这边我总结了下我认为比较关键的一些结论： 仅仅参考论文评价我们常用的：  神经网络的效果最好，13.2%的数据集中取得第一 SVM的效果其次，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/1.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/3.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/4.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/5.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/6.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/7.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/8.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/9.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/10.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/11.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/12.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/13.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/14.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/15.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/16.png">
+<meta property="og:updated_time" content="2019-05-10T11:37:42.033Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVM理论解析及python实现">
+<meta name="twitter:description" content="关于常见的分类算法在不同数据集上的分类效果，在《Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?》这个篇论文上有比较完善的总结，因为文章内容比较长，这边我总结了下我认为比较关键的一些结论： 仅仅参考论文评价我们常用的：  神经网络的效果最好，13.2%的数据集中取得第一 SVM的效果其次，">
+<meta name="twitter:image" content="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/"/>
+
+
+
+
+
+  <title>SVM理论解析及python实现 | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/SVM理论解析及python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SVM理论解析及python实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:43:46+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,313 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>关于常见的分类算法在不同数据集上的分类效果，在<a href="http://xueshu.baidu.com/s?wd=paperuri%3A%28491eb32b0997a8dde16c12fe69bf3eac%29&amp;filter=sc_long_sign&amp;tn=SE_xueshusource_2kduw22v&amp;sc_vurl=http%3A%2F%2Fdl.acm.org%2Fcitation.cfm%3Fid%3D2697065%26amp%3Bdl%3Dacm%26amp%3Bcoll%3Ddl%26amp%3Bpreflayout%3Dflat&amp;ie=utf-8&amp;sc_us=5730949819175219868" target="_blank" rel="noopener">《Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?》</a>这个篇论文上有比较完善的总结，因为文章内容比较长，这边我总结了下我认为比较关键的一些结论：</strong></p>
+<p><strong>仅仅参考论文评价我们常用的：</strong></p>
+<ul>
+<li>神经网络的效果最好，13.2%的数据集中取得第一</li>
+<li>SVM的效果其次，10.7%的数据集中取得第一</li>
+<li>Bagging和Boost紧随其后，9%~10%左右的数据集取得第一</li>
+<li>Elastic Net等的线性算法效果普通，5%-7%的数据集上取得第一</li>
+</ul>
+<p><strong>附加一些我个人平时调参的经验及感悟：</strong></p>
+<ul>
+<li>神经网络拟合的效果好是基于大量的数据量上，如果数据集较小，训练结果通常不如上述其他算法；除此之外，神经网络的训练成本高，关于控制非线性变换的隐藏层层数，控制线性力度的节点个数的设置需要大量的历史经验，相对成本非常高。</li>
+<li>SVM对数据集合量以及维度没有很高的要求，而且可以解决线性问题（kernel=linear），非线性问题（kernel=RBF等），而且相对来说效果优秀。但是SVM的核心是计算最大分隔的间隔，如果全都是分类变量，效果会受一定的影响，而且需要额外的操作才能获取概率结果。</li>
+<li>Bagging和Boost，能够解决非线性问题，Bagging基于抽样抽特征，控制Var的情况下降低Bias；Boost基于N个弱分类器的强化组合，控制Bias的情况下降低Var，对数据格式的要求也很低，实现上比较友好。缺点可能就是太一般，没有专业领域的亮点。</li>
+<li>Elastic Net等线性回归算法，对数据量数据维度没有什么要求，部分算法会自己压缩feature，简单易操作，相比于上述任何一个算法都好实现，除此之外，还可以得到概率结果。缺点就是效果较差，如果在feature和label没有线性关系的时候无法得到理想结果。</li>
+</ul>
+<p>除了上述的方法，还有比如KNN、线性判别分析、Naive Bayes等方法，每个都有自己适用的场景，也但是通常不做首要考虑的分类算法。</p>
+<p>针对其中的SVM，本文接下来和大家解析三个方面：<br>1.感知机、线性感知机、核感知机的理论概览<br>2.如何利用python中的sklearn快速的实现svm分类<br>3.SMO方法的核心功能实现</p>
+<p>如果你只是想快速了解分类算法的概览，方便面试或者日常“交流”，到此就可以不用往下看了。<br>如果你是数据分析师或者软件工程师，只是想快速了解如果使用，直接跳到2。<br>如果你是机器学习工程师，需要对整个算法有个了解，贯穿整个SVM过程，直接看1，2。<br>如果你是算法工程师，需要重构算法，或在当前解决核函数计算瓶颈的，请全文阅读，并阅读推荐书籍。</p>
+<p>让我们开始正文：</p>
+<h1 id="感知机、线性感知机、核感知机的理论概览"><a href="#感知机、线性感知机、核感知机的理论概览" class="headerlink" title="感知机、线性感知机、核感知机的理论概览"></a>感知机、线性感知机、核感知机的理论概览</h1><h2 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a><strong>感知机</strong></h2><p>我们日常说的SVM其实只是一个感知机，也就是没有任何的核函数的情况。<br><img src="/2017/12/01/SVM理论解析及python实现/1.png" alt=""></p>
+<p>上面图中，对于二维数据来说，平面π1，π2，π3都可以将红色和蓝色的点给划分开。对于多维数据来说，这边的平面就可以引申为超平面，wx+b=0。</p>
+<p>所以，我们可以说，对于数据集:<br><img src="/2017/12/01/SVM理论解析及python实现/2.png" alt=""><br>如果我们可以得到超平面wx+b=0，使得y=1的点集合与y=-1的点的集合分隔在平面两边（如上图所示），那我们就说原始数据集D线性可分，wx+b=0为其超平面。</p>
+<p>首先，我们定义损失函数为：<strong>L=max(-y(wx+b),0)，</strong>我们来看下，如果我们预测正确，y=1，我们预测的为wx+b&gt;0或者，y=-1，我们预测的为wx+b<0,y(wx+b)>0,则不贡献梯度；否则，我们可以取-y(wx+b)为梯度，也就得到了上述的梯度公式。<br>接下来的就是常规意义上的对w和b的偏导，然后梯度下降求极值。</0,y(wx+b)></p>
+<h2 id="线性感知机"><a href="#线性感知机" class="headerlink" title="线性感知机"></a><strong>线性感知机</strong></h2><p>现在我们思考两个问题：<br>a.上述的π1、π2、π3都是感知机，如何选取最优？<br>b.下面这张图线性不可分，如何解决？</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/3.png" alt="线性不可分"></p>
+<p>我们先来看，平面π1外任意点到平面的距离如何计算：<br><img src="/2017/12/01/SVM理论解析及python实现/4.png" alt=""><br>假设任意点为X(x，y)，垂点X1(x1，y1)，垂点在π1平面(wx+b=0)上，所以，我们有X-X1=ρw，w为平面π1的法向量。所以，我们有：<br><code>||X-X1||**2=ρw(X-X1)=ρ(wx+b-(wx1+b))=ρ(wx+b)=ρ(wx+b)</code><br>在计算距离的时候，我们需要去归一化，无量纲化。<br>不难看出，距离的计算方式为：</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/5.png" alt=""><br>所以，我们在超平面选取的时候，需要考虑两点：<br><strong>(1)所以的分类结果要保持正确：</strong></p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/6.png" alt=""></p>
+<p><strong>(2)保证决策面离正负样本都极可能的远：</strong></p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/7.png" alt=""><br>里面的min的作用是计算所有的点到平面π的最小距离，外面的max的作用是尽可能的让最小距离最大，保证决策面离正负样本都尽可能的远。</p>
+<p>假设(x1,y1)到决策平面的距离最近，所有y1(wx1+b)&gt;=1,所以目标函数：max(1/||w||)，可以优化为min(||w||^2/2)。<br>但是如果发生1.2节最开始的<strong>线性不可分的问题</strong>的时候，y1(wx1+b)&gt;=1就无法实现，所有我们需要加∆的容忍度，也就是变成了y1(wx1+b)&gt;=1-∆。既然加了∆，我们也需要对∆进行控制：∆=1-y1(wx1+b)，有更新后的目标函数：</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/8.png" alt=""><br>这边的<code>[]+</code>记为神经网络中常用的ReLU函数。<br>有了这个目标函数，接下来就是正常的梯度下降，偏导后求解的过程。</p>
+<h2 id="核函数下的感知机"><a href="#核函数下的感知机" class="headerlink" title="核函数下的感知机"></a><strong>核函数下的感知机</strong></h2><p>上面考虑的问题均是线性可分的问题，假设数据分布如下：</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/9.png" alt=""><br>无论通过平面π1、π2、还是π3均无法做到线性的分割。<br>而核函数的目的就是通过内积的形式，将低维度的数据映射到高维度，通常采取的方式是w=∑αx的形式，带回到原来的损失函数：<br>比如普通感知机的：<br><img src="/2017/12/01/SVM理论解析及python实现/10.png" alt=""></p>
+<p>比如线性感知机</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/11.png" alt=""></p>
+<p>K(xi,xj)常用的有：<br>多项式核函数：<br>(xi+xj+1)^p</p>
+<p>径向基核函数：<br>exp(-ρ||xi-xj||^2)</p>
+<p>至于之后的计算，还是可以和之前一致，将上述选择的核函数代入损失函数后采取梯度下降的方法，高效计算方式SMO算法在第三模块会简单的梳理一遍。</p>
+<p>以上我们就大概的了解了感知机，linear svm，kernel svm的损失函数的来源及构造细节等等，接下来我们来看下如何快速的使用。</p>
+<h1 id="如何利用python中的sklearn快速的实现svm分类"><a href="#如何利用python中的sklearn快速的实现svm分类" class="headerlink" title="如何利用python中的sklearn快速的实现svm分类"></a>如何利用python中的sklearn快速的实现svm分类</h1><p>在python的sklearn包中，有SVM的包，其中SVC是分类，SVR是回归，可以快速简单的上手，下面上code，并在注释中解释：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn.cross_validation <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment">#data add,数据读取</span></span><br><span class="line">risk_data=pd.read_table(<span class="string">'/Users/slade/Desktop/Python File/data/data_all.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#data check，删除无用的列</span></span><br><span class="line">risk_data = risk_data.drop(<span class="string">'Iphone'</span>,axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#data scale，数据归一化（必备的操作），上述理论中也体现归一化后的距离计算的原因</span></span><br><span class="line">risk_data_mm = risk_data.max()-risk_data.min()</span><br><span class="line">risk_data_scale = pd.DataFrame([])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(risk_data.columns)):</span><br><span class="line">new_columns = (risk_data.iloc[:,i]-risk_data.iloc[:,i].min())/risk_data_mm[i]</span><br><span class="line">risk_data_scale = pd.concat([risk_data_scale,pd.DataFrame(new_columns)],axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#split data（将数据分割成训练集和测试集）</span></span><br><span class="line">train_data,test_data = train_test_split(risk_data_scale,test_size = <span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#update_train,update_test（因为我的数据集是非常不平衡的，这边我采取了欠采样的方法）</span></span><br><span class="line">train_badcase = train_data[train_data[<span class="string">'tag'</span>]==<span class="number">1</span>]</span><br><span class="line">train_goodcase = train_data[train_data[<span class="string">'tag'</span>]!=<span class="number">1</span>]</span><br><span class="line">sample_value=(<span class="number">10</span>*train_badcase.count()[<span class="number">0</span>])</span><br><span class="line">train_goodcase_sample = train_goodcase.sample(n=sample_value)</span><br><span class="line">train_data_update = pd.concat([train_badcase,train_goodcase_sample],axis = <span class="number">0</span>)</span><br><span class="line">y=train_data_update[<span class="string">'tag'</span>]</span><br><span class="line">x=train_data_update.iloc[:,<span class="number">1</span>:len(train_data_update.columns)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#svm（linear、rbf、sigmoid为核的SVM）</span></span><br><span class="line">clf_linear = svm.SVC(kernel=<span class="string">'linear'</span>).fit(x,y)</span><br><span class="line">clf_rbf = svm.SVC(kernel=<span class="string">'rbf'</span>).fit(x,y)</span><br><span class="line">clf_sigmoid = svm.SVC(kernel=<span class="string">'sigmoid'</span>).fit(x,y)</span><br><span class="line"></span><br><span class="line"><span class="comment">#test，训练数据处理</span></span><br><span class="line">y_test = test_data[[<span class="string">'tag'</span>]]</span><br><span class="line">x_test = test_data.iloc[:,<span class="number">1</span>:len(test_data.columns)]</span><br><span class="line"></span><br><span class="line"><span class="comment">#模型效果对比</span></span><br><span class="line"><span class="comment">#linear</span></span><br><span class="line">test_pred=clf_linear.predict(x_test)</span><br><span class="line">y_test.index = range(y_test.count())</span><br><span class="line">union_actual_pred = pd.concat([y_test,pd.DataFrame(test_pred)],axis = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#show the result</span></span><br><span class="line">recall = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>][union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count()/union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>].count()</span><br><span class="line">percison = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>][union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count() / union_actual_pred[union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count()</span><br><span class="line">correction = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==union_actual_pred.iloc[:,<span class="number">1</span>]].count()/union_actual_pred.iloc[:,<span class="number">0</span>].count()</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the recall is %s'</span> %recall</span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the percison is %s'</span> %percison</span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the correction is %s'</span> %correction</span><br><span class="line"></span><br><span class="line"><span class="comment">#rbf</span></span><br><span class="line">test_pred=clf_rbf.predict(x_test)</span><br><span class="line">y_test.index = range(y_test.count())</span><br><span class="line">union_actual_pred = pd.concat([y_test,pd.DataFrame(test_pred)],axis = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#show the result</span></span><br><span class="line">recall = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>][union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count()/union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>].count()</span><br><span class="line">percison = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>][union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count() / union_actual_pred[union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count()</span><br><span class="line">correction = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==union_actual_pred.iloc[:,<span class="number">1</span>]].count()/union_actual_pred.iloc[:,<span class="number">0</span>].count()</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the recall is %s'</span> %recall</span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the percison is %s'</span> %percison</span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the correction is %s'</span> %correction</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#sigmoid</span></span><br><span class="line">test_pred=clf_sigmoid.predict(x_test)</span><br><span class="line">y_test.index = range(y_test.count())</span><br><span class="line">union_actual_pred = pd.concat([y_test,pd.DataFrame(test_pred)],axis = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#show the result</span></span><br><span class="line">recall = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>][union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count()/union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>].count()</span><br><span class="line">percison = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==<span class="number">1</span>][union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count() / union_actual_pred[union_actual_pred.iloc[:,<span class="number">1</span>]==<span class="number">1</span>].count()</span><br><span class="line">correction = union_actual_pred[union_actual_pred.iloc[:,<span class="number">0</span>]==union_actual_pred.iloc[:,<span class="number">1</span>]].count()/union_actual_pred.iloc[:,<span class="number">0</span>].count()</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the recall is %s'</span> %recall</span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the percison is %s'</span> %percison</span><br><span class="line"><span class="keyword">print</span> <span class="string">'about the linear svm , the correction is %s'</span> %correction</span><br></pre></td></tr></table></figure></p>
+<p>上述粗略的给出了如何快速的通过svm进行一次训练，现在就svc中的参数进行剖析：<br><code>C</code>:惩罚力度，C越大代表惩罚程度越大，越不能容忍有点集交错的问题<br><code>kernel</code>:核函数，常规的有‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ ，默认的是rbf<br><code>degree</code>:当poly为核函数时启动，默认是3<br><code>gamma</code>:当‘rbf’, ‘poly’ 和 ‘sigmoid’为核函数时的参数设置，默认的是特征个数的倒数<br><code>probability</code>：是否输出概率值<br><code>shrinking</code>:是否自启动<br><code>tol</code>:停止训练的容忍度<br><code>max_iter</code>：最大的训练次数<br><code>class_weight</code>:因变量的权重<br><code>decision_function_shape</code>:因变量的形式：ovo一对一, ovr一对多, 默认’ovr’<br>根据自己的需求，对上述的参数进行grid_search即可完成快速训练任务。</p>
+<h1 id="3-SMO方法的核心功能实现"><a href="#3-SMO方法的核心功能实现" class="headerlink" title="3.SMO方法的核心功能实现"></a>3.SMO方法的核心功能实现</h1><p>首先，我们需要明确，SVM学习过程可以转化为以下问题：</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/12.png" alt=""><br>至于什么是KKT条件，请参照<a href="http://www.jianshu.com/p/4f91f0dcba95" target="_blank" rel="noopener">总结：常见算法工程师面试题目整理(二)</a>中的回答。<br>求解的方式也是比较复杂，这主要以梳理流程为主，我们的目的就是找到一组αi满足上述的约束，然后再根据该组的αi求解到w和b即可。</p>
+<p>求解αi的过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.选择两个拉格朗日乘子αi和αj</span><br><span class="line">2.固定其他拉格朗日乘子αk(k不等于i和j)，只对αi和αj优化w(α)</span><br><span class="line">3.根据优化后的αi和αj，更新截距b的值</span><br><span class="line">4.充分1-3直到收敛</span><br></pre></td></tr></table></figure></p>
+<p>针对上面的过程存在2个问题<br>a.为什么要选择两个乘子？而不是更加方便计算的一个？<br>在原始的约束条件中，存在：<br><img src="/2017/12/01/SVM理论解析及python实现/13.png" alt=""><br>如果只选择一个为变化乘子的化，根据其他确定的乘子，该变化乘子也无法变化。</p>
+<p>b.如何选择两个乘子αi和αj？</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/14.png" alt=""><br>检验样本是否满足KKT条件也就是检验样本是否满足以下条件：</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/15.png" alt=""><br>第一个参数αi优先检验0&lt;αj&lt;C也就是π3和π1平面上的点是否满足条件，如果全部满足条件，再检验全部数据集是否满足条件。</p>
+<p>第二个参数αj则可以简单地随机选取，虽然这不是特别好，但效果已然不错。也可以通过最大化αi的误差与αj的误差之差的绝对值去判断，但是计算量会变大，因为又做了一次全量数据循环。</p>
+<p>当αi和αj有了之后再去对b进行修正：</p>
+<p><img src="/2017/12/01/SVM理论解析及python实现/16.png" alt=""><br>即可。</p>
+<p>这边的代码比较复杂，我就不贴了，百度上很多实现了的版本。</p>
+<p>总的来说，我们对svm的过程有了个浅尝辄止的了解，部分算法工程师需要要深入的了解其深刻完整的含义，仍需完整完善的学习，<a href="https://www.amazon.cn/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E6%9D%8E%E8%88%AA/dp/B007TSFMTA" target="_blank" rel="noopener">《统计学习方法 》</a>一书讲的深入透彻，建议可以研读一下。</p>
+<p>部分软件工程师在运用中可能需要各种版本的svm，这边也贴出地址，供参考<a href="http://www.cs.cornell.edu/people/tj/svm_light/svm_struct.html" target="_blank" rel="noopener">Support Vector Machine for Complex Outputs</a></p>
+<p>最后，谢谢大家的阅读。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/超平面分割/" rel="tag"># 超平面分割</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/能够快速实现的协同推荐/" rel="next" title="能够快速实现的协同推荐">
+                <i class="fa fa-chevron-left"></i> 能够快速实现的协同推荐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/01/python开发：特征工程代码模版-一/" rel="prev" title="python开发：特征工程代码模版(一)">
+                python开发：特征工程代码模版(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#感知机、线性感知机、核感知机的理论概览"><span class="nav-number">1.</span> <span class="nav-text">感知机、线性感知机、核感知机的理论概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机"><span class="nav-number">1.1.</span> <span class="nav-text">感知机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性感知机"><span class="nav-number">1.2.</span> <span class="nav-text">线性感知机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核函数下的感知机"><span class="nav-number">1.3.</span> <span class="nav-text">核函数下的感知机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何利用python中的sklearn快速的实现svm分类"><span class="nav-number">2.</span> <span class="nav-text">如何利用python中的sklearn快速的实现svm分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-SMO方法的核心功能实现"><span class="nav-number">3.</span> <span class="nav-text">3.SMO方法的核心功能实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">106.7k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
