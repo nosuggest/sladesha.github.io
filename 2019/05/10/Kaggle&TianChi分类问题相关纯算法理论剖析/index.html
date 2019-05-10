@@ -96,13 +96,13 @@
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/8.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/9.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/10.png">
-<meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/11.png">
+<meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/11.jpeg">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/12.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/13.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/14.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/15.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/16.png">
-<meta property="og:updated_time" content="2019-05-10T08:16:26.463Z">
+<meta property="og:updated_time" content="2019-05-10T08:20:48.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle&amp;TianChi分类问题相关纯算法理论剖析">
 <meta name="twitter:image" content="http://sladesha.github.io/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/1.png">
@@ -474,7 +474,7 @@
 <p><img src="/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/10.png" alt=""></p>
 <p>按照这个方向去更新Fi(x)，可以保证，组合模型F(x)的每次都是按照最优的方向去优化。</p>
 <p>MSE的损失函数确实是残差形式，不代表所有的损失函数下更新的方向都满足这样的残差形式。<strong>kaggle master 在<a href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/" target="_blank" rel="noopener">blog</a>里面提到Although we can minimize this function directly, gradient descent will let us minimize more complicated loss functions that we can’t minimize directly</strong>，我们就需要设计出一种更快速能提升泛化能力且不失一般性的解决方案，所以有大神提出了以梯度下降的值直接代替因变量y，也就是我每次预测不去比预测值与真实值y的差异，我们比较的是预测的梯度方向与真实的梯度方向。</p>
-<p><img src="/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/11.png" alt=""></p>
+<p><img src="/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/11.jpeg" alt=""></p>
 <p><strong>再基于已经预估出来的负梯度去计算最优的更新步长，使得预测值与真实值更加靠近</strong>，因为每层的负梯度的方向不固定，所以每层i的步长都是变化的。</p>
 <p><img src="/2019/05/10/Kaggle&TianChi分类问题相关纯算法理论剖析/12.png" alt=""></p>
 <p>最后通过缩减率v（这边就是类似logistics里面的∂）控制速率。</p>
@@ -597,8 +597,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/10/Kaggle-TianChi分类问题相关纯算法理论剖析/" rel="next" title="Kaggle&TianChi分类问题相关纯算法理论剖析">
-                <i class="fa fa-chevron-left"></i> Kaggle&TianChi分类问题相关纯算法理论剖析
+              <a href="/2019/01/14/PKUseg在货运领域的评测/" rel="next" title="PKUseg在货运领域的评测">
+                <i class="fa fa-chevron-left"></i> PKUseg在货运领域的评测
               </a>
             
           </div>
@@ -695,7 +695,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -819,7 +819,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.4k</span>
+    <span title="Site words total count">36.1k</span>
   
 </div>
 
