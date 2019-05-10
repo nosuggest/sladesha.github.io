@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="推荐评估方法," />
+  <meta name="keywords" content="聚类," />
 
 
 
@@ -80,20 +80,18 @@
 
 
 
-<meta name="description" content="推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢">
-<meta name="keywords" content="推荐评估方法">
+<meta name="description" content="1.cost function 1.1 距离 常见的为欧式距离（L1 norm）&amp;amp;&amp;amp;p=2，拓展的可以有闵可夫斯基距离（L2 norm）&amp;amp;&amp;amp;p=1： 当p趋向于无穷的时候，切比雪夫距离（Chebyshev distance）： 红色的时候为切比雪夫距离，蓝">
+<meta name="keywords" content="聚类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="量化评估推荐系统效果">
-<meta property="og:url" content="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/index.html">
+<meta property="og:title" content="聚类算法思路总结">
+<meta property="og:url" content="http://sladesha.github.io/2017/06/20/聚类算法思路总结/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。3) 深度评估指标的缺失。(如点击深度、购">
+<meta property="og:description" content="1.cost function 1.1 距离 常见的为欧式距离（L1 norm）&amp;amp;&amp;amp;p=2，拓展的可以有闵可夫斯基距离（L2 norm）&amp;amp;&amp;amp;p=1： 当p趋向于无穷的时候，切比雪夫距离（Chebyshev distance）： 红色的时候为切比雪夫距离，蓝色为闵可夫斯基距离，绿色为欧式距离。 1.2相似系数 夹角余弦及相关系数，相关系数不受线性变换的影响，但是计算速">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/1.png">
-<meta property="og:updated_time" content="2019-05-10T07:41:09.896Z">
+<meta property="og:updated_time" content="2019-05-10T09:11:17.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="量化评估推荐系统效果">
-<meta name="twitter:description" content="推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。3) 深度评估指标的缺失。(如点击深度、购">
-<meta name="twitter:image" content="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/1.png">
+<meta name="twitter:title" content="聚类算法思路总结">
+<meta name="twitter:description" content="1.cost function 1.1 距离 常见的为欧式距离（L1 norm）&amp;amp;&amp;amp;p=2，拓展的可以有闵可夫斯基距离（L2 norm）&amp;amp;&amp;amp;p=1： 当p趋向于无穷的时候，切比雪夫距离（Chebyshev distance）： 红色的时候为切比雪夫距离，蓝色为闵可夫斯基距离，绿色为欧式距离。 1.2相似系数 夹角余弦及相关系数，相关系数不受线性变换的影响，但是计算速">
 
 
 
@@ -123,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2017/06/20/聚类算法思路总结/"/>
 
 
 
 
 
-  <title>量化评估推荐系统效果 | SladeSha's Algorithm World</title>
+  <title>聚类算法思路总结 | SladeSha's Algorithm World</title>
   
 
 
@@ -290,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/07/19/量化评估推荐系统效果/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/20/聚类算法思路总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -307,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">量化评估推荐系统效果</h1>
+          <h1 class="post-title" itemprop="name headline">聚类算法思路总结</h1>
         
 
         <div class="post-meta">
@@ -319,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T09:29:45+08:00">
-                2018-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T00:10:34+08:00">
+                2017-06-20
               </time>
             
 
@@ -342,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -373,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,362 字
+                  1,754 字
                 </span>
               
 
@@ -389,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -410,62 +408,76 @@
       
 
       
-        <p>推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：<br>1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。<br>2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。<br>3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。<br>4）冷启动<br>5）Exploration 和 Exploitation问题</p>
-<h1 id="离线模型之间的评估"><a href="#离线模型之间的评估" class="headerlink" title="离线模型之间的评估"></a>离线模型之间的评估</h1><h2 id="召回集测试"><a href="#召回集测试" class="headerlink" title="召回集测试"></a>召回集测试</h2><ul>
-<li><p>recall<br>命中skn个数/用户真实点击skn个数</p>
-</li>
-<li><p>precision<br>命中skn个数/所有预测出来的skn总数</p>
-</li>
-<li><p>F1-Measure<br>2/(1/recall+1/precison)</p>
-</li>
-<li><p>交互熵 </p>
-</li>
-<li>MAE</li>
-<li>RMSE</li>
-<li>相关性<br>常见的比如：Pearson、Spearman和Kendall’s Tau相关，其中Pearson是更具数值之间的相似度，Spearman是根据数值排序之间的相似度，Kendall’s Tau是加权下的数值排序之间的相似度。</li>
-<li>基尼系数</li>
-<li>信息熵</li>
-</ul>
-<h2 id="排序部分测试"><a href="#排序部分测试" class="headerlink" title="排序部分测试"></a>排序部分测试</h2><ul>
-<li>NDCG（Normalize DCG）</li>
-<li>RBP（rank-biased precision）</li>
-</ul>
-<p>RBP和NDCG指标的唯一不同点在于RBP把推荐列表中商品的浏览概率p按等比数列递减，而ND CG则是按照log调和级数形式。</p>
-<h1 id="离线模型与在线模型之间的评估"><a href="#离线模型与在线模型之间的评估" class="headerlink" title="离线模型与在线模型之间的评估"></a>离线模型与在线模型之间的评估</h1><p>很多时候，我们需要确定离线模型的效果足够的健壮才能允许上线进行线上测试，那如何进行离线模型与线上模型的评估对比就是一个比较复杂的问题。</p>
-<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><ul>
-<li>缺乏公平的测试数据<br>实际处理过程中，我们发现，所有的已知点击都是来自线上模型推荐的结果，所以极端情况下，线上的recall是100%</li>
-<li>缺乏公认的衡量指标<br>在线下对比中，我们发现比如recall、precision、F1-Measure等指标都是大家约定俗成的，不存在很大的争议，而离线在线模型对比却没有一个准确公认的衡量指标</li>
-</ul>
-<h2 id="指标设计"><a href="#指标设计" class="headerlink" title="指标设计"></a>指标设计</h2><ul>
-<li>online_offline_cover_rate&amp;first_click_hit_rate</li>
-</ul>
-<p>这一组指标是结合在一起看的，其中online_offline_cover_rate是指针对每一个用户计算理线模型推荐的商品与在线模型推荐的商品的重合个数/在线模型的推荐商品个数，online_offline_cover_rate越低代表离线模型相对在线模型越独立；first_click_hit_rate是指offline模型对用户每天第一次点击的命中率，也就是命中次数/总统计用户数。<br>结合这两个指标，我们可以得到在online_offline_cover_rate越低的情况下，却能覆盖线上用户真实点击的次数越多，代表offline模型的效果优于线上模型。</p>
-<ul>
-<li>online_precision_rate/offline_precision_rate</li>
-</ul>
-<p>离线模型的准确率和在线模型的准确率。<br>这边在实际计算的时候采取了一个技巧，针对某个推荐位计算在线模型准确率的时候，用的是从来没有浏览过这个推荐位的用户的浏览历史匹配这个用户这个推荐位的推荐结果。这样可以避免用户的点击结果受到推荐位推荐结果影响的问题。</p>
-<p>举个例子：用户在推荐位A上没有浏览过，他的点击是不受推荐位A推荐的商品影响的，拿这个用户推荐位A我们给他线上推荐的结果作为线上模型的推荐结果去计算，这样才更加合理。</p>
-<ul>
-<li>online_recall_rate/offline_recall_rate</li>
-</ul>
-<p>离线模型的召回率和在线模型的召回率。<br>同上解释。</p>
-<ul>
-<li>roi_reall/roi_precision</li>
-</ul>
-<p>同上解释，只是把未来的点击作为match源更换成了加购物车、购买、收藏这些数据。</p>
-<h1 id="其他评估方向"><a href="#其他评估方向" class="headerlink" title="其他评估方向"></a>其他评估方向</h1><h2 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h2><p>推荐覆盖率越高， 系统给用户推荐的商品种类就越多 ，推荐多样新颖的可能性就越大。如果一个推荐算法总是推荐给用户流行的商品，那么它的覆盖率往往很低，通常也是多样性和新颖性都很低的推荐。</p>
-<h2 id="多样性"><a href="#多样性" class="headerlink" title="多样性"></a>多样性</h2><p>采用推荐列表间的相似度（hamming distance、Cosine Method），也就是用户的推荐列表间的重叠度来定义整体多样性。</p>
-<h2 id="新颖性"><a href="#新颖性" class="headerlink" title="新颖性"></a>新颖性</h2><p>计算推荐列表中物品的平均流行度。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>用户满意度、用户问卷、信任度、鲁棒性、实时性、</p>
-<h1 id="评测维度"><a href="#评测维度" class="headerlink" title="评测维度"></a>评测维度</h1><p>最后说一下评测维度分为如下3种，多角度评测：</p>
-<ul>
-<li>用户维度<br>主要包括用户的人口统计学信息、活跃度以及是不是新用户等。</li>
-<li>物品维度<br>包括物品的属性信息、流行度、平均分以及是不是新加入的物品等。</li>
-<li>时间维度<br>包括季节，是工作日还是周末，是白天还是晚上等。</li>
-</ul>
-<p>附常规评价指标的整理结果(来自论文Evaluation Metrics for Recommender Systems)：<br><img src="/2018/07/19/量化评估推荐系统效果/1.png" alt=""></p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。</p>
+        <p>1.cost function</p>
+<p>1.1 距离</p>
+<p>常见的为欧式距离（L1 norm）&amp;&amp;p=2，拓展的可以有闵可夫斯基距离（L2 norm）&amp;&amp;p=1：</p>
+<p>当p趋向于无穷的时候，切比雪夫距离（Chebyshev distance）：</p>
+<p>红色的时候为切比雪夫距离，蓝色为闵可夫斯基距离，绿色为欧式距离。</p>
+<p>1.2相似系数</p>
+<p>夹角余弦及相关系数，相关系数不受线性变换的影响，但是计算速度远慢于距离计算。</p>
+<p>1.3dynamic time warping动态时间规整</p>
+<p>举例子：</p>
+<p>序列A：1,1,1,10,2,3，序列B：1,1,1,2,10,3</p>
+<p>欧式距离：distance[i][j]=(b[j]-a[i])*(b[j]-a[i])来计算的话，总的距离和应该是128</p>
+<p>应该说这个距离是非常大的，而实际上这个序列的图像是十分相似的。因为序列A中的10对应得是B中的2，A中的2对应的B中的10，导致计算膨胀，现在将A中的10对应B中的10，A中的1对应B中的2再计算，膨胀因素会小很多（时间前推一步）。</p>
+<p>2.聚类算法</p>
+<p>2.1分层聚类：</p>
+<p>自上而下：所有点先聚为一类，然后分层次的一步一步筛出与当前类别差异最大的点</p>
+<p>自下而上：所有点先各自为一类，组合成n个类的集合，然后寻找出最靠近的两者聚为新的一类，循环往复</p>
+<p>数值类分类：（适用于计算量巨大或者数据量巨大的时候）</p>
+<p>BIRCH算法，层次平衡迭代规约和聚类，</p>
+<p>主要参数包含：聚类特征和聚类特征树：</p>
+<p>聚类特征：</p>
+<p>给定N个d维的数据点{x1,x2,….,xn}，CF定义如下：CF=（N，LS，SS）,其中，N为子类中的节点的个数，LS是子类中的N个节点的线性和，SS是N个节点的平方和</p>
+<p>存在计算定义：CF1+CF2=（n1+n2, LS1+LS2, SS1+SS2）</p>
+<p>假设簇C1中有三个数据点：（2,3），（4,5），（5,6），则CF1={3，（2+4+5,3+5+6），（2^2+4^2+5^2,3^2+5^2+6^2）}={3，（11,14），（45,70）}</p>
+<p>假设一个簇中，存在质心C和半径R，若有xi，i=1…n个点属于该簇，质心为：C=(X1+X2+…+Xn)/n，R=(|X1-C|^2+|X2-C|^2+…+|Xn-C|^2)/n</p>
+<p>其中，簇半径表示簇中所有点到簇质心的平均距离。当有一个新点加入的时候，属性会变成CF=（N，LS，SS）的统计值，会压缩数据。</p>
+<p>聚类特征树：</p>
+<p>内节点的平衡因子B，子节点的平衡因子L，簇半径T。</p>
+<p>B=6，深度为3，T为每个子节点中簇的范围最大不能超过的值，T越大簇越少，T越小簇越多。</p>
+<p>名义分类：</p>
+<p>ROCK算法：凝聚型的层次聚类算法</p>
+<p>1.如果两个样本点的相似度达到了阈值（θ），这两个样本点就是邻居。阈值（θ）有用户指定，相似度也是通过用户指定的相似度函数计算。常用的分类属性的相似度计算方法有：Jaccard系数，余弦相似度</p>
+<p>Jaccard系数：J=|A∩B|/|A∪B|，一般用于分类变量之间的相似度</p>
+<p>余弦相似度：【-1，1】之间，越趋近于0的时候，方向越一致，越趋向同一。</p>
+<p>2.目标函数（criterion function）：最终簇之间的链接总数最小，而簇内的链接总数最大</p>
+<p>3.相似度合并：遵循最终簇之间的链接总数最小，而簇内的链接总数最大的规则计算所有对象的两两相似度，将相似性最高的两个对象合并。通过该相似性度量不断的凝聚对象至k个簇，最终计算上面目标函数值必然是最大的。</p>
+<p>load(‘country.RData’)</p>
+<p>d&lt;-dist(countries[,-1])</p>
+<p>x&lt;-as.matrix(d)</p>
+<p>library(cba)</p>
+<p>rc &lt;-rockCluster(x, n=4, theta=0.2, debug=TRUE)</p>
+<p>KNN算法：</p>
+<p>先确定K的大小，计算出每个点之外的所有点到这个目标点的距离，选出K个最近的作为一类。一般类别之间的归类的话，投票和加权为常用的，投票及少数服从多数，投票的及越靠近的点赋予越大的权重值。</p>
+<p>2.2分隔聚类：</p>
+<p>需要先确定分成的类数，在根据类内的点都足够近，类间的点都足够远的目标去做迭代。</p>
+<p>常用的有K-means，K-medoids，K-modes等，只能针对数值类的分类，且只能对中等量级数据划分，只能对凸函数进行聚类，凹函数效果很差。</p>
+<p>2.3密度聚类：</p>
+<p>有效的避免了对分隔聚类下对凹函数聚类效果不好的情况，有效的判别入参主要有1:单点外的半径2：单点外半径内包含的点的个数</p>
+<p>DBSCAN为主要常见的算法，可优化的角度是现在密度较高的地方进行聚类，再往密度较低的地方衍生，优化算法：OPTICS。</p>
+<p>2.4网格聚类：</p>
+<p>将n个点映射到n维上，在不同的网格中，计算点的密度，将点更加密集的网格归为一类。</p>
+<p>优点是：超快，超级快，不论多少数据，计算速度只和维度相关。</p>
+<p>缺点：n维的n难取，受分布影响较大（部分行业数据分布及其不规则）</p>
+<p>2.5模型聚类：</p>
+<p>基于概率和神经网络聚类，常见的为GMM，高斯混合模型。缺点为，计算量较大，效率较低。</p>
+<p>GMM：每个点出现的概率：将k个高斯模型混合在一起，每个点出现的概率是几个高斯混合的结果</p>
+<p>假设有K个高斯分布，每个高斯对data points的影响因子为πk，数据点为x，高斯参数为theta，则：</p>
+<p>利用极大似然的方法去求解均值Uk，协方差矩阵（Σk），影响因子πk，但是普通的梯度下降的方法在这里求解会很麻烦，这边就以EM算法代替估计求解。</p>
+<p>3.优化数据结构：</p>
+<p>1.数据变换：</p>
+<p>logit处理，对所有数据进行log变换</p>
+<p>傅里叶变换</p>
+<p>小波变换</p>
+<p>2.降维：</p>
+<p>PCA：</p>
+<p>利用降维（线性变换)的思想，整体方差最大的情况下（在损失很少信息的前提下），把多个指标转化为几个不相关的综合指标（主成分),将变量线性组合代替原变量，保持代替后的数据信息量最大（方差最大）。</p>
+<p>LLE：</p>
+<p>(1) 寻找每个样本点的k个近邻点；</p>
+<p>(2)由每个样本点的近邻点计算出该样本点的局部重建权值矩阵；</p>
+<p>(3)由该样本点的局部重建权值矩阵和其近邻点计算出该样本点的输出值。</p>
+<p>(换句话说，就是由周围N个点构成改点的一个向量矩阵表示）</p>
 
       
     </div>
@@ -512,7 +524,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/推荐评估方法/" rel="tag"># 推荐评估方法</a>
+            <a href="/tags/聚类/" rel="tag"># 聚类</a>
           
         </div>
       
@@ -525,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/28/Tensorflow在GPU下的Poolallocator Message/" rel="next" title="Tensorflow在GPU下的Poolallocator Message">
-                <i class="fa fa-chevron-left"></i> Tensorflow在GPU下的Poolallocator Message
+              <a href="/2017/06/19/常用R语言包介绍/" rel="next" title="常用R语言包介绍">
+                <i class="fa fa-chevron-left"></i> 常用R语言包介绍
               </a>
             
           </div>
@@ -535,8 +547,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/19/热传导-物质扩散算法应用于推荐/" rel="prev" title="热传导-物质扩散算法应用于推荐">
-                热传导-物质扩散算法应用于推荐 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/21/推荐系统威尔逊区间法/" rel="prev" title="推荐系统-威尔逊区间法">
+                推荐系统-威尔逊区间法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,17 +606,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -702,22 +705,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#离线模型之间的评估"><span class="nav-number">1.</span> <span class="nav-text">离线模型之间的评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#召回集测试"><span class="nav-number">1.1.</span> <span class="nav-text">召回集测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序部分测试"><span class="nav-number">1.2.</span> <span class="nav-text">排序部分测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离线模型与在线模型之间的评估"><span class="nav-number">2.</span> <span class="nav-text">离线模型与在线模型之间的评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#难点"><span class="nav-number">2.1.</span> <span class="nav-text">难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指标设计"><span class="nav-number">2.2.</span> <span class="nav-text">指标设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他评估方向"><span class="nav-number">3.</span> <span class="nav-text">其他评估方向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖率"><span class="nav-number">3.1.</span> <span class="nav-text">覆盖率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多样性"><span class="nav-number">3.2.</span> <span class="nav-text">多样性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新颖性"><span class="nav-number">3.3.</span> <span class="nav-text">新颖性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#评测维度"><span class="nav-number">4.</span> <span class="nav-text">评测维度</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
