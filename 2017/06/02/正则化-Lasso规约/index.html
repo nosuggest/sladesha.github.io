@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="正则化问题," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n">
+<meta name="keywords" content="正则化问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则化-Lasso规约">
+<meta property="og:url" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。 实际考虑回归的过程中，我们需要考虑">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/1.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/3.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/4.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/5.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/6.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/7.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/8.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/9.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/10.png">
+<meta property="og:updated_time" content="2019-05-10T10:20:34.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则化-Lasso规约">
+<meta name="twitter:description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。 实际考虑回归的过程中，我们需要考虑">
+<meta name="twitter:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/"/>
+
+
+
+
+
+  <title>正则化-Lasso规约 | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正则化-Lasso规约</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:03:24+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,980 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差</p>
+</blockquote>
+<hr>
+<p>先看一波过拟合：<br><img src="/2017/06/02/正则化-Lasso规约/1.png" alt="拟合曲线"></p>
+<p>图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。</p>
+<p>下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。<br><img src="/2017/06/02/正则化-Lasso规约/2.png" alt=""></p>
+<p>实际考虑回归的过程中，我们需要考虑到误差项，<br><img src="/2017/06/02/正则化-Lasso规约/3.png" alt=""></p>
+<p><img src="/2017/06/02/正则化-Lasso规约/4.png" alt=""></p>
+<p>这个和简单的线性回归的公式相似，而在正则化下来优化过拟合这件事情的时候，会加入一个约束条件，也就是惩罚函数：</p>
+<p><img src="/2017/06/02/正则化-Lasso规约/5.png" alt=""></p>
+<p>这边这个惩罚函数有多种形式，比较常用的有l1,l2，大概有如下几种：<br><img src="/2017/06/02/正则化-Lasso规约/6.png" alt=""></p>
+<p>讲一下比较常用的两种情况，q＝1和q＝2的情况：<br>q＝1，也就是今天想讲的lasso回归，为什么lasso可以控制过拟合呢，因为在数据训练的过程中，可能有几百个，或者几千个变量，再过多的变量衡量目标函数的因变量的时候，可能造成结果的过度解释，而通过q＝1下的惩罚函数来限制变量个数的情况，可以优先筛选掉一些不是特别重要的变量，见下图：</p>
+<p><img src="/2017/06/02/正则化-Lasso规约/7.png" alt=""></p>
+<p>作图只要不是特殊情况下与正方形的边相切，一定是与某个顶点优先相交，那必然存在横纵坐标轴中的一个系数为0，起到对变量的筛选的作用。<br>q＝2的时候，其实就可以看作是上面这个蓝色的圆，在这个圆的限制下，点可以是圆上的任意一点，所以q＝2的时候也叫做岭回归，岭回归是起不到压缩变量的作用的，在这个图里也是可以看出来的。</p>
+<hr>
+<p>lasso回归：<br>lasso回归的特色就是在建立广义线型模型的时候，这里广义线型模型包含一维连续因变量、多维连续因变量、非负次数因变量、二元离散因变量、多元离散因变，除此之外，无论因变量是连续的还是离散的，lasso都能处理，总的来说，lasso对于数据的要求是极其低的，所以应用程度较广；除此之外，lasso还能够对变量进行筛选和对模型的复杂程度进行降低。这里的变量筛选是指不把所有的变量都放入模型中进行拟合，而是有选择的把变量放入模型从而得到更好的性能参数。 复杂度调整是指通过一系列参数控制模型的复杂度，从而避免过度拟合(Overfitting)。 对于线性模型来说，复杂度与模型的变量数有直接关系，变量数越多，模型复杂度就越高。 更多的变量在拟合时往往可以给出一个看似更好的模型，但是同时也面临过度拟合的危险。<br>lasso的复杂程度由<code>λ</code>来控制，<code>λ</code>越大对变量较多的线性模型的惩罚力度就越大，从而最终获得一个变量较少的模型。除此之外，另一个参数α来控制应对高相关性(highly correlated)数据时模型的性状。 lasso回归<code>α=1</code>，Ridge回归<code>α=0</code>，这就对应了惩罚函数的形式和目的。我们可以通过尝试若干次不同值下的λ，来选取最优λ下的参数，还可以结合CV选择最优秀的模型。</p>
+<p>######读取数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setwd(&quot;~/Desktop&quot;)</span><br><span class="line">library(glmnet)</span><br><span class="line">train_origin&lt;-read.table(&apos;trian.txt&apos;,header = T,fill = T)</span><br><span class="line">test_origin&lt;-read.table(&apos;test.txt&apos;,header = T,fill = T)</span><br><span class="line">train_test1&lt;-train_origin</span><br><span class="line">train_test1&lt;-train_test1[,-9]</span><br><span class="line">train_test1$tag&lt;-as.factor(train_test1$tag)</span><br><span class="line">train_test1$risk_level&lt;-as.factor(train_test1$risk_level)</span><br><span class="line">x&lt;-train_test1[,3:11]</span><br><span class="line">y&lt;-train_test1[,2]</span><br><span class="line">## one hot encoding</span><br><span class="line">x1&lt;-model.matrix(~., x)</span><br></pre></td></tr></table></figure></p>
+<p>通常数据中会存在离散点，而lasso在R里面是通过数值矩阵来做输入的，所以需要对原数据做一步预处理，不然这边会抛错误；除此之外，如果数据之间差别的数量级较大，还需要进行标准化，R里面也是可以进行处理的，这边就不赘述了，<code>glmnet()</code>函数中添加参数<code>standardize = TRUE</code>来实现，<code>scale()</code>函数也可以实现，自行选择即可。</p>
+<p>######模型训练<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = glmnet(x1, y, family=&quot;binomial&quot;, nlambda=50, alpha=1)</span><br></pre></td></tr></table></figure></p>
+<p><code>family</code>里面是指选择函数的类型：<br><code>family explation</code>,<code>gaussian univariate</code>,<code>mgaussian multivariate</code>,<code>poisson count</code>,<code>binomial binary</code>,<code>multinomial category</code><br>lambda是指随机选择λ，做lambda个模型；alpha是上述讲到的α，选择惩罚函数，正常情况下，1是lasso，0是岭回归<br>这边模型拓展可以交叉检验一下，有内置的函数：<br>cvmodel = cv.glmnet(x1, y, family = “binomial”, type.measure = “class”,nfolds=10)<br>这边会多出来一个<code>type.measure</code>，这个<code>type.measure</code>是指期望最小化的目标参量是什么，换句话说，就是衡量这个模型的指标函数是啥：<br><code>type.measure</code>  details<br><code>deviance</code>:  <em>-2倍的Log-likelihood</em><br><code>mse</code>:<em>mean squred error</em><br><code>mae</code>:<em>mean absolute error</em><br><code>class</code>:<em>missclassification error</em><br><code>auc</code>:<em>area under the ROC curve</em><br>比较常用的是<code>auc</code>，这个就是现在比较主流的衡量一个模型好坏的roc所衍生出来的一个值；我们这边用的是<code>class</code>，也就是模型错误分配的概率，结合我这次业务开发的实际业务场景，这个更合适一点；<code>nfolds</code>是指folds数目，也可以通过foldid数来控制每个fold里面的数据数量。<br>对于glmnet，可以通过<code>plot(model)</code>来观察每个自变量的变化轨迹，<code>cv.glmnet</code>可以通过<code>plot(cvmodel)</code><br>举个<code>plot(cvmodel)</code>的例子：</p>
+<p><img src="/2017/06/02/正则化-Lasso规约/8.png" alt=""></p>
+<p>可以通过<code>c(cvfit$lambda.min, cvfit$lambda.1se)</code>来看在所有的<code>λ</code>值中，得到最小目标函数<code>type.measure</code>均值的<code>cvfit$lambda.min</code>，以及其所对应的<code>λ</code>值可接受的一个标准误差之内对应的<code>cvfit$lambda.1se</code>。<br><img src="/2017/06/02/正则化-Lasso规约/9.png" alt=""><br>我们可以<code>print(model)</code>，在实际的选择模型中<code>λ</code>值的过程里，存在三个指标：<code>df</code>：自由度， <code>%Dev</code>：残差被解释的占比，也就是模型的好坏程度，类似于线性模型中的R平方，Lambda也就是<code>λ</code>值所对应的值，然后我们可以通过<code>coef(fit, s=c(fit$lambda[35],0.002))</code>得出当时模型所对应的系数。</p>
+<hr>
+<p>最后，讲一下elastic net<br>elastic net融合了l1范数和l2范数两种正则化的方法，上面的岭回归和lasso回归都可以看做它的特例：</p>
+<p><img src="/2017/06/02/正则化-Lasso规约/10.png" alt=""></p>
+<p>elastic net对于p远大于n,或者严重的多重共线性情况有明显的效果，很好理解，当alpha接近1时，elastic net表现很接近lasso，一般来说，elastic net是岭回归和lasso的很好的折中，当alpha从0变化到1，目标函数的稀疏解（部分变量的系数为0）也从0单调增加到lasso的稀疏解。</p>
+<p><strong>特征规约初步总结如下：</strong><br>1）子集选择 这是传统的方法，包括逐步回归和最优子集法等，对可能的部分子集拟合线性模型，利用判别准则 （如AIC,BIC,Cp,调整R2 等）决定最优的模型<br>2）收缩方法（shrinkage method） 收缩方法又称为正则化（regularization）。主要是岭回归（ridge regression）和lasso回归。通过对最小二乘估计加入罚约束，使某些系数的估计为0。（岭回归：消除共线性；模的平方处理；Lasso回归：压缩变量，起降维作用；模处理）<br>(3)维数缩减 主成分回归（PCR）和偏最小二乘回归（PLS）的方法。把p个预测变量投影到m维空间</p>
+<p><em>部分图片转载于：<a href="http://bbs.pinggu.org/thread-3848519-1-1.html" target="_blank" rel="noopener">http://bbs.pinggu.org/thread-3848519-1-1.html</a></em></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/正则化问题/" rel="tag"># 正则化问题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/02/因子分析原理剖析/" rel="prev" title="因子分析原理剖析">
+                因子分析原理剖析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">95.2k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
