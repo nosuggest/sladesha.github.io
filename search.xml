@@ -1,361 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[博客导读公告(置顶)]]></title>
-      <url>/2029/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</url>
-      <content type="html"><![CDATA[<p><img src="/2029/01/20/博客导读公告/wechat.png" alt=""><br><a id="more"></a></p>
-<p><strong>首先，我很荣幸您出现在我的个人博客，下面请允许我花费您3分钟左右的时间，简单的为您介绍一下博客中的相关功能，这将极大的提高您在后续阅读中的体验：</strong></p>
-<p>打个广告，欢迎各位老爷关注我的微信公众号：ml_trip，期待与大家交流！</p>
-<h2 id="我的个人介绍"><a href="#我的个人介绍" class="headerlink" title="我的个人介绍"></a>我的个人介绍</h2><p>大家可以在首页的标题下面找到me这个图标，点击即可，里面有我的个人介绍：<br><img src="/2029/01/20/博客导读公告/个人介绍.png" alt=""></p>
-<p>我的个人简历下载地址在me跳转页面中的位置如下：<br><img src="/2029/01/20/博客导读公告/cv.png" alt=""></p>
-<hr>
-<h2 id="快速阅读"><a href="#快速阅读" class="headerlink" title="快速阅读"></a>快速阅读</h2><p>您可在任何一篇文章的右侧看到红色方框：</p>
-<ul>
-<li>如果您对其中部分内容感兴趣，可直接点击绿色方框内的文章，会自动跳转到您关心的模块；</li>
-<li>如果您想要看到我的<strong>更多联系方式</strong>，可以点击蓝色模块中的站点概览；</li>
-<li>如果您不想红色方框影响您的阅读，在黑色条块的最下方的小叉点击即可。<br><img src="/2029/01/20/博客导读公告/read.png" alt=""></li>
-</ul>
-<hr>
-<h2 id="赞助激励"><a href="#赞助激励" class="headerlink" title="赞助激励"></a>赞助激励</h2><p>如果您觉得我写的东西对您有一些帮助，在您宽裕的情况下可以在文章下面的打赏中给我发一个小红包，或者直接扫描下面的二维码，感谢您对我的认可：<br><img src="/2029/01/20/博客导读公告/pay.png" alt=""></p>
-<p><strong>如果您还是一个学生或者您正处于人生的低谷，感谢您对我的认可，打赏就不需要了，我会一如既往的给大家整理工作中的一些想法和心得</strong></p>
-<hr>
-<h2 id="自定义搜索"><a href="#自定义搜索" class="headerlink" title="自定义搜索"></a>自定义搜索</h2><p>为了方便大家找到自己关心的内容，建议直接点击搜索图标：<br><img src="/2029/01/20/博客导读公告/search.png" alt=""></p>
-<p>比如搜索svm，有模糊匹配结果如下：<br><img src="/2029/01/20/博客导读公告/content.png" alt=""></p>
-<hr>
-<h2 id="标签检索"><a href="#标签检索" class="headerlink" title="标签检索"></a>标签检索</h2><p>大家可以在首页的标题下面找到标签这个图标，点击即可：<br><img src="/2029/01/20/博客导读公告/tag.png" alt=""></p>
-<p>该类别下生成了标签云，为较为仔细的文章内容概括：<br><img src="/2029/01/20/博客导读公告/cloud.png" alt=""></p>
-<hr>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>因为本博客部署在GitHub，如果您有时候遇到打不开网页的问题，建议您重复刷新或者收藏<a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" rel="noopener">slade_sal简书地址</a>，两者内容是一致的</li>
-<li>如果您有任何疑惑或者疑问都可以通过站点概览的邮箱联系我，非常愿意解答您的问题</li>
-<li>如果您遇到算法学习过程的困难，需要内推或者就业方向建议，也可以通过站点概览的邮箱联系我，非常愿意和您进行交流</li>
-<li>绝大多数代码都可以在我的Github上找到，所有的数据都经过脱敏处理，您可以放心使用，希望对您有所帮助</li>
-</ul>
-<p>最后，感谢大家一路以来对我的认可。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 基础 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 公告 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[PKUseg在货运领域的评测]]></title>
-      <url>/2019/01/14/PKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B/</url>
-      <content type="html"><![CDATA[<p>先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上：</p>
-<ul>
-<li>默认模型下，jieba效果优于PKUseg</li>
-<li>PKUseg提供场景精细化的预训练（还没有提供入口），长远来讲适合专业领域使用</li>
-<li>PKUseg在特定的场景下有令人惊喜的效果（地址切分）</li>
-</ul>
-<p>给大家的建议就是，如果大家赶时间求稳定适应范围需要非常广的时候，目前来说jieba是非常好的选择，如果说在面临一些精细化领域的特殊需求的时候，可以用PKUseg进行一波尝试，有意外惊喜。</p>
-<hr>
-<p>那是一个风和日丽的早上，突然群里老大发出一条消息：<br><img src="/2019/01/14/PKUseg在货运领域的评测/boss.png" alt=""><br>我感觉我的心脏有一丝隐隐作痛的感觉，人在办公室坐，活从天上来，虽然身后站着一堆催上线的产品，我还是屈服于老大的正义（淫威），简单测评了新出来的PKUseg与Jieba在公路货运/运输行业上的效果对比。</p>
-<p>在我们的热词数据库中已经有人工切词完成的2万多条货运的词条：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">description	standard</span><br><span class="line">高博集团装货卸宝华	高博 集团 装货 卸 宝华</span><br><span class="line">北安到吉林农安饲料90吨每吨105	北安 到 吉林 农安 饲料 90吨 每吨 105</span><br><span class="line">需要4个车	需要 4个 车</span><br><span class="line">叶张公路装香闵路曲吴路两卸	叶张公路 装 香闵路 曲吴路 两卸</span><br><span class="line">从福通物流到吴滩镇	从 福通 物流 到 吴滩镇</span><br><span class="line">霞浦宏霞路到中通物流	霞浦宏霞路 到 中通物流</span><br><span class="line">石大路3场到德兴西门山	石大路 3场 到 德兴 西门山</span><br><span class="line">公园西路装	公园 西路 装</span><br><span class="line">不押车每吨150	不 押车 每吨 150</span><br><span class="line">速订价钱好商量	速订 价钱 好商量</span><br><span class="line">慈溪胜山装	慈溪 胜山装</span><br><span class="line">好装好卸高价急走	好装好卸 高价急走</span><br><span class="line">九顶山路与东方大道位置装货可以配货	九顶 山路 与 东方 大道 位置 装货 可以 配货</span><br><span class="line">要二部	要 二部</span><br><span class="line">青浦工业园区久远路提货到奉贤新杨公路进仓	青浦 工业园区 久远路 提货 到 奉贤 新杨公路 进仓</span><br><span class="line">园光路装博学南路卸	园光路 装 博学南路 卸</span><br><span class="line">公兴装卸荣昌广顺	公兴 装卸 荣昌 广顺</span><br><span class="line">打备注电话18458331112	打 备注 电话 18458331112</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>首先看，不加任何词库，预训练下的，最后的效果对比：<br><img src="/2019/01/14/PKUseg在货运领域的评测/1.png" alt=""><br>可以看到，<strong>在默认的分词模型下，jieBa分词还是拥有绝对优势的</strong>，但是在pkuSeg的git里面<img src="/2019/01/14/PKUseg在货运领域的评测/2.png" alt=""></p>
-<p>所以我想看看能不能进行一下预训练下后再对比一下，可惜的是我在git（<a href="https://github.com/sladesha/pkuseg-python#相关论文" target="_blank" rel="noopener">git地址传送门</a>）上找了半天也没有找到预训练的入口，只有已经被官方预训练好的词库<br><img src="/2019/01/14/PKUseg在货运领域的评测/3.png" alt=""><br>等有时间了，可以邮件沟通一下再补充这个部分的效果对比，我觉得，应该还是有提升的。</p>
-<p>但是，在我们实际去测的过程中，我们发现了一些差异话的东西比较有意思。我们其实现在在做一个语音发货的产品，涉及到把一串地址切分开的需求：<br><img src="/2019/01/14/PKUseg在货运领域的评测/4.png" alt=""></p>
-<p>其中涉及到<strong>地址切分</strong>的时候，jieba的能力会比如PKUseg要弱不少，比如“山西大同”，“上海浦东”，我们需要把一级二级地址切开的时候，PKUseg可以做到，而jieba并不能按照需求切块。所以，我们已经打算在地址模块切换PKUseg的模型来适应了。<br><img src="/2019/01/14/PKUseg在货运领域的评测/5.png" alt=""></p>
-<p>最后吐槽一下，虽然我知道PKUseg需要加载模型，但是一加载就是一二十秒也是有点夸张了。酒浆，各位下回见。</p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 开源项目 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> NLP </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[YoutubeNet的数据答疑]]></title>
-      <url>/2018/10/16/YoutubeNet%E7%9A%84%E6%95%B0%E6%8D%AE%E7%AD%94%E7%96%91/</url>
-      <content type="html"><![CDATA[<p>实在是太忙了，抽空给大家解析一下之前写的<a href="https://github.com/sladesha/deep_learning/tree/master/YoutubeNetwork" target="_blank" rel="noopener">YoutubeNet</a>的数据是怎么构造的，协助大家可以自行构造一下。</p>
-<p>这边和大家说一下，我没有上传数据的原因有两个：</p>
-<ul>
-<li>涉及公司的数据财产，不方便上传</li>
-<li>懒得做脱敏处理</li>
-<li>数据一共有1300多万条，传输实在不方便</li>
-</ul>
-<p>主要数据处理的部分在map_id_idx.py脚本下，其中包含all_item_20180624.txt和click_thirty_day_data_20180609.txt两个数据集合。</p>
-<p>其中，all_item_20180624.txt是当日所有的商品集合：包含’Prd_Id’, ‘ItemId’, ‘BrandId’, ‘MsortId’和‘GenderId’五列，分别代表着商品id，skuid，低级品牌id，中级品牌id，产品性别，最后形如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5675</span>    <span class="number">50000055</span>    <span class="number">175</span>    <span class="number">1500</span>    <span class="number">3</span></span><br><span class="line"><span class="number">2577</span>    <span class="number">50000056</span>    <span class="number">187</span>    <span class="number">66</span>    <span class="number">3</span></span><br><span class="line"><span class="number">2002</span>    <span class="number">50000057</span>    <span class="number">63</span>    <span class="number">11</span>    <span class="number">2</span></span><br><span class="line"><span class="number">2007</span>    <span class="number">50000058</span>    <span class="number">137</span>    <span class="number">58</span>    <span class="number">3</span></span><br><span class="line"><span class="number">2075</span>    <span class="number">50000060</span>    <span class="number">80</span>    <span class="number">50</span>    <span class="number">3</span></span><br><span class="line"><span class="number">2348</span>    <span class="number">50000061</span>    <span class="number">138</span>    <span class="number">16</span>    <span class="number">2</span></span><br><span class="line"><span class="number">423</span>    <span class="number">50000062</span>    <span class="number">162</span>    <span class="number">237</span>    <span class="number">3</span></span><br><span class="line"><span class="number">469</span>    <span class="number">50000063</span>    <span class="number">10</span>    <span class="number">1500</span>    <span class="number">3</span></span><br><span class="line"><span class="number">1102</span>    <span class="number">50000064</span>    <span class="number">176</span>    <span class="number">11</span>    <span class="number">1</span></span><br><span class="line"><span class="number">1896</span>    <span class="number">50000066</span>    <span class="number">37</span>    <span class="number">27</span>    <span class="number">1</span></span><br><span class="line"><span class="number">2489</span>    <span class="number">50000067</span>    <span class="number">27</span>    <span class="number">44</span>    <span class="number">1</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>click_thirty_day_data_20180609.txt为近三十天的用户点击流，包含’UId’, ‘ItemId’, ‘clickTime’三列，分别代表着uid、点击的skuid，点击时间，最后形如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">34</span>    <span class="number">51668064</span>    <span class="number">1528602406</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51890512</span>    <span class="number">1528788389</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51884724</span>    <span class="number">1528788393</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51884720</span>    <span class="number">1528788399</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51884718</span>    <span class="number">1528788414</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51580974</span>    <span class="number">1528788442</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51854970</span>    <span class="number">1528788487</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51514910</span>    <span class="number">1528788499</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51855000</span>    <span class="number">1528788535</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51854990</span>    <span class="number">1528788569</span></span><br><span class="line"><span class="number">34</span>    <span class="number">51854998</span>    <span class="number">1528788572</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>通过map_id_idx.py对所有的商品进行标序号，然后带入用户的点击流中，方便后期做embedding操作，就酱。</p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 推荐 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[GloVe向量化做文本分类]]></title>
-      <url>/2018/09/25/GloVe%E5%90%91%E9%87%8F%E5%8C%96%E5%81%9A%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/</url>
-      <content type="html"><![CDATA[<h1 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h1><p>在之前，我对向量化的方法一直局限在两个点，</p>
-<p>第一种是常规方法的one-hot-encoding的方法，常见的比如tf-idf生成的0-1的稀疏矩阵来代表原文本：<br><img src="/2018/09/25/GloVe向量化做文本分类/1.png" alt=""></p>
-<p>这种方法简单暴力，直接根据文本中的单词进行one-hot-encoding，但是数据量一但大了，这个单句话的one-hot-encoding结果会异常的长，而且没办法得到词与词之间的关系。</p>
-<p>第二种是基于神经网络的方法，常见的比如word2vec，YouTubeNet：<br><img src="/2018/09/25/GloVe向量化做文本分类/2.png" alt=""></p>
-<p>这种方法（这边以CBOW为例子）都是初始一个固定长度的随机向量作为每个单词的向量，制定一个目标词的向量，以上下文词向量的sum结果作为input进行前向传递，使得传递的结果和目标词向量尽可能一致，以修正初始的随机向量。<br>换句话说，就是刚开始，我随意定义生成一个vector代表一个词，然后通过上下文的联系去修正这个随机的vector。好处就是我们可以得到词与词之间的联系，而且单个词的表示不复杂，坏处就是需要大量的训练样本，毕竟涉及到了神经网络。</p>
-<p>最近，我们突然发现了第三种方法，GloVe向量化。它也是开始的时候随机一个vector作为单词的表示，但是它不利用神经网络去修正，而是利用了一个自己构造的损失函数：<br><img src="/2018/09/25/GloVe向量化做文本分类/3.png" alt=""></p>
-<p>通过我们已有的文章内容，去是的这个损失函数最小，这就变成了一个机器学习的方法了，相比较暴力的前馈传递，这也高快速和高效的多。同时，它还兼具了word2vec最后结果里面vector方法的优点，得到词与词之间的联系，而且单个词的表示不复杂。</p>
-<p>这边就不展开GloVe算法的细节了，后面有空和大家补充，这个算法的构造非常巧妙，值得大家借鉴一下。</p>
-<h1 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h1><p>刚才开门见山的聊了蛮久向量化，看起来和文本分类没什么关系，确实在通常意义上来讲，我们的最简单最常用的方法并不是向量化的方法，比如通过朴素贝叶斯，N-Grams这些方法来做分类识别。</p>
-<h2 id="tfidf-N-grams"><a href="#tfidf-N-grams" class="headerlink" title="tfidf+N-grams"></a>tfidf+N-grams</h2><p>1.其实很简单，首先对语料库进行切词，维护自己的词典，做高频词的人工复审，将无意词进行stop_words归总<br><img src="/2018/09/25/GloVe向量化做文本分类/4.png" alt="对公司内部信息进行了一下处理，主要看分布趋势"></p>
-<p>可以看到，高频词其实是非常非常少的，而且如果你真的去做了，你就会发现，”了”、“的”、“啊”这种语气词，和一些你公司相关的领域词汇会非常靠前，这些词作为stop_words会有效的降低训练成本、提高模型效果。</p>
-<p>2.进行tf-idf，将词进行重赋权，字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降，有效的将向量化中的one hot encoding结果进行了修正。但是依然存在问题：在TFIDF算法中并没有体现出单词的位置信息。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sublinear_tf：replace tf with 1 + log(tf)</span></span><br><span class="line"><span class="comment"># max_df：用来剔出高于词频0.5的词</span></span><br><span class="line"><span class="comment"># token_pattern：(?u)\b\w+\b是为了匹配出长度为1及以上的词，默认的至少需要词长度为2</span></span><br><span class="line"><span class="comment"># ngram_range：这边我做了3-grams处理，如果只想朴素计算的话(1,1)即可</span></span><br><span class="line"><span class="comment"># max_features：随着我做了各种宽松的条件，最后生成的词维度会异常大，这边限制了前3万</span></span><br><span class="line">vectorizer = TfidfVectorizer(stop_words=stpwrdlst, sublinear_tf=<span class="keyword">True</span>, max_df=<span class="number">0.5</span>, token_pattern=<span class="string">r"(?u)\b\w+\b"</span>,ngram_range=(<span class="number">1</span>, <span class="number">3</span>), max_features=<span class="number">30000</span>)</span><br></pre></td></tr></table></figure>
-<p>不得不说，python处理机器学习，深度学习的便捷程度是异常的高。</p>
-<p>3.在经过TfidfVectorizer处理之后的结果是以稀疏矩阵的形式来存的，如果想看内容的话，可以用todense()转化为matrix来看。接下来，用贝叶斯来训练刚才得到的矩阵结果就可以了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mnb_tri = MultinomialNB(alpha=<span class="number">0.001</span>)</span><br><span class="line">mnb_tri.fit(tri_train_set.tdm, tri_train_set.label)</span><br></pre></td></tr></table></figure>
-<h2 id="tf-idf-n-grams-naive-bayes-lr"><a href="#tf-idf-n-grams-naive-bayes-lr" class="headerlink" title="tf-idf + n-grams + naive-bayes + lr"></a>tf-idf + n-grams + naive-bayes + lr</h2><p>这种方法是上面方法的升级版本，我们先看下架构：<br><img src="/2018/09/25/GloVe向量化做文本分类/5.png" alt="对公司内部信息进行了一下处理，主要看算法架构"></p>
-<p>其实主要差异在于右侧的算法模型详细部分，我们做了一个由3-grams到3-grams+naive-bayes+lr的扩充，提升精度。</p>
-<p>在模型的过程中，上面的第一步，都是一样的，在第二、三步有所差异：<br>2.在第二步中，我们除了要构造出一个3-grams的sparse matrix也需要构造出一个朴素的sparse matrix</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 朴素结果</span></span><br><span class="line">vectorizerby = TfidfVectorizer(stop_words=stpwrdlst, token_pattern=<span class="string">r"(?u)\b\w+\b"</span>, max_df=<span class="number">0.5</span>, sublinear_tf=<span class="keyword">True</span>,ngram_range=(<span class="number">1</span>, <span class="number">1</span>), max_features=<span class="number">100000</span>)</span><br></pre></td></tr></table></figure>
-<p>3.不仅仅用bayes进行一次分类，而是根据3-grams和朴素情况下的sparse matrix进行预测，再用logistics regression来合并两个的结果做个stack进行0-1压缩。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造出一个3-grams的sparse matrix也需要构造出一个朴素的sparse matrix</span></span><br><span class="line">mnb_tri = MultinomialNB(alpha=<span class="number">0.001</span>)</span><br><span class="line">mnb_tri.fit(tri_train_set.tdm, tri_train_set.label)</span><br><span class="line">mnb_by = MultinomialNB(alpha=<span class="number">0.001</span>)</span><br><span class="line">mnb_by.fit(by_train_set.tdm, by_train_set.label)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加bias，cv选择最优正则结果，lbfgs配合l2正则</span></span><br><span class="line">lr = LogisticRegressionCV(multi_class=<span class="string">"ovr"</span>, fit_intercept=<span class="keyword">True</span>, Cs=np.logspace(<span class="number">-2</span>, <span class="number">2</span>, <span class="number">20</span>), cv=<span class="number">2</span>, penalty=<span class="string">"l2"</span>,solver=<span class="string">"lbfgs"</span>, tol=<span class="number">0.01</span>)</span><br><span class="line">re = lr.fit(adv_data[[<span class="string">'f1'</span>, <span class="string">'f2'</span>]], adv_data[<span class="string">'rep_label'</span>])</span><br></pre></td></tr></table></figure>
-<p>总结一下上面两种方法，我觉得是入门快，效果也不错的小练手，也是完全可以作为我们开始一个项目的时候，用来做baseline的方法，主要是快啊～/斜眼笑</p>
-<h2 id="GloVe-lr"><a href="#GloVe-lr" class="headerlink" title="GloVe+lr"></a>GloVe+lr</h2><p>因为我目前的带标签数据比较少，所以之前一直没有敢用word2vec去向量化作死，但是GloVe不存在这个问题啊，我就美滋滋的进行了一波。<br>首先，先讲下GloVe的使用：</p>
-<ul>
-<li><a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="noopener">https://github.com/stanfordnlp/GloVe</a> 在最大的代码抄袭网站下载(git clone)坦福大佬的代码，友情提醒，不要作死自己看了理论就觉得自己会写，自己搞个GloVe。(别问我是怎么知道的)</li>
-<li>cd到对应目录下，vim demo.sh这个文件<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="comment"># Makes programs, downloads sample data, trains a GloVe model, and then evaluates it.</span></span><br><span class="line"><span class="comment"># One optional argument can specify the language used for eval script: matlab, octave or [default] python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 请把make这边注释掉，这个是让你去下个demo，我们直接改成自己的数据</span></span><br><span class="line"><span class="comment"># make</span></span><br><span class="line"><span class="comment"># if [ ! -e text8 ]; then</span></span><br><span class="line"><span class="comment">#   if hash wget 2&gt;/dev/null; then</span></span><br><span class="line"><span class="comment">#     wget http://mattmahoney.net/dc/text8.zip</span></span><br><span class="line"><span class="comment">#   else</span></span><br><span class="line"><span class="comment">#     curl -O http://mattmahoney.net/dc/text8.zip</span></span><br><span class="line"><span class="comment">#   fi</span></span><br><span class="line"><span class="comment">#   unzip text8.zip</span></span><br><span class="line"><span class="comment">#   rm text8.zip</span></span><br><span class="line"><span class="comment"># fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CORPUS需要对应自己的欲训练的文档</span></span><br><span class="line">CORPUS=content.txt</span><br><span class="line">VOCAB_FILE=vocab.txt</span><br><span class="line">COOCCURRENCE_FILE=cooccurrence.bin</span><br><span class="line">COOCCURRENCE_SHUF_FILE=cooccurrence.shuf.bin</span><br><span class="line">BUILDDIR=build</span><br><span class="line">SAVE_FILE=vectors</span><br><span class="line">VERBOSE=2</span><br><span class="line">MEMORY=4.0</span><br><span class="line"><span class="comment"># 单词至少出现几次</span></span><br><span class="line">VOCAB_MIN_COUNT=3</span><br><span class="line"><span class="comment"># 向量长度</span></span><br><span class="line">VECTOR_SIZE=128</span><br><span class="line"><span class="comment"># 迭代次数</span></span><br><span class="line">MAX_ITER=30</span><br><span class="line"><span class="comment"># 窗口长度</span></span><br><span class="line">WINDOW_SIZE=15</span><br><span class="line">BINARY=2</span><br><span class="line">NUM_THREADS=8</span><br><span class="line">X_MAX=10</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/vocab_count -min-count <span class="variable">$VOCAB_MIN_COUNT</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$VOCAB_FILE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/vocab_count -min-count <span class="variable">$VOCAB_MIN_COUNT</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$VOCAB_FILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/cooccur -memory <span class="variable">$MEMORY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span> -window-size <span class="variable">$WINDOW_SIZE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$COOCCURRENCE_FILE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/cooccur -memory <span class="variable">$MEMORY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span> -window-size <span class="variable">$WINDOW_SIZE</span> &lt; <span class="variable">$CORPUS</span> &gt; <span class="variable">$COOCCURRENCE_FILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/shuffle -memory <span class="variable">$MEMORY</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$COOCCURRENCE_FILE</span> &gt; <span class="variable">$COOCCURRENCE_SHUF_FILE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/shuffle -memory <span class="variable">$MEMORY</span> -verbose <span class="variable">$VERBOSE</span> &lt; <span class="variable">$COOCCURRENCE_FILE</span> &gt; <span class="variable">$COOCCURRENCE_SHUF_FILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ <span class="variable">$BUILDDIR</span>/glove -save-file <span class="variable">$SAVE_FILE</span> -threads <span class="variable">$NUM_THREADS</span> -input-file <span class="variable">$COOCCURRENCE_SHUF_FILE</span> -x-max <span class="variable">$X_MAX</span> -iter <span class="variable">$MAX_ITER</span> -vector-size <span class="variable">$VECTOR_SIZE</span> -binary <span class="variable">$BINARY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span>"</span></span><br><span class="line"><span class="variable">$BUILDDIR</span>/glove -save-file <span class="variable">$SAVE_FILE</span> -threads <span class="variable">$NUM_THREADS</span> -input-file <span class="variable">$COOCCURRENCE_SHUF_FILE</span> -x-max <span class="variable">$X_MAX</span> -iter <span class="variable">$MAX_ITER</span> -vector-size <span class="variable">$VECTOR_SIZE</span> -binary <span class="variable">$BINARY</span> -vocab-file <span class="variable">$VOCAB_FILE</span> -verbose <span class="variable">$VERBOSE</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$CORPUS</span>"</span> = <span class="string">'text8'</span> ]; <span class="keyword">then</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">'matlab'</span> ]; <span class="keyword">then</span></span><br><span class="line">matlab -nodisplay -nodesktop -nojvm -nosplash &lt; ./<span class="built_in">eval</span>/matlab/read_and_evaluate.m 1&gt;&amp;2 </span><br><span class="line"><span class="keyword">elif</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">'octave'</span> ]; <span class="keyword">then</span></span><br><span class="line">octave &lt; ./<span class="built_in">eval</span>/octave/read_and_evaluate_octave.m 1&gt;&amp;2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"$ python eval/python/evaluate.py"</span></span><br><span class="line">python <span class="built_in">eval</span>/python/evaluate.py</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这边多说一下，<code>CORPUS=content.txt</code>这边content.txt里面的格式需要按照空格为分隔符进行存储，我之前一直以为是<code>\t</code>。</p>
-<ul>
-<li><p>直接sh demo.sh，你会得到vectors.txt，这个里面就对应每个词的向量表示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">天气 -0.754142 0.386905 -1.200074 -0.587121 0.758316 0.373824 0.342211 -1.275982 -0.300846 0.374902 -0.548544 0.595310 0.906426 0.029255 0.549932 -0.650563 -0.425185 1.689703 -1.063556 -0.790254 -1.191287 0.841529 1.080641 -0.082830 1.062107 -0.667727 0.573955 -0.604460 -0.601102 0.615299 -0.470923 0.039398 1.110345 1.071094 0.195431 -0.155259 -0.781432 0.457884 1.093532 -0.188207 -0.161646 0.246220 -0.346529 0.525458 0.617904 -0.328059 1.374414 1.020984 -0.959817 0.670894 1.091743 0.941185 0.902730 0.609815 0.752452 1.037880 -1.522382 0.085098 0.152759 -0.562690 -0.405502 0.299390 -1.143145 -0.183861 0.383053 -0.013507 0.421024 0.025664 -0.290757 -1.258696 0.913482 -0.967165 -0.131502 -0.324543 -0.385994 0.711393 1.870067 1.349140 -0.541325 -1.060084 0.078870 0.773146 0.358453 0.610744 0.407547 -0.552853 1.663435 0.120006 0.534927 0.219279 0.682160 -0.631311 1.071941 -0.340337 -0.503272 0.150010 1.347857 -1.024009 -0.181186 0.610240 -0.218312 -1.120266 -0.486539 0.264507 0.266192 0.347005 0.172728 0.613503 -0.131925 -0.727304 -0.504488 1.773406 -0.700505 -0.159963 -0.888025 -1.358476 0.540589 -0.243272 -0.236959 0.391855 -0.133703 -0.071120 1.050547 -1.087613 -0.467604 1.779341 -0.449409 0.949411</span><br><span class="line">好了 1.413075 -0.226177 -2.024229 -0.192003 0.628270 -1.227394 -1.054946 -0.900683 -1.958882 -0.133343 -1.014088 -0.434961 0.026207 -0.066139 0.608682 -0.362021 0.314323 0.261955 -0.571414 1.738899 -1.013223 0.503853 -0.536511 -0.212048 0.611990 -0.627851 0.297657 -0.187690 -0.565871 -0.234922 -0.845875 -0.767733 0.032470 1.508012 -0.204894 -0.495031 -0.159262 0.181380 0.050582 -0.333469 0.454832 -2.091174 0.448453 0.940212 0.882077 -0.617093 0.616782 -0.993445 -0.385087 0.251711 0.259918 -0.222614 -0.595131 0.661472 0.194740 0.619222 -1.253610 -0.838179 0.781428 -0.396697 -0.530109 0.022801 -0.558296 -0.656034 0.842634 -0.105293 0.586823 -0.603681 -0.605727 -0.556468 0.924275 -0.299228 -1.121538 0.237787 0.498935 -0.045423 0.171536 -1.026385 -0.262225 0.390662 1.263240 0.352172 0.261121 0.915840 1.522183 -0.498536 2.046169 0.012683 -0.073264 -0.361662 0.759529 -0.713268 0.281747 -0.811104 -0.002061 -0.802508 0.520559 0.092275 -0.623098 0.199694 -0.134896 -1.390617 0.911266 -0.114067 1.274048 1.108440 -0.266002 1.066987 0.514556 0.144796 -0.606461 0.197114 0.340205 -0.400785 -0.957690 -0.327456 1.529557 -1.182615 0.431229 -0.084865 0.513266 -0.022768 -0.092925 -0.553804 -2.269741 -0.078390 1.376199 -1.163337</span><br><span class="line">随意 0.410436 0.776917 -0.381131 0.969900 -0.804778 -0.785379 -0.887346 -1.463543 -1.574851 0.313285 0.685253 -0.918359 0.199073 -0.305374 -0.642721 0.098114 -0.723331 0.353159 0.042807 0.369208 -1.534930 -0.084871 0.020417 -0.384782 0.276833 -0.160028 1.107051 0.884343 -0.204381 -0.459738 -0.387128 0.125867 0.093569 1.192471 -0.473752 -0.314541 -1.029249 0.481447 1.358753 -1.688778 -0.113080 -0.401443 -0.958206 0.605638 1.083126 0.131617 0.092507 0.476506 0.801755 1.096883 -0.102036 0.461804 0.820297 -0.104053 -0.126638 0.957708 -0.722038 0.223686 0.583582 0.201246 -1.254708 0.770717 -1.271523 -0.584094 -1.142426 1.066567 0.071951 -0.182649 0.014365 -0.577141 0.037340 -0.166832 -0.247827 0.165994 1.143665 -0.258421 -0.335195 0.170218 -0.212838 0.013709 0.088847 0.663238 -0.597439 0.632847 0.370871 0.652707 0.306935 0.195127 -0.252443 0.588479 0.191633 -1.587564 0.564600 -0.306158 -0.648177 -0.488595 1.532795 -0.462473 -0.643878 1.292369 -0.051494 -1.032738 0.453587 0.411327 -0.469373 0.428398 -0.020839 0.307422 0.518331 -0.860913 -2.170098 -0.277532 -0.966210 0.615336 -0.924783 0.042679 1.289640 1.272992 1.367773 0.426600 -0.187254 -0.781009 1.331301 -0.088357 -1.113550 -0.262879 0.300137 0.437905</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>有了每个词的向量，我们这边采取了借鉴YoutubeNet网络的想法：<br><img src="/2018/09/25/GloVe向量化做文本分类/6.png" alt=""></p>
-</li>
-</ul>
-<p>举个例子：存在一句话”我爱中国”，“我”的向量是[0.3,0.2,0.3]，”爱”的向量是[0.1,0.2,0.3]，“中国”的向量是[0.6,0.6,0.4]，那么average后就是[0.33,0.33,0.33]，然后这就类似一个特征为三的input。</p>
-<p>这种方法的好处就是快捷，预处理的工作代价要小，随着数据量的增多，模型的效果要更加的好。</p>
-<h1 id="效果对比"><a href="#效果对比" class="headerlink" title="效果对比"></a>效果对比</h1><p>最后这边粗略的给出一下业务数据对比：</p>
-<table>
-<thead>
-<tr>
-<th>experiment</th>
-<th>date</th>
-<th>intercepted_recall</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3-grams</td>
-<td>20180915</td>
-<td>79.3%</td>
-</tr>
-<tr>
-<td>3-grams</td>
-<td>20180917</td>
-<td>78.7%</td>
-</tr>
-<tr>
-<td>3-grams+bayes+lr</td>
-<td>20180915</td>
-<td>83.4%</td>
-</tr>
-<tr>
-<td>3-grams+bayes+lr</td>
-<td>20180917</td>
-<td>88.6%</td>
-</tr>
-<tr>
-<td>gloVe+lr</td>
-<td>20180915</td>
-<td>93.1%</td>
-</tr>
-<tr>
-<td>gloVe+lr</td>
-<td>20180917</td>
-<td>93.9%</td>
-</tr>
-</tbody>
-</table>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，相关代码已经上传到我的<a href="https://github.com/sladesha/machine_learning" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> NLP </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Google团队在DNN的实际应用方式的整理]]></title>
-      <url>/2018/08/29/Google%E5%9B%A2%E9%98%9F%E5%9C%A8DNN%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%E7%9A%84%E6%95%B4%E7%90%86/</url>
-      <content type="html"><![CDATA[<p>很荣幸有机会和论文作者<a href="https://www.linkedin.com/in/mehmet-emre-sargin-0665047/" target="_blank" rel="noopener">Emre Sargin</a>关于之前发的<a href="https://zhuanlan.zhihu.com/p/38638747" target="_blank" rel="noopener">Deep Neural Networks for YouTube Recommendations</a>进行交流，梳理如下：</p>
-<p><strong>提问对话汇总：</strong></p>
-<ul>
-<li>如何进行负采样的？</li>
-</ul>
-<p>构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，google的label是一个200万长度的向量，瑟瑟发抖.jpg。）</p>
-<ul>
-<li>推荐算法应用上，有什么评估方式和评估指标？</li>
-</ul>
-<p>主要基于线上进行小批量的abtest进行对比，在考虑ctr指标的同时也会综合全站的信息加以分析，同时对新颖程度和用户兴趣变换也是我们考察的对象。</p>
-<ul>
-<li>冷启动的解决方式？从来没有被点击过的video如何处理？新上的video如何处理？</li>
-</ul>
-<p>google的推荐基于多种推荐算法的组合，YouTubeNet主要解决的是热门商品的一个推荐问题，冷启动或者没有被点击的video会有其他算法进行计算。换句话说，解决不了。</p>
-<ul>
-<li>example age如何定义？</li>
-</ul>
-<p>user+vedio的组合形式，train过程中，是用户点击该vedio的时间距离当前时间的间隔；predict过程中，为0。该部分对模型的鲁棒性非常重要。</p>
-<ul>
-<li>是否遇到神经元死亡的问题？</li>
-</ul>
-<p>有，解决方案很常规，都是大家了解的，降低learning_rate，使用batchnormalization。</p>
-<ul>
-<li>是否预到过拟合？</li>
-</ul>
-<p>没，youtube的用户上亿，可以构造出上千亿的数据，过拟合的情况不明显。但是会存在未登录用户，我们会通过一些其他CRM类的算法补充构造出他们的基本信息，比如gender、age…</p>
-<ul>
-<li>vedio vector在哪边进行构造和修正？</li>
-</ul>
-<p>history click部分进行vedio embedding，并进行修正。另外，50是我们尝试的历史点击长度，20-30也有不错的效果。</p>
-<ul>
-<li>会有工程计算压力么？</li>
-</ul>
-<p>不存在，建议在GPU上计算，后面由于VPN网络信号抖动没听清，大概就说Google在训练模型的时候会有大量GPU支持，每天大概更新2-3模型，没有遇到什么计算瓶颈。</p>
-<p><em>(以上为我个人针对提问结果的理解及总结)</em></p>
-<p><strong>个人感想如下：有钱任性</strong></p>
-<p><strong>最后，我觉得算法还是要适应实际情况，大公司的方法可以借鉴但是可能很多时候抄不来，也没条件抄。</strong></p>
-<p><em>原问题如下（实际有删改）：<br>How to do video embedding?<br>Is there any pre-training?<br>How to use example age in the model?<br>How to deal dead ReLU neurons？<br>How to sample negative classes？<br>How does the video embedding generated？<br>How to recommend the video never been clicked and new uploaded videos？<br>How to do ab testing? What’s the metrics?<br>Have you facing overfitting？How to solve it?<br>There is any difficulty in calculating the embedding for millions of videos and users.<br>During input embedding generation, are they simply averaged?</em></p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 论文解析 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现]]></title>
-      <url>/2018/06/26/%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
-      <content type="html"><![CDATA[<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/1.png" alt=""></p>
-<a id="more"></a>
-<p>论文 Deep Neural Networks for YouTube Recommendations 来自google的YouTube团队，发表在16年9月的RecSys会议。我想应该很多人都读过，之前参与了公司的推荐系统优化的项目，本来想从各大搜索引擎中寻找到现成的分析，但是出人意料的一无所获。Github上的代码实现也出奇的少以及不清晰，所以就借着这个机会和大家分享一下自己做的过程中的一些理论心得、工程坑、代码实现等等。</p>
-<p><em>本文基于大家对Deep Neural Networks for YouTube Recommendations已经完成通读的基础上，不会做细致的论文解析，只会涉及到自己实现过程中的一些总结，如果没有论文了解，会非常不易理解。</em></p>
-<h2 id="系统概览"><a href="#系统概览" class="headerlink" title="系统概览"></a>系统概览</h2><p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/2.png" alt=""><br>上面这张图可以说是比较详细的涵盖了基础框架部分，整体的模型的优点我就不详述了，包括规模容纳的程度大啊、鲁棒性好啊、实时性优秀啊、延展性好啊等等，网上很多水字数的文章很多，我们主要总结几个愿论文上的亮点和实际去做的时候需要注意的地方：</p>
-<ul>
-<li>DNN网络可以怎么改</li>
-<li>负采样的“避坑”</li>
-<li>example age有没有必要构造</li>
-<li>user feature的选择方向</li>
-<li>attention 机制的引入</li>
-<li>video vectors的深坑</li>
-<li>实时化的选择</li>
-</ul>
-<p>整体上来说，G厂的这套算法基于的是两个部分：matching+ranking，这个的也给我们带来了更大的工作量，在做的时候，分成两个部分，我们在实际处理的时候，通过recall rate来判断matching部分的好坏，通过<a href="https://www.cnblogs.com/eyeszjwang/articles/2368087.html" target="_blank" rel="noopener">NDCG</a>来判断排序部分的好坏。总体如下：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/3.png" alt=""></p>
-<p>candidate generation就是我们matching的模块，目的是把百万级的商品、视频筛选出百级、千级的可排序的量级；再通过ranking模块，选出十位数的展示商品、视频作为最后的推送内容。之所以把推荐系统划分成Matching和Ranking两个阶段，主要是从性能方面考虑的。Matching阶段面临的是百万级，而Ranking阶段的算法则非常消耗资源，不可能对所有目标都算一遍，而且就算算了，其中大部分在Ranking阶段排名也很低，也是浪费计算资源。</p>
-<h2 id="Matching-amp-Ranking-Problems"><a href="#Matching-amp-Ranking-Problems" class="headerlink" title="Matching &amp; Ranking Problems"></a>Matching &amp; Ranking Problems</h2><p>首先，我们都知道，G厂给出的这个解决方案用的就是基于DNN的超大规模多分类思想，即在时刻t，为用户U（上下文信息C）在视频库V中精准的预测出视频i的类别（每个具体的视频视为一个类别，i即为一个类别），用数学公式表达如下：</p>
-<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/4.png" alt=""></p>
-<p>很显然上式为一个softmax多分类器的形式。向量u是<user, context="">信息的高纬“embedding”，而向量v则是视频 j 的embedding向量，通过u与v的点积大小来判断用户与对应视频的匹配程度。所以DNN的目标就是在用户信息和上下文信息为输入条件下学习视频的embedding向量v，从而得到用户的向量u。</user,></p>
-<p>说完基本思想，让我们看看实际的效果对比：</p>
-<h3 id="DNN网络可以怎么改：softmax及revise的考虑"><a href="#DNN网络可以怎么改：softmax及revise的考虑" class="headerlink" title="DNN网络可以怎么改：softmax及revise的考虑"></a>DNN网络可以怎么改：<strong>softmax及revise</strong>的考虑</h3><p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/5.png" alt=""></p>
-<p>如我图中两处红色标记，论文中虽然给出了模型的整体流程，但是却没有指明，1处的video vectors需要单独的embedding还是沿用最下方的embedded video watches里面的已经embedding好的结果，我们称之为softmax问题；2处论文没有提及一个问题，就是在固定好历史watch的长度，比如过去20次浏览的video，可能存在部分用户所有的历史浏览video数量都不足20次，在average的时候，是应该除以固定长度（比如上述例子中的20）还是选择除以用户真实的浏览video数量，我们称之为revise问题。</p>
-<p>根据我们的数据实测，效果对比如下：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/6.png" alt=""></p>
-<p><code>nosoft:沿用最下方的embedded video watches里面的已经embedding好的结果</code><br><code>revise:除以用户真实的浏览video数量</code></p>
-<p>我们尝试的去探求原因发现，nosoft比softmax好的原因在于user vector是由最下方的embedded video watches里面的已经embedding好的结果进行多次FC传递得来的，如果新增一个video embedded vector 的话，和FC传递得到的u vector的点积的意义就难以解释；revise比norevise好的原因是，实际在yoho!buy的购物场景下，用户的点击历史比较我们实际选取的window size要短不少，如果所有的用户都除以固定长度的话，大量的用户history click average的vector大小接近于0。</p>
-<h3 id="DNN网络可以怎么改：神经元死亡及网络的内部构造"><a href="#DNN网络可以怎么改：神经元死亡及网络的内部构造" class="headerlink" title="DNN网络可以怎么改：神经元死亡及网络的内部构造"></a>DNN网络可以怎么改：<strong>神经元死亡及网络的内部构造</strong></h3><p>这是一个异常恶心还有没什么好方法的问题，在刚开始做的时候，我们遇到了一个常见的问题，神经元批量死亡的问题。在增加了batch normalization、clip_by_global_norm和exponential_decay learning rate 后有所缓解。</p>
-<p>网络结构的变化比较常规，对比场景的激活函数，参考了论文中推荐的深度、节点数，效果对比如下：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/7.png" alt=""></p>
-<p>虽然我们看到增加网络的深度（3–&gt;4）一定程度上会提高模型的命中率，增加leakyrelu的一层网络也可以有些许的提升，但是总的来说，对模型没有啥大的影响，所以在之后的实际模型中，我们选择了原论文中relu+relu+relu，1024+512+256的框架。</p>
-<h3 id="负采样的“避坑”"><a href="#负采样的“避坑”" class="headerlink" title="负采样的“避坑”"></a><strong>负采样的“避坑”</strong></h3><p>我们都知道，算法写起来小半天就可以搞定，但是前期的数据处理要搞个小半个月都不一定能出来。作为爱省事的我，为了快速实现算法，没有重视负采样的部分，采取了列表页点击为label=1，未点击为label=0的方式，详情如下：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/8.png" alt=""></p>
-<p>看上去没什么问题，省略了从全量样本中抽样作为负样本的复杂过程，实际上，我把代码狂改了n边效果也一直维持在1.57%，可以说是没有任何提升，在此过程期间，我还是了拿用户的尾次点击（last_record）进行训练，拿了有较多行为的用户的尾次点击（change_last_record）进行训练，效果很感人：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/9.png" alt=""></p>
-<p>在我孤注一掷一致，选择按照原论文中说的，每次label=0的我不拿展现给用户但是用户没有点击的商品，而是随机从全量商品中抽取用户没有点击过的商品作为label=0的商品后，奇迹发生了：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/10.png" alt=""></p>
-<p>事后我仔细分析了原因：<br>a.在当次展现的情况下，虽然用户只点击了click商品，其他商品没有点击，但是很多用户在后续浏览的时候未click的商品也在其他非列表页的地方进行click，我实际上将用户感兴趣的商品误标记为了负样本<br>b.后来我咨询看了论文，也发现了原论文中也提及到，展现商品极有可能为热门商品，虽然该商品该用户未点击，但是我们不能降低热门商品的权重（通过label=0的方式），实际上最后的数据也证明了这一点<br>c.“偷窥未来的行为”，如下图，原论文中指出input构造时候不能拿还未发生的点击，只能拿label=1产生时之前的所有历史点击作为input；同理，在构造label=0的时候，只能拿在label=0的时候已经上架的商品，由于训练时间的拉长，不能偷窥label=1发生时还未上架的商品作为label=0的负样本</p>
-<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/11.png" alt=""></p>
-<h3 id="example-age有没有必要构造"><a href="#example-age有没有必要构造" class="headerlink" title="example age有没有必要构造"></a><strong>example age有没有必要构造</strong></h3><p>首先，先稍微解释一下我对example age的概念的理解。所有的训练数据其实都是历史数据，距离当前的时刻都过去了一段时间，站在当前来看，距离当前原因的数据，对当前的影响应该是越小的。就比如1年前我买了白色的铅笔，对我现在需要不需要再买一支黑色的钢笔的影响是微乎其微的。而example age其实就是给了每一条数据一个权重，引用一下原论文的描述<code>In (5b), the example age is expressed as tmax − tN where tmax is the maximum observed time in the training data</code>，我这边采取了(tmax − tN)/tmax的赋权方式：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/12.png" alt=""></p>
-<p>很悲催的是，直观的离线训练数据并没有给出很直观的效果提升，但是由于评估机制的问题（我们后面会说到），我会在实际上线 做abtest的时候重新验证我的这个example age的点，但是可以肯定的是，理论和逻辑上，给样本数据进行权重的更改，是一个可以深挖的点，对线上的鲁棒性的增强是正向的。</p>
-<h3 id="user-feature的选择方向"><a href="#user-feature的选择方向" class="headerlink" title="user feature的选择方向"></a><strong>user feature的选择方向</strong></h3><p>很不幸的是，在这一块的提升，确实没有论文中说的那么好，对于整个网络的贡献，以我做的实际项目的结果来说，history click embedded item &gt; history click embedded brand &gt; history click embedded sort &gt; user info &gt; example age &gt; others。不过，因为时间、数据质量、数据的真实性的原因，可能作为原始input的数据构造的就没有那么好。这边主要和大家说两个点：</p>
-<p>1.topic数据<br>原论文中在第四节的RANKING中指出:<br><code>We observe that the most important signals are those that describe a user’s previous interaction with the item itself and other similar items, matching others’ experience in ranking ads</code><br>论文中还举出了比如用户前一天的每个频道（topic）的浏览视频个数，最后一次浏览距今时间，其实说白了就是强调了过去的行为汇总对未来的预测的作用，认为过去的行为贯穿了整体的用户点击轨迹。<br>除此之外，G厂大佬还认为一些用户排序性质的描述特征对后面的ranking部分的提高也是蛮重要的，这边还举出了用户视频评分的例子，更多的内容大家可以自己去看一下原论文的部分，应该都会有自己的体会。</p>
-<p>回到我们的项目，因为yoho!buy是电商，我类比着做了用户每个类目（裤子、衣服、鞋子…）的历史浏览点击购买次数、最后一次点击距今时长等等的topic信息，提升不是很明显。但是在大家做G厂这边论文，准确率陷入困境的时候，可以尝试一下这边的思路。<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/13.png" alt=""></p>
-<p>2.query infomation<br>相比于论文中的user information的添加，在实际模型测试中，我们发现，query的information的部分有更多的”遐想”。</p>
-<p>原论文中点名指出user language and video language 做为basic info的重要性，这边给出的提升也是相对于user info有明显的增长的：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/14.png" alt=""></p>
-<p>有提升也自然有该部分的缺点：<br>1.语言模型的处理复杂，耗时久<br>在该部分的处理中，我强行拖着隔壁组的nlp博士和我一起搞了一周，每天都加班的搞去做数据清理，句法分析，语句树解析。如果需要让一个常规做推荐的人去弄，会有各种各样的坑，而且耗时还久<br>2.语言新增问题<br>商品的标题这类的文本处理还好，毕竟每日更新的数据存在一个可控的范围，但是用户搜索内容的变化是巨大的，粗略估测一下，一周时间间隔后，原提纯文本数据和新提纯文本数据的交集覆盖率不到78%，这意味着要重复的做nlp工作</p>
-<h3 id="attention-机制的引入"><a href="#attention-机制的引入" class="headerlink" title="attention 机制的引入"></a><strong>attention 机制的引入</strong></h3><p>attention 机制的引入是我老大的硬性需求，我这边也就做了下，如果不了解attention 机制的朋友，可以阅读以下这边文章：<a href="https://blog.csdn.net/qq_21190081/article/details/53083516" target="_blank" rel="noopener">Attention model</a>。</p>
-<p>我通俗的解释一下，不准确但是方便理解，Attention model就是让你每一个input与你的output计算一个similarity，再通过这些similarities给出每个input的权重。但是，很明显，我们离线训练还好，既有input也有output，但是线上预测的时候，就没有output了，所以，我们采取了lastclick替代的方式：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/15.png" alt=""></p>
-<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/16.png" alt=""></p>
-<p>不得不说，老祖宗传下来的东西确实有独到之处，但是在提升了近1pp的rate代价之下，会有一个让人头疼的问题耗时。因为每一个input的weight需要和output进行一次相似度计算，而且后续还要对计算出的相似度进行处理，原本只需要6-7小时训练完的模型，在我加了3层Multihead Attention后被拖到了一天。数据量还只采样了一半，确实需要斟酌带来的提升与投入的成本之间的平衡问题。</p>
-<h3 id="video-vectors的深坑"><a href="#video-vectors的深坑" class="headerlink" title="video vectors的深坑"></a><strong>video vectors的深坑</strong></h3><p>G厂一句话，我们测断腿。这句话不是瞎说的，大家应该还记得一开始我给出的那张图，在最上面有一行不是很明显的小字：video vectors。G厂的大佬们既没有说这些video vectors该怎么构造，也没有说video vectors需不需要变动，留下了一个乐趣点让大家体验。</p>
-<p>刚开始我很傻的用了我们最开始的embedded item作为video vectors，与模型FC出来的user vectors进行点击，计算top items。我来来回回测了一个月，老命都快改没了，最后提升rate到4pp。然而RNN随便跑跑就能到达3pp，我说很不服气的，所以拉着同事一起脑洞了一下，我们之前做图片相似度匹配的时候，喜欢把图片的向量拆成颜色+款式+性别，所以我们就借用了一下，改成了embedded item + embedded brand + embedded sort作为video vectors，历史总是给我们惊喜，效果上一下子就能大到5.2pp左右，这个点的提升应该是得来的最意外的，建议大家在用的时候考虑一下。<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/17.png" alt=""></p>
-<h3 id="实时化的选择"><a href="#实时化的选择" class="headerlink" title="实时化的选择"></a><strong>实时化的选择</strong></h3><p>实时部署上，我们用了tensor flow serving，没什么好说的，给一下关键代码，大家看下自己仿一下就行，一般自己做做demo不需要，企业级上线才需要，企业级上线的那些大佬可能也比我有更多想法，所以就不展开了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">部署及用python作为Client进行调用的测试：</span><br><span class="line">#1.编译服务</span><br><span class="line">bazel build //tensorflow_serving/model_servers:tensorflow_model_server</span><br><span class="line">#2.启动服务</span><br><span class="line">bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server --port=9005 --model_name=test --model_base_path=/Data/sladesha/tmp/test/ </span><br><span class="line">#3.编译文件 </span><br><span class="line">bazel build //tensorflow_serving/test:test_client</span><br><span class="line">#4.注销报错的包</span><br><span class="line">注销：/Data/muc/serving/bazel-bin/tensorflow_serving/test/test_client.runfiles/org_tensorflow/tensorflow/contrib/image/__init__.pyc中的from tensorflow.contrib.image.python.ops.single_image_random_dot_stereograms import single_image_random_dot_stereograms</span><br><span class="line">参考：https://github.com/tensorflow/serving/issues/421</span><br><span class="line">#5.运行</span><br><span class="line">bazel-bin/tensorflow_serving/test/test_client --server=localhost:9005</span><br></pre></td></tr></table></figure>
-<p>相关的问题，有大佬已经梳理好了，自取其他可选的一些参数设置：<a href="https://blog.csdn.net/langb2014/article/details/54317490" target="_blank" rel="noopener">tensorflow serving 参数设置</a>。</p>
-<p>还有一些评估技巧，模型之间的对比技巧，这边就不细讲了，可借鉴的意义也不大。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然早就读过这篇文章，但是实现之后，发现新收获仍然不少。我特别赞成清凇的一句话:’对于普通的学术论文，重要的是提供一些新的点子，而对于类似google这种工业界发布的paper，特别是带有practical lessons的paper，很值得精读。’<br>G厂的这个推荐代码和attention model的代码之前是准备放GitHub的，想想还是算了。一是之前也放过很多此代码，也没什么反馈，二是这两个代码自己写也不是很难，可以作为练手项目。</p>
-<h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><p>以上我个人在Yoho!Buy团队在实践中的一点总结，不代表公司的任何言论，仅仅是我个人的观点。最后感谢项目推进过程中所有合作方和项目组同学的付出和努力，感谢各个团队各位老大们的支持！溜了溜了。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 论文解析 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[博客导读公告(置顶)]]></title>
+    <url>%2F2029%2F01%2F20%2F%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A%2F</url>
+    <content type="text"><![CDATA[首先，我很荣幸您出现在我的个人博客，下面请允许我花费您3分钟左右的时间，简单的为您介绍一下博客中的相关功能，这将极大的提高您在后续阅读中的体验： 打个广告，欢迎各位老爷关注我的微信公众号：ml_trip，期待与大家交流！ 我的个人介绍大家可以在首页的标题下面找到me这个图标，点击即可，里面有我的个人介绍： 我的个人简历下载地址在me跳转页面中的位置如下： 快速阅读您可在任何一篇文章的右侧看到红色方框： 如果您对其中部分内容感兴趣，可直接点击绿色方框内的文章，会自动跳转到您关心的模块； 如果您想要看到我的更多联系方式，可以点击蓝色模块中的站点概览； 如果您不想红色方框影响您的阅读，在黑色条块的最下方的小叉点击即可。 赞助激励如果您觉得我写的东西对您有一些帮助，在您宽裕的情况下可以在文章下面的打赏中给我发一个小红包，或者直接扫描下面的二维码，感谢您对我的认可： 如果您还是一个学生或者您正处于人生的低谷，感谢您对我的认可，打赏就不需要了，我会一如既往的给大家整理工作中的一些想法和心得 自定义搜索为了方便大家找到自己关心的内容，建议直接点击搜索图标： 比如搜索svm，有模糊匹配结果如下： 标签检索大家可以在首页的标题下面找到标签这个图标，点击即可： 该类别下生成了标签云，为较为仔细的文章内容概括： 其他 因为本博客部署在GitHub，如果您有时候遇到打不开网页的问题，建议您重复刷新或者收藏slade_sal简书地址，两者内容是一致的 如果您有任何疑惑或者疑问都可以通过站点概览的邮箱联系我，非常愿意解答您的问题 如果您遇到算法学习过程的困难，需要内推或者就业方向建议，也可以通过站点概览的邮箱联系我，非常愿意和您进行交流 绝大多数代码都可以在我的Github上找到，所有的数据都经过脱敏处理，您可以放心使用，希望对您有所帮助 最后，感谢大家一路以来对我的认可。]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>公告</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PKUseg在货运领域的评测]]></title>
+    <url>%2F2019%2F01%2F14%2FPKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B%2F</url>
+    <content type="text"><![CDATA[先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上： 默认模型下，jieba效果优于PKUseg PKUseg提供场景精细化的预训练（还没有提供入口），长远来讲适合专业领域使用 PKUseg在特定的场景下有令人惊喜的效果（地址切分） 给大家的建议就是，如果大家赶时间求稳定适应范围需要非常广的时候，目前来说jieba是非常好的选择，如果说在面临一些精细化领域的特殊需求的时候，可以用PKUseg进行一波尝试，有意外惊喜。 那是一个风和日丽的早上，突然群里老大发出一条消息：我感觉我的心脏有一丝隐隐作痛的感觉，人在办公室坐，活从天上来，虽然身后站着一堆催上线的产品，我还是屈服于老大的正义（淫威），简单测评了新出来的PKUseg与Jieba在公路货运/运输行业上的效果对比。 在我们的热词数据库中已经有人工切词完成的2万多条货运的词条：1234567891011121314151617181920description standard高博集团装货卸宝华 高博 集团 装货 卸 宝华北安到吉林农安饲料90吨每吨105 北安 到 吉林 农安 饲料 90吨 每吨 105需要4个车 需要 4个 车叶张公路装香闵路曲吴路两卸 叶张公路 装 香闵路 曲吴路 两卸从福通物流到吴滩镇 从 福通 物流 到 吴滩镇霞浦宏霞路到中通物流 霞浦宏霞路 到 中通物流石大路3场到德兴西门山 石大路 3场 到 德兴 西门山公园西路装 公园 西路 装不押车每吨150 不 押车 每吨 150速订价钱好商量 速订 价钱 好商量慈溪胜山装 慈溪 胜山装好装好卸高价急走 好装好卸 高价急走九顶山路与东方大道位置装货可以配货 九顶 山路 与 东方 大道 位置 装货 可以 配货要二部 要 二部青浦工业园区久远路提货到奉贤新杨公路进仓 青浦 工业园区 久远路 提货 到 奉贤 新杨公路 进仓园光路装博学南路卸 园光路 装 博学南路 卸公兴装卸荣昌广顺 公兴 装卸 荣昌 广顺打备注电话18458331112 打 备注 电话 18458331112... 首先看，不加任何词库，预训练下的，最后的效果对比：可以看到，在默认的分词模型下，jieBa分词还是拥有绝对优势的，但是在pkuSeg的git里面 所以我想看看能不能进行一下预训练下后再对比一下，可惜的是我在git（git地址传送门）上找了半天也没有找到预训练的入口，只有已经被官方预训练好的词库等有时间了，可以邮件沟通一下再补充这个部分的效果对比，我觉得，应该还是有提升的。 但是，在我们实际去测的过程中，我们发现了一些差异话的东西比较有意思。我们其实现在在做一个语音发货的产品，涉及到把一串地址切分开的需求： 其中涉及到地址切分的时候，jieba的能力会比如PKUseg要弱不少，比如“山西大同”，“上海浦东”，我们需要把一级二级地址切开的时候，PKUseg可以做到，而jieba并不能按照需求切块。所以，我们已经打算在地址模块切换PKUseg的模型来适应了。 最后吐槽一下，虽然我知道PKUseg需要加载模型，但是一加载就是一二十秒也是有点夸张了。酒浆，各位下回见。 欢迎大家关注我的个人bolg，知乎，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
+      <categories>
+        <category>开源项目</category>
+      </categories>
+      <tags>
+        <tag>NLP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[YoutubeNet的数据答疑]]></title>
+    <url>%2F2018%2F10%2F16%2FYoutubeNet%E7%9A%84%E6%95%B0%E6%8D%AE%E7%AD%94%E7%96%91%2F</url>
+    <content type="text"><![CDATA[实在是太忙了，抽空给大家解析一下之前写的YoutubeNet的数据是怎么构造的，协助大家可以自行构造一下。 这边和大家说一下，我没有上传数据的原因有两个： 涉及公司的数据财产，不方便上传 懒得做脱敏处理 数据一共有1300多万条，传输实在不方便 主要数据处理的部分在map_id_idx.py脚本下，其中包含all_item_20180624.txt和click_thirty_day_data_20180609.txt两个数据集合。 其中，all_item_20180624.txt是当日所有的商品集合：包含’Prd_Id’, ‘ItemId’, ‘BrandId’, ‘MsortId’和‘GenderId’五列，分别代表着商品id，skuid，低级品牌id，中级品牌id，产品性别，最后形如： 1234567891011125675 50000055 175 1500 32577 50000056 187 66 32002 50000057 63 11 22007 50000058 137 58 32075 50000060 80 50 32348 50000061 138 16 2423 50000062 162 237 3469 50000063 10 1500 31102 50000064 176 11 11896 50000066 37 27 12489 50000067 27 44 1... click_thirty_day_data_20180609.txt为近三十天的用户点击流，包含’UId’, ‘ItemId’, ‘clickTime’三列，分别代表着uid、点击的skuid，点击时间，最后形如： 12345678910111234 51668064 152860240634 51890512 152878838934 51884724 152878839334 51884720 152878839934 51884718 152878841434 51580974 152878844234 51854970 152878848734 51514910 152878849934 51855000 152878853534 51854990 152878856934 51854998 1528788572... 通过map_id_idx.py对所有的商品进行标序号，然后带入用户的点击流中，方便后期做embedding操作，就酱。 欢迎大家关注我的个人bolg，知乎，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>推荐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GloVe向量化做文本分类]]></title>
+    <url>%2F2018%2F09%2F25%2FGloVe%E5%90%91%E9%87%8F%E5%8C%96%E5%81%9A%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[向量化在之前，我对向量化的方法一直局限在两个点， 第一种是常规方法的one-hot-encoding的方法，常见的比如tf-idf生成的0-1的稀疏矩阵来代表原文本： 这种方法简单暴力，直接根据文本中的单词进行one-hot-encoding，但是数据量一但大了，这个单句话的one-hot-encoding结果会异常的长，而且没办法得到词与词之间的关系。 第二种是基于神经网络的方法，常见的比如word2vec，YouTubeNet： 这种方法（这边以CBOW为例子）都是初始一个固定长度的随机向量作为每个单词的向量，制定一个目标词的向量，以上下文词向量的sum结果作为input进行前向传递，使得传递的结果和目标词向量尽可能一致，以修正初始的随机向量。换句话说，就是刚开始，我随意定义生成一个vector代表一个词，然后通过上下文的联系去修正这个随机的vector。好处就是我们可以得到词与词之间的联系，而且单个词的表示不复杂，坏处就是需要大量的训练样本，毕竟涉及到了神经网络。 最近，我们突然发现了第三种方法，GloVe向量化。它也是开始的时候随机一个vector作为单词的表示，但是它不利用神经网络去修正，而是利用了一个自己构造的损失函数： 通过我们已有的文章内容，去是的这个损失函数最小，这就变成了一个机器学习的方法了，相比较暴力的前馈传递，这也高快速和高效的多。同时，它还兼具了word2vec最后结果里面vector方法的优点，得到词与词之间的联系，而且单个词的表示不复杂。 这边就不展开GloVe算法的细节了，后面有空和大家补充，这个算法的构造非常巧妙，值得大家借鉴一下。 文本分类刚才开门见山的聊了蛮久向量化，看起来和文本分类没什么关系，确实在通常意义上来讲，我们的最简单最常用的方法并不是向量化的方法，比如通过朴素贝叶斯，N-Grams这些方法来做分类识别。 tfidf+N-grams1.其实很简单，首先对语料库进行切词，维护自己的词典，做高频词的人工复审，将无意词进行stop_words归总 可以看到，高频词其实是非常非常少的，而且如果你真的去做了，你就会发现，”了”、“的”、“啊”这种语气词，和一些你公司相关的领域词汇会非常靠前，这些词作为stop_words会有效的降低训练成本、提高模型效果。 2.进行tf-idf，将词进行重赋权，字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降，有效的将向量化中的one hot encoding结果进行了修正。但是依然存在问题：在TFIDF算法中并没有体现出单词的位置信息。 123456# sublinear_tf：replace tf with 1 + log(tf)# max_df：用来剔出高于词频0.5的词# token_pattern：(?u)\b\w+\b是为了匹配出长度为1及以上的词，默认的至少需要词长度为2# ngram_range：这边我做了3-grams处理，如果只想朴素计算的话(1,1)即可# max_features：随着我做了各种宽松的条件，最后生成的词维度会异常大，这边限制了前3万vectorizer = TfidfVectorizer(stop_words=stpwrdlst, sublinear_tf=True, max_df=0.5, token_pattern=r"(?u)\b\w+\b",ngram_range=(1, 3), max_features=30000) 不得不说，python处理机器学习，深度学习的便捷程度是异常的高。 3.在经过TfidfVectorizer处理之后的结果是以稀疏矩阵的形式来存的，如果想看内容的话，可以用todense()转化为matrix来看。接下来，用贝叶斯来训练刚才得到的矩阵结果就可以了。 12mnb_tri = MultinomialNB(alpha=0.001)mnb_tri.fit(tri_train_set.tdm, tri_train_set.label) tf-idf + n-grams + naive-bayes + lr这种方法是上面方法的升级版本，我们先看下架构： 其实主要差异在于右侧的算法模型详细部分，我们做了一个由3-grams到3-grams+naive-bayes+lr的扩充，提升精度。 在模型的过程中，上面的第一步，都是一样的，在第二、三步有所差异：2.在第二步中，我们除了要构造出一个3-grams的sparse matrix也需要构造出一个朴素的sparse matrix 12# 朴素结果vectorizerby = TfidfVectorizer(stop_words=stpwrdlst, token_pattern=r"(?u)\b\w+\b", max_df=0.5, sublinear_tf=True,ngram_range=(1, 1), max_features=100000) 3.不仅仅用bayes进行一次分类，而是根据3-grams和朴素情况下的sparse matrix进行预测，再用logistics regression来合并两个的结果做个stack进行0-1压缩。 12345# 构造出一个3-grams的sparse matrix也需要构造出一个朴素的sparse matrixmnb_tri = MultinomialNB(alpha=0.001)mnb_tri.fit(tri_train_set.tdm, tri_train_set.label)mnb_by = MultinomialNB(alpha=0.001)mnb_by.fit(by_train_set.tdm, by_train_set.label) 123# 加bias，cv选择最优正则结果，lbfgs配合l2正则lr = LogisticRegressionCV(multi_class="ovr", fit_intercept=True, Cs=np.logspace(-2, 2, 20), cv=2, penalty="l2",solver="lbfgs", tol=0.01)re = lr.fit(adv_data[['f1', 'f2']], adv_data['rep_label']) 总结一下上面两种方法，我觉得是入门快，效果也不错的小练手，也是完全可以作为我们开始一个项目的时候，用来做baseline的方法，主要是快啊～/斜眼笑 GloVe+lr因为我目前的带标签数据比较少，所以之前一直没有敢用word2vec去向量化作死，但是GloVe不存在这个问题啊，我就美滋滋的进行了一波。首先，先讲下GloVe的使用： https://github.com/stanfordnlp/GloVe 在最大的代码抄袭网站下载(git clone)坦福大佬的代码，友情提醒，不要作死自己看了理论就觉得自己会写，自己搞个GloVe。(别问我是怎么知道的) cd到对应目录下，vim demo.sh这个文件12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#!/bin/bashset -e# Makes programs, downloads sample data, trains a GloVe model, and then evaluates it.# One optional argument can specify the language used for eval script: matlab, octave or [default] python# 请把make这边注释掉，这个是让你去下个demo，我们直接改成自己的数据# make# if [ ! -e text8 ]; then# if hash wget 2&gt;/dev/null; then# wget http://mattmahoney.net/dc/text8.zip# else# curl -O http://mattmahoney.net/dc/text8.zip# fi# unzip text8.zip# rm text8.zip# fi# CORPUS需要对应自己的欲训练的文档CORPUS=content.txtVOCAB_FILE=vocab.txtCOOCCURRENCE_FILE=cooccurrence.binCOOCCURRENCE_SHUF_FILE=cooccurrence.shuf.binBUILDDIR=buildSAVE_FILE=vectorsVERBOSE=2MEMORY=4.0# 单词至少出现几次VOCAB_MIN_COUNT=3# 向量长度VECTOR_SIZE=128# 迭代次数MAX_ITER=30# 窗口长度WINDOW_SIZE=15BINARY=2NUM_THREADS=8X_MAX=10echoecho "$ $BUILDDIR/vocab_count -min-count $VOCAB_MIN_COUNT -verbose $VERBOSE &lt; $CORPUS &gt; $VOCAB_FILE"$BUILDDIR/vocab_count -min-count $VOCAB_MIN_COUNT -verbose $VERBOSE &lt; $CORPUS &gt; $VOCAB_FILEecho "$ $BUILDDIR/cooccur -memory $MEMORY -vocab-file $VOCAB_FILE -verbose $VERBOSE -window-size $WINDOW_SIZE &lt; $CORPUS &gt; $COOCCURRENCE_FILE"$BUILDDIR/cooccur -memory $MEMORY -vocab-file $VOCAB_FILE -verbose $VERBOSE -window-size $WINDOW_SIZE &lt; $CORPUS &gt; $COOCCURRENCE_FILEecho "$ $BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE &lt; $COOCCURRENCE_FILE &gt; $COOCCURRENCE_SHUF_FILE"$BUILDDIR/shuffle -memory $MEMORY -verbose $VERBOSE &lt; $COOCCURRENCE_FILE &gt; $COOCCURRENCE_SHUF_FILEecho "$ $BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE"$BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSEif [ "$CORPUS" = 'text8' ]; thenif [ "$1" = 'matlab' ]; thenmatlab -nodisplay -nodesktop -nojvm -nosplash &lt; ./eval/matlab/read_and_evaluate.m 1&gt;&amp;2 elif [ "$1" = 'octave' ]; thenoctave &lt; ./eval/octave/read_and_evaluate_octave.m 1&gt;&amp;2elseecho "$ python eval/python/evaluate.py"python eval/python/evaluate.pyfifi 这边多说一下，CORPUS=content.txt这边content.txt里面的格式需要按照空格为分隔符进行存储，我之前一直以为是\t。 直接sh demo.sh，你会得到vectors.txt，这个里面就对应每个词的向量表示 1234天气 -0.754142 0.386905 -1.200074 -0.587121 0.758316 0.373824 0.342211 -1.275982 -0.300846 0.374902 -0.548544 0.595310 0.906426 0.029255 0.549932 -0.650563 -0.425185 1.689703 -1.063556 -0.790254 -1.191287 0.841529 1.080641 -0.082830 1.062107 -0.667727 0.573955 -0.604460 -0.601102 0.615299 -0.470923 0.039398 1.110345 1.071094 0.195431 -0.155259 -0.781432 0.457884 1.093532 -0.188207 -0.161646 0.246220 -0.346529 0.525458 0.617904 -0.328059 1.374414 1.020984 -0.959817 0.670894 1.091743 0.941185 0.902730 0.609815 0.752452 1.037880 -1.522382 0.085098 0.152759 -0.562690 -0.405502 0.299390 -1.143145 -0.183861 0.383053 -0.013507 0.421024 0.025664 -0.290757 -1.258696 0.913482 -0.967165 -0.131502 -0.324543 -0.385994 0.711393 1.870067 1.349140 -0.541325 -1.060084 0.078870 0.773146 0.358453 0.610744 0.407547 -0.552853 1.663435 0.120006 0.534927 0.219279 0.682160 -0.631311 1.071941 -0.340337 -0.503272 0.150010 1.347857 -1.024009 -0.181186 0.610240 -0.218312 -1.120266 -0.486539 0.264507 0.266192 0.347005 0.172728 0.613503 -0.131925 -0.727304 -0.504488 1.773406 -0.700505 -0.159963 -0.888025 -1.358476 0.540589 -0.243272 -0.236959 0.391855 -0.133703 -0.071120 1.050547 -1.087613 -0.467604 1.779341 -0.449409 0.949411好了 1.413075 -0.226177 -2.024229 -0.192003 0.628270 -1.227394 -1.054946 -0.900683 -1.958882 -0.133343 -1.014088 -0.434961 0.026207 -0.066139 0.608682 -0.362021 0.314323 0.261955 -0.571414 1.738899 -1.013223 0.503853 -0.536511 -0.212048 0.611990 -0.627851 0.297657 -0.187690 -0.565871 -0.234922 -0.845875 -0.767733 0.032470 1.508012 -0.204894 -0.495031 -0.159262 0.181380 0.050582 -0.333469 0.454832 -2.091174 0.448453 0.940212 0.882077 -0.617093 0.616782 -0.993445 -0.385087 0.251711 0.259918 -0.222614 -0.595131 0.661472 0.194740 0.619222 -1.253610 -0.838179 0.781428 -0.396697 -0.530109 0.022801 -0.558296 -0.656034 0.842634 -0.105293 0.586823 -0.603681 -0.605727 -0.556468 0.924275 -0.299228 -1.121538 0.237787 0.498935 -0.045423 0.171536 -1.026385 -0.262225 0.390662 1.263240 0.352172 0.261121 0.915840 1.522183 -0.498536 2.046169 0.012683 -0.073264 -0.361662 0.759529 -0.713268 0.281747 -0.811104 -0.002061 -0.802508 0.520559 0.092275 -0.623098 0.199694 -0.134896 -1.390617 0.911266 -0.114067 1.274048 1.108440 -0.266002 1.066987 0.514556 0.144796 -0.606461 0.197114 0.340205 -0.400785 -0.957690 -0.327456 1.529557 -1.182615 0.431229 -0.084865 0.513266 -0.022768 -0.092925 -0.553804 -2.269741 -0.078390 1.376199 -1.163337随意 0.410436 0.776917 -0.381131 0.969900 -0.804778 -0.785379 -0.887346 -1.463543 -1.574851 0.313285 0.685253 -0.918359 0.199073 -0.305374 -0.642721 0.098114 -0.723331 0.353159 0.042807 0.369208 -1.534930 -0.084871 0.020417 -0.384782 0.276833 -0.160028 1.107051 0.884343 -0.204381 -0.459738 -0.387128 0.125867 0.093569 1.192471 -0.473752 -0.314541 -1.029249 0.481447 1.358753 -1.688778 -0.113080 -0.401443 -0.958206 0.605638 1.083126 0.131617 0.092507 0.476506 0.801755 1.096883 -0.102036 0.461804 0.820297 -0.104053 -0.126638 0.957708 -0.722038 0.223686 0.583582 0.201246 -1.254708 0.770717 -1.271523 -0.584094 -1.142426 1.066567 0.071951 -0.182649 0.014365 -0.577141 0.037340 -0.166832 -0.247827 0.165994 1.143665 -0.258421 -0.335195 0.170218 -0.212838 0.013709 0.088847 0.663238 -0.597439 0.632847 0.370871 0.652707 0.306935 0.195127 -0.252443 0.588479 0.191633 -1.587564 0.564600 -0.306158 -0.648177 -0.488595 1.532795 -0.462473 -0.643878 1.292369 -0.051494 -1.032738 0.453587 0.411327 -0.469373 0.428398 -0.020839 0.307422 0.518331 -0.860913 -2.170098 -0.277532 -0.966210 0.615336 -0.924783 0.042679 1.289640 1.272992 1.367773 0.426600 -0.187254 -0.781009 1.331301 -0.088357 -1.113550 -0.262879 0.300137 0.437905.. 有了每个词的向量，我们这边采取了借鉴YoutubeNet网络的想法： 举个例子：存在一句话”我爱中国”，“我”的向量是[0.3,0.2,0.3]，”爱”的向量是[0.1,0.2,0.3]，“中国”的向量是[0.6,0.6,0.4]，那么average后就是[0.33,0.33,0.33]，然后这就类似一个特征为三的input。 这种方法的好处就是快捷，预处理的工作代价要小，随着数据量的增多，模型的效果要更加的好。 效果对比最后这边粗略的给出一下业务数据对比： experiment date intercepted_recall 3-grams 20180915 79.3% 3-grams 20180917 78.7% 3-grams+bayes+lr 20180915 83.4% 3-grams+bayes+lr 20180917 88.6% gloVe+lr 20180915 93.1% gloVe+lr 20180917 93.9% 欢迎大家关注我的个人bolg，知乎，相关代码已经上传到我的Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>NLP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Google团队在DNN的实际应用方式的整理]]></title>
+    <url>%2F2018%2F08%2F29%2FGoogle%E5%9B%A2%E9%98%9F%E5%9C%A8DNN%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%E7%9A%84%E6%95%B4%E7%90%86%2F</url>
+    <content type="text"><![CDATA[很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总： 如何进行负采样的？ 构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，google的label是一个200万长度的向量，瑟瑟发抖.jpg。） 推荐算法应用上，有什么评估方式和评估指标？ 主要基于线上进行小批量的abtest进行对比，在考虑ctr指标的同时也会综合全站的信息加以分析，同时对新颖程度和用户兴趣变换也是我们考察的对象。 冷启动的解决方式？从来没有被点击过的video如何处理？新上的video如何处理？ google的推荐基于多种推荐算法的组合，YouTubeNet主要解决的是热门商品的一个推荐问题，冷启动或者没有被点击的video会有其他算法进行计算。换句话说，解决不了。 example age如何定义？ user+vedio的组合形式，train过程中，是用户点击该vedio的时间距离当前时间的间隔；predict过程中，为0。该部分对模型的鲁棒性非常重要。 是否遇到神经元死亡的问题？ 有，解决方案很常规，都是大家了解的，降低learning_rate，使用batchnormalization。 是否预到过拟合？ 没，youtube的用户上亿，可以构造出上千亿的数据，过拟合的情况不明显。但是会存在未登录用户，我们会通过一些其他CRM类的算法补充构造出他们的基本信息，比如gender、age… vedio vector在哪边进行构造和修正？ history click部分进行vedio embedding，并进行修正。另外，50是我们尝试的历史点击长度，20-30也有不错的效果。 会有工程计算压力么？ 不存在，建议在GPU上计算，后面由于VPN网络信号抖动没听清，大概就说Google在训练模型的时候会有大量GPU支持，每天大概更新2-3模型，没有遇到什么计算瓶颈。 (以上为我个人针对提问结果的理解及总结) 个人感想如下：有钱任性 最后，我觉得算法还是要适应实际情况，大公司的方法可以借鉴但是可能很多时候抄不来，也没条件抄。 原问题如下（实际有删改）：How to do video embedding?Is there any pre-training?How to use example age in the model?How to deal dead ReLU neurons？How to sample negative classes？How does the video embedding generated？How to recommend the video never been clicked and new uploaded videos？How to do ab testing? What’s the metrics?Have you facing overfitting？How to solve it?There is any difficulty in calculating the embedding for millions of videos and users.During input embedding generation, are they simply averaged? 欢迎大家关注我的个人bolg，知乎，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>论文解析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现]]></title>
+    <url>%2F2018%2F06%2F26%2F%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[论文 Deep Neural Networks for YouTube Recommendations 来自google的YouTube团队，发表在16年9月的RecSys会议。我想应该很多人都读过，之前参与了公司的推荐系统优化的项目，本来想从各大搜索引擎中寻找到现成的分析，但是出人意料的一无所获。Github上的代码实现也出奇的少以及不清晰，所以就借着这个机会和大家分享一下自己做的过程中的一些理论心得、工程坑、代码实现等等。 本文基于大家对Deep Neural Networks for YouTube Recommendations已经完成通读的基础上，不会做细致的论文解析，只会涉及到自己实现过程中的一些总结，如果没有论文了解，会非常不易理解。 系统概览上面这张图可以说是比较详细的涵盖了基础框架部分，整体的模型的优点我就不详述了，包括规模容纳的程度大啊、鲁棒性好啊、实时性优秀啊、延展性好啊等等，网上很多水字数的文章很多，我们主要总结几个愿论文上的亮点和实际去做的时候需要注意的地方： DNN网络可以怎么改 负采样的“避坑” example age有没有必要构造 user feature的选择方向 attention 机制的引入 video vectors的深坑 实时化的选择 整体上来说，G厂的这套算法基于的是两个部分：matching+ranking，这个的也给我们带来了更大的工作量，在做的时候，分成两个部分，我们在实际处理的时候，通过recall rate来判断matching部分的好坏，通过NDCG来判断排序部分的好坏。总体如下： candidate generation就是我们matching的模块，目的是把百万级的商品、视频筛选出百级、千级的可排序的量级；再通过ranking模块，选出十位数的展示商品、视频作为最后的推送内容。之所以把推荐系统划分成Matching和Ranking两个阶段，主要是从性能方面考虑的。Matching阶段面临的是百万级，而Ranking阶段的算法则非常消耗资源，不可能对所有目标都算一遍，而且就算算了，其中大部分在Ranking阶段排名也很低，也是浪费计算资源。 Matching &amp; Ranking Problems首先，我们都知道，G厂给出的这个解决方案用的就是基于DNN的超大规模多分类思想，即在时刻t，为用户U（上下文信息C）在视频库V中精准的预测出视频i的类别（每个具体的视频视为一个类别，i即为一个类别），用数学公式表达如下： 很显然上式为一个softmax多分类器的形式。向量u是信息的高纬“embedding”，而向量v则是视频 j 的embedding向量，通过u与v的点积大小来判断用户与对应视频的匹配程度。所以DNN的目标就是在用户信息和上下文信息为输入条件下学习视频的embedding向量v，从而得到用户的向量u。 说完基本思想，让我们看看实际的效果对比： DNN网络可以怎么改：softmax及revise的考虑 如我图中两处红色标记，论文中虽然给出了模型的整体流程，但是却没有指明，1处的video vectors需要单独的embedding还是沿用最下方的embedded video watches里面的已经embedding好的结果，我们称之为softmax问题；2处论文没有提及一个问题，就是在固定好历史watch的长度，比如过去20次浏览的video，可能存在部分用户所有的历史浏览video数量都不足20次，在average的时候，是应该除以固定长度（比如上述例子中的20）还是选择除以用户真实的浏览video数量，我们称之为revise问题。 根据我们的数据实测，效果对比如下： nosoft:沿用最下方的embedded video watches里面的已经embedding好的结果revise:除以用户真实的浏览video数量 我们尝试的去探求原因发现，nosoft比softmax好的原因在于user vector是由最下方的embedded video watches里面的已经embedding好的结果进行多次FC传递得来的，如果新增一个video embedded vector 的话，和FC传递得到的u vector的点积的意义就难以解释；revise比norevise好的原因是，实际在yoho!buy的购物场景下，用户的点击历史比较我们实际选取的window size要短不少，如果所有的用户都除以固定长度的话，大量的用户history click average的vector大小接近于0。 DNN网络可以怎么改：神经元死亡及网络的内部构造这是一个异常恶心还有没什么好方法的问题，在刚开始做的时候，我们遇到了一个常见的问题，神经元批量死亡的问题。在增加了batch normalization、clip_by_global_norm和exponential_decay learning rate 后有所缓解。 网络结构的变化比较常规，对比场景的激活函数，参考了论文中推荐的深度、节点数，效果对比如下： 虽然我们看到增加网络的深度（3–&gt;4）一定程度上会提高模型的命中率，增加leakyrelu的一层网络也可以有些许的提升，但是总的来说，对模型没有啥大的影响，所以在之后的实际模型中，我们选择了原论文中relu+relu+relu，1024+512+256的框架。 负采样的“避坑”我们都知道，算法写起来小半天就可以搞定，但是前期的数据处理要搞个小半个月都不一定能出来。作为爱省事的我，为了快速实现算法，没有重视负采样的部分，采取了列表页点击为label=1，未点击为label=0的方式，详情如下： 看上去没什么问题，省略了从全量样本中抽样作为负样本的复杂过程，实际上，我把代码狂改了n边效果也一直维持在1.57%，可以说是没有任何提升，在此过程期间，我还是了拿用户的尾次点击（last_record）进行训练，拿了有较多行为的用户的尾次点击（change_last_record）进行训练，效果很感人： 在我孤注一掷一致，选择按照原论文中说的，每次label=0的我不拿展现给用户但是用户没有点击的商品，而是随机从全量商品中抽取用户没有点击过的商品作为label=0的商品后，奇迹发生了： 事后我仔细分析了原因：a.在当次展现的情况下，虽然用户只点击了click商品，其他商品没有点击，但是很多用户在后续浏览的时候未click的商品也在其他非列表页的地方进行click，我实际上将用户感兴趣的商品误标记为了负样本b.后来我咨询看了论文，也发现了原论文中也提及到，展现商品极有可能为热门商品，虽然该商品该用户未点击，但是我们不能降低热门商品的权重（通过label=0的方式），实际上最后的数据也证明了这一点c.“偷窥未来的行为”，如下图，原论文中指出input构造时候不能拿还未发生的点击，只能拿label=1产生时之前的所有历史点击作为input；同理，在构造label=0的时候，只能拿在label=0的时候已经上架的商品，由于训练时间的拉长，不能偷窥label=1发生时还未上架的商品作为label=0的负样本 example age有没有必要构造首先，先稍微解释一下我对example age的概念的理解。所有的训练数据其实都是历史数据，距离当前的时刻都过去了一段时间，站在当前来看，距离当前原因的数据，对当前的影响应该是越小的。就比如1年前我买了白色的铅笔，对我现在需要不需要再买一支黑色的钢笔的影响是微乎其微的。而example age其实就是给了每一条数据一个权重，引用一下原论文的描述In (5b), the example age is expressed as tmax − tN where tmax is the maximum observed time in the training data，我这边采取了(tmax − tN)/tmax的赋权方式： 很悲催的是，直观的离线训练数据并没有给出很直观的效果提升，但是由于评估机制的问题（我们后面会说到），我会在实际上线 做abtest的时候重新验证我的这个example age的点，但是可以肯定的是，理论和逻辑上，给样本数据进行权重的更改，是一个可以深挖的点，对线上的鲁棒性的增强是正向的。 user feature的选择方向很不幸的是，在这一块的提升，确实没有论文中说的那么好，对于整个网络的贡献，以我做的实际项目的结果来说，history click embedded item &gt; history click embedded brand &gt; history click embedded sort &gt; user info &gt; example age &gt; others。不过，因为时间、数据质量、数据的真实性的原因，可能作为原始input的数据构造的就没有那么好。这边主要和大家说两个点： 1.topic数据原论文中在第四节的RANKING中指出:We observe that the most important signals are those that describe a user’s previous interaction with the item itself and other similar items, matching others’ experience in ranking ads论文中还举出了比如用户前一天的每个频道（topic）的浏览视频个数，最后一次浏览距今时间，其实说白了就是强调了过去的行为汇总对未来的预测的作用，认为过去的行为贯穿了整体的用户点击轨迹。除此之外，G厂大佬还认为一些用户排序性质的描述特征对后面的ranking部分的提高也是蛮重要的，这边还举出了用户视频评分的例子，更多的内容大家可以自己去看一下原论文的部分，应该都会有自己的体会。 回到我们的项目，因为yoho!buy是电商，我类比着做了用户每个类目（裤子、衣服、鞋子…）的历史浏览点击购买次数、最后一次点击距今时长等等的topic信息，提升不是很明显。但是在大家做G厂这边论文，准确率陷入困境的时候，可以尝试一下这边的思路。 2.query infomation相比于论文中的user information的添加，在实际模型测试中，我们发现，query的information的部分有更多的”遐想”。 原论文中点名指出user language and video language 做为basic info的重要性，这边给出的提升也是相对于user info有明显的增长的： 有提升也自然有该部分的缺点：1.语言模型的处理复杂，耗时久在该部分的处理中，我强行拖着隔壁组的nlp博士和我一起搞了一周，每天都加班的搞去做数据清理，句法分析，语句树解析。如果需要让一个常规做推荐的人去弄，会有各种各样的坑，而且耗时还久2.语言新增问题商品的标题这类的文本处理还好，毕竟每日更新的数据存在一个可控的范围，但是用户搜索内容的变化是巨大的，粗略估测一下，一周时间间隔后，原提纯文本数据和新提纯文本数据的交集覆盖率不到78%，这意味着要重复的做nlp工作 attention 机制的引入attention 机制的引入是我老大的硬性需求，我这边也就做了下，如果不了解attention 机制的朋友，可以阅读以下这边文章：Attention model。 我通俗的解释一下，不准确但是方便理解，Attention model就是让你每一个input与你的output计算一个similarity，再通过这些similarities给出每个input的权重。但是，很明显，我们离线训练还好，既有input也有output，但是线上预测的时候，就没有output了，所以，我们采取了lastclick替代的方式： 不得不说，老祖宗传下来的东西确实有独到之处，但是在提升了近1pp的rate代价之下，会有一个让人头疼的问题耗时。因为每一个input的weight需要和output进行一次相似度计算，而且后续还要对计算出的相似度进行处理，原本只需要6-7小时训练完的模型，在我加了3层Multihead Attention后被拖到了一天。数据量还只采样了一半，确实需要斟酌带来的提升与投入的成本之间的平衡问题。 video vectors的深坑G厂一句话，我们测断腿。这句话不是瞎说的，大家应该还记得一开始我给出的那张图，在最上面有一行不是很明显的小字：video vectors。G厂的大佬们既没有说这些video vectors该怎么构造，也没有说video vectors需不需要变动，留下了一个乐趣点让大家体验。 刚开始我很傻的用了我们最开始的embedded item作为video vectors，与模型FC出来的user vectors进行点击，计算top items。我来来回回测了一个月，老命都快改没了，最后提升rate到4pp。然而RNN随便跑跑就能到达3pp，我说很不服气的，所以拉着同事一起脑洞了一下，我们之前做图片相似度匹配的时候，喜欢把图片的向量拆成颜色+款式+性别，所以我们就借用了一下，改成了embedded item + embedded brand + embedded sort作为video vectors，历史总是给我们惊喜，效果上一下子就能大到5.2pp左右，这个点的提升应该是得来的最意外的，建议大家在用的时候考虑一下。 实时化的选择实时部署上，我们用了tensor flow serving，没什么好说的，给一下关键代码，大家看下自己仿一下就行，一般自己做做demo不需要，企业级上线才需要，企业级上线的那些大佬可能也比我有更多想法，所以就不展开了。 123456789101112部署及用python作为Client进行调用的测试：#1.编译服务bazel build //tensorflow_serving/model_servers:tensorflow_model_server#2.启动服务bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server --port=9005 --model_name=test --model_base_path=/Data/sladesha/tmp/test/ #3.编译文件 bazel build //tensorflow_serving/test:test_client#4.注销报错的包注销：/Data/muc/serving/bazel-bin/tensorflow_serving/test/test_client.runfiles/org_tensorflow/tensorflow/contrib/image/__init__.pyc中的from tensorflow.contrib.image.python.ops.single_image_random_dot_stereograms import single_image_random_dot_stereograms参考：https://github.com/tensorflow/serving/issues/421#5.运行bazel-bin/tensorflow_serving/test/test_client --server=localhost:9005 相关的问题，有大佬已经梳理好了，自取其他可选的一些参数设置：tensorflow serving 参数设置。 还有一些评估技巧，模型之间的对比技巧，这边就不细讲了，可借鉴的意义也不大。 总结虽然早就读过这篇文章，但是实现之后，发现新收获仍然不少。我特别赞成清凇的一句话:’对于普通的学术论文，重要的是提供一些新的点子，而对于类似google这种工业界发布的paper，特别是带有practical lessons的paper，很值得精读。’G厂的这个推荐代码和attention model的代码之前是准备放GitHub的，想想还是算了。一是之前也放过很多此代码，也没什么反馈，二是这两个代码自己写也不是很难，可以作为练手项目。 鸣谢以上我个人在Yoho!Buy团队在实践中的一点总结，不代表公司的任何言论，仅仅是我个人的观点。最后感谢项目推进过程中所有合作方和项目组同学的付出和努力，感谢各个团队各位老大们的支持！溜了溜了。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>论文解析</tag>
+      </tags>
+  </entry>
 </search>
