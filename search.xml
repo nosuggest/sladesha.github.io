@@ -597,6 +597,37 @@
     </entry>
     
     <entry>
+      <title><![CDATA[热传导-物质扩散算法应用于推荐]]></title>
+      <url>/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC-%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</url>
+      <content type="html"><![CDATA[<p>没有大量的数据，没有大量的人力就不能做好推荐么？当然不是，热传导/物质扩散推荐算法就是作为冷启动及小规模团队非常实用的推荐召回部分的算法。</p>
+<p>目标是为a图中标有星号（不妨记为用户1）的用户推荐商品，该用户已经购买过的两件商品是我们可以利用的信息，用来给目标用户进行推荐。</p>
+<p>物质扩散算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/1.png" alt=""><br>初始，我们认为每件被目标用户购买过的商品的信息量为1。<br>商品把自己的信息平均分给所有购买过它的用户，用户的信息值则是从所有商品所得到的信息值得总和，比如上图(b)中的第一个节点的信息就等于第一个商品平均分给三个用户的的平均信息1/3，再加上第四个商品平均分给两个用户的平均信息1/2，即为1/3+1/2=5/6；接下来，每一个用户再把自己的信息平均分给所有购买过的商品，商品的信息则是从所有用户收到的信息值得总和，如对于图(c)中的第一个商品，它的信息值就等于第一个用户信息值的一半，为5/12，加上第二个用户信息值的1/4，为5/24，再加上第三个用户信息值得一半，为1/6，总的能量值即为:5/12+5/24+1/6=19/24。</p>
+<p>以上两个步骤加起来为从商品到商品信息扩散一步。针对大规模系统的推荐，为了保持实时性和效率，往往只需扩散三步以内。如果以一步为界，基于图(c)中的结果，则在目标用户没有购买过的所有商品中，第三个商品的信息值最大，因此基于物质扩散算法的推荐系统则会将此商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。值得注意的是物质扩散这种算法得到的所有商品最后的信息值之和就等于初始时所有商品的信息值，即能量是守恒的，图(c)中所有商品的信息之和仍为2。</p>
+<p>热传导算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/2.png" alt=""></p>
+<p>初始，我们认为目标用户购买过的每件商品的信息量为1。<br>目标用户的信息等于所有他购买过的商品信息的平均值，如图(d)所示，目标用户购买了商品1和商品4，则该用户的信息值即为(1 + 1) / 2 = 1。再根据目标用户浏览过的商品给所以商品计算信息，第一个商品、第四个商品信息量为1/2，其他商品的信息量为0（因为目标用户没有买过），接下来根据每一个商品的信息计算其他的用户的信息，如图(d)中的第二个用户的信息就为商品1,2,3,4的信息的平均值（1/2 + 1/2）/4 = 1/2；再根据每个用户的信息量平均分配信息到每个商品，如图(e)中的第一个商品来自第一个、第二个、第三个用户的信息的和，即为1/2<em>1/2+1/2</em>1/3+1/2*/12=2/3。</p>
+<p>以上两个步骤加起来为从商品到商品热传导一步。因此基于热传导算法的推荐系统则会将此信息量大的商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。与物质扩散不同的是这种算法得到的所有商品最后的信息值之和就不一定等于初始时所有商品的信息值，即不满足守恒定律，这是因为在信息传到的第二步过程中，有的用户的信息可能会被多次计算，从而导致不守恒。</p>
+<p>基于物质扩散和基于热传导的推荐算法的区别在于： 基于物质扩散的方法在进行个性化推荐时，系统的总信息是守恒的；而热传导在推荐过程中，目标用户（即被推荐用户）的收藏品将被视作信息初始点，负责提供能量，所以系统的总信息量随着传递步骤的增加是在不断增加的。</p>
+<p>如果对物理比较熟悉的朋友很容易联想到凸透镜和凹透镜，是的，我个人在理解的时候也是这样迁移理解，原理上确实一致。 基于物质扩散的方法相当于凸透镜一样把用户历史点击的信息聚焦到了少量优势的skn上了； 基于热传导的方法相当于是凹透镜一样把用户的历史点击信息发散到了那些较不流行的物品上，从而提高了推荐的新颖多样性。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 推荐 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[量化评估推荐系统效果]]></title>
       <url>/2018/07/19/%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C/</url>
       <content type="html"><![CDATA[<p>推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：<br>1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。<br>2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。<br>3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。<br>4）冷启动<br>5）Exploration 和 Exploitation问题</p>
@@ -667,37 +698,6 @@
         <tags>
             
             <tag> 推荐评估方法 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[热传导-物质扩散算法应用于推荐]]></title>
-      <url>/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC-%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</url>
-      <content type="html"><![CDATA[<p>没有大量的数据，没有大量的人力就不能做好推荐么？当然不是，热传导/物质扩散推荐算法就是作为冷启动及小规模团队非常实用的推荐召回部分的算法。</p>
-<p>目标是为a图中标有星号（不妨记为用户1）的用户推荐商品，该用户已经购买过的两件商品是我们可以利用的信息，用来给目标用户进行推荐。</p>
-<p>物质扩散算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/1.png" alt=""><br>初始，我们认为每件被目标用户购买过的商品的信息量为1。<br>商品把自己的信息平均分给所有购买过它的用户，用户的信息值则是从所有商品所得到的信息值得总和，比如上图(b)中的第一个节点的信息就等于第一个商品平均分给三个用户的的平均信息1/3，再加上第四个商品平均分给两个用户的平均信息1/2，即为1/3+1/2=5/6；接下来，每一个用户再把自己的信息平均分给所有购买过的商品，商品的信息则是从所有用户收到的信息值得总和，如对于图(c)中的第一个商品，它的信息值就等于第一个用户信息值的一半，为5/12，加上第二个用户信息值的1/4，为5/24，再加上第三个用户信息值得一半，为1/6，总的能量值即为:5/12+5/24+1/6=19/24。</p>
-<p>以上两个步骤加起来为从商品到商品信息扩散一步。针对大规模系统的推荐，为了保持实时性和效率，往往只需扩散三步以内。如果以一步为界，基于图(c)中的结果，则在目标用户没有购买过的所有商品中，第三个商品的信息值最大，因此基于物质扩散算法的推荐系统则会将此商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。值得注意的是物质扩散这种算法得到的所有商品最后的信息值之和就等于初始时所有商品的信息值，即能量是守恒的，图(c)中所有商品的信息之和仍为2。</p>
-<p>热传导算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/2.png" alt=""></p>
-<p>初始，我们认为目标用户购买过的每件商品的信息量为1。<br>目标用户的信息等于所有他购买过的商品信息的平均值，如图(d)所示，目标用户购买了商品1和商品4，则该用户的信息值即为(1 + 1) / 2 = 1。再根据目标用户浏览过的商品给所以商品计算信息，第一个商品、第四个商品信息量为1/2，其他商品的信息量为0（因为目标用户没有买过），接下来根据每一个商品的信息计算其他的用户的信息，如图(d)中的第二个用户的信息就为商品1,2,3,4的信息的平均值（1/2 + 1/2）/4 = 1/2；再根据每个用户的信息量平均分配信息到每个商品，如图(e)中的第一个商品来自第一个、第二个、第三个用户的信息的和，即为1/2<em>1/2+1/2</em>1/3+1/2*/12=2/3。</p>
-<p>以上两个步骤加起来为从商品到商品热传导一步。因此基于热传导算法的推荐系统则会将此信息量大的商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。与物质扩散不同的是这种算法得到的所有商品最后的信息值之和就不一定等于初始时所有商品的信息值，即不满足守恒定律，这是因为在信息传到的第二步过程中，有的用户的信息可能会被多次计算，从而导致不守恒。</p>
-<p>基于物质扩散和基于热传导的推荐算法的区别在于： 基于物质扩散的方法在进行个性化推荐时，系统的总信息是守恒的；而热传导在推荐过程中，目标用户（即被推荐用户）的收藏品将被视作信息初始点，负责提供能量，所以系统的总信息量随着传递步骤的增加是在不断增加的。</p>
-<p>如果对物理比较熟悉的朋友很容易联想到凸透镜和凹透镜，是的，我个人在理解的时候也是这样迁移理解，原理上确实一致。 基于物质扩散的方法相当于凸透镜一样把用户历史点击的信息聚焦到了少量优势的skn上了； 基于热传导的方法相当于是凹透镜一样把用户的历史点击信息发散到了那些较不流行的物品上，从而提高了推荐的新颖多样性。</p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 推荐 </tag>
             
         </tags>
         
@@ -1630,6 +1630,114 @@
         <tags>
             
             <tag> 推荐 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[基于Tensorflow的神经网络解决用户流失概率问题]]></title>
+      <url>/2017/12/01/%E5%9F%BA%E4%BA%8ETensorflow%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%A7%A3%E5%86%B3%E7%94%A8%E6%88%B7%E6%B5%81%E5%A4%B1%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：<a href="https://www.kaggle.com/c/kkbox-churn-prediction-challenge" target="_blank" rel="noopener">KKBOX的会员流失预测算法竞赛</a>，如何能够搭建一个精准的模型成了大家探索的重要问题。<br>本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。</p>
+<hr>
+<h1 id="行业做法："><a href="#行业做法：" class="headerlink" title="行业做法："></a>行业做法：</h1><p>通常的行业预测用户流失大概分以下几种思路：</p>
+<ul>
+<li>利用线性模型(比如Logistic)＋非线性模型Xgboost判断用户是否回流逝</li>
+</ul>
+<p>这种方法有关是行业里面用的最多的，效果也被得意验证足够优秀且稳定的。核心点在于特征的预处理，Xgboost的参数挑优，拟合程度的控制，这个方法值得读者去仔细研究一边。问题也是很明显的，会有一个行业baseline，基本上达到上限之后，想有有提升会非常困难，对要求精准预测的需求会显得非常乏力。</p>
+<ul>
+<li>规则触发</li>
+</ul>
+<p>这种方法比较古老，但是任然有很多公司选择使用，实现成本较低而且非常快速。核心在于，先确定几条核心的流失指标(比如近7日登录时长)，然后动态的选择一个移动的窗口，不停根据已经流失的用户去更新流失指标的阈值。当新用户达到阈值的时候，触发流失预警。效果不如第一个方法，但是实现简单，老板也很容易懂。</p>
+<ul>
+<li>场景模型的预测</li>
+</ul>
+<p>这个方法比较依赖于公司业务的特征，如果公司业务有部分依赖于评论，可以做文本分析，比如我上次写的<a href="http://www.jianshu.com/p/413cff5b9f3a" target="_blank" rel="noopener">基于word2vec下的用户流失概率分析</a>。如果业务有部分依赖于登录打卡，可以做时间线上的频次预估。这些都是比较偏奇门易巧，不属于通用类别的，不过当第一种方法达到上线的时候，这种方法补充收益会非常的大。</p>
+<p>其实还有很多其它方法，我这边也不一一列出了，这个领域的方法论还是很多的。</p>
+<hr>
+<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><ul>
+<li><strong>核心</strong><br><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/1.png" alt="神经网络流程"><br>上面这张图片诠释了神经网络正向传播的流程，先通过线性变换(上图左侧)Σxw+b将线性可分的数据分离，再通过非线性变换(上图右侧)Sigmoid函数将非线性可分的数据分离，最后将输入空间投向另一个输出空间。</li>
+</ul>
+<p>根据上面所说，我们可以知道，通过增加左侧线性节点的个数，我们可以强化线性变换的力度；而通过增加层数，多做N次激活函数(比如上面提到的Sigmoid)可以增强非线性变换的能力。</p>
+<p>通过矩阵的线性变换+激活矩阵的非线性变换，将原始不可分的数据，先映射到高纬度，再进行分离。但是这边左侧节点的个数，网络的层数选择是非常困难的课题，需要反复尝试。</p>
+<ul>
+<li><strong>参数训练</strong><br>刚才我们了解了整个训练的流程，但是如何训练好包括线性变换的矩阵系数是一个还没有解决的问题。</li>
+</ul>
+<p>我们来看下面的过程：<br>input ==&gt; Σxw+b(线性变换) ==&gt; f(Σxw+b)(激活函数) ==&gt; …(多层的话重复前面过程) ==&gt; output(到此为止，正向传播结束，反向修正矩阵weights开始) ==&gt; <strong>error=actual_output-output(计算预测值与正式值误差)==&gt;output处的梯度==&gt;调整后矩阵weight=当前矩阵weight+error<code>x</code>学习速率<code>x</code>output处的负梯度</strong><br>核心目的在于通过比较预测值和实际值来调整权重矩阵，将预测值与实际值的差值缩小。<br>比如：梯度下降的方法，通过计算当前的损失值的方向的负方向，控制学习速率来降低预测值与实际值间的误差。</p>
+<p>利用一行代码来解释就是  <code>synaptic_weights += dot(inputs, (real_outputs - output) * output * (1 - output))*η</code><br>这边output * (1 - output))是在output处的Sigmoid的倒数形式，η是学习速率。</p>
+<p><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/2.png" alt="weight的循环流程"></p>
+<ul>
+<li><strong>神经网络流程小结</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1数据集获取（有监督数据整理）</span><br><span class="line">2神经网络参数确定，有多少层，多少个节点，激活函数是什么，损失函数是什么</span><br><span class="line">3数据预处理，pca，标准化，中心化，特征压缩，异常值处理</span><br><span class="line">4初始化网络权重</span><br><span class="line">5网络训练</span><br><span class="line">5.1正向传播</span><br><span class="line">5.2计算loss</span><br><span class="line">5.3计算反向梯度</span><br><span class="line">5.4更新梯度</span><br><span class="line">5.5重新正向传播</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这边只是简单介绍了神经网络的基础知识，针对有一定基础的朋友唤醒记忆，如果纯小白用户，建议从头开始认真阅读理解一遍过程，避免我讲的有偏颇的地方对你进行误导。</p>
+<hr>
+<h1 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h1><p>理论上讲，TensorFlow工具可以单独写一本书，用法很多而且技巧性的东西也非常的复杂，这边我们主要作为工具进行使用，遇到新技巧会在code中解释，但不做全书的梳理，建议去买一本《TensorFlow实战Google深度学习框架》，简单易懂。</p>
+<p>TensorFlow是谷歌于2015年11月9日正式开源的计算框架，由Jeff Dean领导的谷歌大脑团队改编的DistBelief得到的，在ImageNet2014、YouTube视频学习，语言识别错误率优化，街景识别，广告，电商等等都有了非常优秀的产出，是我个人非常喜欢的工具。</p>
+<p>除此之外，我在列出一些其他的框架工具供读者使用：</p>
+<p><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/3.png" alt=""></p>
+<p><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/4.png" alt=""></p>
+<p>接下来看一下最基本的语法，方便之后我们直接贴代码的时候可以轻松阅读。</p>
+<ul>
+<li><p>张量：可以理解为多维array 或者 list，time决定张量是什么<br>tf.placeholder(time,shape,name)</p>
+</li>
+<li><p>变量：同一时刻下的不变的数据<br>tf.Variable(value,name)</p>
+</li>
+<li><p>常量：永远不变的常值<br>tf.constant(value)</p>
+</li>
+<li><p>执行环境开启与关闭，在环境中才能运行TensorFlow语法<br>sess=tf.Session()<br>sess.close()<br>sess.run(op)</p>
+</li>
+<li><p>初始化所有权重：类似于变量申明<br>tf.initialize_all_variables()</p>
+</li>
+<li><p>更新权重：<br>tf.assign(variable_to_be_updated,new_value)</p>
+</li>
+<li><p>加值行为，利用feed_dict里面的值来训练[output]函数<br>sess.run([output],feed_dict={input1:value1,input2:value2})<br>利用input1，input2，来跑output的值</p>
+</li>
+<li><p>矩阵乘法，类似于dot<br>tf.matmul(input,layer1)</p>
+</li>
+<li><p>激活函数，relu<br>tf.nn.relu()，除此之外，还有tf.nn.sigmoid，tf.nn.tanh等等<br><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/5.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<h1 id="用户流失分析"><a href="#用户流失分析" class="headerlink" title="用户流失分析"></a>用户流失分析</h1><p>说了那么多前置的铺垫，让我们来真实的面对我们需要解决的问题：</p>
+<p>首先，我们拿到了用户是否流失的历史数据集20724条，流失与飞流失用户占比在1:4，这部分数据需要进行一下预处理，这边就不细讲预处理过程了，包含缺失值填充(分层填充)，异常值处理(isolation foest)，数据平衡(tomek link)，特征选择(xgboost importance)，特征变形(normalizing)，特征分布优化等等，工程技巧我之前的文章都有讲解过，不做本文重点。</p>
+<p><strong>taiking is cheap,show me the code.</strong><br><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/6.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#author:shataowei</span><br><span class="line">#time:20170924</span><br><span class="line">#基础包加载</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import tensorflow as tf</span><br><span class="line">import math</span><br><span class="line">from sklearn.cross_validation import train_test_split</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#数据处理</span><br><span class="line">data = pd.read_table(&apos;/Users/slade/Desktop/machine learning/data/data_all.txt&apos;)</span><br><span class="line">data = data.iloc[:,1:len(data.columns)]</span><br><span class="line">data1 = (data - data.mean())/data.std()</span><br><span class="line">labels = data[&apos;tag&apos;]</span><br><span class="line">items = data1.iloc[:,1:len(data1.columns)]</span><br><span class="line">all_data = pd.concat([pd.DataFrame(labels),items],axis = 1)</span><br><span class="line"></span><br><span class="line">#数据集切分成训练集和测试集，占比为0.8：0.2</span><br><span class="line">train_X,test_X,train_y,test_y = train_test_split(items,labels,test_size = 0.2,random_state = 0)</span><br><span class="line"></span><br><span class="line">#pandas读取进来是dataframe，转换为ndarray的形式</span><br><span class="line">train_X = np.array(train_X)</span><br><span class="line">test_X = np.array(test_X)</span><br><span class="line"></span><br><span class="line">#我将0或者1的预测结果转换成了[0,1]或者[1,0]的对应形式，读者可以不转</span><br><span class="line">train_Y = []</span><br><span class="line">for i in train_y:</span><br><span class="line">if i ==0:</span><br><span class="line">train_Y.append([0,1])</span><br><span class="line">else:</span><br><span class="line">train_Y.append([1,0])</span><br><span class="line">test_Y = []</span><br><span class="line">for i in test_y:</span><br><span class="line">if i ==0:</span><br><span class="line">test_Y.append([0,1])</span><br><span class="line">else:</span><br><span class="line">test_Y.append([1,0])</span><br></pre></td></tr></table></figure>
+<p>下面我们就要开始正式开始训练神经网络了，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">input_node = 9 #输入的feature的个数，也就是input的维度</span><br><span class="line">output_node = 2 #输出的[0,1]或者[1,0]的维度</span><br><span class="line">layer1_node = 500 #隐藏层的节点个数，一般在255-1000之间，读者可以自行调整</span><br><span class="line">batch_size = 200 #批量训练的数据，batch_size越小训练时间越长，训练效果越准确（但会存在过拟合）</span><br><span class="line">learning_rate_base = 0.8 #训练weights的速率η</span><br><span class="line">regularzation_rate = 0.0001 #正则力度</span><br><span class="line">training_steps = 10000 #训练次数，这个指标需要类似grid_search进行搜索优化</span><br><span class="line"></span><br><span class="line">#设定之后想要被训练的x及对应的正式结果y_</span><br><span class="line">x = tf.placeholder(tf.float32,[None,input_node])</span><br><span class="line">y_ = tf.placeholder(tf.float32,[None,output_node])</span><br><span class="line"></span><br><span class="line">#input到layer1之间的线性矩阵weight</span><br><span class="line">weight1 = tf.Variable(tf.truncated_normal([input_node,layer1_node],stddev=0.1))</span><br><span class="line">#layer1到output之间的线性矩阵weight</span><br><span class="line">weight2 = tf.Variable(tf.truncated_normal([layer1_node,output_node],stddev=0.1))</span><br><span class="line">#input到layer1之间的线性矩阵的偏置</span><br><span class="line">biases1 = tf.Variable(tf.constant(0.1,shape = [layer1_node]))</span><br><span class="line">#layer1到output之间的线性矩阵的偏置</span><br><span class="line">biases2 = tf.Variable(tf.constant(0.1,shape=[output_node]))</span><br><span class="line"></span><br><span class="line">#正向传播的流程，线性计算及激活函数relu的非线性计算得到result</span><br><span class="line">def interence(input_tensor,weight1,weight2,biases1,biases2):</span><br><span class="line">layer1 = tf.nn.relu(tf.matmul(input_tensor,weight1)+biases1)</span><br><span class="line">result = tf.matmul(layer1,weight2)+biases2</span><br><span class="line">return result</span><br><span class="line">y = interence(x,weight1,weight2,biases1,biases2)</span><br></pre></td></tr></table></figure></p>
+<p>正向传播完成后，我们要反向传播来修正weight<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">global_step = tf.Variable(0,trainable = False)</span><br><span class="line">#交叉熵，用来衡量两个分布之间的相似程度</span><br><span class="line">cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels = y_,logits=y)</span><br><span class="line">cross_entropy_mean = tf.reduce_mean(cross_entropy)</span><br><span class="line"></span><br><span class="line">#l2正则化，这部分的理论分析可以参考我之前写的：http://www.jianshu.com/p/4f91f0dcba95</span><br><span class="line">regularzer = tf.contrib.layers.l2_regularizer(regularzation_rate)</span><br><span class="line">regularzation = regularzer(weight1) + regularzer(weight2)</span><br><span class="line"></span><br><span class="line">#损失函数为交叉熵+正则化</span><br><span class="line">loss = cross_entropy_mean + regularzation</span><br><span class="line"></span><br><span class="line">#我们用learning_rate_base作为速率η，来训练梯度下降的loss函数解</span><br><span class="line">train_op = tf.train.GradientDescentOptimizer(learning_rate_base).minimize(loss,global_step = global_step)</span><br><span class="line"></span><br><span class="line">#y是我们的预测值，y_是真实值，我们来找到y_及y(比如[0.1，0.2])中最大值对应的index位置，判断y与y_是否一致</span><br><span class="line">correction = tf.equal(tf.argmax(y,1),tf.argmax(y_,1))</span><br><span class="line"></span><br><span class="line">#如果y与y_一致则为1，否则为0，mean正好为其准确率</span><br><span class="line">accurary = tf.reduce_mean(tf.cast(correction,tf.float32))</span><br></pre></td></tr></table></figure></p>
+<p>模型训练结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#初始化环境，设置输入值，检验值</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line">validate_feed = &#123;x:train_X,y_:train_Y&#125;</span><br><span class="line">test_feed = &#123;x:test_X,y_:test_Y&#125;</span><br><span class="line"></span><br><span class="line">#模型训练，每到1000次汇报一次训练效果</span><br><span class="line">for i in range(training_steps):</span><br><span class="line">start = (i*batch_size)%len(train_X)</span><br><span class="line">end = min(start+batch_size,16579)</span><br><span class="line">xs = train_X[start:end]</span><br><span class="line">ys = train_Y[start:end]</span><br><span class="line">if i%1000 ==0:</span><br><span class="line">validate_accuary = sess.run(accurary,feed_dict = validate_feed)</span><br><span class="line">print &apos;the times of training is %d, and the accurary is %s&apos; %(i,validate_accuary)</span><br><span class="line">sess.run(train_op,feed_dict = &#123;x:xs,y_:ys&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>训练的结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2017-09-24 12:11:28.409585: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">2017-09-24 12:11:28.409620: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">2017-09-24 12:11:28.409628: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">2017-09-24 12:11:28.409635: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">the times of training is 0, and the accurary is 0.736775</span><br><span class="line">the times of training is 1000, and the accurary is 0.99246</span><br><span class="line">the times of training is 2000, and the accurary is 0.993003</span><br><span class="line">the times of training is 3000, and the accurary is 0.992943</span><br><span class="line">the times of training is 4000, and the accurary is 0.992943</span><br><span class="line">the times of training is 5000, and the accurary is 0.99234</span><br><span class="line">the times of training is 6000, and the accurary is 0.993124</span><br><span class="line">the times of training is 7000, and the accurary is 0.992943</span><br><span class="line">the times of training is 8000, and the accurary is 0.993124</span><br><span class="line">the times of training is 9000, and the accurary is 0.992943</span><br></pre></td></tr></table></figure></p>
+<p>初步看出，在训练集合上，准确率在能够99%以上，让我们在看看测试集效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test_accuary = sess.run(accurary,feed_dict = test_feed)</span><br></pre></td></tr></table></figure></p>
+<p><code>Out[5]: 0.99034983</code>,也是我们的测试数据集效果也是在99%附近，可以看出这个分类的效果还是比较高的。</p>
+<p>初次之外，我们还可以得到每个值被预测出来的结果，也可以通过工程技巧转换为0-1的概率：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">result_y = sess.run(y,feed_dict=&#123;x:train_X&#125;)</span><br><span class="line">result_y_update=[]</span><br><span class="line">for i in result_y:</span><br><span class="line">if i[0]&gt;=i[1]:</span><br><span class="line">result_y_update.append([1,0])</span><br><span class="line">else:</span><br><span class="line">result_y_update.append([0,1])</span><br></pre></td></tr></table></figure></p>
+<p>==&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Out[7]:</span><br><span class="line">array([[-1.01412344,  1.21461654],</span><br><span class="line">[-3.66026735,  3.81834102],</span><br><span class="line">[-3.78952932,  3.79097509],</span><br><span class="line">...,</span><br><span class="line">[-3.71239662,  3.65721083],</span><br><span class="line">[-1.59250259,  1.89412308],</span><br><span class="line">[-3.35591984,  3.24001145]], dtype=float32)</span><br></pre></td></tr></table></figure></p>
+<p>以上就实现了如果用TensorFlow里面的神经网络技巧去做一个分类问题，其实这并不TensorFlow的全部，传统的Bp神经网络，SVM也可以到达近似的效果，在接下来的文章中，我们将继续看到比如CNN图像识别，LSTM进行文本分类，RNN训练不均衡数据等复杂问题上面的优势。</p>
+<p>##可能存在的问题<br>在刚做神经网络的训练前，要注意一下是否会犯以下的错误。</p>
+<ul>
+<li><p>数据是否规范化<br>模型计算的过程时间长度及模型最后的效果，均依赖于input的形式。大部分的神经网络训练过程都是以input为1的标准差，0的均值为前提的；除此之外，在算梯度算反向传播的时候，过大的值有可能会导致梯度消失等意想不到的情况，非常值得大家注意</p>
+</li>
+<li><p>batch的选择<br>在上面我也提了，过小的batch会增加模型过拟合的风险，且计算的时间大大增加。过大的batch会造成模型的拟合能力不足，可能会被局部最小值卡住等等，所以需要多次选择并计算尝试。</p>
+</li>
+<li><p>过拟合的问题<br>是否在计算过程中只考虑了损失函数比如交叉熵，有没有考虑l2正则、l2正则，或者有没有进行dropout行为，是否有必要加入噪声，在什么地方加入噪声（weight？input？），需不需要结合Bagging或者bayes方法等</p>
+</li>
+<li><p>激活函数的选择是否正确<br>比如relu只能产出&gt;=0的结果，是否符合最后的产出结果要求。比如Sigmoid的函数在数据离散且均大于+3的数据集合上会产生梯度消失的问题，等等</p>
+</li>
+</ul>
+<hr>
+<p>到这里，我觉得一篇用TensorFlow来训练分类模型来解决用户流失这个问题就基本上算是梳理完了。很多简单的知识点我没有提，上面这些算是比较重要的模块，希望对大家有所帮助，最后谢谢大家的阅读。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 深度学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> CRM预估 </tag>
             
         </tags>
         

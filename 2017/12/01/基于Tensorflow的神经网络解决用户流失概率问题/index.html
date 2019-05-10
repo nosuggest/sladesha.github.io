@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CRM预估," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对">
+<meta name="keywords" content="CRM预估">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Tensorflow的神经网络解决用户流失概率问题">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:description" content="前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/1.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/3.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/4.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/5.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/6.jpg">
+<meta property="og:updated_time" content="2019-05-10T09:31:47.919Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Tensorflow的神经网络解决用户流失概率问题">
+<meta name="twitter:description" content="前言：用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：KKBOX的会员流失预测算法竞赛，如何能够搭建一个精准的模型成了大家探索的重要问题。本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。">
+<meta name="twitter:image" content="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/"/>
+
+
+
+
+
+  <title>基于Tensorflow的神经网络解决用户流失概率问题 | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于Tensorflow的神经网络解决用户流失概率问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:41:59+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,845 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>用户流失一直都是公司非常重视的一个问题，也是AAARR中的Retention的核心问题，所以各大算法竞赛都很关注。比如最近的：<a href="https://www.kaggle.com/c/kkbox-churn-prediction-challenge" target="_blank" rel="noopener">KKBOX的会员流失预测算法竞赛</a>，如何能够搭建一个精准的模型成了大家探索的重要问题。<br>本文主要讲解神经网络、TensorFlow的概述、如何利用python基于TensorFlow神经网络对流失用户进行分类预测，及可能存在的一些常见问题，作为深度学习的入门阅读比较适合。</p>
+<hr>
+<h1 id="行业做法："><a href="#行业做法：" class="headerlink" title="行业做法："></a>行业做法：</h1><p>通常的行业预测用户流失大概分以下几种思路：</p>
+<ul>
+<li>利用线性模型(比如Logistic)＋非线性模型Xgboost判断用户是否回流逝</li>
+</ul>
+<p>这种方法有关是行业里面用的最多的，效果也被得意验证足够优秀且稳定的。核心点在于特征的预处理，Xgboost的参数挑优，拟合程度的控制，这个方法值得读者去仔细研究一边。问题也是很明显的，会有一个行业baseline，基本上达到上限之后，想有有提升会非常困难，对要求精准预测的需求会显得非常乏力。</p>
+<ul>
+<li>规则触发</li>
+</ul>
+<p>这种方法比较古老，但是任然有很多公司选择使用，实现成本较低而且非常快速。核心在于，先确定几条核心的流失指标(比如近7日登录时长)，然后动态的选择一个移动的窗口，不停根据已经流失的用户去更新流失指标的阈值。当新用户达到阈值的时候，触发流失预警。效果不如第一个方法，但是实现简单，老板也很容易懂。</p>
+<ul>
+<li>场景模型的预测</li>
+</ul>
+<p>这个方法比较依赖于公司业务的特征，如果公司业务有部分依赖于评论，可以做文本分析，比如我上次写的<a href="http://www.jianshu.com/p/413cff5b9f3a" target="_blank" rel="noopener">基于word2vec下的用户流失概率分析</a>。如果业务有部分依赖于登录打卡，可以做时间线上的频次预估。这些都是比较偏奇门易巧，不属于通用类别的，不过当第一种方法达到上线的时候，这种方法补充收益会非常的大。</p>
+<p>其实还有很多其它方法，我这边也不一一列出了，这个领域的方法论还是很多的。</p>
+<hr>
+<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><ul>
+<li><strong>核心</strong><br><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/1.png" alt="神经网络流程"><br>上面这张图片诠释了神经网络正向传播的流程，先通过线性变换(上图左侧)Σxw+b将线性可分的数据分离，再通过非线性变换(上图右侧)Sigmoid函数将非线性可分的数据分离，最后将输入空间投向另一个输出空间。</li>
+</ul>
+<p>根据上面所说，我们可以知道，通过增加左侧线性节点的个数，我们可以强化线性变换的力度；而通过增加层数，多做N次激活函数(比如上面提到的Sigmoid)可以增强非线性变换的能力。</p>
+<p>通过矩阵的线性变换+激活矩阵的非线性变换，将原始不可分的数据，先映射到高纬度，再进行分离。但是这边左侧节点的个数，网络的层数选择是非常困难的课题，需要反复尝试。</p>
+<ul>
+<li><strong>参数训练</strong><br>刚才我们了解了整个训练的流程，但是如何训练好包括线性变换的矩阵系数是一个还没有解决的问题。</li>
+</ul>
+<p>我们来看下面的过程：<br>input ==&gt; Σxw+b(线性变换) ==&gt; f(Σxw+b)(激活函数) ==&gt; …(多层的话重复前面过程) ==&gt; output(到此为止，正向传播结束，反向修正矩阵weights开始) ==&gt; <strong>error=actual_output-output(计算预测值与正式值误差)==&gt;output处的梯度==&gt;调整后矩阵weight=当前矩阵weight+error<code>x</code>学习速率<code>x</code>output处的负梯度</strong><br>核心目的在于通过比较预测值和实际值来调整权重矩阵，将预测值与实际值的差值缩小。<br>比如：梯度下降的方法，通过计算当前的损失值的方向的负方向，控制学习速率来降低预测值与实际值间的误差。</p>
+<p>利用一行代码来解释就是  <code>synaptic_weights += dot(inputs, (real_outputs - output) * output * (1 - output))*η</code><br>这边output * (1 - output))是在output处的Sigmoid的倒数形式，η是学习速率。</p>
+<p><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/2.png" alt="weight的循环流程"></p>
+<ul>
+<li><strong>神经网络流程小结</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1数据集获取（有监督数据整理）</span><br><span class="line">2神经网络参数确定，有多少层，多少个节点，激活函数是什么，损失函数是什么</span><br><span class="line">3数据预处理，pca，标准化，中心化，特征压缩，异常值处理</span><br><span class="line">4初始化网络权重</span><br><span class="line">5网络训练</span><br><span class="line">5.1正向传播</span><br><span class="line">5.2计算loss</span><br><span class="line">5.3计算反向梯度</span><br><span class="line">5.4更新梯度</span><br><span class="line">5.5重新正向传播</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这边只是简单介绍了神经网络的基础知识，针对有一定基础的朋友唤醒记忆，如果纯小白用户，建议从头开始认真阅读理解一遍过程，避免我讲的有偏颇的地方对你进行误导。</p>
+<hr>
+<h1 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h1><p>理论上讲，TensorFlow工具可以单独写一本书，用法很多而且技巧性的东西也非常的复杂，这边我们主要作为工具进行使用，遇到新技巧会在code中解释，但不做全书的梳理，建议去买一本《TensorFlow实战Google深度学习框架》，简单易懂。</p>
+<p>TensorFlow是谷歌于2015年11月9日正式开源的计算框架，由Jeff Dean领导的谷歌大脑团队改编的DistBelief得到的，在ImageNet2014、YouTube视频学习，语言识别错误率优化，街景识别，广告，电商等等都有了非常优秀的产出，是我个人非常喜欢的工具。</p>
+<p>除此之外，我在列出一些其他的框架工具供读者使用：</p>
+<p><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/3.png" alt=""></p>
+<p><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/4.png" alt=""></p>
+<p>接下来看一下最基本的语法，方便之后我们直接贴代码的时候可以轻松阅读。</p>
+<ul>
+<li><p>张量：可以理解为多维array 或者 list，time决定张量是什么<br>tf.placeholder(time,shape,name)</p>
+</li>
+<li><p>变量：同一时刻下的不变的数据<br>tf.Variable(value,name)</p>
+</li>
+<li><p>常量：永远不变的常值<br>tf.constant(value)</p>
+</li>
+<li><p>执行环境开启与关闭，在环境中才能运行TensorFlow语法<br>sess=tf.Session()<br>sess.close()<br>sess.run(op)</p>
+</li>
+<li><p>初始化所有权重：类似于变量申明<br>tf.initialize_all_variables()</p>
+</li>
+<li><p>更新权重：<br>tf.assign(variable_to_be_updated,new_value)</p>
+</li>
+<li><p>加值行为，利用feed_dict里面的值来训练[output]函数<br>sess.run([output],feed_dict={input1:value1,input2:value2})<br>利用input1，input2，来跑output的值</p>
+</li>
+<li><p>矩阵乘法，类似于dot<br>tf.matmul(input,layer1)</p>
+</li>
+<li><p>激活函数，relu<br>tf.nn.relu()，除此之外，还有tf.nn.sigmoid，tf.nn.tanh等等<br><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/5.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<h1 id="用户流失分析"><a href="#用户流失分析" class="headerlink" title="用户流失分析"></a>用户流失分析</h1><p>说了那么多前置的铺垫，让我们来真实的面对我们需要解决的问题：</p>
+<p>首先，我们拿到了用户是否流失的历史数据集20724条，流失与飞流失用户占比在1:4，这部分数据需要进行一下预处理，这边就不细讲预处理过程了，包含缺失值填充(分层填充)，异常值处理(isolation foest)，数据平衡(tomek link)，特征选择(xgboost importance)，特征变形(normalizing)，特征分布优化等等，工程技巧我之前的文章都有讲解过，不做本文重点。</p>
+<p><strong>taiking is cheap,show me the code.</strong><br><img src="/2017/12/01/基于Tensorflow的神经网络解决用户流失概率问题/6.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#author:shataowei</span><br><span class="line">#time:20170924</span><br><span class="line">#基础包加载</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import tensorflow as tf</span><br><span class="line">import math</span><br><span class="line">from sklearn.cross_validation import train_test_split</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#数据处理</span><br><span class="line">data = pd.read_table(&apos;/Users/slade/Desktop/machine learning/data/data_all.txt&apos;)</span><br><span class="line">data = data.iloc[:,1:len(data.columns)]</span><br><span class="line">data1 = (data - data.mean())/data.std()</span><br><span class="line">labels = data[&apos;tag&apos;]</span><br><span class="line">items = data1.iloc[:,1:len(data1.columns)]</span><br><span class="line">all_data = pd.concat([pd.DataFrame(labels),items],axis = 1)</span><br><span class="line"></span><br><span class="line">#数据集切分成训练集和测试集，占比为0.8：0.2</span><br><span class="line">train_X,test_X,train_y,test_y = train_test_split(items,labels,test_size = 0.2,random_state = 0)</span><br><span class="line"></span><br><span class="line">#pandas读取进来是dataframe，转换为ndarray的形式</span><br><span class="line">train_X = np.array(train_X)</span><br><span class="line">test_X = np.array(test_X)</span><br><span class="line"></span><br><span class="line">#我将0或者1的预测结果转换成了[0,1]或者[1,0]的对应形式，读者可以不转</span><br><span class="line">train_Y = []</span><br><span class="line">for i in train_y:</span><br><span class="line">if i ==0:</span><br><span class="line">train_Y.append([0,1])</span><br><span class="line">else:</span><br><span class="line">train_Y.append([1,0])</span><br><span class="line">test_Y = []</span><br><span class="line">for i in test_y:</span><br><span class="line">if i ==0:</span><br><span class="line">test_Y.append([0,1])</span><br><span class="line">else:</span><br><span class="line">test_Y.append([1,0])</span><br></pre></td></tr></table></figure>
+<p>下面我们就要开始正式开始训练神经网络了，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">input_node = 9 #输入的feature的个数，也就是input的维度</span><br><span class="line">output_node = 2 #输出的[0,1]或者[1,0]的维度</span><br><span class="line">layer1_node = 500 #隐藏层的节点个数，一般在255-1000之间，读者可以自行调整</span><br><span class="line">batch_size = 200 #批量训练的数据，batch_size越小训练时间越长，训练效果越准确（但会存在过拟合）</span><br><span class="line">learning_rate_base = 0.8 #训练weights的速率η</span><br><span class="line">regularzation_rate = 0.0001 #正则力度</span><br><span class="line">training_steps = 10000 #训练次数，这个指标需要类似grid_search进行搜索优化</span><br><span class="line"></span><br><span class="line">#设定之后想要被训练的x及对应的正式结果y_</span><br><span class="line">x = tf.placeholder(tf.float32,[None,input_node])</span><br><span class="line">y_ = tf.placeholder(tf.float32,[None,output_node])</span><br><span class="line"></span><br><span class="line">#input到layer1之间的线性矩阵weight</span><br><span class="line">weight1 = tf.Variable(tf.truncated_normal([input_node,layer1_node],stddev=0.1))</span><br><span class="line">#layer1到output之间的线性矩阵weight</span><br><span class="line">weight2 = tf.Variable(tf.truncated_normal([layer1_node,output_node],stddev=0.1))</span><br><span class="line">#input到layer1之间的线性矩阵的偏置</span><br><span class="line">biases1 = tf.Variable(tf.constant(0.1,shape = [layer1_node]))</span><br><span class="line">#layer1到output之间的线性矩阵的偏置</span><br><span class="line">biases2 = tf.Variable(tf.constant(0.1,shape=[output_node]))</span><br><span class="line"></span><br><span class="line">#正向传播的流程，线性计算及激活函数relu的非线性计算得到result</span><br><span class="line">def interence(input_tensor,weight1,weight2,biases1,biases2):</span><br><span class="line">layer1 = tf.nn.relu(tf.matmul(input_tensor,weight1)+biases1)</span><br><span class="line">result = tf.matmul(layer1,weight2)+biases2</span><br><span class="line">return result</span><br><span class="line">y = interence(x,weight1,weight2,biases1,biases2)</span><br></pre></td></tr></table></figure></p>
+<p>正向传播完成后，我们要反向传播来修正weight<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">global_step = tf.Variable(0,trainable = False)</span><br><span class="line">#交叉熵，用来衡量两个分布之间的相似程度</span><br><span class="line">cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels = y_,logits=y)</span><br><span class="line">cross_entropy_mean = tf.reduce_mean(cross_entropy)</span><br><span class="line"></span><br><span class="line">#l2正则化，这部分的理论分析可以参考我之前写的：http://www.jianshu.com/p/4f91f0dcba95</span><br><span class="line">regularzer = tf.contrib.layers.l2_regularizer(regularzation_rate)</span><br><span class="line">regularzation = regularzer(weight1) + regularzer(weight2)</span><br><span class="line"></span><br><span class="line">#损失函数为交叉熵+正则化</span><br><span class="line">loss = cross_entropy_mean + regularzation</span><br><span class="line"></span><br><span class="line">#我们用learning_rate_base作为速率η，来训练梯度下降的loss函数解</span><br><span class="line">train_op = tf.train.GradientDescentOptimizer(learning_rate_base).minimize(loss,global_step = global_step)</span><br><span class="line"></span><br><span class="line">#y是我们的预测值，y_是真实值，我们来找到y_及y(比如[0.1，0.2])中最大值对应的index位置，判断y与y_是否一致</span><br><span class="line">correction = tf.equal(tf.argmax(y,1),tf.argmax(y_,1))</span><br><span class="line"></span><br><span class="line">#如果y与y_一致则为1，否则为0，mean正好为其准确率</span><br><span class="line">accurary = tf.reduce_mean(tf.cast(correction,tf.float32))</span><br></pre></td></tr></table></figure></p>
+<p>模型训练结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#初始化环境，设置输入值，检验值</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line">validate_feed = &#123;x:train_X,y_:train_Y&#125;</span><br><span class="line">test_feed = &#123;x:test_X,y_:test_Y&#125;</span><br><span class="line"></span><br><span class="line">#模型训练，每到1000次汇报一次训练效果</span><br><span class="line">for i in range(training_steps):</span><br><span class="line">start = (i*batch_size)%len(train_X)</span><br><span class="line">end = min(start+batch_size,16579)</span><br><span class="line">xs = train_X[start:end]</span><br><span class="line">ys = train_Y[start:end]</span><br><span class="line">if i%1000 ==0:</span><br><span class="line">validate_accuary = sess.run(accurary,feed_dict = validate_feed)</span><br><span class="line">print &apos;the times of training is %d, and the accurary is %s&apos; %(i,validate_accuary)</span><br><span class="line">sess.run(train_op,feed_dict = &#123;x:xs,y_:ys&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>训练的结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2017-09-24 12:11:28.409585: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">2017-09-24 12:11:28.409620: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">2017-09-24 12:11:28.409628: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">2017-09-24 12:11:28.409635: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&apos;t compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.</span><br><span class="line">the times of training is 0, and the accurary is 0.736775</span><br><span class="line">the times of training is 1000, and the accurary is 0.99246</span><br><span class="line">the times of training is 2000, and the accurary is 0.993003</span><br><span class="line">the times of training is 3000, and the accurary is 0.992943</span><br><span class="line">the times of training is 4000, and the accurary is 0.992943</span><br><span class="line">the times of training is 5000, and the accurary is 0.99234</span><br><span class="line">the times of training is 6000, and the accurary is 0.993124</span><br><span class="line">the times of training is 7000, and the accurary is 0.992943</span><br><span class="line">the times of training is 8000, and the accurary is 0.993124</span><br><span class="line">the times of training is 9000, and the accurary is 0.992943</span><br></pre></td></tr></table></figure></p>
+<p>初步看出，在训练集合上，准确率在能够99%以上，让我们在看看测试集效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test_accuary = sess.run(accurary,feed_dict = test_feed)</span><br></pre></td></tr></table></figure></p>
+<p><code>Out[5]: 0.99034983</code>,也是我们的测试数据集效果也是在99%附近，可以看出这个分类的效果还是比较高的。</p>
+<p>初次之外，我们还可以得到每个值被预测出来的结果，也可以通过工程技巧转换为0-1的概率：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">result_y = sess.run(y,feed_dict=&#123;x:train_X&#125;)</span><br><span class="line">result_y_update=[]</span><br><span class="line">for i in result_y:</span><br><span class="line">if i[0]&gt;=i[1]:</span><br><span class="line">result_y_update.append([1,0])</span><br><span class="line">else:</span><br><span class="line">result_y_update.append([0,1])</span><br></pre></td></tr></table></figure></p>
+<p>==&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Out[7]:</span><br><span class="line">array([[-1.01412344,  1.21461654],</span><br><span class="line">[-3.66026735,  3.81834102],</span><br><span class="line">[-3.78952932,  3.79097509],</span><br><span class="line">...,</span><br><span class="line">[-3.71239662,  3.65721083],</span><br><span class="line">[-1.59250259,  1.89412308],</span><br><span class="line">[-3.35591984,  3.24001145]], dtype=float32)</span><br></pre></td></tr></table></figure></p>
+<p>以上就实现了如果用TensorFlow里面的神经网络技巧去做一个分类问题，其实这并不TensorFlow的全部，传统的Bp神经网络，SVM也可以到达近似的效果，在接下来的文章中，我们将继续看到比如CNN图像识别，LSTM进行文本分类，RNN训练不均衡数据等复杂问题上面的优势。</p>
+<p>##可能存在的问题<br>在刚做神经网络的训练前，要注意一下是否会犯以下的错误。</p>
+<ul>
+<li><p>数据是否规范化<br>模型计算的过程时间长度及模型最后的效果，均依赖于input的形式。大部分的神经网络训练过程都是以input为1的标准差，0的均值为前提的；除此之外，在算梯度算反向传播的时候，过大的值有可能会导致梯度消失等意想不到的情况，非常值得大家注意</p>
+</li>
+<li><p>batch的选择<br>在上面我也提了，过小的batch会增加模型过拟合的风险，且计算的时间大大增加。过大的batch会造成模型的拟合能力不足，可能会被局部最小值卡住等等，所以需要多次选择并计算尝试。</p>
+</li>
+<li><p>过拟合的问题<br>是否在计算过程中只考虑了损失函数比如交叉熵，有没有考虑l2正则、l2正则，或者有没有进行dropout行为，是否有必要加入噪声，在什么地方加入噪声（weight？input？），需不需要结合Bagging或者bayes方法等</p>
+</li>
+<li><p>激活函数的选择是否正确<br>比如relu只能产出&gt;=0的结果，是否符合最后的产出结果要求。比如Sigmoid的函数在数据离散且均大于+3的数据集合上会产生梯度消失的问题，等等</p>
+</li>
+</ul>
+<hr>
+<p>到这里，我觉得一篇用TensorFlow来训练分类模型来解决用户流失这个问题就基本上算是梳理完了。很多简单的知识点我没有提，上面这些算是比较重要的模块，希望对大家有所帮助，最后谢谢大家的阅读。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CRM预估/" rel="tag"># CRM预估</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/基于SSD下的图像内容识别（二）/" rel="next" title="基于SSD下的图像内容识别（二）">
+                <i class="fa fa-chevron-left"></i> 基于SSD下的图像内容识别（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/01/能够快速实现的协同推荐/" rel="prev" title="能够快速实现的协同推荐">
+                能够快速实现的协同推荐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行业做法："><span class="nav-number">2.</span> <span class="nav-text">行业做法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">3.</span> <span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow"><span class="nav-number">4.</span> <span class="nav-text">TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户流失分析"><span class="nav-number">5.</span> <span class="nav-text">用户流失分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">68.5k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
