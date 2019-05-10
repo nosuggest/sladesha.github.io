@@ -1,92 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[博客导读公告(置顶)]]></title>
-      <url>/2029/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</url>
-      <content type="html"><![CDATA[<p><img src="/2029/01/20/博客导读公告/wechat.png" alt=""><br><a id="more"></a></p>
-<p><strong>首先，我很荣幸您出现在我的个人博客，下面请允许我花费您3分钟左右的时间，简单的为您介绍一下博客中的相关功能，这将极大的提高您在后续阅读中的体验：</strong></p>
-<p>打个广告，欢迎各位老爷关注我的微信公众号：ml_trip，期待与大家交流！</p>
-<h2 id="我的个人介绍"><a href="#我的个人介绍" class="headerlink" title="我的个人介绍"></a>我的个人介绍</h2><p>大家可以在首页的标题下面找到me这个图标，点击即可，里面有我的个人介绍：<br><img src="/2029/01/20/博客导读公告/个人介绍.png" alt=""></p>
-<p>我的个人简历下载地址在me跳转页面中的位置如下：<br><img src="/2029/01/20/博客导读公告/cv.png" alt=""></p>
-<hr>
-<h2 id="快速阅读"><a href="#快速阅读" class="headerlink" title="快速阅读"></a>快速阅读</h2><p>您可在任何一篇文章的右侧看到红色方框：</p>
-<ul>
-<li>如果您对其中部分内容感兴趣，可直接点击绿色方框内的文章，会自动跳转到您关心的模块；</li>
-<li>如果您想要看到我的<strong>更多联系方式</strong>，可以点击蓝色模块中的站点概览；</li>
-<li>如果您不想红色方框影响您的阅读，在黑色条块的最下方的小叉点击即可。<br><img src="/2029/01/20/博客导读公告/read.png" alt=""></li>
-</ul>
-<hr>
-<h2 id="赞助激励"><a href="#赞助激励" class="headerlink" title="赞助激励"></a>赞助激励</h2><p>如果您觉得我写的东西对您有一些帮助，在您宽裕的情况下可以在文章下面的打赏中给我发一个小红包，或者直接扫描下面的二维码，感谢您对我的认可：<br><img src="/2029/01/20/博客导读公告/pay.png" alt=""></p>
-<p><strong>如果您还是一个学生或者您正处于人生的低谷，感谢您对我的认可，打赏就不需要了，我会一如既往的给大家整理工作中的一些想法和心得</strong></p>
-<hr>
-<h2 id="自定义搜索"><a href="#自定义搜索" class="headerlink" title="自定义搜索"></a>自定义搜索</h2><p>为了方便大家找到自己关心的内容，建议直接点击搜索图标：<br><img src="/2029/01/20/博客导读公告/search.png" alt=""></p>
-<p>比如搜索svm，有模糊匹配结果如下：<br><img src="/2029/01/20/博客导读公告/content.png" alt=""></p>
-<hr>
-<h2 id="标签检索"><a href="#标签检索" class="headerlink" title="标签检索"></a>标签检索</h2><p>大家可以在首页的标题下面找到标签这个图标，点击即可：<br><img src="/2029/01/20/博客导读公告/tag.png" alt=""></p>
-<p>该类别下生成了标签云，为较为仔细的文章内容概括：<br><img src="/2029/01/20/博客导读公告/cloud.png" alt=""></p>
-<hr>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>因为本博客部署在GitHub，如果您有时候遇到打不开网页的问题，建议您重复刷新或者收藏<a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" rel="noopener">slade_sal简书地址</a>，两者内容是一致的</li>
-<li>如果您有任何疑惑或者疑问都可以通过站点概览的邮箱联系我，非常愿意解答您的问题</li>
-<li>如果您遇到算法学习过程的困难，需要内推或者就业方向建议，也可以通过站点概览的邮箱联系我，非常愿意和您进行交流</li>
-<li>绝大多数代码都可以在我的Github上找到，所有的数据都经过脱敏处理，您可以放心使用，希望对您有所帮助</li>
-</ul>
-<p>最后，感谢大家一路以来对我的认可。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 基础 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 公告 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[PKUseg在货运领域的评测]]></title>
-      <url>/2019/01/14/PKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B/</url>
-      <content type="html"><![CDATA[<p>先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上：</p>
-<ul>
-<li>默认模型下，jieba效果优于PKUseg</li>
-<li>PKUseg提供场景精细化的预训练（还没有提供入口），长远来讲适合专业领域使用</li>
-<li>PKUseg在特定的场景下有令人惊喜的效果（地址切分）</li>
-</ul>
-<p>给大家的建议就是，如果大家赶时间求稳定适应范围需要非常广的时候，目前来说jieba是非常好的选择，如果说在面临一些精细化领域的特殊需求的时候，可以用PKUseg进行一波尝试，有意外惊喜。</p>
-<hr>
-<p>那是一个风和日丽的早上，突然群里老大发出一条消息：<br><img src="/2019/01/14/PKUseg在货运领域的评测/boss.png" alt=""><br>我感觉我的心脏有一丝隐隐作痛的感觉，人在办公室坐，活从天上来，虽然身后站着一堆催上线的产品，我还是屈服于老大的正义（淫威），简单测评了新出来的PKUseg与Jieba在公路货运/运输行业上的效果对比。</p>
-<p>在我们的热词数据库中已经有人工切词完成的2万多条货运的词条：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">description	standard</span><br><span class="line">高博集团装货卸宝华	高博 集团 装货 卸 宝华</span><br><span class="line">北安到吉林农安饲料90吨每吨105	北安 到 吉林 农安 饲料 90吨 每吨 105</span><br><span class="line">需要4个车	需要 4个 车</span><br><span class="line">叶张公路装香闵路曲吴路两卸	叶张公路 装 香闵路 曲吴路 两卸</span><br><span class="line">从福通物流到吴滩镇	从 福通 物流 到 吴滩镇</span><br><span class="line">霞浦宏霞路到中通物流	霞浦宏霞路 到 中通物流</span><br><span class="line">石大路3场到德兴西门山	石大路 3场 到 德兴 西门山</span><br><span class="line">公园西路装	公园 西路 装</span><br><span class="line">不押车每吨150	不 押车 每吨 150</span><br><span class="line">速订价钱好商量	速订 价钱 好商量</span><br><span class="line">慈溪胜山装	慈溪 胜山装</span><br><span class="line">好装好卸高价急走	好装好卸 高价急走</span><br><span class="line">九顶山路与东方大道位置装货可以配货	九顶 山路 与 东方 大道 位置 装货 可以 配货</span><br><span class="line">要二部	要 二部</span><br><span class="line">青浦工业园区久远路提货到奉贤新杨公路进仓	青浦 工业园区 久远路 提货 到 奉贤 新杨公路 进仓</span><br><span class="line">园光路装博学南路卸	园光路 装 博学南路 卸</span><br><span class="line">公兴装卸荣昌广顺	公兴 装卸 荣昌 广顺</span><br><span class="line">打备注电话18458331112	打 备注 电话 18458331112</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>首先看，不加任何词库，预训练下的，最后的效果对比：<br><img src="/2019/01/14/PKUseg在货运领域的评测/1.png" alt=""><br>可以看到，<strong>在默认的分词模型下，jieBa分词还是拥有绝对优势的</strong>，但是在pkuSeg的git里面<img src="/2019/01/14/PKUseg在货运领域的评测/2.png" alt=""></p>
-<p>所以我想看看能不能进行一下预训练下后再对比一下，可惜的是我在git（<a href="https://github.com/sladesha/pkuseg-python#相关论文" target="_blank" rel="noopener">git地址传送门</a>）上找了半天也没有找到预训练的入口，只有已经被官方预训练好的词库<br><img src="/2019/01/14/PKUseg在货运领域的评测/3.png" alt=""><br>等有时间了，可以邮件沟通一下再补充这个部分的效果对比，我觉得，应该还是有提升的。</p>
-<p>但是，在我们实际去测的过程中，我们发现了一些差异话的东西比较有意思。我们其实现在在做一个语音发货的产品，涉及到把一串地址切分开的需求：<br><img src="/2019/01/14/PKUseg在货运领域的评测/4.png" alt=""></p>
-<p>其中涉及到<strong>地址切分</strong>的时候，jieba的能力会比如PKUseg要弱不少，比如“山西大同”，“上海浦东”，我们需要把一级二级地址切开的时候，PKUseg可以做到，而jieba并不能按照需求切块。所以，我们已经打算在地址模块切换PKUseg的模型来适应了。<br><img src="/2019/01/14/PKUseg在货运领域的评测/5.png" alt=""></p>
-<p>最后吐槽一下，虽然我知道PKUseg需要加载模型，但是一加载就是一二十秒也是有点夸张了。酒浆，各位下回见。</p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 开源项目 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> NLP </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[博客导读公告(置顶)]]></title>
+    <url>%2F2029%2F01%2F20%2F%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A%2F</url>
+    <content type="text"><![CDATA[首先，我很荣幸您出现在我的个人博客，下面请允许我花费您3分钟左右的时间，简单的为您介绍一下博客中的相关功能，这将极大的提高您在后续阅读中的体验： 打个广告，欢迎各位老爷关注我的微信公众号：ml_trip，期待与大家交流！ 我的个人介绍大家可以在首页的标题下面找到me这个图标，点击即可，里面有我的个人介绍： 我的个人简历下载地址在me跳转页面中的位置如下： 快速阅读您可在任何一篇文章的右侧看到红色方框： 如果您对其中部分内容感兴趣，可直接点击绿色方框内的文章，会自动跳转到您关心的模块； 如果您想要看到我的更多联系方式，可以点击蓝色模块中的站点概览； 如果您不想红色方框影响您的阅读，在黑色条块的最下方的小叉点击即可。 赞助激励如果您觉得我写的东西对您有一些帮助，在您宽裕的情况下可以在文章下面的打赏中给我发一个小红包，或者直接扫描下面的二维码，感谢您对我的认可： 如果您还是一个学生或者您正处于人生的低谷，感谢您对我的认可，打赏就不需要了，我会一如既往的给大家整理工作中的一些想法和心得 自定义搜索为了方便大家找到自己关心的内容，建议直接点击搜索图标： 比如搜索svm，有模糊匹配结果如下： 标签检索大家可以在首页的标题下面找到标签这个图标，点击即可： 该类别下生成了标签云，为较为仔细的文章内容概括： 其他 因为本博客部署在GitHub，如果您有时候遇到打不开网页的问题，建议您重复刷新或者收藏slade_sal简书地址，两者内容是一致的 如果您有任何疑惑或者疑问都可以通过站点概览的邮箱联系我，非常愿意解答您的问题 如果您遇到算法学习过程的困难，需要内推或者就业方向建议，也可以通过站点概览的邮箱联系我，非常愿意和您进行交流 绝大多数代码都可以在我的Github上找到，所有的数据都经过脱敏处理，您可以放心使用，希望对您有所帮助 最后，感谢大家一路以来对我的认可。]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>公告</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PKUseg在货运领域的评测]]></title>
+    <url>%2F2019%2F01%2F14%2FPKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B%2F</url>
+    <content type="text"><![CDATA[先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上： 默认模型下，jieba效果优于PKUseg PKUseg提供场景精细化的预训练（还没有提供入口），长远来讲适合专业领域使用 PKUseg在特定的场景下有令人惊喜的效果（地址切分） 给大家的建议就是，如果大家赶时间求稳定适应范围需要非常广的时候，目前来说jieba是非常好的选择，如果说在面临一些精细化领域的特殊需求的时候，可以用PKUseg进行一波尝试，有意外惊喜。 那是一个风和日丽的早上，突然群里老大发出一条消息：我感觉我的心脏有一丝隐隐作痛的感觉，人在办公室坐，活从天上来，虽然身后站着一堆催上线的产品，我还是屈服于老大的正义（淫威），简单测评了新出来的PKUseg与Jieba在公路货运/运输行业上的效果对比。 在我们的热词数据库中已经有人工切词完成的2万多条货运的词条：1234567891011121314151617181920description standard高博集团装货卸宝华 高博 集团 装货 卸 宝华北安到吉林农安饲料90吨每吨105 北安 到 吉林 农安 饲料 90吨 每吨 105需要4个车 需要 4个 车叶张公路装香闵路曲吴路两卸 叶张公路 装 香闵路 曲吴路 两卸从福通物流到吴滩镇 从 福通 物流 到 吴滩镇霞浦宏霞路到中通物流 霞浦宏霞路 到 中通物流石大路3场到德兴西门山 石大路 3场 到 德兴 西门山公园西路装 公园 西路 装不押车每吨150 不 押车 每吨 150速订价钱好商量 速订 价钱 好商量慈溪胜山装 慈溪 胜山装好装好卸高价急走 好装好卸 高价急走九顶山路与东方大道位置装货可以配货 九顶 山路 与 东方 大道 位置 装货 可以 配货要二部 要 二部青浦工业园区久远路提货到奉贤新杨公路进仓 青浦 工业园区 久远路 提货 到 奉贤 新杨公路 进仓园光路装博学南路卸 园光路 装 博学南路 卸公兴装卸荣昌广顺 公兴 装卸 荣昌 广顺打备注电话18458331112 打 备注 电话 18458331112... 首先看，不加任何词库，预训练下的，最后的效果对比：可以看到，在默认的分词模型下，jieBa分词还是拥有绝对优势的，但是在pkuSeg的git里面 所以我想看看能不能进行一下预训练下后再对比一下，可惜的是我在git（git地址传送门）上找了半天也没有找到预训练的入口，只有已经被官方预训练好的词库等有时间了，可以邮件沟通一下再补充这个部分的效果对比，我觉得，应该还是有提升的。 但是，在我们实际去测的过程中，我们发现了一些差异话的东西比较有意思。我们其实现在在做一个语音发货的产品，涉及到把一串地址切分开的需求： 其中涉及到地址切分的时候，jieba的能力会比如PKUseg要弱不少，比如“山西大同”，“上海浦东”，我们需要把一级二级地址切开的时候，PKUseg可以做到，而jieba并不能按照需求切块。所以，我们已经打算在地址模块切换PKUseg的模型来适应了。 最后吐槽一下，虽然我知道PKUseg需要加载模型，但是一加载就是一二十秒也是有点夸张了。酒浆，各位下回见。 欢迎大家关注我的个人bolg，知乎，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。]]></content>
+      <categories>
+        <category>开源项目</category>
+      </categories>
+      <tags>
+        <tag>NLP</tag>
+      </tags>
+  </entry>
 </search>
