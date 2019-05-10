@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="数据处理," />
 
 
 
@@ -80,16 +80,22 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SladeSha&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/archives/2018/07/index.html">
+<meta name="description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最">
+<meta name="keywords" content="数据处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="伪标签半监督学习">
+<meta property="og:url" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/1.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/3.png">
+<meta property="og:updated_time" content="2019-05-10T07:39:49.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SladeSha&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:title" content="伪标签半监督学习">
+<meta name="twitter:description" content="之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。 其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：  均值、众数填充最简单的填充，效果也惨不忍睹 根据没有缺失的数据线性回归填充填充的好会造成共线性错">
+<meta name="twitter:image" content="http://sladesha.github.io/2018/07/24/伪标签半监督学习/1.png">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/archives/2018/07/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2018/07/24/伪标签半监督学习/"/>
 
 
 
 
 
-  <title>归档 | SladeSha's Algorithm World</title>
+  <title>伪标签半监督学习 | SladeSha's Algorithm World</title>
   
 
 
@@ -144,7 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,148 +278,252 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/07/24/伪标签半监督学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">伪标签半监督学习</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T09:12:58+08:00">
+                2018-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 15 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/特征刻画/" itemprop="url" rel="index">
+                    <span itemprop="name">特征刻画</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/30/基于Tensorflow实现DeepFM/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">基于Tensorflow实现DeepFM</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  591 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-30T14:12:58+08:00"
-              content="2018-07-30" >
-          07-30
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/25/基于Tensorflow实现多层感知机网络MLPs/" itemprop="url">
-              
-                <span itemprop="name">基于Tensorflow实现多层感知机网络MLPs</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-25T18:12:58+08:00"
-              content="2018-07-25" >
-          07-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/24/伪标签半监督学习/" itemprop="url">
-              
-                <span itemprop="name">伪标签半监督学习</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-24T09:12:58+08:00"
-              content="2018-07-24" >
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。</p>
+<p>其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：</p>
+<ul>
+<li>均值、众数填充<br>最简单的填充，效果也惨不忍睹</li>
+<li>根据没有缺失的数据线性回归填充<br>填充的好会造成共线性错误，填充的不好就没价值，很矛盾</li>
+<li>剔除<br>丢失信息量</li>
+<li>设置哑变量<br>会造成数据分布有偏</li>
+<li>smote<br>连续值有效，离散值就无法实施了</li>
+</ul>
+<p>我在Google上看imbalance问题的时候，偶然看到了这个<a href="http://course.fast.ai/?spm=a2c4e.11153940.blogcont215222.9.378a3aadIvrayn" target="_blank" rel="noopener">视频教程</a>，上面讲了图像的缺失处理，提到了伪标签处理的半监督学习方式。我就在国内的论坛上找了下，阿里云技术论坛也同样注意到了这个问题，但是只给出了如下的粗糙的构思图：<br><img src="/2018/07/24/伪标签半监督学习/1.png" alt=""></p>
+<p>有一份整理了的流程图，具体执行步骤总结，和大家一起看一下：<br><img src="/2018/07/24/伪标签半监督学习/2.png" alt=""></p>
+<ul>
+<li>将有标签部分数据分为两份：train_set&amp;validation_set，并训练出最优的model1</li>
+<li>用model1对未知标签数据(test_set)进行预测，给出伪标签结果pseudo-labeled</li>
+<li>将train_set中抽取一部分做新的validation_set，把剩余部分与pseudo-labeled部分融合作为新的train_set，训练出最优的model2</li>
+<li>再用model2对未知标签数据(test_set)进行预测，得到最终的final result label</li>
+</ul>
+<p>我利用了已知标签的数据对这个方法进行测试，用了最简单的mixed logistic regression模型作为Basic Model，得到结果如下：<br><img src="/2018/07/24/伪标签半监督学习/3.png" alt=""><br>利用伪标签半监督的方式，同样的mixed logistic regression模型AUC值会提高0.1pp左右，效果还不错，而且实施并不复杂，大家可以在缺失值处理或者分类问题中应用尝试一下。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。</p>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据处理/" rel="tag"># 数据处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/" rel="next" title="关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现">
+                <i class="fa fa-chevron-left"></i> 关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/25/基于Tensorflow实现多层感知机网络MLPs/" rel="prev" title="基于Tensorflow实现多层感知机网络MLPs">
+                基于Tensorflow实现多层感知机网络MLPs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -421,6 +531,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -689,6 +808,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

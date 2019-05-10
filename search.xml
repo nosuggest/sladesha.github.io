@@ -507,6 +507,96 @@
     </entry>
     
     <entry>
+      <title><![CDATA[基于Tensorflow实现多层感知机网络MLPs]]></title>
+      <url>/2018/07/25/%E5%9F%BA%E4%BA%8ETensorflow%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%BD%91%E7%BB%9CMLPs/</url>
+      <content type="html"><![CDATA[<p>之前在<a href="https://www.jianshu.com/p/f26e232bff57" target="_blank" rel="noopener">基于Tensorflow的神经网络解决用户流失概率问题</a>写了一个MLPs的网络，很多人在问，其实这个网络看起来很清晰，但是却写的比较冗长，这边优化了一个版本更方便大家修改后直接使用。</p>
+<p><img src="/2018/07/25/基于Tensorflow实现多层感知机网络MLPs/1.png" alt="多层感知机网络"></p>
+<p>直接和大家过一遍核心部分：</p>
+<p>上次我们计算过程中，通过的是先定义好多层网络中每层的weight，在通过<code>tf.matual</code>进行层与层之间的计算，最后再通过tf.contrib.layers.l2_regularizer进行正则；而这次我们直接通过图像识别中经常使用的全连接（FC）的接口，只需要确定每层的节点数，通过<code>layers_nodes</code>进行声明，自动可以计算出不同层下的weight，更加清晰明了。另外，还增加了dropout的部分，降低过拟合的问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">din_all = tf.layers.batch_normalization(inputs=din_all, name=<span class="string">'b1'</span>)</span><br><span class="line">layer_1 = tf.layers.dense(din_all, self.layers_nodes[<span class="number">0</span>], activation=tf.nn.sigmoid,use_bias=<span class="keyword">True</span>,kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularzation_rate),name=<span class="string">'f1'</span>)</span><br><span class="line">layer_1 = tf.nn.dropout(layer_1, keep_prob=self.drop_rate[<span class="number">0</span>])</span><br><span class="line">layer_2 = tf.layers.dense(layer_1, self.layers_nodes[<span class="number">1</span>], activation=tf.nn.sigmoid,use_bias=<span class="keyword">True</span>,kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularzation_rate),name=<span class="string">'f2'</span>)</span><br><span class="line">layer_2 = tf.nn.dropout(layer_2, keep_prob=self.drop_rate[<span class="number">1</span>])</span><br><span class="line">layer_3 = tf.layers.dense(layer_2, self.layers_nodes[<span class="number">2</span>], activation=tf.nn.sigmoid,use_bias=<span class="keyword">True</span>,kernel_regularizer=tf.contrib.layers.l2_regularizer(self.regularzation_rate),name=<span class="string">'f3'</span>)</span><br></pre></td></tr></table></figure>
+<p><code>tf.layers.dense</code>接口信息如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">tf.layers.dense(</span><br><span class="line">inputs,</span><br><span class="line">units,</span><br><span class="line">activation=<span class="keyword">None</span>,</span><br><span class="line">use_bias=<span class="keyword">True</span>,</span><br><span class="line">kernel_initializer=<span class="keyword">None</span>,</span><br><span class="line">bias_initializer=tf.zeros_initializer(),</span><br><span class="line">kernel_regularizer=<span class="keyword">None</span>,</span><br><span class="line">bias_regularizer=<span class="keyword">None</span>,</span><br><span class="line">activity_regularizer=<span class="keyword">None</span>,</span><br><span class="line">kernel_constraint=<span class="keyword">None</span>,</span><br><span class="line">bias_constraint=<span class="keyword">None</span>,</span><br><span class="line">trainable=<span class="keyword">True</span>,</span><br><span class="line">name=<span class="keyword">None</span>,</span><br><span class="line">reuse=<span class="keyword">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>inputs：必需，即需要进行操作的输入数据。</li>
+<li>units：必须，即神经元的数量。</li>
+<li>activation：可选，默认为 None，如果为 None 则是线性激活。</li>
+<li>use_bias：可选，默认为 True，是否使用偏置。</li>
+<li>kernel_initializer：可选，默认为 None，即权重的初始化方法，如果为 None，则使用默认的 Xavier 初始化方法。</li>
+<li>bias_initializer：可选，默认为零值初始化，即偏置的初始化方法。</li>
+<li>kernel_regularizer：可选，默认为 None，施加在权重上的正则项。</li>
+<li>bias_regularizer：可选，默认为 None，施加在偏置上的正则项。</li>
+<li>activity_regularizer：可选，默认为 None，施加在输出上的正则项。</li>
+<li>kernel_constraint，可选，默认为 None，施加在权重上的约束项。</li>
+<li>bias_constraint，可选，默认为 None，施加在偏置上的约束项。</li>
+<li>trainable：可选，默认为 True，布尔类型，如果为 True，则将变量添加到 GraphKeys.TRAINABLE_VARIABLES 中。</li>
+<li>name：可选，默认为 None，卷积层的名称。</li>
+<li>reuse：可选，默认为 None，布尔类型，如果为 True，那么如果 name 相同时，会重复利用。</li>
+</ul>
+<p>除此之外，之前我们定义y和y_的时候把1转化为[1,0]，转化为了[0,1]，增加了工程量，这次我们通过：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cross_entropy_mean = -tf.reduce_mean(self.y_ * tf.log(self.output + <span class="number">1e-24</span>))</span><br><span class="line">self.loss = cross_entropy_mean</span><br></pre></td></tr></table></figure>
+<p>直接进行计算，避免了一些无用功。</p>
+<p>最后，之前对于梯度的值没有进行限制，会导致整体模型的波动过大，这次优化中也做了修改，如果大家需要也可以参考一下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们用learning_rate_base作为速率η，来训练梯度下降的loss函数解，对梯度进行限制后计算loss</span></span><br><span class="line">opt = tf.train.GradientDescentOptimizer(self.learning_rate_base)</span><br><span class="line">trainable_params = tf.trainable_variables()</span><br><span class="line">gradients = tf.gradients(self.loss, trainable_params)</span><br><span class="line">clip_gradients, _ = tf.clip_by_global_norm(gradients, <span class="number">5</span>)</span><br><span class="line">self.train_op = opt.apply_gradients(zip(clip_gradients, trainable_params), global_step=self.global_step)</span><br></pre></td></tr></table></figure></p>
+<p>MLPs是入门级别的神经网络算法，实际的工业开发中使用的频率也不高，<strong>后面我准备和大家过一下常见的FM、FFM、DeepFM、NFM、DIN、MLR等在工业开发中更为常见的网络，欢迎大家持续关注。</strong></p>
+<p>完整代码已经上传到Github中。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 深度学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 神经网络 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[伪标签半监督学习]]></title>
+      <url>/2018/07/24/%E4%BC%AA%E6%A0%87%E7%AD%BE%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</url>
+      <content type="html"><![CDATA[<p>之前在训练YoutubeNet和DCN的时候，我都发现平台用户中基础用户的信息数据缺失率特别高，比如性别一栏准确填写的不足60%，所以我一直想调研一下有没有什么更好的填充方法，要保证既不能太复杂太耗时，也要有足够好的效果。</p>
+<p>其实这个问题就是一个缺失值填充，之前的文章中也写过很多办法，常规的也总结过：</p>
+<ul>
+<li>均值、众数填充<br>最简单的填充，效果也惨不忍睹</li>
+<li>根据没有缺失的数据线性回归填充<br>填充的好会造成共线性错误，填充的不好就没价值，很矛盾</li>
+<li>剔除<br>丢失信息量</li>
+<li>设置哑变量<br>会造成数据分布有偏</li>
+<li>smote<br>连续值有效，离散值就无法实施了</li>
+</ul>
+<p>我在Google上看imbalance问题的时候，偶然看到了这个<a href="http://course.fast.ai/?spm=a2c4e.11153940.blogcont215222.9.378a3aadIvrayn" target="_blank" rel="noopener">视频教程</a>，上面讲了图像的缺失处理，提到了伪标签处理的半监督学习方式。我就在国内的论坛上找了下，阿里云技术论坛也同样注意到了这个问题，但是只给出了如下的粗糙的构思图：<br><img src="/2018/07/24/伪标签半监督学习/1.png" alt=""></p>
+<p>有一份整理了的流程图，具体执行步骤总结，和大家一起看一下：<br><img src="/2018/07/24/伪标签半监督学习/2.png" alt=""></p>
+<ul>
+<li>将有标签部分数据分为两份：train_set&amp;validation_set，并训练出最优的model1</li>
+<li>用model1对未知标签数据(test_set)进行预测，给出伪标签结果pseudo-labeled</li>
+<li>将train_set中抽取一部分做新的validation_set，把剩余部分与pseudo-labeled部分融合作为新的train_set，训练出最优的model2</li>
+<li>再用model2对未知标签数据(test_set)进行预测，得到最终的final result label</li>
+</ul>
+<p>我利用了已知标签的数据对这个方法进行测试，用了最简单的mixed logistic regression模型作为Basic Model，得到结果如下：<br><img src="/2018/07/24/伪标签半监督学习/3.png" alt=""><br>利用伪标签半监督的方式，同样的mixed logistic regression模型AUC值会提高0.1pp左右，效果还不错，而且实施并不复杂，大家可以在缺失值处理或者分类问题中应用尝试一下。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 特征刻画 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数据处理 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于'Deep Neural Networks for YouTube Recommendations'的一些思考和实现]]></title>
       <url>/2018/06/26/%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
       <content type="html"><![CDATA[<p><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/1.png" alt=""></p>
