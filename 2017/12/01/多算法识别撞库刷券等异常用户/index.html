@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="风控," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。">
+<meta name="keywords" content="风控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多算法识别撞库刷券等异常用户">
+<meta property="og:url" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/1.jpg">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/3.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/4.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/5.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/6.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/7.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/10.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/11.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/12.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/13.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/14.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/15.png">
+<meta property="og:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/16.png">
+<meta property="og:updated_time" content="2019-05-10T10:47:21.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多算法识别撞库刷券等异常用户">
+<meta name="twitter:description" content="在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。">
+<meta name="twitter:image" content="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/"/>
+
+
+
+
+
+  <title>多算法识别撞库刷券等异常用户 | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/多算法识别撞库刷券等异常用户/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多算法识别撞库刷券等异常用户</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T18:11:01+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,794 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2017/12/01/多算法识别撞库刷券等异常用户/1.jpg" alt=""><br>在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。<br><a id="more"></a></p>
+<h1 id="问题剖析："><a href="#问题剖析：" class="headerlink" title="问题剖析："></a><strong>问题剖析：</strong></h1><p>此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：</p>
+<ul>
+<li>1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户</li>
+<li>2.维数灾难及交叉指标计算之间的高频计算性能瓶颈</li>
+</ul>
+<p><strong>算法概述：</strong></p>
+<ul>
+<li>1.图形位置分布</li>
+<li>2.统计方法检测</li>
+<li>3.距离位置检测</li>
+<li>4.密度位置检测</li>
+<li>5.无监督模型识别</li>
+</ul>
+<h1 id="算法详述："><a href="#算法详述：" class="headerlink" title="算法详述："></a><strong>算法详述：</strong></h1><h2 id="图形位置分布"><a href="#图形位置分布" class="headerlink" title="图形位置分布"></a><strong>图形位置分布</strong></h2><p>当我们不需要长期监控异常用户，只需要少数几次识别异常用户，且精度要求不高的时候，我们可以采取简单方便的图形识别方式，例如：箱式图。</p>
+<p><img src="/2017/12/01/多算法识别撞库刷券等异常用户/2.png" alt=""></p>
+<p>箱式图判断中，一般我们只需要锁定25%(Q1)分位点的用户特征值，75%(Q3)分位点的用户特征值，Q3与Q1之间的位差即为IQR，一般认定Q3+1.5个IQR外的点即为异常点，对应的用户即为异常用户。这种方法也叫做“盖帽法”，不必人为设定上限阀值，随着用户的数据变化而变化上界，避免了高频修改的问题，只是精度欠缺且绝大多数情况下识别出的异常用户较少。</p>
+<p>方法比较简单，也不多加解释了。</p>
+<h2 id="统计方法检测"><a href="#统计方法检测" class="headerlink" title="统计方法检测"></a><strong>统计方法检测</strong></h2><p>方法也比较简单，上线开发简单。一直是分两步：</p>
+<ul>
+<li>先假设全量数据服从一定的分布，比如常见的正太分布，泊松分布等</li>
+<li>在计算每个点属于这个分布的概率，也就是大家常用的以平均值和方差定密度函数的问题</li>
+</ul>
+<p><img src="/2017/12/01/多算法识别撞库刷券等异常用户/3.png" alt=""></p>
+<p>因为这边，我们前期无法知道数据服从什么样的分布，所以，我们这边可以用切比雪夫不等式来代替确定的分布形式。除此之外，也就是同时用了马氏距离来衡量了每个具体的点在整体数据集中的位置。</p>
+<p><img src="/2017/12/01/多算法识别撞库刷券等异常用户/4.png" alt=""></p>
+<p>核心代码就是下面这个协方差矩阵及矩阵相乘：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两个维度之间协方差矩阵</span></span><br><span class="line">S=np.cov(X)</span><br><span class="line"><span class="comment">#协方差矩阵的逆矩阵</span></span><br><span class="line">SI = np.linalg.inv(S)</span><br><span class="line"><span class="comment">#第一次计算全量用户的维度重心</span></span><br><span class="line">XTmean = XT.mean(axis=<span class="number">0</span>)</span><br><span class="line">d1=[]</span><br><span class="line">n  = XT.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">delta = XT[i] - XTmean</span><br><span class="line">d = np.sqrt(np.dot(np.dot(delta,SI),delta.T))</span><br><span class="line">d1.append(d)</span><br></pre></td></tr></table></figure></p>
+<p>这个方法的最核心的优点就是对全量数据进行了分块，可以理解为将1拆分成了必定有问题的1/m用户，可能有问题的1/n用户，必定没问题的1/w用户（1/m+1/n+1/w=1），这也奠定了后续更好的方法的基础。<br>但是问题也是很明显的，对于1/m，1/n的大小确定无法非常的精准，多了则影响正常用户，少了则无法准确拦截，还是一个划分的算法，并不能给出每个人的好坏程度。</p>
+<h2 id="距离位置检测"><a href="#距离位置检测" class="headerlink" title="距离位置检测"></a><strong>距离位置检测</strong></h2><p>距离探测的方法有一个非常强的假设，正常的用户都比较集中，有较多的邻居，而异常用户都特立独行。<br>在常见的业务问题中都是满足的，比如对爬虫ip的识别，撞库的识别，这些一看那些高频访问的就不是正常用户，但是对于特别稀疏的业务场景，比如企业融资，高深度的敏感页面访问，均不是很适用，它们的频次较低无法构成一个邻居的概念。</p>
+<p>这边非常常用的有2种，一个是连续特征间的欧式距离（标准化下的欧式距离（马氏距离）），另一个是名义变量下的余弦相似度。</p>
+<p>这边只讨论第一种情况，连续特征下如何衡量数据是否为异常数据。前面我们也说到了，切比雪夫不等式的方法能够有效的划分出三个类别正常用户，异常用户，未知用户。所以，相应的，我们只需要在未知用户的集群里面去寻找与正常用户更不相似的，或者和异常用户更相似的用户就可以了。</p>
+<p>对于单变量衡量：<br><img src="/2017/12/01/多算法识别撞库刷券等异常用户/5.png" alt=""></p>
+<p>对于多变量衡量：<br><img src="/2017/12/01/多算法识别撞库刷券等异常用户/6.png" alt=""></p>
+<p>核心计算相似度的方式就是以上两个公式，会有一些细节处理的问题及注意点，大家可自行研究。</p>
+<h2 id="密度位置检测"><a href="#密度位置检测" class="headerlink" title="密度位置检测"></a><strong>密度位置检测</strong></h2><p>这边先等下谈原理，较为冗长，先说结论，其实，在能够使用距离位置检测的情况下，优先使用距离位置检测的方法。密度方法的前提几乎与位置方法的前提一致，但是在计算量级上而言，存在较大的差异差别。</p>
+<p><img src="/2017/12/01/多算法识别撞库刷券等异常用户/7.png" alt=""><br>上述的图片是Fei Tony Liu, Kai Ming Ting, Zhi-Hua Zhou的一篇论文里面对比的常见的iForest,ORCA,LOF(也就是密度位置检测),RF方法的准确率和耗时情况，也清晰的可以看出，同为距离衡量的ORCA的耗时较大，但是LOF的耗时更高，甚至部分情况下都无法计算出结果。</p>
+<p>下面让我们看下理论先，密度位置检测的方法之一，LOF：<br>概念定义：<br>1) d(p,o)：两点p和o之间的距离；<br>2) k-distance：第k距离<br>　　　　对于点p的第k距离dk(p)定义如下：<br>　　　　dk(p)=d(p,o)，并且满足：<br>　　　　　　　　　　a) 在集合中至少有不包括p在内的k个点o,∈C{x≠p}， 满足d(p,o,)≤d(p,o) ；<br>　　　　　　　　　　　　　　　　b) 在集合中最多有不包括p在内的k−1个点o,∈C{x≠p}，满足d(p,o,)<d(p,o) ；="" 　　　　　　　　　　　　　　　　="" 　　　　　　　　　　　　　　　　上面两个条件总结起来就是1.距离范围内至少满足一定数量的点数，2.最多允许有一个距离最大的非p点="" 　　　　　　　　　　　　　　　　形象的看，距离就是p的第k距离，也就是距离p第k远的点的距离，不包括p，如下图箭头的路径长度。="" 　　　　　　　　　　　　　　　　![](多算法识别撞库刷券等异常用户="" 8.png)="" 　　　　　　　　　　　　　　　　3)="" k-distance="" neighborhood="" of="" p：第k距离邻域="" 　　　　　　　　　　　　　　　　　　　　点p的第k距离邻域nk(p)，就是p的第k距离即以内的所有点，包括第k距离。="" 　　　　　　　　　　　　　　　　　　　　　　　　因此p的第k邻域点的个数记为="" |nk(p)|，且|nk(p)|≥k="" 　　　　　　　　　　　　　　　　　　　　　　　　="" 　　　　　　　　　　　　　　　　　　　　　　　　我们在定义一些衡量指标，那么lof就算是完成了：="" 　　　　　　　　　　　　　　　　　　　　　　　　1、可达距离（reach-distance）="" 　　　　　　　　　　　　　　　　　　　　　　　　点o到点p的第k可达距离定义为：="" 　　　　　　　　　　　　　　　　　　　　　　　　reach-distancek(p,o)="max{k−distance(o),d(p,o)}" 　　　　　　　　　　　　　　　　　　　　　　　　2、局部可达密度（local="" reachablility="" density）="" 　　　　　　　　　　　　　　　　　　　　　　　　点p处的局部可达密度为：="" 　　　　　　　　　　　　　　　　　　　　　　　　![](多算法识别撞库刷券等异常用户="" 9.png)="" 　　　　　　　　　　　　　　　　　　　　　　　　其中，|nk(p)|为p的第k领域点的个数，∑o∈nk(p)reach-distk(p,o)计算的是p的k领域内的点到p的可达距离，也就是1中涉及的计算方式。="" 　　　　　　　　　　　　　　　　　　　　　　　　3、局部离群因子（local="" outlier="" factor）="" 　　　　　　　　　　　　　　　　　　　　　　　　点p的局部离群因子为：="" 　　　　　　　　　　　　　　　　　　　　　　　　lof（p）="（∑o∈Nk(p)lrdk(o)/lrdk(p)）/|Nk(p)|" 　　　　　　　　　　　　　　　　　　　　　　　　其中，lrdk(o)="" lrdk(p)比值衡量了p点与附近的点之间的密切差异情况，lof值="1时，代表p与p附近的点密度一致；LOF值<1时，代表p点的密度大于p附近点的密度；LOF值">1时，代表p点的密度小于p附近点的密度，也是非常符合我们的前提假设的，异常点总是比较稀疏，正常点总是比较稠密的。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　到此位置LOF的数学理论就完成了，让我们回顾一下它的思想。它其实就是找数据集合中的每一个点及其邻居的点，计算它和它的邻居的密度，当它的密度大于等于它邻居的密度的时候，则认为它是稠密中心，是正常用户数据；否则异常。<br>　　　　　　　　　　　　　　　　　　　　　　　　但是要计算每个点及对应的邻居的LOF值，计算成本也是非常的高的，最初我们也指出了这一点。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　核心代码：<br>　　　　　　　　　　　　　　　　　　　　　　　　<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="function"><span class="keyword">def</span> <span class="title">k_distance</span><span class="params">(k, instance, instances, distance_function=distance_euclidean)</span>:</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　distances = &#123;&#125;</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">for</span> instance2 <span class="keyword">in</span> instances:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　distance_value = distance_function(instance, instance2)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">if</span> distance_value <span class="keyword">in</span> distances:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　distances[distance_value].append(instance2)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">else</span>:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　distances[distance_value] = [instance2]</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　distances = sorted(distances.items())</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　neighbours = []</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　k_sero = <span class="number">0</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　k_dist = <span class="keyword">None</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">for</span> dist <span class="keyword">in</span> distances:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　k_sero += len(dist[<span class="number">1</span>])</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　neighbours.extend(dist[<span class="number">1</span>])</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　k_dist = dist[<span class="number">0</span>]</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">if</span> k_sero &gt;= k:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">break</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">return</span> k_dist, neighbours</span><br></pre></td></tr></table></figure></d(p,o)></p>
+<p>　　　　　　　　　　　　　　　　　　　　　　　　## <strong>无监督模型识别</strong><br>　　　　　　　　　　　　　　　　　　　　　　　　其实这边说完全的无监督，我觉得不是很准确，我觉得叫“半监督”可能更好一些。<br>　　　　　　　　　　　　　　　　　　　　　　　　这边方法很多，我只介绍两种：<br>　　　　　　　　　　　　　　　　　　　　　　　　1.Iforest<br>　　　　　　　　　　　　　　　　　　　　　　　　2.RNN<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　先让我们看下Iforest：<br>　　　　　　　　　　　　　　　　　　　　　　　　算法的关键在于:对于一个有若干维的数据集合，对于其中的任一维度，如果该维度是连续属性的话，在若干次随机二分类后，边界稀疏点最容易优先达到子叶节点,如下图：<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/10.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　算法实现详细的过程为：<br>　　　　　　　　　　　　　　　　　　　　　　　　假设数据集有N条数据，构建一颗iTree时，从N条数据中均匀抽样(一般是无放回抽样)出m(通常为256)个样本出来，作为这颗树的训练样本。在样本中，随机选一个特征，并在这个特征的所有值范围内(最小值与最大值之间)随机选一个值，对样本进行二叉划分，将样本中小于该值的划分到节点的左边，大于等于该值的划分到节点的右边,重复以上划分步骤，直到达到划分层数上限log(m)或者节点内只有一个样本，一棵树Itree的结果往往是不可信的，所以我们可以训练100-255棵树，最后整合所以树的结果取平均的深度作为输出深度，也叫做Isolation Forest。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　有了算法逻辑，再看衡量指标：<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/11.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。（这边需要注意，在sklearn中的Isolation是取得相反的逻辑，score越小数据异常的可能性越大。）<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　这边也贴上核心代码：<br>　　　　　　　　　　　　　　　　　　　　　　　　<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None, sample_weight=None)</span>:</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　X = check_array(X, accept_sparse=[<span class="string">'csc'</span>], ensure_2d=<span class="keyword">False</span>)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">if</span> issparse(X):</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment"># Pre-sort indices to avoid that each individual tree of the</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment"># ensemble sorts the indices.</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　X.sort_indices()</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　rnd = check_random_state(self.random_state)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　y = rnd.uniform(size=X.shape[<span class="number">0</span>])</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment"># ensure that max_sample is in [1, n_samples]:</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">if</span> <span class="keyword">not</span> (self.max_samples &lt;= n_samples):</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　warn(<span class="string">"max_samples is larger than the total number of samples"</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="string">" n_samples. Corrected as max_samples=n_samples"</span>)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　self.max_samples = n_samples</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">if</span> <span class="keyword">not</span> (<span class="number">0</span> &lt; self.max_samples):</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">raise</span> ValueError(<span class="string">"max_samples has to be positive"</span>)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　super(IsolationForest, self).fit(X, y, sample_weight=sample_weight)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">return</span> self</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="function"><span class="keyword">def</span> <span class="title">_cost</span><span class="params">(self, n)</span>:</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">return</span> <span class="number">1.</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">else</span>:</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　harmonic_number = np.log(n) + <span class="number">0.5772156649</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　<span class="keyword">return</span> <span class="number">2.</span> * harmonic_number - <span class="number">2.</span> * (n - <span class="number">1.</span>) / n</span><br></pre></td></tr></table></figure></p>
+<p>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　2.RNN<br>　　　　　　　　　　　　　　　　　　　　　　　　通常我们会以5层的卷积神经网络作为训练网络。我在这边处理之前将切比雪夫不等式划分出来的正常用户作为0-output，异常用户作为1-output，然后尽可能的降低损失函数的误差即可。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/12.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　第一层是常规层，将不同的input做线性组合：<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/13.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　第二层、第四层是做数据非线性变化：<br>　　　　　　　　　　　　　　　　　　　　　　　　这边选用的是tanh函数<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　第三层是做梯度分层下的非线性变化，抹平相似特征间的ouput：<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/14.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　其中，k为3，N为想要分的梯度的个数，a3为一个阶梯跳跃到另一个阶梯的转换效率，形如：<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/15.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　第五层，也就是最后一层通过sigmoid进行0-1之间的压缩。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　这边的损失函数用的是常见的mse：<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<img src="/2017/12/01/多算法识别撞库刷券等异常用户/16.png" alt=""><br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　当通过测试数据训练完成后，再将未知数据进行模型训练，观察得到结果的大小，越靠近1，越有可能为异常用户。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　<em>**</em><br>　　　　　　　　　　　　　　　　　　　　　　　　以上就是5种常见的只基于数据下的异常用户的识别，更偏方法技术一点，但是无论是算法实现还是业务应用中，同样需要注意输入特征的问题。由于大家运用方向不同，就不细节赘述。<br>　　　　　　　　　　　　　　　　　　　　　　　　<br>　　　　　　　　　　　　　　　　　　　　　　　　详细实现demo可以私信我要，最后谢谢大家阅读了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/风控/" rel="tag"># 风控</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/01/python开发：特征工程代码模版-一/" rel="next" title="python开发：特征工程代码模版(一)">
+                <i class="fa fa-chevron-left"></i> python开发：特征工程代码模版(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/01/python开发：特征工程代码模版-二/" rel="prev" title="python开发：特征工程代码模版(二)">
+                python开发：特征工程代码模版(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题剖析："><span class="nav-number">1.</span> <span class="nav-text">问题剖析：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法详述："><span class="nav-number">2.</span> <span class="nav-text">算法详述：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图形位置分布"><span class="nav-number">2.1.</span> <span class="nav-text">图形位置分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计方法检测"><span class="nav-number">2.2.</span> <span class="nav-text">统计方法检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#距离位置检测"><span class="nav-number">2.3.</span> <span class="nav-text">距离位置检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密度位置检测"><span class="nav-number">2.4.</span> <span class="nav-text">密度位置检测</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">99.4k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
