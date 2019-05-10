@@ -86,13 +86,13 @@
 <meta property="og:url" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/1.png">
-<meta property="og:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/2.png">
+<meta property="og:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/1.jpg">
+<meta property="og:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/2.jpg">
 <meta property="og:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/3.png">
-<meta property="og:updated_time" content="2019-05-10T07:46:29.208Z">
+<meta property="og:updated_time" content="2019-05-10T07:54:33.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tf.nn.embedding_lookup">
-<meta name="twitter:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/1.png">
+<meta name="twitter:image" content="http://sladesha.github.io/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/1.jpg">
 
 
 
@@ -409,8 +409,8 @@
       
 
       
-        <p><img src="/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/1.png" alt=""><br><a id="more"></a></p>
-<p><img src="/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/2.png" alt=""><br>我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。</p>
+        <p><img src="/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/1.jpg" alt=""><br><a id="more"></a></p>
+<p><img src="/2018/06/11/Tensorflow专题tf-nn-embedding-lookup/2.jpg" alt=""><br>我觉得这张图就够了，实际上tf.nn.embedding_lookup的作用就是找到要寻找的embedding data中的对应的行下的vector。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.embedding_lookup(params, ids, partition_strategy=<span class="string">'mod'</span>, name=<span class="keyword">None</span>, validate_indices=<span class="keyword">True</span>, max_norm=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
 <p><strong><a href="https://www.tensorflow.org/api_docs/python/tf/nn/embedding_lookup" target="_blank" rel="noopener">官方文档位置</a></strong>，其中，params是我们给出的，可以通过：<br>1.<code>tf.get_variable(&quot;item_emb_w&quot;, [self.item_count, self.embedding_size])</code>等方式生产服从[0,1]的均匀分布或者标准分布<br>2.<code>tf.convert_to_tensor</code>转化我们现有的array<br>然后，ids是我们要找的params中对应位置。</p>
 <p>举个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">data = np.array([[[<span class="number">2</span>],[<span class="number">1</span>]],[[<span class="number">3</span>],[<span class="number">4</span>]],[[<span class="number">6</span>],[<span class="number">7</span>]]])</span><br><span class="line">data = tf.convert_to_tensor(data)</span><br><span class="line">lk = [[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">lookup_data = tf.nn.embedding_lookup(data,lk)</span><br><span class="line">init = tf.global_variables_initializer()</span><br></pre></td></tr></table></figure></p>
