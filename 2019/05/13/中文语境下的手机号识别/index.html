@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="最近在做一个关于中文大段文本中的手机号码识别，由于属于对抗性的一个文本，发现传统的手机号码识别方法，比如正则匹配并不是很适用。 理论情况下文本中的手机号码出现方式应该如下：19*6箱车转让，连线路一起打包，带线路转让，固定货源联系13802131234,手机号，非诚勿扰2+1合同 对于这种情况，只要需要进行一下正则就行了：123text = &amp;apos;9*6箱车转让，连线路一起打包，带线路转让，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-13T02:14:38.157Z">
+<meta property="og:updated_time" content="2019-05-13T02:22:33.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中文语境下的手机号识别">
 <meta name="twitter:description" content="最近在做一个关于中文大段文本中的手机号码识别，由于属于对抗性的一个文本，发现传统的手机号码识别方法，比如正则匹配并不是很适用。 理论情况下文本中的手机号码出现方式应该如下：19*6箱车转让，连线路一起打包，带线路转让，固定货源联系13802131234,手机号，非诚勿扰2+1合同 对于这种情况，只要需要进行一下正则就行了：123text = &amp;apos;9*6箱车转让，连线路一起打包，带线路转让，">
@@ -418,7 +418,7 @@
 <p>这样的情况下，继续通过规则就难以实现了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [38]: re.findall(mobilephone_pattern, text, flags=0)</span><br><span class="line">Out[38]: []</span><br></pre></td></tr></table></figure></p>
 <p>所以，我们做了一个拼音转译+循环判断的逻辑进行了优化，会先把文本处理一边：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">In [37]: text = &apos;9*6箱车转让，连线路一起打包，带线路转让，固定货源联系1衫8-洞2##幺散幺2删4,手机号，非诚勿扰2+1合同&apos;</span><br><span class="line"></span><br><span class="line">In [38]: re.findall(mobilephone_pattern, text, flags=0)</span><br><span class="line">Out[38]: []</span><br><span class="line"></span><br><span class="line">In [39]: from YMMNlpUtils import YMMNlpUtils</span><br><span class="line"></span><br><span class="line">In [40]: obj = YMMNlpUtils(strict=True)</span><br><span class="line"></span><br><span class="line">In [41]: obj.get_all_phone_number(text)</span><br><span class="line">Out[41]: &apos;96箱车转让连线路17打包带线路转让固定货源联系13802131234手机号非诚5扰21合同&apos;</span><br><span class="line"></span><br><span class="line">In [42]: re.findall(mobilephone_pattern,obj.get_all_phone_number(text), flags=0)</span><br><span class="line">Out[42]: [&apos;13802131234&apos;]</span><br></pre></td></tr></table></figure></p>
 <p>这样处理完就可以得到手机号码了。</p>
-<p>由于是定制化的功能，后期可能还会维护出微信号，身份证号这些，更多的可以去git看一下，放上地址链接<a href="https://github.com/sladesha/machine_learning/tree/master/YMMNlpUtils" target="_blank" rel="noopener">手机号码小工具</a>，安装方法在README里面有解释。</p>
+<p>由于是定制化的功能，后期可能还会维护出微信号，身份证号这些，更多的可以去git看一下，放上地址链接<a href="https://github.com/sladesha/machine_learning/tree/master/YMMNlpUtils" target="_blank" rel="noopener">手机号码小工具</a>，安装方法在<a href="https://github.com/sladesha/machine_learning" target="_blank" rel="noopener">README</a>里面有解释。</p>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 
       
