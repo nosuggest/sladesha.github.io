@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="论文解析," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -80,20 +80,18 @@
 
 
 
-<meta name="description" content="很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总：  如何进行负采样的？  构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过">
-<meta name="keywords" content="论文解析">
+<meta name="description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Google团队在DNN的实际应用方式的整理">
-<meta property="og:url" content="http://sladesha.github.io/2018/08/29/Google团队在DNN的实际应用方式的整理/index.html">
+<meta property="og:title" content="Python踩坑指南（第一季）">
+<meta property="og:url" content="http://sladesha.github.io/2019/05/14/Python踩坑指南（第一季）/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总：  如何进行负采样的？  构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，">
+<meta property="og:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:print(f.read()) IO读取采用with形式，避免忘记clos">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-10T06:33:01.991Z">
+<meta property="og:updated_time" content="2019-05-14T01:26:37.570Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Google团队在DNN的实际应用方式的整理">
-<meta name="twitter:description" content="很荣幸有机会和论文作者Emre Sargin关于之前发的Deep Neural Networks for YouTube Recommendations进行交流，梳理如下： 提问对话汇总：  如何进行负采样的？  构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Python踩坑指南（第一季）">
+<meta name="twitter:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:print(f.read()) IO读取采用with形式，避免忘记clos">
 
 
 
@@ -123,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2018/08/29/Google团队在DNN的实际应用方式的整理/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/05/14/Python踩坑指南（第一季）/"/>
 
 
 
 
 
-  <title>Google团队在DNN的实际应用方式的整理 | SladeSha's Algorithm World</title>
+  <title>Python踩坑指南（第一季） | SladeSha's Algorithm World</title>
   
 
 
@@ -290,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/29/Google团队在DNN的实际应用方式的整理/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/05/14/Python踩坑指南（第一季）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -307,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Google团队在DNN的实际应用方式的整理</h1>
+          <h1 class="post-title" itemprop="name headline">Python踩坑指南（第一季）</h1>
         
 
         <div class="post-meta">
@@ -319,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T14:12:58+08:00">
-                2018-08-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-14T09:13:41+08:00">
+                2019-05-14
               </time>
             
 
@@ -342,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
+                  <a href="/categories/代码集合/" itemprop="url" rel="index">
+                    <span itemprop="name">代码集合</span>
                   </a>
                 </span>
 
@@ -373,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  806 字
+                  727 字
                 </span>
               
 
@@ -410,45 +408,40 @@
       
 
       
-        <p>很荣幸有机会和论文作者<a href="https://www.linkedin.com/in/mehmet-emre-sargin-0665047/" target="_blank" rel="noopener">Emre Sargin</a>关于之前发的<a href="https://zhuanlan.zhihu.com/p/38638747" target="_blank" rel="noopener">Deep Neural Networks for YouTube Recommendations</a>进行交流，梳理如下：</p>
-<p><strong>提问对话汇总：</strong></p>
-<ul>
-<li>如何进行负采样的？</li>
-</ul>
-<p>构造了千万量级热门视频集合，每个用户的负采样结果来源于这个集合，会有一些筛选的tricks，比如剔除浏览过的商品，负采样的数量Google在200万条。（也就是说，在计算loss的时候，google的label是一个200万长度的向量，瑟瑟发抖.jpg。）</p>
-<ul>
-<li>推荐算法应用上，有什么评估方式和评估指标？</li>
-</ul>
-<p>主要基于线上进行小批量的abtest进行对比，在考虑ctr指标的同时也会综合全站的信息加以分析，同时对新颖程度和用户兴趣变换也是我们考察的对象。</p>
-<ul>
-<li>冷启动的解决方式？从来没有被点击过的video如何处理？新上的video如何处理？</li>
-</ul>
-<p>google的推荐基于多种推荐算法的组合，YouTubeNet主要解决的是热门商品的一个推荐问题，冷启动或者没有被点击的video会有其他算法进行计算。换句话说，解决不了。</p>
-<ul>
-<li>example age如何定义？</li>
-</ul>
-<p>user+vedio的组合形式，train过程中，是用户点击该vedio的时间距离当前时间的间隔；predict过程中，为0。该部分对模型的鲁棒性非常重要。</p>
-<ul>
-<li>是否遇到神经元死亡的问题？</li>
-</ul>
-<p>有，解决方案很常规，都是大家了解的，降低learning_rate，使用batchnormalization。</p>
-<ul>
-<li>是否预到过拟合？</li>
-</ul>
-<p>没，youtube的用户上亿，可以构造出上千亿的数据，过拟合的情况不明显。但是会存在未登录用户，我们会通过一些其他CRM类的算法补充构造出他们的基本信息，比如gender、age…</p>
-<ul>
-<li>vedio vector在哪边进行构造和修正？</li>
-</ul>
-<p>history click部分进行vedio embedding，并进行修正。另外，50是我们尝试的历史点击长度，20-30也有不错的效果。</p>
-<ul>
-<li>会有工程计算压力么？</li>
-</ul>
-<p>不存在，建议在GPU上计算，后面由于VPN网络信号抖动没听清，大概就说Google在训练模型的时候会有大量GPU支持，每天大概更新2-3模型，没有遇到什么计算瓶颈。</p>
-<p><em>(以上为我个人针对提问结果的理解及总结)</em></p>
-<p><strong>个人感想如下：有钱任性</strong></p>
-<p><strong>最后，我觉得算法还是要适应实际情况，大公司的方法可以借鉴但是可能很多时候抄不来，也没条件抄。</strong></p>
-<p><em>原问题如下（实际有删改）：<br>How to do video embedding?<br>Is there any pre-training?<br>How to use example age in the model?<br>How to deal dead ReLU neurons？<br>How to sample negative classes？<br>How does the video embedding generated？<br>How to recommend the video never been clicked and new uploaded videos？<br>How to do ab testing? What’s the metrics?<br>Have you facing overfitting？How to solve it?<br>There is any difficulty in calculating the embedding for millions of videos and users.<br>During input embedding generation, are they simply averaged?</em></p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。<br><img src="https://upload-images.jianshu.io/upload_images/1129359-654dc61c581d94e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+        <p>最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(&apos;/path/to/file&apos;, &apos;r&apos;) as f:</span><br><span class="line">print(f.read())</span><br></pre></td></tr></table></figure>
+<p>IO读取采用with形式，避免忘记close，否则会产生很神奇的结果</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">embereding_data.drop_duplicates(keep=&apos;first&apos;,inplace=True)</span><br></pre></td></tr></table></figure>
+<p>python 中删除重复项 如果在原来数据上删除重复项，就要加入inplace=True<br>否则 只是保存一个副本！！！</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.read_csv(filename,error_bad_lines=False)</span><br></pre></td></tr></table></figure>
+<p>pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 3, saw 2解决办法<br>在使用pandas读取csv文件时报以上错误，解决办法如左<br>加上error_bad_lines=False就可以完美解决了</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = &quot; &quot;.join(list(map(str, l)))</span><br></pre></td></tr></table></figure>
+<p>myList = [‘a’,’b’,’c’,’d’] myString = “,”.join(myList ) 当myList含有数字的时候这种方法就会报错 因此需要转为str</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.loads(&apos;key&apos;:value)</span><br></pre></td></tr></table></figure>
+<p>value不可以为set、tuple</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d3=&apos;&#123;&quot;Message&quot;:&quot;已注销帐户。\r\n\r\n使用者:\r\n\t安全&quot;&#125;&apos;</span><br><span class="line">j=json.loads(d3,strict=False,encoding=&apos;utf-8&apos;)</span><br><span class="line">print(type(j)) #返回值：&lt;type &apos;dict&apos;&gt;</span><br><span class="line">print(j[&apos;Opcode&apos;].encode(&apos;u8&apos;)) #返回值：信息</span><br></pre></td></tr></table></figure>
+<p>使用json.loads时，如果原字符串中包含有 \r\n\t等字符，则会提示报错,<br>修改参数strict=False即可</p>
+<p>说明：”If strict is False (True is the default), then control characters will be allowed inside strings. Control characters in this context are those with character codes in the 0-31 range, including ‘\t’ (tab), ‘\n’, ‘\r’ and ‘\0’.”</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[&apos;county_route_index&apos;] = data.apply(lambda x: str(x.start_county_cd) + &apos;_&apos; + str(x.end_county_cd),</span><br><span class="line">axis=1)</span><br></pre></td></tr></table></figure>
+<p>生成county_route_index字段示例310112.0_320583.0，而start_county_cd、end_county_cd为整型（int64）<br>解决办法：<br>1.str(x.start_county_cd)改为str(int(x.start_county<em>cd))<br>2.df[‘col3’] = df[‘col1’].map(str) + ‘</em>‘ + df[‘col2’].map(str)</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">arr = (12,[1,3,3,4],&apos;b&apos;)</span><br><span class="line">arr[1]+=[6]</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">TypeError                                 Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-15-6bc7f041d391&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 arr[1]+=[6]</span><br><span class="line">TypeError: &apos;tuple&apos; object does not support item assignment</span><br></pre></td></tr></table></figure>
+<p>但是实际上却操作成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [16]: arr</span><br><span class="line">Out[16]: (12, [1, 3, 3, 4, 6], &apos;b&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>不要混合使用list和tuple的时候使用concat操作</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def func(a,b):</span><br><span class="line">if a ==1:</span><br><span class="line">return b</span><br><span class="line">else:</span><br><span class="line">return 1-b</span><br><span class="line"></span><br><span class="line">bbs_data[&quot;real_label&quot;] = bbs_data.apply(lambda row:func(row[2],row[3]),axis = 1)</span><br></pre></td></tr></table></figure>
+<p>dataframe 某列的值根据其他列的值计算得来</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pRec = &#123;&#125;</span><br><span class="line">import functools</span><br><span class="line"></span><br><span class="line">def check_is_key_param(f):</span><br><span class="line">    global pRec</span><br><span class="line">    @functools.wraps(f)</span><br><span class="line">    def wrapper(*args, **kwargs):</span><br><span class="line">        pRec.update(f(*args, **kwargs))</span><br><span class="line">        return f(*args, **kwargs)</span><br><span class="line">    return wrapper</span><br></pre></td></tr></table></figure>
+<p>收集计算过程中的中间数据</p>
+<p>我觉得pythons确实是比较容易入门的语言，代价是它带来的不稳定性确实也是比较高，需要积累踩坑</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
 
       
     </div>
@@ -495,7 +488,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/论文解析/" rel="tag"># 论文解析</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -508,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/27/Segmenter问题整理/" rel="next" title="Stanford Word Segmenter问题整理">
-                <i class="fa fa-chevron-left"></i> Stanford Word Segmenter问题整理
+              <a href="/2019/05/13/中文语境下的手机号识别/" rel="next" title="中文语境下的手机号识别">
+                <i class="fa fa-chevron-left"></i> 中文语境下的手机号识别
               </a>
             
           </div>
@@ -518,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/25/GloVe向量化做文本分类/" rel="prev" title="GloVe向量化做文本分类">
-                GloVe向量化做文本分类 <i class="fa fa-chevron-right"></i>
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
