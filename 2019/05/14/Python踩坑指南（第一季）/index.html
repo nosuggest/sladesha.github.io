@@ -86,12 +86,12 @@
 <meta property="og:title" content="Python踩坑指南（第一季）">
 <meta property="og:url" content="http://sladesha.github.io/2019/05/14/Python踩坑指南（第一季）/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:print(f.read()) IO读取采用with形式，避免忘记clos">
+<meta property="og:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:    print(f.read()) IO读取采用with形式，避免忘记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-14T01:29:15.698Z">
+<meta property="og:updated_time" content="2019-05-14T01:31:17.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python踩坑指南（第一季）">
-<meta name="twitter:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:print(f.read()) IO读取采用with形式，避免忘记clos">
+<meta name="twitter:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:    print(f.read()) IO读取采用with形式，避免忘记">
 
 
 
@@ -409,7 +409,7 @@
 
       
         <p>最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(&apos;/path/to/file&apos;, &apos;r&apos;) as f:</span><br><span class="line">print(f.read())</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(&apos;/path/to/file&apos;, &apos;r&apos;) as f:</span><br><span class="line">    print(f.read())</span><br></pre></td></tr></table></figure>
 <p>IO读取采用with形式，避免忘记close，否则会产生很神奇的结果</p>
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">embereding_data.drop_duplicates(keep=&apos;first&apos;,inplace=True)</span><br></pre></td></tr></table></figure>
