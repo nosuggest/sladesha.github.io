@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2019/05/14/Python%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E4%B8%80%E5%AD%A3%EF%BC%89/</loc>
+    <lastmod>2019-05-17T01:00:44.692Z</lastmod>
+    <data>
+        <display>
+        <title>Python踩坑指南（第一季）</title>
+        <pubTime>2019-05-14T01:13:41.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="代码集合" url="http://sladesha.github.io/categories/%E4%BB%A3%E7%A0%81%E9%9B%86%E5%90%88/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2017/12/28/Kaggle-TianChi%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2019-05-17T00:52:45.868Z</lastmod>
     <data>
@@ -17,26 +37,6 @@
            
              
               <breadCrumb title="算法" url="http://sladesha.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2019/05/14/Python%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E4%B8%80%E5%AD%A3%EF%BC%89/</loc>
-    <lastmod>2019-05-14T01:31:17.052Z</lastmod>
-    <data>
-        <display>
-        <title>Python踩坑指南（第一季）</title>
-        <pubTime>2019-05-14T01:13:41.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="代码集合" url="http://sladesha.github.io/categories/%E4%BB%A3%E7%A0%81%E9%9B%86%E5%90%88/"/>
           
         </display>
     </data>

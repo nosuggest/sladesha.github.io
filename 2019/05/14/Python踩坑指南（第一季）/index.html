@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:    print(f.read()) IO读取采用with形式，避免忘记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-14T01:31:17.052Z">
+<meta property="og:updated_time" content="2019-05-17T01:00:44.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python踩坑指南（第一季）">
 <meta name="twitter:description" content="最近在python开发的过程中，发现了一些比较有意思的问题，确实让自己在开发过程中被恶心了一把，所以开了这个连续的更新博文，之后会持续的按第一第二第三这种版本下去，更新一些比较有意思的python代码问题。 12with open(&amp;apos;/path/to/file&amp;apos;, &amp;apos;r&amp;apos;) as f:    print(f.read()) IO读取采用with形式，避免忘记">
@@ -440,7 +440,7 @@
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pRec = &#123;&#125;</span><br><span class="line">import functools</span><br><span class="line"></span><br><span class="line">def check_is_key_param(f):</span><br><span class="line">    global pRec</span><br><span class="line">    @functools.wraps(f)</span><br><span class="line">    def wrapper(*args, **kwargs):</span><br><span class="line">        pRec.update(f(*args, **kwargs))</span><br><span class="line">        return f(*args, **kwargs)</span><br><span class="line">    return wrapper</span><br></pre></td></tr></table></figure>
 <p>收集计算过程中的中间数据</p>
-<p>我觉得pythons确实是比较容易入门的语言，代价是它带来的不稳定性确实也是比较高，需要积累踩坑</p>
+<p>我觉得python确实是比较容易入门的语言，代价是它带来的不稳定性确实也是比较高，需要积累踩坑</p>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
 
       
