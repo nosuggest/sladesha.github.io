@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="NLP," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Sta">
-<meta name="keywords" content="NLP">
+<meta name="description" content="本期围绕jieba讲一个我遇到的实际问题，在同一个服务里，存在两个不同接口A和B，都用到了jieba分词，区别在于两者需要调用不同的词库，巧合中，存在以下情况： 12词库A：&amp;quot;干拌面&amp;quot;词库B：&amp;quot;干拌&amp;quot;,&amp;quot;面&amp;quot; 在">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Stanford Word Segmenter问题整理">
-<meta property="og:url" content="http://sladesha.github.io/2018/08/27/Segmenter问题整理/index.html">
+<meta property="og:title" content="Python踩坑指南（第二季）">
+<meta property="og:url" content="http://sladesha.github.io/2019/05/28/Python踩坑指南（第二季）/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能">
+<meta property="og:description" content="本期围绕jieba讲一个我遇到的实际问题，在同一个服务里，存在两个不同接口A和B，都用到了jieba分词，区别在于两者需要调用不同的词库，巧合中，存在以下情况： 12词库A：&amp;quot;干拌面&amp;quot;词库B：&amp;quot;干拌&amp;quot;,&amp;quot;面&amp;quot; 在服务启动的时候，由于词库A优先被加载了，再去加载词库B的时候发现，并没有加载成功： 接口A中：1jieba.load_userd">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T07:19:38.884Z">
+<meta property="og:updated_time" content="2019-05-28T01:38:41.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stanford Word Segmenter问题整理">
-<meta name="twitter:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能">
+<meta name="twitter:title" content="Python踩坑指南（第二季）">
+<meta name="twitter:description" content="本期围绕jieba讲一个我遇到的实际问题，在同一个服务里，存在两个不同接口A和B，都用到了jieba分词，区别在于两者需要调用不同的词库，巧合中，存在以下情况： 12词库A：&amp;quot;干拌面&amp;quot;词库B：&amp;quot;干拌&amp;quot;,&amp;quot;面&amp;quot; 在服务启动的时候，由于词库A优先被加载了，再去加载词库B的时候发现，并没有加载成功： 接口A中：1jieba.load_userd">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2018/08/27/Segmenter问题整理/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/05/28/Python踩坑指南（第二季）/"/>
 
 
 
 
 
-  <title>Stanford Word Segmenter问题整理 | SladeSha's Algorithm World</title>
+  <title>Python踩坑指南（第二季） | SladeSha's Algorithm World</title>
   
 
 
@@ -288,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/27/Segmenter问题整理/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/05/28/Python踩坑指南（第二季）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -305,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Stanford Word Segmenter问题整理</h1>
+          <h1 class="post-title" itemprop="name headline">Python踩坑指南（第二季）</h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T09:12:58+08:00">
-                2018-08-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T09:24:37+08:00">
+                2019-05-28
               </time>
             
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  399 字
+                  503 字
                 </span>
               
 
@@ -408,47 +408,18 @@
       
 
       
-        <p>最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Item</th>
-<th style="text-align:center">time(s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">jieba</td>
-<td style="text-align:center">0.4</td>
-</tr>
-<tr>
-<td style="text-align:center">snownlp</td>
-<td style="text-align:center">7.4</td>
-</tr>
-<tr>
-<td style="text-align:center">pynlpir</td>
-<td style="text-align:center">0.8</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>StanfordCoreNLP</strong></td>
-<td style="text-align:center"><strong>21.5</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pyltp</td>
-<td style="text-align:center">5.3</td>
-</tr>
-</tbody>
-</table>
-<p>因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能，所以尝试只用它的切词部分功能，但是在做的过程中发现一些问题，整理如下：</p>
-<p>官网给出的方法<a href="http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.stanford_segmenter" target="_blank" rel="noopener">nltk.tokenize.stanford_segmenter module</a>是这么写的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.tokenize.stanford_segmenter <span class="keyword">import</span> StanfordSegmenter</span><br><span class="line">seg = StanfordSegmenter()</span><br><span class="line">seg.default_config(<span class="string">'zh'</span>)</span><br></pre></td></tr></table></figure>
-<p>但是这个缺少各种数据路径的，是完全不通的。</p>
-<p>然后度娘的top1的答案给出的解决方案是：<a href="http://www.52nlp.cn/python自然语言处理实践-在nltk中使用斯坦福中文分词器" target="_blank" rel="noopener"></a>`<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">segmenter = StanfordSegmenter(path_to_jar=<span class="string">"stanford-segmenter-3.4.1.jar"</span>, path_to_sihan_corpora_dict=<span class="string">"./data"</span>, path_to_model=<span class="string">"./data/pku.gz"</span>, path_to_dict=<span class="string">"./data/dict-chris6.ser.gz"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>如果你的nltk的版本比较新，恭喜你，你会遇到下面这个问题：<br><code>TypeError: expected str, bytes or os.PathLike object, not NoneType</code></p>
-<p>我在<a href="https://stackoverflow.com/questions/45663121/about-stanford-word-segmenter/45668849" target="_blank" rel="noopener">stackoverflow</a>上找了半天，发现有如下的解决方案：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.parse.corenlp <span class="keyword">import</span> CoreNLPParser </span><br><span class="line">corenlp_parser = CoreNLPParser(<span class="string">'http://localhost:9001'</span>, encoding=<span class="string">'utf8'</span>)</span><br><span class="line">result = corenlp_parser.api_call(text, &#123;<span class="string">'annotators'</span>: <span class="string">'tokenize,ssplit'</span>&#125;)</span><br><span class="line">tokens = [token[<span class="string">'originalText'</span>] <span class="keyword">or</span> token[<span class="string">'word'</span>] <span class="keyword">for</span> sentence <span class="keyword">in</span> result[<span class="string">'sentences'</span>]</span><br></pre></td></tr></table></figure></p>
-<p>可以完美解决，原因之前作者也说了，据称升级版本后不兼容，各位看看就好<a href="https://github.com/nltk/nltk/issues/1808" target="_blank" rel="noopener">“TypeError: expected str, bytes or os.PathLike object, not NoneType” about Stanford NLP </a>。</p>
-<p>这个坑花了我两个多小时（主要在下载各种gz包），希望大家能够避免。</p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
+        <p>本期围绕jieba讲一个我遇到的实际问题，在同一个服务里，存在两个不同接口A和B，都用到了jieba分词，区别在于两者需要调用不同的词库，巧合中，存在以下情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">词库A：&quot;干拌面&quot;</span><br><span class="line">词库B：&quot;干拌&quot;,&quot;面&quot;</span><br></pre></td></tr></table></figure>
+<p>在服务启动的时候，由于词库A优先被加载了，再去加载词库B的时候发现，并没有加载成功：</p>
+<p>接口A中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jieba.load_userdict(&quot;A.txt&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>接口B中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jieba.load_userdict(&quot;B.txt&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>结果发现，在切干拌面这个词的时候，接口B中还是没有切成功。其实每次在我们加载jieba的时候，可以注意一下会出现以下info：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Building prefix dict from the default dictionary ...</span><br><span class="line">Dumping model to file cache /var/folders/hv/kfb7n4lj06590hqxjv6f3dd00000gn/T/jieba.cache</span><br><span class="line">Loading model cost 0.824 seconds.</span><br><span class="line">Prefix dict has been built succesfully.</span><br></pre></td></tr></table></figure></p>
+<p>显而易见，先进行了Building prefix dict，再Dumping model to file cache，后续Loading model都会来自这，所以这个地方导致以上问题。</p>
+<p>我是这么处理的：<br>接口A中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jieba1 = jieba.Tokenizer(dictionary=&quot;A.txt&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>接口B中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jieba2 = jieba.Tokenizer(dictionary=&quot;B.txt&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，去看Tokenizer源码，里面有这么一段读取调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def gen_pfdict(self, f):</span><br><span class="line">    lfreq = &#123;&#125;</span><br><span class="line">    ltotal = 0</span><br><span class="line">    f_name = resolve_filename(f)</span><br><span class="line">    for lineno, line in enumerate(f, 1):</span><br><span class="line">        try:</span><br><span class="line">            line = line.strip().decode(&apos;utf-8&apos;)</span><br><span class="line">            word, freq = line.split(&apos; &apos;)[:2]</span><br><span class="line">            freq = int(freq)</span><br><span class="line">            lfreq[word] = freq</span><br><span class="line">            ltotal += freq</span><br><span class="line">            for ch in xrange(len(word)):</span><br><span class="line">                wfrag = word[:ch + 1]</span><br><span class="line">                if wfrag not in lfreq:</span><br><span class="line">                    lfreq[wfrag] = 0</span><br><span class="line">        except ValueError:</span><br><span class="line">            raise ValueError(</span><br><span class="line">                &apos;invalid dictionary entry in %s at Line %s: %s&apos; % (f_name, lineno, line))</span><br><span class="line">    f.close()</span><br><span class="line">    return lfreq, ltotal</span><br></pre></td></tr></table></figure></p>
+<p>在load_userdict的时候词库的词频可以省略不写，<code>word, freq = line.split(&#39; &#39;)[:2]</code>决定了这边需要加上，这个依赖于版本，我并没有实验不同版本。</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 
       
     </div>
@@ -495,7 +466,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NLP/" rel="tag"># NLP</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -508,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/14/regression一点理解/" rel="next" title="logistic regression一点理解">
-                <i class="fa fa-chevron-left"></i> logistic regression一点理解
+              <a href="/2019/05/28/数据结构/" rel="next" title="数据结构">
+                <i class="fa fa-chevron-left"></i> 数据结构
               </a>
             
           </div>
@@ -518,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/29/Google团队在DNN的实际应用方式的整理/" rel="prev" title="Google团队在DNN的实际应用方式的整理">
-                Google团队在DNN的实际应用方式的整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
