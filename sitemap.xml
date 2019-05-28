@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/about/index.html</loc>
+    
+    <lastmod>2019-05-28T08:44:13.638Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2019/01/14/PKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B/</loc>
     
     <lastmod>2019-05-28T08:25:43.768Z</lastmod>
@@ -390,13 +397,6 @@
     <loc>http://sladesha.github.io/2018/06/26/%E5%85%B3%E4%BA%8EDeep-Neural-Networks-for-YouTube-Recommendations%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2019-05-10T06:42:36.247Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/about/index.html</loc>
-    
-    <lastmod>2019-05-10T06:42:33.703Z</lastmod>
     
   </url>
   
