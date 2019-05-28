@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="本期围绕jieba讲一个我遇到的实际问题，在同一个服务里，存在两个不同接口A和B，都用到了jieba分词，区别在于两者需要调用不同的词库，巧合中，存在以下情况： 12词库A：&amp;quot;干拌面&amp;quot;词库B：&amp;quot;干拌&amp;quot;,&amp;quot;面&amp;quot; 在服务启动的时候，由于词库A优先被加载了，再去加载词库B的时候发现，并没有加载成功： 接口A中：1jieba.load_userd">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-28T01:38:41.521Z">
+<meta property="og:updated_time" content="2019-05-28T01:48:44.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python踩坑指南（第二季）">
 <meta name="twitter:description" content="本期围绕jieba讲一个我遇到的实际问题，在同一个服务里，存在两个不同接口A和B，都用到了jieba分词，区别在于两者需要调用不同的词库，巧合中，存在以下情况： 12词库A：&amp;quot;干拌面&amp;quot;词库B：&amp;quot;干拌&amp;quot;,&amp;quot;面&amp;quot; 在服务启动的时候，由于词库A优先被加载了，再去加载词库B的时候发现，并没有加载成功： 接口A中：1jieba.load_userd">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  503 字
+                  654 字
                 </span>
               
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -417,8 +417,11 @@
 <p>显而易见，先进行了Building prefix dict，再Dumping model to file cache，后续Loading model都会来自这，所以这个地方导致以上问题。</p>
 <p>我是这么处理的：<br>接口A中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jieba1 = jieba.Tokenizer(dictionary=&quot;A.txt&quot;)</span><br></pre></td></tr></table></figure></p>
 <p>接口B中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jieba2 = jieba.Tokenizer(dictionary=&quot;B.txt&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>案例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [1]: import jieba</span><br><span class="line"></span><br><span class="line">In [2]: jieba1=jieba.Tokenizer(dictionary=&quot;A.txt&quot;)</span><br><span class="line"></span><br><span class="line">In [3]: jieba2=jieba.Tokenizer(dictionary=&quot;B.txt&quot;)</span><br><span class="line"></span><br><span class="line">In [4]: jieba1.lcut(&quot;干拌面&quot;)</span><br><span class="line">Building prefix dict from /Users/slade/Desktop/A.txt ...</span><br><span class="line">Dumping model to file cache /var/folders/hv/kfb7n4lj06590hqxjv6f3dd00000gn/T/jieba.u5221c1b70f06b36e44bc519f39715c96.cache</span><br><span class="line">Loading model cost 0.006 seconds.</span><br><span class="line">Prefix dict has been built succesfully.</span><br><span class="line">Out[4]: [&apos;干拌面&apos;]</span><br><span class="line"></span><br><span class="line">In [5]: jieba2.lcut(&quot;干拌面&quot;)</span><br><span class="line">Building prefix dict from /Users/slade/Desktop/B.txt ...</span><br><span class="line">Dumping model to file cache /var/folders/hv/kfb7n4lj06590hqxjv6f3dd00000gn/T/jieba.uc4f38d90bf7ce748744ff94fb2863fe4.cache</span><br><span class="line">Loading model cost 0.003 seconds.</span><br><span class="line">Prefix dict has been built succesfully.</span><br><span class="line">Out[5]: [&apos;干拌&apos;, &apos;面&apos;]</span><br></pre></td></tr></table></figure></p>
 <p>需要注意的是，去看Tokenizer源码，里面有这么一段读取调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def gen_pfdict(self, f):</span><br><span class="line">    lfreq = &#123;&#125;</span><br><span class="line">    ltotal = 0</span><br><span class="line">    f_name = resolve_filename(f)</span><br><span class="line">    for lineno, line in enumerate(f, 1):</span><br><span class="line">        try:</span><br><span class="line">            line = line.strip().decode(&apos;utf-8&apos;)</span><br><span class="line">            word, freq = line.split(&apos; &apos;)[:2]</span><br><span class="line">            freq = int(freq)</span><br><span class="line">            lfreq[word] = freq</span><br><span class="line">            ltotal += freq</span><br><span class="line">            for ch in xrange(len(word)):</span><br><span class="line">                wfrag = word[:ch + 1]</span><br><span class="line">                if wfrag not in lfreq:</span><br><span class="line">                    lfreq[wfrag] = 0</span><br><span class="line">        except ValueError:</span><br><span class="line">            raise ValueError(</span><br><span class="line">                &apos;invalid dictionary entry in %s at Line %s: %s&apos; % (f_name, lineno, line))</span><br><span class="line">    f.close()</span><br><span class="line">    return lfreq, ltotal</span><br></pre></td></tr></table></figure></p>
 <p>在load_userdict的时候词库的词频可以省略不写，<code>word, freq = line.split(&#39; &#39;)[:2]</code>决定了这边需要加上，这个依赖于版本，我并没有实验不同版本。</p>
+<p>A.txt:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">干拌面 1</span><br></pre></td></tr></table></figure></p>
+<p>B.txt:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">干拌 1</span><br><span class="line">面 1</span><br></pre></td></tr></table></figure></p>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 
       
@@ -676,7 +679,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">123.4k</span>
+    <span title="Site words total count">123.5k</span>
   
 </div>
 
