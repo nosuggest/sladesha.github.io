@@ -68,7 +68,68 @@
 <p>实际线上效果如下：<br><img src="/2019/06/25/语音转译文本后的意图识别-YMMNlpUtils/2.png" alt=""></p>
 <p>使用Demo如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from YMMNlpUtils import YMMPhoneDistinguish</span><br><span class="line">obj = YMMPhoneDistinguish(show_reason=False, user_dict=None, stop_words=None)</span><br><span class="line">#:param show_reason:是否需要展示被识别出来的原因</span><br><span class="line">#:param user_dict:用户自定义词典，默认调用自带词典</span><br><span class="line">#:param stop_words:自定义停顿词</span><br><span class="line">In [8]: obj.predict(&quot;你等会让我jj#等会儿。是名额的香车翻起来！好，你说6.2。有</span><br><span class="line">   ...: 三，有牛有。U0150508。6050508。50568号。&quot;,0.92)</span><br><span class="line">Out[8]: (0.9527009149362651, 1)</span><br><span class="line"># 0.92为默认阈值，可以自行修改</span><br></pre></td></tr></table></figure></p>
 <p>Reason解析如下：<br><code>-1:&quot;无原因&quot;, 0: &quot;逻辑拼接&quot;, 1: &quot;命中敏感词&quot;, 2: &quot;疑似电话数字&quot;, 3: &quot;数字过长&quot;, 4: &quot;涉及微信号码敏感&quot;</code></p>
-<p>阈值调整建议如下：<br>| 阈值           | 精确率                 |   召回率            |<br>| ————- |:——————-:|:——————:|<br>| 0.5          | 99.40%         |          95.20%          |<br>| 0.6          | 99.50%            |       94.50%             |<br>| 0.7          |  99.60%      |           93.30%         |<br>| 0.8          | 99.60%                 |       90.80%           |<br>| 0.9        | 99.70%   |  83.60%              |<br>| 0.91       | 99.70%           |   82.40%             |<br>| 0.92 | 99.70%              |     80.60%          |<br>| 0.93 | 99.80%              |     78.00%          |<br>| 0.94 | 99.80%              |     75.70%          |<br>| 0.95 | 99.80%              |     72.80%          |</p>
+<p>阈值调整建议如下：</p>
+<table>
+<thead>
+<tr>
+<th>阈值</th>
+<th style="text-align:center">精确率</th>
+<th style="text-align:center">召回率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.5</td>
+<td style="text-align:center">99.40%</td>
+<td style="text-align:center">95.20%</td>
+</tr>
+<tr>
+<td>0.6</td>
+<td style="text-align:center">99.50%</td>
+<td style="text-align:center">94.50%</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td style="text-align:center">99.60%</td>
+<td style="text-align:center">93.30%</td>
+</tr>
+<tr>
+<td>0.8</td>
+<td style="text-align:center">99.60%</td>
+<td style="text-align:center">90.80%</td>
+</tr>
+<tr>
+<td>0.9</td>
+<td style="text-align:center">99.70%</td>
+<td style="text-align:center">83.60%</td>
+</tr>
+<tr>
+<td>0.91</td>
+<td style="text-align:center">99.70%</td>
+<td style="text-align:center">82.40%</td>
+</tr>
+<tr>
+<td>0.92</td>
+<td style="text-align:center">99.70%</td>
+<td style="text-align:center">80.60%</td>
+</tr>
+<tr>
+<td>0.93</td>
+<td style="text-align:center">99.80%</td>
+<td style="text-align:center">78.00%</td>
+</tr>
+<tr>
+<td>0.94</td>
+<td style="text-align:center">99.80%</td>
+<td style="text-align:center">75.70%</td>
+</tr>
+<tr>
+<td>0.95</td>
+<td style="text-align:center">99.80%</td>
+<td style="text-align:center">72.80%</td>
+</tr>
+</tbody>
+</table>
 <p>开源代码详见<a href="https://github.com/sladesha/machine_learning" target="_blank" rel="noopener">Github</a></p>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 ]]></content>
