@@ -86,17 +86,17 @@
 <meta property="og:title" content="transformer工程实现笔记">
 <meta property="og:url" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="上线形式：tensorflow直接加载上线基于openblas重新实现基于cublas库重新实现优点：tensorflow：有谷歌开源代码，不需要另外实现cublas/openblas：可以定制化优化，耗时更短，可微调缺点：tensorflow：耗时长，内部黑盒无法微调cublas/openblas：部分核心功能要重写，只支持基础包 input/output为序列： 基础架构： 每个Encoder">
+<meta property="og:description" content="上线形式：tensorflow直接加载上线基于openblas重新实现基于cublas库重新实现优点：tensorflow：有谷歌开源代码，不需要另外实现cublas/openblas：可以定制化优化，耗时更短，可微调缺点：tensorflow：耗时长，内部黑盒无法微调cublas/openblas：部分核心功能要重写，只支持基础包  以下为工程实现细节： input/output为序列： 基础架">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/1.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/2.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/3.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/4.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/5.png">
-<meta property="og:updated_time" content="2019-07-01T00:49:39.129Z">
+<meta property="og:updated_time" content="2019-07-01T00:57:14.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="transformer工程实现笔记">
-<meta name="twitter:description" content="上线形式：tensorflow直接加载上线基于openblas重新实现基于cublas库重新实现优点：tensorflow：有谷歌开源代码，不需要另外实现cublas/openblas：可以定制化优化，耗时更短，可微调缺点：tensorflow：耗时长，内部黑盒无法微调cublas/openblas：部分核心功能要重写，只支持基础包 input/output为序列： 基础架构： 每个Encoder">
+<meta name="twitter:description" content="上线形式：tensorflow直接加载上线基于openblas重新实现基于cublas库重新实现优点：tensorflow：有谷歌开源代码，不需要另外实现cublas/openblas：可以定制化优化，耗时更短，可微调缺点：tensorflow：耗时长，内部黑盒无法微调cublas/openblas：部分核心功能要重写，只支持基础包  以下为工程实现细节： input/output为序列： 基础架">
 <meta name="twitter:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/1.png">
 
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  940 字
+                  949 字
                 </span>
               
 
@@ -415,6 +415,8 @@
 
       
         <p>上线形式：<br>tensorflow直接加载上线<br>基于openblas重新实现<br>基于cublas库重新实现<br>优点：<br>tensorflow：有谷歌开源代码，不需要另外实现<br>cublas/openblas：可以定制化优化，耗时更短，可微调<br>缺点：<br>tensorflow：耗时长，内部黑盒无法微调<br>cublas/openblas：部分核心功能要重写，只支持基础包</p>
+<hr>
+<p>以下为工程实现细节：</p>
 <p>input/output为序列：<br><img src="/2019/07/01/transformer工程实现笔记/1.png" alt=""></p>
 <p>基础架构：<br><img src="/2019/07/01/transformer工程实现笔记/2.png" alt=""></p>
 <p>每个Encoders中分别由6个Encoder组成（论文中是这样配置的）。而每个Decoders中同样也是由6个Decoder组成：<br><img src="/2019/07/01/transformer工程实现笔记/3.png" alt=""></p>
@@ -425,8 +427,7 @@
 <li>输入词embedding 将词转化为下标 通过映射来查找</li>
 <li>输入词embedding维度：1024float</li>
 <li>输入词embedding初始化结果来源：w2v</li>
-<li>输入词位置信息embedding：左半部分的值是一由一个正弦函数生成的，而右半部分是由另一个函数（余弦）生成</li>
-<li><img src="/2019/07/01/transformer工程实现笔记/4.png" alt="">，<br>其中，<a href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py" target="_blank" rel="noopener">get_timing_signal_1d()源码地址</a></li>
+<li>输入词位置信息embedding：左半部分的值是一由一个正弦函数生成的，而右半部分是由另一个函数（余弦）生成。其中，<a href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py" target="_blank" rel="noopener">get_timing_signal_1d()源码地址</a><br><img src="/2019/07/01/transformer工程实现笔记/4.png" alt="">，</li>
 <li>input Embedding = word Embedding + position Embedding</li>
 </ul>
 </li>
@@ -452,7 +453,7 @@
 <li>multi-headed attention前的矩阵设为in</li>
 <li>multi-headed attention后的矩阵设为out</li>
 <li>残差处理：Z = sqrt(∑(out-in)**2)</li>
-<li><img src="/2019/07/01/transformer工程实现笔记/5.png" alt=""><br>第一层的激活函数是ReLU，第二层是一个线性变换，W1和W2分别为1024<em>4096，4096</em>1024</li>
+<li>第一层的激活函数是ReLU，第二层是一个线性变换，W1和W2分别为1024<em>4096，4096</em>1024<br><img src="/2019/07/01/transformer工程实现笔记/5.png" alt=""></li>
 <li>encode out = resudual feed forward neural network in + resudual feed forward neural network out</li>
 </ul>
 </li>
