@@ -67,7 +67,7 @@
 <li>输入词embedding 将词转化为下标 通过映射来查找</li>
 <li>输入词embedding维度：1024float</li>
 <li>输入词embedding初始化结果来源：w2v</li>
-<li>输入词位置信息embedding：左半部分的值是一由一个正弦函数生成的，而右半部分是由另一个函数（余弦）生成。其中，<a href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py" target="_blank" rel="noopener">get_timing_signal_1d()源码地址</a><br><img src="/2019/07/01/transformer工程实现笔记/4.png" alt="">，</li>
+<li>输入词位置信息embedding：左半部分的值是一由一个正弦函数生成的，而右半部分是由另一个函数（余弦）生成。其中，<a href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py" target="_blank" rel="noopener">get_timing_signal_1d()源码地址</a><br><img src="/2019/07/01/transformer工程实现笔记/4.png" alt=""></li>
 <li>input Embedding = word Embedding + position Embedding</li>
 </ul>
 </li>

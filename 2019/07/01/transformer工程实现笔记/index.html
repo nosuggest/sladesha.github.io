@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/3.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/4.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/5.png">
-<meta property="og:updated_time" content="2019-07-01T01:09:49.466Z">
+<meta property="og:updated_time" content="2019-07-01T01:11:09.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="transformer工程实现笔记">
 <meta name="twitter:description" content="上线形式：tensorflow直接加载上线基于openblas重新实现基于cublas库重新实现优点：tensorflow：有谷歌开源代码，不需要另外实现cublas/openblas：可以定制化优化，耗时更短，可微调缺点：tensorflow：耗时长，内部黑盒无法微调cublas/openblas：部分核心功能要重写，只支持基础包  以下为工程实现细节： input/output为序列： 基础架">
@@ -427,7 +427,7 @@
 <li>输入词embedding 将词转化为下标 通过映射来查找</li>
 <li>输入词embedding维度：1024float</li>
 <li>输入词embedding初始化结果来源：w2v</li>
-<li>输入词位置信息embedding：左半部分的值是一由一个正弦函数生成的，而右半部分是由另一个函数（余弦）生成。其中，<a href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py" target="_blank" rel="noopener">get_timing_signal_1d()源码地址</a><br><img src="/2019/07/01/transformer工程实现笔记/4.png" alt="">，</li>
+<li>输入词位置信息embedding：左半部分的值是一由一个正弦函数生成的，而右半部分是由另一个函数（余弦）生成。其中，<a href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py" target="_blank" rel="noopener">get_timing_signal_1d()源码地址</a><br><img src="/2019/07/01/transformer工程实现笔记/4.png" alt=""></li>
 <li>input Embedding = word Embedding + position Embedding</li>
 </ul>
 </li>
