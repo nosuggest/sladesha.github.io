@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/3.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/4.png">
 <meta property="og:image" content="http://sladesha.github.io/2019/07/01/transformer工程实现笔记/5.png">
-<meta property="og:updated_time" content="2019-07-01T00:57:14.958Z">
+<meta property="og:updated_time" content="2019-07-01T01:00:51.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="transformer工程实现笔记">
 <meta name="twitter:description" content="上线形式：tensorflow直接加载上线基于openblas重新实现基于cublas库重新实现优点：tensorflow：有谷歌开源代码，不需要另外实现cublas/openblas：可以定制化优化，耗时更短，可微调缺点：tensorflow：耗时长，内部黑盒无法微调cublas/openblas：部分核心功能要重写，只支持基础包  以下为工程实现细节： input/output为序列： 基础架">
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  949 字
+                  946 字
                 </span>
               
 
@@ -434,26 +434,24 @@
 <li>Encode（假设每个batch有15个input词）<ul>
 <li>multi-headed attention<ul>
 <li>self-attention<ul>
-<li>创建一个Query/Key/Value的矩阵，单个矩阵size：1024(16(头数量)<em>64(q,k,v向量的长度))</em>1024(词向量的长度)<ul>
-<li>Query/Key/Value的矩阵合并后为15<em>3</em>1024*1024</li>
+<li>创建一个Query/Key/Value的矩阵，单个矩阵size：1024(16(头数量)x64(q,k,v向量的长度))x1024(词向量的长度)</li>
+<li>Query/Key/Value的矩阵合并后为15x3x1024x1024</li>
 <li>将query向量和key向量点击来对相应的单词打分</li>
 <li>再将得到的输出通过softmax函数标准化，使得最后的列表和为1</li>
 <li>将每个Value向量乘以softmax后的得分。这里实际上的意义在于保存对当前词的关注度不变的情况下，降低对不相关词的关注。</li>
-<li>QK的点击为15<em>64</em>64<em>15，结果15</em>15，这样的矩阵有16个，再对此进行sotfmax压缩</li>
+<li>QK的点击为15x64x64x15，结果15x15，这样的矩阵有16个，再对此进行sotfmax压缩</li>
 <li>如果batch小于15，则填充负无穷</li>
-<li>KQ的15<em>15</em>16再点积V=X<em>Wv15</em>64<em>16，16个15</em>64的矩阵</li>
-<li>KQ<em>V得16</em>(15<em>15</em>15<em>64)=16</em>15*64</li>
-<li>后接一个dense，1024<em>1024，得到15</em>1024</li>
+<li>KQ的15x15x16再点积V=XxWv15x64x16，16个15x64的矩阵</li>
+<li>KQxV得16x(15x15x15x64)=16x15x64</li>
+<li>后接一个dense，1024x1024，得到15x1024</li>
 <li>add一个bias，再normalization</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>resudual feed forward neural network<ul>
 <li>multi-headed attention前的矩阵设为in</li>
 <li>multi-headed attention后的矩阵设为out</li>
-<li>残差处理：Z = sqrt(∑(out-in)**2)</li>
-<li>第一层的激活函数是ReLU，第二层是一个线性变换，W1和W2分别为1024<em>4096，4096</em>1024<br><img src="/2019/07/01/transformer工程实现笔记/5.png" alt=""></li>
+<li>残差处理：Z = sqrt(∑(out-in)xx2)</li>
+<li>第一层的激活函数是ReLU，第二层是一个线性变换，W1和W2分别为1024x4096，4096x1024<br><img src="/2019/07/01/transformer工程实现笔记/5.png" alt=""></li>
 <li>encode out = resudual feed forward neural network in + resudual feed forward neural network out</li>
 </ul>
 </li>
@@ -466,10 +464,10 @@
 <li>Decode出来靠近的词更重要，则把对应的input的矩阵的上三角矩阵进行mask，保证尽量减少对已经decode出来的词的影响</li>
 <li>self-attention – &gt; resudual –&gt; in/out attention –&gt; resudual –&gt; FFN –&gt; resudual，一次解码完成</li>
 <li>每次计算Decode完成后把decode出来的词进行储存，下一次的input直接拼接之前m次的带入下一次decode即可</li>
-<li>参数矩阵：KV来自encode部分计算好的（1024<em>2048），Q来自decode部分新建的（1024</em>1024）</li>
-<li>Decode:Q:n<em>16</em>64,K/V:15<em>16</em>64,QK:16<em>(n</em>64)<em>(15</em>64) = 16<em>n</em>15;QK<em>V = 16(n</em>15<em>15</em>64)=n*1024，n即为decode得词数</li>
+<li>参数矩阵：KV来自encode部分计算好的（1024x2048），Q来自decode部分新建的（1024x1024）</li>
+<li>Decode:Q:nx16x64,K/V:15x16x64,QK:16x(nx64)x(15x64) = 16xnx15;QKxV = 16(nx15x15x64)=nx1024，n即为decode得词数</li>
 <li>Q的行数是Decode的词的数量，第一轮是1，第二轮是2…，解多少个词就有多少轮</li>
-<li>Decode出来的结果矩阵点乘vocabulary_size*1024，得出vocabulary_size的向量后softmax（所有vocabulary_size和为1），得到top8</li>
+<li>Decode出来的结果矩阵点乘vocabulary_sizex1024，得出vocabulary_size的向量后softmax（所有vocabulary_size和为1），得到top8</li>
 <li>beam search，beam=4，一直算到eosid；如果下一个就是eosid的话，用top8其他的其他4个</li>
 </ul>
 </li>
