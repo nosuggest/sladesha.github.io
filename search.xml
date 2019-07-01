@@ -105,7 +105,7 @@
 <li>self-attention – &gt; resudual –&gt; in/out attention –&gt; resudual –&gt; FFN –&gt; resudual，一次解码完成</li>
 <li>每次计算Decode完成后把decode出来的词进行储存，下一次的input直接拼接之前m次的带入下一次decode即可</li>
 <li>参数矩阵：KV来自encode部分计算好的（1024x2048），Q来自decode部分新建的（1024x1024）</li>
-<li>Decode:Q:nx16x64,K/V:15x16x64,QK:16x(nx64)x(15x64) = 16xnx15;QKxV = 16(nx15x15x64)=nx1024，n即为decode得词数</li>
+<li>Decode:Q:nx16x64,K/V:15x16x64,<br>QK:16x(nx64)x(15x64)= 16xnx15<br>QKxV=16x(nx15x15x64)=nx1024，n即为decode得词数</li>
 <li>Q的行数是Decode的词的数量，第一轮是1，第二轮是2…，解多少个词就有多少轮</li>
 <li>Decode出来的结果矩阵点乘vocabulary_sizex1024，得出vocabulary_size的向量后softmax（所有vocabulary_size和为1），得到top8</li>
 <li>beam search，beam=4，一直算到eosid；如果下一个就是eosid的话，用top8其他的其他4个</li>
