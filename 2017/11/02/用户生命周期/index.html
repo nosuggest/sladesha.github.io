@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  ###如何定义参与度？以电商平台而言，">
+<meta name="description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  如何定义参与度？以电商平台而言，冒泡（">
 <meta name="keywords" content="生命周期">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用户生命周期">
 <meta property="og:url" content="http://sladesha.github.io/2017/11/02/用户生命周期/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  ###如何定义参与度？以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与">
+<meta property="og:description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  如何定义参与度？以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与平台的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://sladesha.github.io/2017/11/02/用户生命周期/1.png">
 <meta property="og:image" content="http://sladesha.github.io/2017/11/02/用户生命周期/2.png">
@@ -96,7 +96,7 @@
 <meta property="og:updated_time" content="2019-05-10T09:24:19.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用户生命周期">
-<meta name="twitter:description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  ###如何定义参与度？以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与">
+<meta name="twitter:description" content="摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环  定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。  如何定义参与度？以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与平台的">
 <meta name="twitter:image" content="http://sladesha.github.io/2017/11/02/用户生命周期/1.png">
 
 
@@ -419,13 +419,14 @@
 </blockquote>
 <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。</p>
 <hr>
-<p>###如何定义参与度？<br>以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与平台的主要行为，综合考虑（但不限于此）这些因素，</p>
+<h3 id="如何定义参与度？"><a href="#如何定义参与度？" class="headerlink" title="如何定义参与度？"></a>如何定义参与度？</h3><p>以电商平台而言，冒泡（打开app），浏览，点击，搜索，收藏，加购物车，下单，评论等都是用户参与平台的主要行为，综合考虑（但不限于此）这些因素，</p>
 <p><strong>活跃度：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">θ = α1* pv + α2 * click + α3* search + α4 * clc + α5* cart + α6* order + α7* comment + bubble</span><br></pre></td></tr></table></figure></p>
 <p><em>其中，θ是活跃度，pv是用户浏览量，click是用户点击量，search是用户搜索量，clc是用户收藏量，cart是用户加购物车次，order为用户订单量，comment为用户评论量<br>α1 为全部用户冒泡次数 与 全部用户浏览量之比；<br>α2 为全部用户冒泡次数 与 全部用户点击量之比；<br>…
 </em><br><strong>这样保证了，所有平台参与行为与用户活跃情况成正相关，同时动态变化的降低了操作成本低的变量的权重，也满足奥卡姆剃刀原理</strong><br>后续再利用活跃度来直接衡量生命周期状态。</p>
 <h1 id="如何定义生命周期？"><a href="#如何定义生命周期？" class="headerlink" title="如何定义生命周期？"></a>如何定义生命周期？</h1><ul>
 <li>以电商平台为例，考虑用户的行为，先来定义生命周期状态划分逻辑：<br>1.计算用户连续N(N&gt;3)个周期内的参与度组成特征向量<br>2.形成不同生命周期下的模式特征向量<br>3.分类用户的特征向量如下：</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -487,11 +488,12 @@
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>定义完整的用户生命周期状态后，再对用户的生命周期做session切分，根据聚类算法，将样本用户进行聚类，形成聚类中心，判断用户距离聚类中心距离，匹配用户所处的生命周期详细位置，反过来输出分位数，判断用户生命周期类型。</li>
 </ul>
 <h1 id="下面思考如何优化kmeans解决这个问题："><a href="#下面思考如何优化kmeans解决这个问题：" class="headerlink" title="下面思考如何优化kmeans解决这个问题："></a>下面思考如何优化kmeans解决这个问题：</h1><p>考虑到业务开发的效率等原因，常规的聚类算法中，kmeans常常为优先考虑的算法，但实际运用过程中，需要根据不同的问题有差异化的优化。</p>
-<p>1.考虑用户的特征偏移<br>可能存在用户的活跃属性间断，比如用户外出出差一周，导致某个单位统计时间内平台参与度下降，用户的活跃属性下降，而实际用户为真实高活跃用户，只是出现异常间断点，影响用户活跃的最终判断，利用语义分析中的最佳路径计算方式解决这个问题。<br><img src="/2017/11/02/用户生命周期/1.png" alt=""><br>这三条线中，蓝色和青色线的分布走势类似，而红色线条的差异较大；计算蓝色–&gt;红色的欧式距离，蓝色–&gt;青色的欧式距离，发现蓝色–&gt;青色的欧式距离反而大于蓝色–&gt;红色的欧式距离，时间波动的情况下，欧式距离偏差较大。</p>
+<p>1.考虑用户的特征偏移<br>可能存在用户的活跃属性间断，比如用户外出出差一周，导致某个单位统计时间内平台参与度下降，用户的活跃属性下降，而实际用户为真实高活跃用户，只是出现异常间断点，影响用户活跃的最终判断，利用语义分析中的最佳路径计算方式解决这个问题。<br><img src="/2017/11/02/用户生命周期/1.png" alt=""><br>这三条线中，蓝色和青色线的分布走势类似，而红色线条的差异较大；计算蓝色—&gt;红色的欧式距离，蓝色—&gt;青色的欧式距离，发现蓝色—&gt;青色的欧式距离反而大于蓝色—&gt;红色的欧式距离，时间波动的情况下，欧式距离偏差较大。</p>
 <p>所以，常规意义上的kmeans等基于欧式距离的算法这种情况下，使用较为局限。所以在整体思路不变的情况下，就距离计算，我们可以参考语音分析里面的DP（最佳路径规划算法），构造邻接矩阵，寻找最小最小路径和</p>
 <p><img src="/2017/11/02/用户生命周期/2.png" alt=""><br>实际在计算蓝色曲线到青色曲线的距离的时候，同时计算AB（蓝色曲线当前位置A点到前一个时间段青色曲线位置B）、AC（蓝色曲线当前位置A点到当前时间段青色曲线位置C），AD（蓝色曲线当前位置A点到后一个时间段青色曲线位置D）的距离，综合判断一个点最短路径；再根据曲线上的每一个点，会形成一个矩阵，判断矩阵的每个点的最佳路径即可</p>
 <p>可以用如下的公式表述：<br><img src="/2017/11/02/用户生命周期/3.png" alt=""><br>其中，<img src="/2017/11/02/用户生命周期/4.png" alt="">就是路径选择的过程</p>
@@ -757,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定义生命周期？"><span class="nav-number">2.</span> <span class="nav-text">如何定义生命周期？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下面思考如何优化kmeans解决这个问题："><span class="nav-number">3.</span> <span class="nav-text">下面思考如何优化kmeans解决这个问题：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何定义参与度？"><span class="nav-number">1.0.1.</span> <span class="nav-text">如何定义参与度？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定义生命周期？"><span class="nav-number">2.</span> <span class="nav-text">如何定义生命周期？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下面思考如何优化kmeans解决这个问题："><span class="nav-number">3.</span> <span class="nav-text">下面思考如何优化kmeans解决这个问题：</span></a></li></ol></div>
             
 
           </div>
@@ -792,7 +794,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1305,6 +1307,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

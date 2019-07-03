@@ -462,7 +462,7 @@
 </li>
 <li>Decode过程与Encode过程保持一致，不同点如下：<ul>
 <li>Decode出来靠近的词更重要，则把对应的input的矩阵的上三角矩阵进行mask，保证尽量减少对已经decode出来的词的影响</li>
-<li>self-attention – &gt; resudual –&gt; in/out attention –&gt; resudual –&gt; FFN –&gt; resudual，一次解码完成</li>
+<li>self-attention – &gt; resudual —&gt; in/out attention —&gt; resudual —&gt; FFN —&gt; resudual，一次解码完成</li>
 <li>每次计算Decode完成后把decode出来的词进行储存，下一次的input直接拼接之前m次的带入下一次decode即可</li>
 <li>参数矩阵：KV来自encode部分计算好的（1024x2048），Q来自decode部分新建的（1024x1024）</li>
 <li>Decode:Q:nx16x64,K/V:15x16x64,<br>QK:16x(nx64)x(15x64)= 16xnx15<br>QKxV=16x(nx15x15x64)=nx1024，n即为decode得词数</li>
@@ -735,7 +735,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1248,6 +1248,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

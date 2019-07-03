@@ -436,9 +436,9 @@
 <p>作图只要不是特殊情况下与正方形的边相切，一定是与某个顶点优先相交，那必然存在横纵坐标轴中的一个系数为0，起到对变量的筛选的作用。<br>q＝2的时候，其实就可以看作是上面这个蓝色的圆，在这个圆的限制下，点可以是圆上的任意一点，所以q＝2的时候也叫做岭回归，岭回归是起不到压缩变量的作用的，在这个图里也是可以看出来的。</p>
 <hr>
 <p>lasso回归：<br>lasso回归的特色就是在建立广义线型模型的时候，这里广义线型模型包含一维连续因变量、多维连续因变量、非负次数因变量、二元离散因变量、多元离散因变，除此之外，无论因变量是连续的还是离散的，lasso都能处理，总的来说，lasso对于数据的要求是极其低的，所以应用程度较广；除此之外，lasso还能够对变量进行筛选和对模型的复杂程度进行降低。这里的变量筛选是指不把所有的变量都放入模型中进行拟合，而是有选择的把变量放入模型从而得到更好的性能参数。 复杂度调整是指通过一系列参数控制模型的复杂度，从而避免过度拟合(Overfitting)。 对于线性模型来说，复杂度与模型的变量数有直接关系，变量数越多，模型复杂度就越高。 更多的变量在拟合时往往可以给出一个看似更好的模型，但是同时也面临过度拟合的危险。<br>lasso的复杂程度由<code>λ</code>来控制，<code>λ</code>越大对变量较多的线性模型的惩罚力度就越大，从而最终获得一个变量较少的模型。除此之外，另一个参数α来控制应对高相关性(highly correlated)数据时模型的性状。 lasso回归<code>α=1</code>，Ridge回归<code>α=0</code>，这就对应了惩罚函数的形式和目的。我们可以通过尝试若干次不同值下的λ，来选取最优λ下的参数，还可以结合CV选择最优秀的模型。</p>
-<p>######读取数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setwd(&quot;~/Desktop&quot;)</span><br><span class="line">library(glmnet)</span><br><span class="line">train_origin&lt;-read.table(&apos;trian.txt&apos;,header = T,fill = T)</span><br><span class="line">test_origin&lt;-read.table(&apos;test.txt&apos;,header = T,fill = T)</span><br><span class="line">train_test1&lt;-train_origin</span><br><span class="line">train_test1&lt;-train_test1[,-9]</span><br><span class="line">train_test1$tag&lt;-as.factor(train_test1$tag)</span><br><span class="line">train_test1$risk_level&lt;-as.factor(train_test1$risk_level)</span><br><span class="line">x&lt;-train_test1[,3:11]</span><br><span class="line">y&lt;-train_test1[,2]</span><br><span class="line">## one hot encoding</span><br><span class="line">x1&lt;-model.matrix(~., x)</span><br></pre></td></tr></table></figure></p>
+<h6 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setwd(&quot;~/Desktop&quot;)</span><br><span class="line">library(glmnet)</span><br><span class="line">train_origin&lt;-read.table(&apos;trian.txt&apos;,header = T,fill = T)</span><br><span class="line">test_origin&lt;-read.table(&apos;test.txt&apos;,header = T,fill = T)</span><br><span class="line">train_test1&lt;-train_origin</span><br><span class="line">train_test1&lt;-train_test1[,-9]</span><br><span class="line">train_test1$tag&lt;-as.factor(train_test1$tag)</span><br><span class="line">train_test1$risk_level&lt;-as.factor(train_test1$risk_level)</span><br><span class="line">x&lt;-train_test1[,3:11]</span><br><span class="line">y&lt;-train_test1[,2]</span><br><span class="line">## one hot encoding</span><br><span class="line">x1&lt;-model.matrix(~., x)</span><br></pre></td></tr></table></figure>
 <p>通常数据中会存在离散点，而lasso在R里面是通过数值矩阵来做输入的，所以需要对原数据做一步预处理，不然这边会抛错误；除此之外，如果数据之间差别的数量级较大，还需要进行标准化，R里面也是可以进行处理的，这边就不赘述了，<code>glmnet()</code>函数中添加参数<code>standardize = TRUE</code>来实现，<code>scale()</code>函数也可以实现，自行选择即可。</p>
-<p>######模型训练<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = glmnet(x1, y, family=&quot;binomial&quot;, nlambda=50, alpha=1)</span><br></pre></td></tr></table></figure></p>
+<h6 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = glmnet(x1, y, family=&quot;binomial&quot;, nlambda=50, alpha=1)</span><br></pre></td></tr></table></figure>
 <p><code>family</code>里面是指选择函数的类型：<br><code>family explation</code>,<code>gaussian univariate</code>,<code>mgaussian multivariate</code>,<code>poisson count</code>,<code>binomial binary</code>,<code>multinomial category</code><br>lambda是指随机选择λ，做lambda个模型；alpha是上述讲到的α，选择惩罚函数，正常情况下，1是lasso，0是岭回归<br>这边模型拓展可以交叉检验一下，有内置的函数：<br>cvmodel = cv.glmnet(x1, y, family = “binomial”, type.measure = “class”,nfolds=10)<br>这边会多出来一个<code>type.measure</code>，这个<code>type.measure</code>是指期望最小化的目标参量是什么，换句话说，就是衡量这个模型的指标函数是啥：<br><code>type.measure</code>  details<br><code>deviance</code>:  <em>-2倍的Log-likelihood</em><br><code>mse</code>:<em>mean squred error</em><br><code>mae</code>:<em>mean absolute error</em><br><code>class</code>:<em>missclassification error</em><br><code>auc</code>:<em>area under the ROC curve</em><br>比较常用的是<code>auc</code>，这个就是现在比较主流的衡量一个模型好坏的roc所衍生出来的一个值；我们这边用的是<code>class</code>，也就是模型错误分配的概率，结合我这次业务开发的实际业务场景，这个更合适一点；<code>nfolds</code>是指folds数目，也可以通过foldid数来控制每个fold里面的数据数量。<br>对于glmnet，可以通过<code>plot(model)</code>来观察每个自变量的变化轨迹，<code>cv.glmnet</code>可以通过<code>plot(cvmodel)</code><br>举个<code>plot(cvmodel)</code>的例子：</p>
 <p><img src="/2017/06/02/正则化-Lasso规约/8.png" alt=""></p>
 <p>可以通过<code>c(cvfit$lambda.min, cvfit$lambda.1se)</code>来看在所有的<code>λ</code>值中，得到最小目标函数<code>type.measure</code>均值的<code>cvfit$lambda.min</code>，以及其所对应的<code>λ</code>值可接受的一个标准误差之内对应的<code>cvfit$lambda.1se</code>。<br><img src="/2017/06/02/正则化-Lasso规约/9.png" alt=""><br>我们可以<code>print(model)</code>，在实际的选择模型中<code>λ</code>值的过程里，存在三个指标：<code>df</code>：自由度， <code>%Dev</code>：残差被解释的占比，也就是模型的好坏程度，类似于线性模型中的R平方，Lambda也就是<code>λ</code>值所对应的值，然后我们可以通过<code>coef(fit, s=c(fit$lambda[35],0.002))</code>得出当时模型所对应的系数。</p>
@@ -572,8 +572,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -672,6 +681,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#读取数据"><span class="nav-number">1.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#模型训练"><span class="nav-number">2.</span> <span class="nav-text">模型训练</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -700,7 +725,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1213,6 +1238,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

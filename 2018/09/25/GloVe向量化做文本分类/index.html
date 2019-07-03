@@ -456,6 +456,7 @@
 <p>举个例子：存在一句话”我爱中国”，“我”的向量是[0.3,0.2,0.3]，”爱”的向量是[0.1,0.2,0.3]，“中国”的向量是[0.6,0.6,0.4]，那么average后就是[0.33,0.33,0.33]，然后这就类似一个特征为三的input。</p>
 <p>这种方法的好处就是快捷，预处理的工作代价要小，随着数据量的增多，模型的效果要更加的好。</p>
 <h1 id="效果对比"><a href="#效果对比" class="headerlink" title="效果对比"></a>效果对比</h1><p>最后这边粗略的给出一下业务数据对比：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -497,6 +498,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，相关代码已经上传到我的<a href="https://github.com/sladesha/machine_learning" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过公众号发消息给我。</p>
 
       
@@ -779,7 +781,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1292,6 +1294,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

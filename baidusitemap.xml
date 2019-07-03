@@ -3,6 +3,26 @@
 
 
     
+  <url>
+    <loc>http://sladesha.github.io/2029/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</loc>
+    <lastmod>2019-07-03T01:46:42.950Z</lastmod>
+    <data>
+        <display>
+        <title>博客导读公告(置顶)</title>
+        <pubTime>2029-01-20T14:54:08.000Z</pubTime>
+        
+        <tag>公告</tag>
+         
+         
+           
+             
+              <breadCrumb title="基础" url="http://sladesha.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://sladesha.github.io/2019/07/01/transformer%E5%B7%A5%E7%A8%8B%E5%AE%9E%E7%8E%B0%E7%AC%94%E8%AE%B0/</loc>
@@ -1218,26 +1238,6 @@
            
              
               <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2029/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</loc>
-    <lastmod>2019-05-10T04:31:36.455Z</lastmod>
-    <data>
-        <display>
-        <title>博客导读公告(置顶)</title>
-        <pubTime>2029-01-20T14:54:08.000Z</pubTime>
-        
-        <tag>公告</tag>
-         
-         
-           
-             
-              <breadCrumb title="基础" url="http://sladesha.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
           
         </display>
     </data>

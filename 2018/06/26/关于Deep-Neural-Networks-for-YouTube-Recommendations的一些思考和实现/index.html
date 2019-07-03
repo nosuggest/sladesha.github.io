@@ -450,7 +450,7 @@
 <p>我们尝试的去探求原因发现，nosoft比softmax好的原因在于user vector是由最下方的embedded video watches里面的已经embedding好的结果进行多次FC传递得来的，如果新增一个video embedded vector 的话，和FC传递得到的u vector的点积的意义就难以解释；revise比norevise好的原因是，实际在yoho!buy的购物场景下，用户的点击历史比较我们实际选取的window size要短不少，如果所有的用户都除以固定长度的话，大量的用户history click average的vector大小接近于0。</p>
 <h3 id="DNN网络可以怎么改：神经元死亡及网络的内部构造"><a href="#DNN网络可以怎么改：神经元死亡及网络的内部构造" class="headerlink" title="DNN网络可以怎么改：神经元死亡及网络的内部构造"></a>DNN网络可以怎么改：<strong>神经元死亡及网络的内部构造</strong></h3><p>这是一个异常恶心还有没什么好方法的问题，在刚开始做的时候，我们遇到了一个常见的问题，神经元批量死亡的问题。在增加了batch normalization、clip_by_global_norm和exponential_decay learning rate 后有所缓解。</p>
 <p>网络结构的变化比较常规，对比场景的激活函数，参考了论文中推荐的深度、节点数，效果对比如下：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/7.png" alt=""></p>
-<p>虽然我们看到增加网络的深度（3–&gt;4）一定程度上会提高模型的命中率，增加leakyrelu的一层网络也可以有些许的提升，但是总的来说，对模型没有啥大的影响，所以在之后的实际模型中，我们选择了原论文中relu+relu+relu，1024+512+256的框架。</p>
+<p>虽然我们看到增加网络的深度（3—&gt;4）一定程度上会提高模型的命中率，增加leakyrelu的一层网络也可以有些许的提升，但是总的来说，对模型没有啥大的影响，所以在之后的实际模型中，我们选择了原论文中relu+relu+relu，1024+512+256的框架。</p>
 <h3 id="负采样的“避坑”"><a href="#负采样的“避坑”" class="headerlink" title="负采样的“避坑”"></a><strong>负采样的“避坑”</strong></h3><p>我们都知道，算法写起来小半天就可以搞定，但是前期的数据处理要搞个小半个月都不一定能出来。作为爱省事的我，为了快速实现算法，没有重视负采样的部分，采取了列表页点击为label=1，未点击为label=0的方式，详情如下：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/8.png" alt=""></p>
 <p>看上去没什么问题，省略了从全量样本中抽样作为负样本的复杂过程，实际上，我把代码狂改了n边效果也一直维持在1.57%，可以说是没有任何提升，在此过程期间，我还是了拿用户的尾次点击（last_record）进行训练，拿了有较多行为的用户的尾次点击（change_last_record）进行训练，效果很感人：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/9.png" alt=""></p>
 <p>在我孤注一掷一致，选择按照原论文中说的，每次label=0的我不拿展现给用户但是用户没有点击的商品，而是随机从全量商品中抽取用户没有点击过的商品作为label=0的商品后，奇迹发生了：<br><img src="/2018/06/26/关于Deep-Neural-Networks-for-YouTube-Recommendations的一些思考和实现/10.png" alt=""></p>
@@ -757,7 +757,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1270,6 +1270,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

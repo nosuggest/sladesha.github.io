@@ -490,7 +490,7 @@
 <p>初次之外，我们还可以得到每个值被预测出来的结果，也可以通过工程技巧转换为0-1的概率：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">result_y = sess.run(y,feed_dict=&#123;x:train_X&#125;)</span><br><span class="line">result_y_update=[]</span><br><span class="line">for i in result_y:</span><br><span class="line">if i[0]&gt;=i[1]:</span><br><span class="line">result_y_update.append([1,0])</span><br><span class="line">else:</span><br><span class="line">result_y_update.append([0,1])</span><br></pre></td></tr></table></figure></p>
 <p>==&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Out[7]:</span><br><span class="line">array([[-1.01412344,  1.21461654],</span><br><span class="line">[-3.66026735,  3.81834102],</span><br><span class="line">[-3.78952932,  3.79097509],</span><br><span class="line">...,</span><br><span class="line">[-3.71239662,  3.65721083],</span><br><span class="line">[-1.59250259,  1.89412308],</span><br><span class="line">[-3.35591984,  3.24001145]], dtype=float32)</span><br></pre></td></tr></table></figure></p>
 <p>以上就实现了如果用TensorFlow里面的神经网络技巧去做一个分类问题，其实这并不TensorFlow的全部，传统的Bp神经网络，SVM也可以到达近似的效果，在接下来的文章中，我们将继续看到比如CNN图像识别，LSTM进行文本分类，RNN训练不均衡数据等复杂问题上面的优势。</p>
-<p>##可能存在的问题<br>在刚做神经网络的训练前，要注意一下是否会犯以下的错误。</p>
+<h2 id="可能存在的问题"><a href="#可能存在的问题" class="headerlink" title="可能存在的问题"></a>可能存在的问题</h2><p>在刚做神经网络的训练前，要注意一下是否会犯以下的错误。</p>
 <ul>
 <li><p>数据是否规范化<br>模型计算的过程时间长度及模型最后的效果，均依赖于input的形式。大部分的神经网络训练过程都是以input为1的标准差，0的均值为前提的；除此之外，在算梯度算反向传播的时候，过大的值有可能会导致梯度消失等意想不到的情况，非常值得大家注意</p>
 </li>
@@ -749,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行业做法："><span class="nav-number">2.</span> <span class="nav-text">行业做法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">3.</span> <span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow"><span class="nav-number">4.</span> <span class="nav-text">TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户流失分析"><span class="nav-number">5.</span> <span class="nav-text">用户流失分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行业做法："><span class="nav-number">2.</span> <span class="nav-text">行业做法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">3.</span> <span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow"><span class="nav-number">4.</span> <span class="nav-text">TensorFlow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户流失分析"><span class="nav-number">5.</span> <span class="nav-text">用户流失分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可能存在的问题"><span class="nav-number">5.1.</span> <span class="nav-text">可能存在的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -784,7 +784,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1297,6 +1297,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

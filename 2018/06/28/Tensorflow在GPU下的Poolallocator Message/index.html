@@ -411,7 +411,7 @@
 <p>我在在用GPU跑我一个深度模型的时候，发生了以下的问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">2018-06-27 18:09:11.701458: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: After 63521 get requests, put_count=63521 evicted_count=1000 eviction_rate=0.0157428 and unsatisfied allocation rate=0.0173171</span><br><span class="line">2018-06-27 18:09:11.701503: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:259] Raising pool_size_limit_ from 100 to 110</span><br><span class="line">Global_step 2000        Train_loss: 0.0758</span><br><span class="line">Global_step 3000        Train_loss: 0.0618</span><br><span class="line">Global_step 4000        Train_loss: 0.0564</span><br><span class="line">Global_step 5000        Train_loss: 0.0521</span><br><span class="line">Global_step 6000        Train_loss: 0.0492</span><br><span class="line">Global_step 7000        Train_loss: 0.0468</span><br><span class="line">Global_step 8000        Train_loss: 0.0443</span><br><span class="line">Global_step 9000        Train_loss: 0.0422</span><br><span class="line">Global_step 10000       Train_loss: 0.0410</span><br><span class="line">Global_step 11000       Train_loss: 0.0397</span><br><span class="line">Global_step 12000       Train_loss: 0.0383</span><br><span class="line">2018-06-27 18:13:59.743133: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:247] PoolAllocator: After 71532 get requests, put_count=71532 evicted_count=1000 eviction_rate=0.0139798 and unsatisfied allocation rate=0.0143013</span><br><span class="line">2018-06-27 18:13:59.743167: I tensorflow/core/common_runtime/gpu/pool_allocator.cc:259] Raising pool_size_limit_ from 256 to 281</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 <p>除了常规的loss数据之外，我看到穿插在之间的warming informations ，虽然最后的结果没有任何问题，但是我抱着好奇的心态在stackoverflow找到了原因：</p>
 <blockquote>
-<p>TensorFlow has multiple memory allocators, for memory that will be used in different ways. Their behavior has some adaptive aspects.<br><strong>In your particular case, since you’re using a GPU, there is a PoolAllocator for CPU memory that is pre-registered with the GPU for fast DMA. A tensor that is expected to be transferred from CPU to GPU, e.g., will be allocated from this pool.</strong><br>The PoolAllocators attempt to amortize the cost of calling a more expensive underlying allocator by keeping around a pool of allocated then freed chunks that are eligible for immediate reuse. Their default behavior is to grow slowly until the eviction rate drops below some constant. (The eviction rate is the proportion of free calls where we return an unused chunk from the pool to the underlying pool in order not to exceed the size limit.) In the log messages above, you see <strong>“Raising pool_size<em>limit</em>“ lines that show the pool size growing. Assuming that your program actually has a steady state behavior with a maximum size collection of chunks it needs, the pool will grow to accommodate it, and then grow no more.</strong> It behaves this way rather than simply retaining all chunks ever allocated so that sizes needed only rarely, or only during program startup, are less likely to be retained in the pool.<br>These messages should only be a cause for concern <strong>if you run out of memory</strong>. In such a case the log messages may help diagnose the problem. Note also that peak execution speed may only be attained after the memory pools have grown to the proper size.</p>
+<p>TensorFlow has multiple memory allocators, for memory that will be used in different ways. Their behavior has some adaptive aspects.<br><strong>In your particular case, since you’re using a GPU, there is a PoolAllocator for CPU memory that is pre-registered with the GPU for fast DMA. A tensor that is expected to be transferred from CPU to GPU, e.g., will be allocated from this pool.</strong><br>The PoolAllocators attempt to amortize the cost of calling a more expensive underlying allocator by keeping around a pool of allocated then freed chunks that are eligible for immediate reuse. Their default behavior is to grow slowly until the eviction rate drops below some constant. (The eviction rate is the proportion of free calls where we return an unused chunk from the pool to the underlying pool in order not to exceed the size limit.) In the log messages above, you see <strong>“Raising pool_size_limit_” lines that show the pool size growing. Assuming that your program actually has a steady state behavior with a maximum size collection of chunks it needs, the pool will grow to accommodate it, and then grow no more.</strong> It behaves this way rather than simply retaining all chunks ever allocated so that sizes needed only rarely, or only during program startup, are less likely to be retained in the pool.<br>These messages should only be a cause for concern <strong>if you run out of memory</strong>. In such a case the log messages may help diagnose the problem. Note also that peak execution speed may only be attained after the memory pools have grown to the proper size.</p>
 </blockquote>
 <p>加粗部分解释机制、处理方式和原因。总结起来就是，PoolAllocator会有一个内存分配机制，GPU和CPU之间不是独立的可以相互传输，如果你使用的空间太多，他就会提高原有的预设的空间大小，如果够用了，就没有什么影响了，但是，需要注意的是，兄弟你的数据加载量太大了，看看是不是改改batch size，一次性少加载点数据，或者干掉隔壁同事的任务。</p>
 
@@ -483,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/19/量化评估推荐系统效果/" rel="prev" title="量化评估推荐系统效果">
-                量化评估推荐系统效果 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/19/热传导-物质扩散算法应用于推荐/" rel="prev" title="热传导-物质扩散算法应用于推荐">
+                热传导-物质扩散算法应用于推荐 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -670,7 +670,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1183,6 +1183,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -92,7 +92,9 @@
 <meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/4.png">
 <meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/5.png">
 <meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/6.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=E%28X%29%3D-%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%7Bp_%7Bi%7Dlog_%7B2%7D%28p_%7Bi%7D+%29++%7D+">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=IGain%28S%2CA%29%3DE%28S%29-E%28A%29">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=E%28A%29%3D%5Csum_%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S_%7Bv%7D%29+%7D%7Bnum%28S%29%7DE%28S_%7Bv%7D+%29+%7D+">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=Gain-ratio%3D%5Cfrac%7BIGain%28S%2CA%29%7D%7BInfo%7D+">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=Info%3D-%5Csum_%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S_%7Bv%7D%29+%7D%7Bnum%28S%29%7Dlog_2%7B%5Cfrac%7Bnum%28S_%7Bv%7D+%29%7D%7Bnum%28S%29%7D+%7D%7D+">
 <meta property="og:image" content="http://sladesha.github.io/2017/12/01/常见算法工程师面试题目整理-一/7.png">
@@ -394,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,098 字
+                  4,037 字
                 </span>
               
 
@@ -458,7 +460,7 @@
 <p><img src="/2017/12/01/常见算法工程师面试题目整理-一/6.png" alt=""><br><strong>左边的l1，右边的l2，</strong><br><strong>l1在作图只要不是特殊情况下与正方形的边相切，一定是与某个顶点优先相交，那必然存在横纵坐标轴中的一个系数为0，起到对变量的筛选的作用。</strong><br><strong>l2的时候，其实就可以看作是上面这个蓝色的圆，在这个圆的限制下，点可以是圆上的任意一点，所以q＝2的时候也叫做岭回归，岭回归是起不到压缩变量的作用的，在这个图里也是可以看出来的。</strong></p>
 <hr>
 <h1 id="分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble-Classification-model是什么？"><a href="#分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble-Classification-model是什么？" class="headerlink" title="分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble Classification model是什么？"></a>分类模型如何选择？如何判断效果？如何计算AUC？你最熟悉的ensemble Classification model是什么？</h1><p>我这边参考了《Do we Need Hundreds of Classifiers to Solve Real World Classification Problems》里面的结论，有兴趣的自行去搜<br>答案：<br><strong>整体上讲：数据量越大，神经网络越好；维度越多，bagging算法越优秀；数据量上不多不少的情况下，SVM效果最好；<br>常用判断：roc、auc、ks、f1值、recall等；<br>AUC计算方法：roc曲线下方的面积积分即可，或者大数定律的投点实验</strong></p>
-<p>最熟悉的集成分类模型，我说的是randomforest，详述了原理及实际应用的注意点，后来我问了面试管，主要在这块想了解的是实际解决的相关项目的真实性：<br>1.randomforest是由若干颗cart树构成的，每棵树尽情生长不枝剪，最后采取加权投票或者均值的方式确定输出值<br>2.每棵树的数据是采取bagging式的随机抽取特征及数据样本，两颗树之间的数据有可能会重复<br>3.一般流程会先以sqrt(feature_number)作为每次输入的特征数，采取grid<em>search的方法观察tree的数量由0-500，oob的变化<br>这边被打断了，解释什么叫做oob，也就是out of bag，每次抽取的数据样本进行训练，没有被抽取到的数据作为检验样本，检验样本上的误差就叫做oob<br>4.根据实际要求的精度上后期可以跟进调整：每次输入的特征个数、每棵树的最大深度、每个节点的分支方式（GINI还是信息增益率）、子节点最少数据量、父节点最少数据量等等<br>这边又被打断了，问，什么叫做信息增益率？<br>首先熵的计算如下：<br>![](<a href="https://www.zhihu.com/equation?tex=E%28X%29%3D-%5Csum" target="_blank" rel="noopener">https://www.zhihu.com/equation?tex=E%28X%29%3D-%5Csum</a></em>%7Bi%3D1%7D%5E%7Bn%7D%7Bp<em>%7Bi%7Dlog</em>%7B2%7D%28p<em>%7Bi%7D+%29++%7D+)<br>信息增益如下：<br><img src="https://www.zhihu.com/equation?tex=IGain%28S%2CA%29%3DE%28S%29-E%28A%29" alt=""><br>![](<a href="https://www.zhihu.com/equation?tex=E%28A%29%3D%5Csum" target="_blank" rel="noopener">https://www.zhihu.com/equation?tex=E%28A%29%3D%5Csum</a></em>%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S<em>%7Bv%7D%29+%7D%7Bnum%28S%29%7DE%28S</em>%7Bv%7D+%29+%7D+)<br>比如14个人，好人5个坏人9个。这14个人被通过性别划分开，10个男性中3个坏人，7个好人；4个女性中2个坏人，2个好人。</p>
+<p>最熟悉的集成分类模型，我说的是randomforest，详述了原理及实际应用的注意点，后来我问了面试管，主要在这块想了解的是实际解决的相关项目的真实性：<br>1.randomforest是由若干颗cart树构成的，每棵树尽情生长不枝剪，最后采取加权投票或者均值的方式确定输出值<br>2.每棵树的数据是采取bagging式的随机抽取特征及数据样本，两颗树之间的数据有可能会重复<br>3.一般流程会先以sqrt(feature_number)作为每次输入的特征数，采取grid_search的方法观察tree的数量由0-500，oob的变化<br>这边被打断了，解释什么叫做oob，也就是out of bag，每次抽取的数据样本进行训练，没有被抽取到的数据作为检验样本，检验样本上的误差就叫做oob<br>4.根据实际要求的精度上后期可以跟进调整：每次输入的特征个数、每棵树的最大深度、每个节点的分支方式（GINI还是信息增益率）、子节点最少数据量、父节点最少数据量等等<br>这边又被打断了，问，什么叫做信息增益率？<br>首先熵的计算如下：<br><img src="https://www.zhihu.com/equation?tex=E%28X%29%3D-%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%7Bp_%7Bi%7Dlog_%7B2%7D%28p_%7Bi%7D+%29++%7D+" alt=""><br>信息增益如下：<br><img src="https://www.zhihu.com/equation?tex=IGain%28S%2CA%29%3DE%28S%29-E%28A%29" alt=""><br><img src="https://www.zhihu.com/equation?tex=E%28A%29%3D%5Csum_%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S_%7Bv%7D%29+%7D%7Bnum%28S%29%7DE%28S_%7Bv%7D+%29+%7D+" alt=""><br>比如14个人，好人5个坏人9个。这14个人被通过性别划分开，10个男性中3个坏人，7个好人；4个女性中2个坏人，2个好人。</p>
 <p>信息增益就是:<br>IGain＝(-5/14)<em>log(5/14)+(-9/14)</em>log(9/14)-(10/14<em>(-3/10</em>log(3/10)-7/10<em>log(7/10))+4/14</em>(-1/2<em>log(1/2)-1/2</em>log(1/2)))<br>看到这样的计算方式，必然会存在问题，假设我们身份证为区分类别的化，每个身份证号码都是独一无二的，势必存在存在1/n*log(1)=0这样的最佳划分，但是这样的结果就是将所有的情况分别作为子节点，很明显没有意义，所以引出下面的信息增益率。</p>
 <p>信息增益率就是:<br><img src="https://www.zhihu.com/equation?tex=Gain-ratio%3D%5Cfrac%7BIGain%28S%2CA%29%7D%7BInfo%7D+" alt=""><br><img src="https://www.zhihu.com/equation?tex=Info%3D-%5Csum_%7Bv%5Cin+value%28A%29%7D%7B%5Cfrac%7Bnum%28S_%7Bv%7D%29+%7D%7Bnum%28S%29%7Dlog_2%7B%5Cfrac%7Bnum%28S_%7Bv%7D+%29%7D%7Bnum%28S%29%7D+%7D%7D+" alt=""><br>比如上面分人的例子，Info＝-10/14log(10/14)-4/14log(4/14)<br>很明显也可以看出，当你划分的子类别越多，你的info会越大，Gain_ratio就越小，信息增益率就越低，惩罚了刚才身份证分类这种行为。</p>
 <p>这也是id3和c4.5之间最大的差异，c4.5以信息增益率代替率id3里面的信息增益，除此之外，id3只能对分类变量处理而c4.5既可以分类变量也可以连续变量，还是很强的，同时他们都可以做多分类，而后续的cart等做多分类的成本会增加（叠加的方式）</p>
@@ -772,7 +774,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1285,6 +1287,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

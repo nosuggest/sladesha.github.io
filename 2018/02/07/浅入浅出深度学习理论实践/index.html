@@ -476,7 +476,7 @@
 <p>回到最上面filter_num，filter_num的值就是重复上述流程的次数，随着次数的增加，会增加后面pooling层的基础数据层数：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-a186f2410acb046d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>每次黄色箭头后的pool层的层数就是filter_num。</p>
 <p>到此为止，卷积层就简单的梳理完了，主要是要清楚几个概念：filter_weights的作用，filter_num的定义，padding的差异，还有扫描的速度。这些主要是围绕着下面我要实际应用的场景梳理的卷积神经网络的知识点，如果要深刻透彻的了解还需要更多更深入的解读。</p>
 <h3 id="池化层一-池化层二"><a href="#池化层一-池化层二" class="headerlink" title="池化层一/池化层二"></a>池化层一/池化层二</h3><p>先从数学角度来看，它的操作步骤：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-1277229fc560f408.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>这张图看起来，和卷积层中的image –&gt; Convolved feature非常类似，也是确定一个shape之后，对shape内的数据进行操作，但是差异就在：<strong>卷积层中是采取对image里面的像素点逐点计算后汇总，相当于加权了每个像素点的作用；而池化层通常采用最大/最小/均值/求和等方式汇总Convolved feature</strong>。</p>
+<p>这张图看起来，和卷积层中的image —&gt; Convolved feature非常类似，也是确定一个shape之后，对shape内的数据进行操作，但是差异就在：<strong>卷积层中是采取对image里面的像素点逐点计算后汇总，相当于加权了每个像素点的作用；而池化层通常采用最大/最小/均值/求和等方式汇总Convolved feature</strong>。</p>
 <p>罗列出来就是：</p>
 <ul>
 <li>对象不同，一个是image，一个是Convolved feature</li>
@@ -505,7 +505,7 @@
 <p>再次强调，本文重点不在介绍CNN，而是利用CNN作为传统机器学习做协助，所以，如果想要深入了解CNN的同学建议从头开始学习，不建议阅读我这种跳讲的内容作为入门。</p>
 <h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p>相比CNN而言，RNN要简单而又有趣一些：</p>
 <p>几乎所有的讲RNN的技术文章都会有下面这张图，无法免俗，因为确实囊括了RNN的核心：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-246995854fe4a3f1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>不得不说，nlp是RNN非常优秀的应用场景，我们从nlp的角度去切入，观察RNN在其中所起的作用也是非常好的一个方式：<br>假设有一句话：“今天天气真的不是很好，让我们去<em>__</em>吧。”</p>
+<p>不得不说，nlp是RNN非常优秀的应用场景，我们从nlp的角度去切入，观察RNN在其中所起的作用也是非常好的一个方式：<br>假设有一句话：“今天天气真的不是很好，让我们去____吧。”</p>
 <p>如果用朴素贝叶斯来解决这个填空问题，它的解决思路是：</p>
 <ul>
 <li>先分词，今天，天气，真的，不是很好，让，我们，去，吧</li>
@@ -532,7 +532,7 @@
 <h1 id="Attention理解"><a href="#Attention理解" class="headerlink" title="Attention理解"></a>Attention理解</h1><p>在篇幅如此冗长的情况下，我依然坚持要和大家讨论一下关于Attention的一些看法和观点，我觉得正是有attention的存在，才让我们能够想到如何更好的去扩展应用这些深度学习的方法。</p>
 <p>我之前一直没有找到很好的通俗易懂的解释attention的文章，这边我尝试以业务的角度为大家分析一下，尽可能的抛开数学的角度让大家浅入浅出一下。</p>
 <p>假设存在用户A，及他的各种行为A_actions，如果我不做任何操作简单的把他的各种行为A_actions当成变量进行模型训练可以得到模型AM。但是，如果我知道，他可能是一个2年前流失近期活跃的用户，我选择剔除他两年前的A_actions，而只考虑他近期的行为，这样的过程其实就是一个Attention的过程，因为我们要预测他近期可能买什么，所以我们应该把关注点集中在了他近期的部分信息而不是全部信息上。</p>
-<p>而在深度学习运用的过程中，我们也应该考虑attention的问题，比如用户商品点击流为A–&gt;B–&gt;A–&gt;C–&gt;D，我们常规操作是什么样的？无非是：</p>
+<p>而在深度学习运用的过程中，我们也应该考虑attention的问题，比如用户商品点击流为A—&gt;B—&gt;A—&gt;C—&gt;D，我们常规操作是什么样的？无非是：</p>
 <ul>
 <li>生成4xembed_dim的embedding层</li>
 <li>将ABCD四个商品编号为0123</li>
@@ -553,7 +553,7 @@
 <p>换句话说，就是在坑爹的Encoder到Decoder过程中，增加了缓冲计算Ci，通过构造Ci代替Encoder结果进行Decoder的过程，让深度学习的过程更加的合理。<br><img src="http://upload-images.jianshu.io/upload_images/1129359-4d833425ca8bff8b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>数学的形式就是:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y1=f1(C1)</span><br><span class="line">y2=f1(C2,y1)</span><br><span class="line">y3=f1(C3,y1,y2)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>比如我在B商品停留了2mins，而其他商品均只停留了不到10s时，我们就可以构造缓冲C=g(0.1xf(A)+0.6xf(B)+0.1xf(C)+0.1xf(D))，这意味着A–&gt;B–&gt;A–&gt;C–&gt;D–&gt;?，对于？的判断，B起了比ACD都要重要的作用。</p>
+<p>比如我在B商品停留了2mins，而其他商品均只停留了不到10s时，我们就可以构造缓冲C=g(0.1xf(A)+0.6xf(B)+0.1xf(C)+0.1xf(D))，这意味着A—&gt;B—&gt;A—&gt;C—&gt;D—&gt;?，对于？的判断，B起了比ACD都要重要的作用。</p>
 <p>大名鼎鼎的RNN在attention的机制下就会变成：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-3eada4a94d4275f4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>那么具体如何构造缓冲C呢，我们看下面这个流程：<br>首先，在RNN最初参数设置的时候，我们会确定init memory，不妨记为z0；hi为当前时刻输出的隐层输出向量，所以对每个商品ABCD都有一个z0与hi的相似度∂0i：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1129359-3cfbf5662c5ce7e9.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>在每次循环之前，相当于考虑了当前所有的输入（比如此刻的ABCD）与initmemory的匹配度，至于匹配度match在论文中的计算方式为：矩阵变换α=hTWz (Multiplicative attention，Luong et al., 2015) ，其实简化为余弦相似度也是可以的，只要能判断两者之间的相似程度都行。算出所有的∂0a,∂0b,∂0c,∂0d后归一化后的值即可作为ABCD对应的隐层ha，hb，hc，hd的权重：<br><img src="http://upload-images.jianshu.io/upload_images/1129359-eafbed902bac58a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -919,7 +919,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1432,6 +1432,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

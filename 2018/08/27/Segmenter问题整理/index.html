@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Sta">
+<meta name="description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：     Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3     因为S">
 <meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stanford Word Segmenter问题整理">
 <meta property="og:url" content="http://sladesha.github.io/2018/08/27/Segmenter问题整理/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能">
+<meta property="og:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：     Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3     因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T07:19:38.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stanford Word Segmenter问题整理">
-<meta name="twitter:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：    Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3    因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能">
+<meta name="twitter:description" content="最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：     Item time(s)     jieba 0.4   snownlp 7.4   pynlpir 0.8   StanfordCoreNLP 21.5   pyltp 5.3     因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词">
 
 
 
@@ -409,6 +409,7 @@
 
       
         <p>最近在做一些nlp相关的项目，在涉及到Stanford CoreNLP工具包处理中文分词的时候，发现耗时问题很严重：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -439,6 +440,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>因为Stanford CoreNLP调用的是这个pipeline，而我们实际用的是切词功能，所以尝试只用它的切词部分功能，但是在做的过程中发现一些问题，整理如下：</p>
 <p>官网给出的方法<a href="http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.stanford_segmenter" target="_blank" rel="noopener">nltk.tokenize.stanford_segmenter module</a>是这么写的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.tokenize.stanford_segmenter <span class="keyword">import</span> StanfordSegmenter</span><br><span class="line">seg = StanfordSegmenter()</span><br><span class="line">seg.default_config(<span class="string">'zh'</span>)</span><br></pre></td></tr></table></figure>
@@ -705,7 +707,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">125.1k</span>
+    <span title="Site words total count">125.0k</span>
   
 </div>
 
@@ -1218,6 +1220,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
