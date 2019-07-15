@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="正则化问题," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -80,29 +80,18 @@
 
 
 
-<meta name="description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n">
-<meta name="keywords" content="正则化问题">
+<meta name="description" content="在代码维护的过程中，发现需要对某个变量进行保护，不允许调用修改，之前我一直使用的是_x或者__x的形式，这样做只是避免展示，但是如果想要强行修改，还是可以变更的，为了保证高安全性，这边可以参考@property的形式： 123456789101112class test(object):	&amp;quot;&amp;">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="正则化-Lasso规约">
-<meta property="og:url" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/index.html">
+<meta property="og:title" content="Python踩坑指南（第三季）">
+<meta property="og:url" content="http://sladesha.github.io/2019/07/15/Python踩坑指南（第三季）/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。 实际考虑回归的过程中，我们需要考虑">
+<meta property="og:description" content="在代码维护的过程中，发现需要对某个变量进行保护，不允许调用修改，之前我一直使用的是_x或者__x的形式，这样做只是避免展示，但是如果想要强行修改，还是可以变更的，为了保证高安全性，这边可以参考@property的形式： 123456789101112class test(object):	&amp;quot;&amp;quot;&amp;quot;docstring for test&amp;quot;&amp;quot;&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/1.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/2.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/3.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/4.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/5.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/6.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/7.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/8.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/9.png">
-<meta property="og:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/10.png">
-<meta property="og:updated_time" content="2019-05-10T10:20:34.449Z">
+<meta property="og:updated_time" content="2019-07-15T01:36:20.399Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则化-Lasso规约">
-<meta name="twitter:description" content="摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差   先看一波过拟合： 图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。 下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。 实际考虑回归的过程中，我们需要考虑">
-<meta name="twitter:image" content="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/1.png">
+<meta name="twitter:title" content="Python踩坑指南（第三季）">
+<meta name="twitter:description" content="在代码维护的过程中，发现需要对某个变量进行保护，不允许调用修改，之前我一直使用的是_x或者__x的形式，这样做只是避免展示，但是如果想要强行修改，还是可以变更的，为了保证高安全性，这边可以参考@property的形式： 123456789101112class test(object):	&amp;quot;&amp;quot;&amp;quot;docstring for test&amp;quot;&amp;quot;&amp;quot;">
 
 
 
@@ -132,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/07/15/Python踩坑指南（第三季）/"/>
 
 
 
 
 
-  <title>正则化-Lasso规约 | SladeSha's Algorithm World</title>
+  <title>Python踩坑指南（第三季） | SladeSha's Algorithm World</title>
   
 
 
@@ -299,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/06/02/正则化-Lasso规约/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/07/15/Python踩坑指南（第三季）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -316,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">正则化-Lasso规约</h1>
+          <h1 class="post-title" itemprop="name headline">Python踩坑指南（第三季）</h1>
         
 
         <div class="post-meta">
@@ -328,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:03:24+08:00">
-                2017-06-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-15T09:20:37+08:00">
+                2019-07-15
               </time>
             
 
@@ -351,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/代码集合/" itemprop="url" rel="index">
+                    <span itemprop="name">代码集合</span>
                   </a>
                 </span>
 
@@ -382,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,980 字
+                  630 字
                 </span>
               
 
@@ -398,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -419,35 +408,22 @@
       
 
       
-        <blockquote>
-<p>摘要：lasso的目的主要是避免数据拟合过渡，导致训练数据效果优秀，测试数据效果较差</p>
-</blockquote>
+        <p>在代码维护的过程中，发现需要对某个变量进行保护，不允许调用修改，之前我一直使用的是_x或者__x的形式，这样做只是避免展示，但是如果想要强行修改，还是可以变更的，为了保证高安全性，这边可以参考@property的形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class test(object):</span><br><span class="line">	&quot;&quot;&quot;docstring for test&quot;&quot;&quot;</span><br><span class="line">	def __init__(self, arg):</span><br><span class="line">		self._arg = arg</span><br><span class="line">	</span><br><span class="line">	@property</span><br><span class="line">	def arg(self):</span><br><span class="line">	    return self._arg</span><br><span class="line">	</span><br><span class="line">	@arg.setter</span><br><span class="line">	def set_arg(self,val):</span><br><span class="line">		self._arg=val</span><br></pre></td></tr></table></figure>
+<p>当想修改arg的值的时候，必须通过set_arg去修改，虽然仍然可以通过改_arg的方式，但是相对直接暴露多了一层保护；除此之外，它还可以实现一定的逻辑转化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">In [10]: class test(object):</span><br><span class="line">    ...: ^I&quot;&quot;&quot;docstring for test&quot;&quot;&quot;</span><br><span class="line">    ...: ^Idef __init__(self, arg):</span><br><span class="line">    ...: ^I^Iself._arg = arg</span><br><span class="line">    ...: ^I^Iself._half_arg = arg/2</span><br><span class="line">    ...: ^I</span><br><span class="line">    ...: ^I@property</span><br><span class="line">    ...: ^Idef arg(self):</span><br><span class="line">    ...: ^I    return self._arg</span><br><span class="line">    ...:</span><br><span class="line">    ...: ^I@property</span><br><span class="line">    ...: ^Idef half_arg(self):</span><br><span class="line">    ...: ^I    return self._half_arg</span><br><span class="line">    ...: ^I^I</span><br><span class="line">    ...: ^I@arg.setter</span><br><span class="line">    ...: ^Idef set_arg(self,val):</span><br><span class="line">    ...: ^I^Iself._arg=val</span><br><span class="line">    ...: ^I^Iself._half_arg = val/2</span><br><span class="line">    ...:</span><br><span class="line"></span><br><span class="line">In [11]: t=test(10)</span><br><span class="line"></span><br><span class="line">In [12]: t.arg</span><br><span class="line">Out[12]: 10</span><br><span class="line"></span><br><span class="line">In [13]: t.half_arg</span><br><span class="line">Out[13]: 5.0</span><br><span class="line"></span><br><span class="line">In [14]: t.set_arg=20</span><br><span class="line"></span><br><span class="line">In [15]: t.arg</span><br><span class="line">Out[15]: 20</span><br><span class="line"></span><br><span class="line">In [16]: t.half_arg</span><br><span class="line">Out[16]: 10.0</span><br></pre></td></tr></table></figure>
 <hr>
-<p>先看一波过拟合：<br><img src="/2017/06/02/正则化-Lasso规约/1.png" alt="拟合曲线"></p>
-<p>图中，红色的线存在明显的过拟合，绿色的线才是合理的拟合曲线，为了避免过拟合，我们可以引入正则化。</p>
-<p>下面可以利用正则化来解决曲线拟合过程中的过拟合发生，存在均方根误差也叫标准误差，即为√[∑di^2/n]=Re，n为测量次数；di为一组测量值与真值的偏差。<br><img src="/2017/06/02/正则化-Lasso规约/2.png" alt=""></p>
-<p>实际考虑回归的过程中，我们需要考虑到误差项，<br><img src="/2017/06/02/正则化-Lasso规约/3.png" alt=""></p>
-<p><img src="/2017/06/02/正则化-Lasso规约/4.png" alt=""></p>
-<p>这个和简单的线性回归的公式相似，而在正则化下来优化过拟合这件事情的时候，会加入一个约束条件，也就是惩罚函数：</p>
-<p><img src="/2017/06/02/正则化-Lasso规约/5.png" alt=""></p>
-<p>这边这个惩罚函数有多种形式，比较常用的有l1,l2，大概有如下几种：<br><img src="/2017/06/02/正则化-Lasso规约/6.png" alt=""></p>
-<p>讲一下比较常用的两种情况，q＝1和q＝2的情况：<br>q＝1，也就是今天想讲的lasso回归，为什么lasso可以控制过拟合呢，因为在数据训练的过程中，可能有几百个，或者几千个变量，再过多的变量衡量目标函数的因变量的时候，可能造成结果的过度解释，而通过q＝1下的惩罚函数来限制变量个数的情况，可以优先筛选掉一些不是特别重要的变量，见下图：</p>
-<p><img src="/2017/06/02/正则化-Lasso规约/7.png" alt=""></p>
-<p>作图只要不是特殊情况下与正方形的边相切，一定是与某个顶点优先相交，那必然存在横纵坐标轴中的一个系数为0，起到对变量的筛选的作用。<br>q＝2的时候，其实就可以看作是上面这个蓝色的圆，在这个圆的限制下，点可以是圆上的任意一点，所以q＝2的时候也叫做岭回归，岭回归是起不到压缩变量的作用的，在这个图里也是可以看出来的。</p>
+<p>利用None!=None的性质可以进行快速去None，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = df[df.label_y==df.label_y]</span><br></pre></td></tr></table></figure>
+<p>可以快速的把label_y=None的列进行剔除，比dropna要快一些。</p>
 <hr>
-<p>lasso回归：<br>lasso回归的特色就是在建立广义线型模型的时候，这里广义线型模型包含一维连续因变量、多维连续因变量、非负次数因变量、二元离散因变量、多元离散因变，除此之外，无论因变量是连续的还是离散的，lasso都能处理，总的来说，lasso对于数据的要求是极其低的，所以应用程度较广；除此之外，lasso还能够对变量进行筛选和对模型的复杂程度进行降低。这里的变量筛选是指不把所有的变量都放入模型中进行拟合，而是有选择的把变量放入模型从而得到更好的性能参数。 复杂度调整是指通过一系列参数控制模型的复杂度，从而避免过度拟合(Overfitting)。 对于线性模型来说，复杂度与模型的变量数有直接关系，变量数越多，模型复杂度就越高。 更多的变量在拟合时往往可以给出一个看似更好的模型，但是同时也面临过度拟合的危险。<br>lasso的复杂程度由<code>λ</code>来控制，<code>λ</code>越大对变量较多的线性模型的惩罚力度就越大，从而最终获得一个变量较少的模型。除此之外，另一个参数α来控制应对高相关性(highly correlated)数据时模型的性状。 lasso回归<code>α=1</code>，Ridge回归<code>α=0</code>，这就对应了惩罚函数的形式和目的。我们可以通过尝试若干次不同值下的λ，来选取最优λ下的参数，还可以结合CV选择最优秀的模型。</p>
-<h6 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setwd(&quot;~/Desktop&quot;)</span><br><span class="line">library(glmnet)</span><br><span class="line">train_origin&lt;-read.table(&apos;trian.txt&apos;,header = T,fill = T)</span><br><span class="line">test_origin&lt;-read.table(&apos;test.txt&apos;,header = T,fill = T)</span><br><span class="line">train_test1&lt;-train_origin</span><br><span class="line">train_test1&lt;-train_test1[,-9]</span><br><span class="line">train_test1$tag&lt;-as.factor(train_test1$tag)</span><br><span class="line">train_test1$risk_level&lt;-as.factor(train_test1$risk_level)</span><br><span class="line">x&lt;-train_test1[,3:11]</span><br><span class="line">y&lt;-train_test1[,2]</span><br><span class="line">## one hot encoding</span><br><span class="line">x1&lt;-model.matrix(~., x)</span><br></pre></td></tr></table></figure>
-<p>通常数据中会存在离散点，而lasso在R里面是通过数值矩阵来做输入的，所以需要对原数据做一步预处理，不然这边会抛错误；除此之外，如果数据之间差别的数量级较大，还需要进行标准化，R里面也是可以进行处理的，这边就不赘述了，<code>glmnet()</code>函数中添加参数<code>standardize = TRUE</code>来实现，<code>scale()</code>函数也可以实现，自行选择即可。</p>
-<h6 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = glmnet(x1, y, family=&quot;binomial&quot;, nlambda=50, alpha=1)</span><br></pre></td></tr></table></figure>
-<p><code>family</code>里面是指选择函数的类型：<br><code>family explation</code>,<code>gaussian univariate</code>,<code>mgaussian multivariate</code>,<code>poisson count</code>,<code>binomial binary</code>,<code>multinomial category</code><br>lambda是指随机选择λ，做lambda个模型；alpha是上述讲到的α，选择惩罚函数，正常情况下，1是lasso，0是岭回归<br>这边模型拓展可以交叉检验一下，有内置的函数：<br>cvmodel = cv.glmnet(x1, y, family = “binomial”, type.measure = “class”,nfolds=10)<br>这边会多出来一个<code>type.measure</code>，这个<code>type.measure</code>是指期望最小化的目标参量是什么，换句话说，就是衡量这个模型的指标函数是啥：<br><code>type.measure</code>  details<br><code>deviance</code>:  <em>-2倍的Log-likelihood</em><br><code>mse</code>:<em>mean squred error</em><br><code>mae</code>:<em>mean absolute error</em><br><code>class</code>:<em>missclassification error</em><br><code>auc</code>:<em>area under the ROC curve</em><br>比较常用的是<code>auc</code>，这个就是现在比较主流的衡量一个模型好坏的roc所衍生出来的一个值；我们这边用的是<code>class</code>，也就是模型错误分配的概率，结合我这次业务开发的实际业务场景，这个更合适一点；<code>nfolds</code>是指folds数目，也可以通过foldid数来控制每个fold里面的数据数量。<br>对于glmnet，可以通过<code>plot(model)</code>来观察每个自变量的变化轨迹，<code>cv.glmnet</code>可以通过<code>plot(cvmodel)</code><br>举个<code>plot(cvmodel)</code>的例子：</p>
-<p><img src="/2017/06/02/正则化-Lasso规约/8.png" alt=""></p>
-<p>可以通过<code>c(cvfit$lambda.min, cvfit$lambda.1se)</code>来看在所有的<code>λ</code>值中，得到最小目标函数<code>type.measure</code>均值的<code>cvfit$lambda.min</code>，以及其所对应的<code>λ</code>值可接受的一个标准误差之内对应的<code>cvfit$lambda.1se</code>。<br><img src="/2017/06/02/正则化-Lasso规约/9.png" alt=""><br>我们可以<code>print(model)</code>，在实际的选择模型中<code>λ</code>值的过程里，存在三个指标：<code>df</code>：自由度， <code>%Dev</code>：残差被解释的占比，也就是模型的好坏程度，类似于线性模型中的R平方，Lambda也就是<code>λ</code>值所对应的值，然后我们可以通过<code>coef(fit, s=c(fit$lambda[35],0.002))</code>得出当时模型所对应的系数。</p>
-<hr>
-<p>最后，讲一下elastic net<br>elastic net融合了l1范数和l2范数两种正则化的方法，上面的岭回归和lasso回归都可以看做它的特例：</p>
-<p><img src="/2017/06/02/正则化-Lasso规约/10.png" alt=""></p>
-<p>elastic net对于p远大于n,或者严重的多重共线性情况有明显的效果，很好理解，当alpha接近1时，elastic net表现很接近lasso，一般来说，elastic net是岭回归和lasso的很好的折中，当alpha从0变化到1，目标函数的稀疏解（部分变量的系数为0）也从0单调增加到lasso的稀疏解。</p>
-<p><strong>特征规约初步总结如下：</strong><br>1）子集选择 这是传统的方法，包括逐步回归和最优子集法等，对可能的部分子集拟合线性模型，利用判别准则 （如AIC,BIC,Cp,调整R2 等）决定最优的模型<br>2）收缩方法（shrinkage method） 收缩方法又称为正则化（regularization）。主要是岭回归（ridge regression）和lasso回归。通过对最小二乘估计加入罚约束，使某些系数的估计为0。（岭回归：消除共线性；模的平方处理；Lasso回归：压缩变量，起降维作用；模处理）<br>(3)维数缩减 主成分回归（PCR）和偏最小二乘回归（PLS）的方法。把p个预测变量投影到m维空间</p>
-<p><em>部分图片转载于：<a href="http://bbs.pinggu.org/thread-3848519-1-1.html" target="_blank" rel="noopener">http://bbs.pinggu.org/thread-3848519-1-1.html</a></em></p>
+<p>traceback可以很好的把错误信息进行暴露，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">     1/0</span><br><span class="line">except Exception,e:</span><br><span class="line">    print e</span><br></pre></td></tr></table></figure></p>
+<p>如果这样包起来错误的花,输出结果是integer division or modulo by zero，只知道是报了这个错，但是却不知道在哪个文件哪个函数哪一行报的错</p>
+<p>如果使用traceback:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">     1/0</span><br><span class="line">except Exception  as e:</span><br><span class="line">    traceback.print_exc()</span><br></pre></td></tr></table></figure>
+<p>输出结果是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last): </span><br><span class="line"></span><br><span class="line">File “test_traceback.py”, line 3, in  </span><br><span class="line"></span><br><span class="line">1/0 </span><br><span class="line"></span><br><span class="line">ZeroDivisionError: integer division or modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>这个还不是精髓的，如果说在一个服务中，或者大型项目中，我们不会时时刻刻去盯着进程，还可以进行落日志，方便后续查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">traceback.print_exc(file=open(‘tb.txt’,’w+’)) </span><br><span class="line">import time</span><br><span class="line">try:</span><br><span class="line">     1/0</span><br><span class="line">except Exception  as e:</span><br><span class="line">    traceback.print_exc(file=open(str(time.time())+&apos;.txt&apos;,&apos;w+&apos;))</span><br></pre></td></tr></table></figure></p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 
       
     </div>
@@ -494,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/正则化问题/" rel="tag"># 正则化问题</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -507,14 +483,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/01/transformer工程实现笔记/" rel="next" title="transformer工程实现笔记">
+                <i class="fa fa-chevron-left"></i> transformer工程实现笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/02/因子分析原理剖析/" rel="prev" title="因子分析原理剖析">
-                因子分析原理剖析 <i class="fa fa-chevron-right"></i>
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -572,17 +552,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -680,22 +651,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#读取数据"><span class="nav-number">1.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#模型训练"><span class="nav-number">2.</span> <span class="nav-text">模型训练</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
