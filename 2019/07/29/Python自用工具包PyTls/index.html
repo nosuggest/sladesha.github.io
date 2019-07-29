@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="做这件事的初衷是发生了一个星期要同时用python开发3个项目的情况，我发现了两个现象：1.有很多定制化的需求是极度高频反复重写的；2.有很多功能之前写过，可能因为稍许复杂又忘了，再用的时候又要去Google。所以，拉着一个实习生，一起维护了PyTls的这个项目，为的就是那句”life is short, we need python”。 所有的详细的测试demo都可以在我的git找到，PyTls">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T03:46:36.642Z">
+<meta property="og:updated_time" content="2019-07-29T03:51:02.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python自用工具包PyTls">
 <meta name="twitter:description" content="做这件事的初衷是发生了一个星期要同时用python开发3个项目的情况，我发现了两个现象：1.有很多定制化的需求是极度高频反复重写的；2.有很多功能之前写过，可能因为稍许复杂又忘了，再用的时候又要去Google。所以，拉着一个实习生，一起维护了PyTls的这个项目，为的就是那句”life is short, we need python”。 所有的详细的测试demo都可以在我的git找到，PyTls">
@@ -340,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/代码集合/" itemprop="url" rel="index">
-                    <span itemprop="name">代码集合</span>
+                  <a href="/categories/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
                   </a>
                 </span>
 
@@ -410,6 +410,7 @@
       
         <p>做这件事的初衷是发生了一个星期要同时用python开发3个项目的情况，我发现了两个现象：1.有很多定制化的需求是极度高频反复重写的；2.有很多功能之前写过，可能因为稍许复杂又忘了，再用的时候又要去Google。所以，拉着一个实习生，一起维护了PyTls的这个项目，为的就是那句”life is short, we need python”。</p>
 <p>所有的详细的测试demo都可以在我的git找到，<a href="https://github.com/sladesha/PyTls/blob/master/demos.py" target="_blank" rel="noopener">PyTls的使用手册</a> 肯定可以帮助到你一些，以下简单的介绍一下每个功能。</p>
+<hr>
 <h1 id="dictt"><a href="#dictt" class="headerlink" title="dictt"></a>dictt</h1><h3 id="get-map-value"><a href="#get-map-value" class="headerlink" title="get_map_value()"></a>get_map_value()</h3><p>由于工程设计问题，我们的数据流中存在多层的字典数据格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [7]: msg = &#123;&apos;time&apos;:&#123;&apos;20190714&apos;:234,&apos;20190715&apos;:311&#125;&#125;</span><br><span class="line">In [8]: dictt.get_map_value(msg,None,True,&apos;time&apos;,&apos;20190714&apos;)</span><br><span class="line">Out[8]: 234</span><br></pre></td></tr></table></figure></p>
 <p>这边None是查找不到的时候的默认值，True可以不用管，是我这边设计的是否一定要底层查找，比较业务化通用性不好，True之后就是依次需要按逻辑查找的dict字段。</p>
 <h3 id="update-map-value"><a href="#update-map-value" class="headerlink" title="update_map_value()"></a>update_map_value()</h3><p>is_strict：True不允许新增kv，这边不会报错，只会增加不成功，需要注意一下。</p>
@@ -420,6 +421,7 @@
 <h3 id="merge"><a href="#merge" class="headerlink" title="merge()"></a>merge()</h3><p>合并两个dict,顺便说一句，reduce(merge,*dicts)，合并N个，这个比较少用就没整理</p>
 <h3 id="func-dict"><a href="#func-dict" class="headerlink" title="func_dict()"></a>func_dict()</h3><p>这个功能比较拗口，比如我们现在有个function，input 2，output 4，且想存储所有的kv结果，所以可以用这个功能进行记录。注意，这边的入参应该是一个<strong>函数</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F = dictt.func_dict(lambda x: x * 2)</span><br><span class="line">print((F[2], F))</span><br><span class="line"># (4, defaultdict(&lt;function &lt;lambda&gt; at 0x103d812f0&gt;, &#123;2: 4&#125;))</span><br></pre></td></tr></table></figure></p>
 <h3 id="WordCount"><a href="#WordCount" class="headerlink" title="WordCount()"></a>WordCount()</h3><p>字典树，快速查询和高效存储，支持string和list/tuple；支持计数、查找、位置校验三个核心功能<br>目前只output了是否存在查询词的功能，稍微改一下output就可以得到计数结果和位置结果，看有需要后期扩展一下这个功能，要说的是里面用了dfs，有点慢所以加了cache，这个点大家可以自行优化。</p>
+<hr>
 <h1 id="StrBuffer"><a href="#StrBuffer" class="headerlink" title="StrBuffer"></a>StrBuffer</h1><p>参考java中的StringButter而写的字符类，增加一些功能，重命名了我比较熟悉喜欢用的函数名，加了一些str内置没有的功能</p>
 <h3 id="append"><a href="#append" class="headerlink" title="append()"></a>append()</h3><p>增加一个字符</p>
 <h3 id="index-at"><a href="#index-at" class="headerlink" title="index_at()"></a>index_at()</h3><p>查找某个元素的index</p>
@@ -427,28 +429,35 @@
 <h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>倒排所有字符</p>
 <h3 id="char-at"><a href="#char-at" class="headerlink" title="char_at()"></a>char_at()</h3><p>查找某个index的元素</p>
 <h3 id="to-str-storge"><a href="#to-str-storge" class="headerlink" title="to_str()/storge()"></a>to_str()/storge()</h3><p>to_str:以string的方式打印当前字符串<br>storge:以list的方式打印当前字符串</p>
+<hr>
 <h1 id="strt"><a href="#strt" class="headerlink" title="strt"></a>strt</h1><h3 id="str-reverse"><a href="#str-reverse" class="headerlink" title="str_reverse()"></a>str_reverse()</h3><p>字符串反转</p>
 <h3 id="str-repeat"><a href="#str-repeat" class="headerlink" title="str_repeat()"></a>str_repeat()</h3><p>字符串快速复制，n为复制的次数</p>
 <h3 id="str-splits"><a href="#str-splits" class="headerlink" title="str_splits()"></a>str_splits()</h3><p>字符串批切割，split_chars为分隔符，支持多个，以|连接，warning_info可以设置为False进行关闭，取消提示信息</p>
+<hr>
 <h1 id="typet"><a href="#typet" class="headerlink" title="typet"></a>typet</h1><p>基础的格式判断类，复用程度不高，主要是用来支持这个项目中的其他功能</p>
 <h3 id="is-none"><a href="#is-none" class="headerlink" title="is_none()"></a>is_none()</h3><p>是否为None，支持None和np.nan判断</p>
 <h3 id="is-type"><a href="#is-type" class="headerlink" title="is_type()"></a>is_type()</h3><p>判断是否为对应类型，类似于isinstance</p>
 <h3 id="is-empty"><a href="#is-empty" class="headerlink" title="is_empty()"></a>is_empty()</h3><p>判断是否为空</p>
 <h3 id="is-has-attr"><a href="#is-has-attr" class="headerlink" title="is_has_attr()"></a>is_has_attr()</h3><p>判断是否含有某个属性，类中是否有某个属性变量</p>
+<hr>
 <h1 id="loaddatat"><a href="#loaddatat" class="headerlink" title="loaddatat"></a>loaddatat</h1><p>pickle 的数据持久化，这个我用的最多，特别好用，可以支持在保持模型，整理数据，保存日志，存储报错信息等各个方向，我基本上每次必加载</p>
 <h3 id="readbunchobj"><a href="#readbunchobj" class="headerlink" title="readbunchobj()"></a>readbunchobj()</h3><p>读数据</p>
 <h3 id="writebunchobj"><a href="#writebunchobj" class="headerlink" title="writebunchobj()"></a>writebunchobj()</h3><p>存数据</p>
+<hr>
 <h1 id="randomt"><a href="#randomt" class="headerlink" title="randomt"></a>randomt</h1><p>随机数</p>
 <h3 id="get-random"><a href="#get-random" class="headerlink" title="get_random()"></a>get_random()</h3><p>迭代器办，每次随机取一个;min_value, max_value限制范围，limit限制可取的迭代次数</p>
+<hr>
 <h1 id="Chinese2num-py"><a href="#Chinese2num-py" class="headerlink" title="Chinese2num.py"></a>Chinese2num.py</h1><p>数字相关，提取数字更加强大的功能建议参考YMMNlpUtils</p>
 <h3 id="Chinese-2-num"><a href="#Chinese-2-num" class="headerlink" title="Chinese_2_num()"></a>Chinese_2_num()</h3><p>中文转成数字，支持繁体中文简体中文的转换，如果是提取手机号的或者更复杂的数据建议参考YMMNlpUtils项目</p>
 <h3 id="isdigit"><a href="#isdigit" class="headerlink" title="isdigit()"></a>isdigit()</h3><p>判断是否为数字，同样也支持小数，也可以识别str后的数字，会自动解析掉str，”0.234”—&gt;True</p>
+<hr>
 <h1 id="matht"><a href="#matht" class="headerlink" title="matht"></a>matht</h1><p>数学相关的类，包括信息熵，ln，互信息，条件概率等;<strong>所有熵计算的函数中有个expiation的参数，设置为False就不提醒是否越大越稳定还是不稳定的提示信息了</strong>，主要是为老忘，自己提醒自己的</p>
 <h3 id="ln"><a href="#ln" class="headerlink" title="ln()"></a>ln()</h3><p>以e为地的对数</p>
 <h3 id="entropy"><a href="#entropy" class="headerlink" title="entropy()"></a>entropy()</h3><p>熵值</p>
 <h3 id="condition-entropy"><a href="#condition-entropy" class="headerlink" title="condition_entropy()"></a>condition_entropy()</h3><p>条件熵</p>
 <h3 id="MI"><a href="#MI" class="headerlink" title="MI()"></a>MI()</h3><p>来自于条件概率计算法：H(x)-H(x/y)</p>
 <h3 id="NMI"><a href="#NMI" class="headerlink" title="NMI()"></a>NMI()</h3><p>来自于公式的互信息熵计算：2<em>∑pxylog(pxy/(px</em>py))/(H(x)+H(y))</p>
+<hr>
 <h1 id="listt"><a href="#listt" class="headerlink" title="listt"></a>listt</h1><p>list相关的处理，list是我最常用的一个type，所以我写了比较多而且以后也会最常去更新的一个地方，确实很多东西固化下来很好用;该部分代码尽可能考虑了时间复杂度，可能会牺牲一些空间复杂度，各位自行取舍</p>
 <h3 id="index-hash-map"><a href="#index-hash-map" class="headerlink" title="index_hash_map()"></a>index_hash_map()</h3><p>list元素出现位置，等同于numpy array中的<code>np.where</code></p>
 <h3 id="Pi"><a href="#Pi" class="headerlink" title="Pi()"></a>Pi()</h3><p>list元素出现的个数分布</p>
@@ -461,6 +470,7 @@
 <h3 id="getindex"><a href="#getindex" class="headerlink" title="getindex()"></a>getindex()</h3><p>返回list中最大/最小元素的位置:[3,1,2],flag=”max”—&gt;0/[3,1,2],flag=”min”—&gt;1;这边参数flag记得要小写min/max，大写暂不识别</p>
 <h3 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h3><p>list按照指定个数切分，比如split([1,2,3,4],3)—&gt;[(1,2,3)]；如果list%需要切分的长度!=0，则末端部分会被舍弃，需要注意一下；如果确实需要的话可以进行尾部以0填充，保证不丢失数据；</p>
 <h3 id="unzip"><a href="#unzip" class="headerlink" title="unzip()"></a>unzip()</h3><p>把zip后的数据还原</p>
+<hr>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转&gt;行疑问都欢迎通过邮箱发消息给我。</p>
 
       
