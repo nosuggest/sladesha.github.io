@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/about/index.html</loc>
+    
+    <lastmod>2019-07-29T06:20:36.208Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2019/07/29/Python%E8%87%AA%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8C%85PyTls/</loc>
     
     <lastmod>2019-07-29T05:40:13.823Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://sladesha.github.io/2029/01/20/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%AF%BB%E5%85%AC%E5%91%8A/</loc>
     
     <lastmod>2019-07-03T02:01:44.436Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/about/index.html</loc>
-    
-    <lastmod>2019-07-01T01:59:19.952Z</lastmod>
     
   </url>
   
