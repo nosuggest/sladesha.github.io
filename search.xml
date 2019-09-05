@@ -112,8 +112,10 @@
 </li>
 </ul>
 <p>之后的转移方程反而非常简单:<code>d[i] = max(d[i - 1], d[i - 2] + target[i])</code></p>
-<h1 id="技巧类型"><a href="#技巧类型" class="headerlink" title="技巧类型"></a>技巧类型</h1><pre><code>- [940. 不同的子序列 II](https://leetcode-cn.com/problems/distinct-subsequences-ii/)
-</code></pre><p>这题在于要想到把字符转化对应的ASCII码，转移方程:<code>array[ord(c)-ord(&quot;a&quot;)]=sum(array)+1</code>，除此之外还需要想到新增一个字母等于当前所有字母后面可加+单独自身，这个方程确实非常非常有技巧</p>
+<h1 id="技巧类型"><a href="#技巧类型" class="headerlink" title="技巧类型"></a>技巧类型</h1><ul>
+<li><a href="https://leetcode-cn.com/problems/distinct-subsequences-ii/" target="_blank" rel="noopener">940. 不同的子序列 II</a></li>
+</ul>
+<p>这题在于要想到把字符转化对应的ASCII码，转移方程:<code>array[ord(c)-ord(&quot;a&quot;)]=sum(array)+1</code>，除此之外还需要想到新增一个字母等于当前所有字母后面可加+单独自身，这个方程确实非常非常有技巧</p>
 <hr>
 <p>以上为LeetCode中比较有代表性的一些题目，把这些搞懂之后可以解决绝大多数dp的类似题型，以2020校招为例：</p>
 <p><strong>携程 - Deep learning Engineer</strong></p>

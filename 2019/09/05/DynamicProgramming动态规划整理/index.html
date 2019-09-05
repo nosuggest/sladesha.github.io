@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是:dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态方程是:result[i]=result[i-1]+result[i-2] 19">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T05:27:43.557Z">
+<meta property="og:updated_time" content="2019-09-05T05:34:21.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DynamicProgramming动态规划整理">
 <meta name="twitter:description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是:dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态方程是:result[i]=result[i-1]+result[i-2] 19">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,152 字
+                  1,144 字
                 </span>
               
 
@@ -466,8 +466,10 @@
 </li>
 </ul>
 <p>之后的转移方程反而非常简单:<code>d[i] = max(d[i - 1], d[i - 2] + target[i])</code></p>
-<h1 id="技巧类型"><a href="#技巧类型" class="headerlink" title="技巧类型"></a>技巧类型</h1><pre><code>- [940. 不同的子序列 II](https://leetcode-cn.com/problems/distinct-subsequences-ii/)
-</code></pre><p>这题在于要想到把字符转化对应的ASCII码，转移方程:<code>array[ord(c)-ord(&quot;a&quot;)]=sum(array)+1</code>，除此之外还需要想到新增一个字母等于当前所有字母后面可加+单独自身，这个方程确实非常非常有技巧</p>
+<h1 id="技巧类型"><a href="#技巧类型" class="headerlink" title="技巧类型"></a>技巧类型</h1><ul>
+<li><a href="https://leetcode-cn.com/problems/distinct-subsequences-ii/" target="_blank" rel="noopener">940. 不同的子序列 II</a></li>
+</ul>
+<p>这题在于要想到把字符转化对应的ASCII码，转移方程:<code>array[ord(c)-ord(&quot;a&quot;)]=sum(array)+1</code>，除此之外还需要想到新增一个字母等于当前所有字母后面可加+单独自身，这个方程确实非常非常有技巧</p>
 <hr>
 <p>以上为LeetCode中比较有代表性的一些题目，把这些搞懂之后可以解决绝大多数dp的类似题型，以2020校招为例：</p>
 <p><strong>携程 - Deep learning Engineer</strong></p>
