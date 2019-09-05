@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是：dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态">
+<meta name="description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是:dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态">
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DynamicProgramming动态规划整理">
 <meta property="og:url" content="http://sladesha.github.io/2019/09/05/DynamicProgramming动态规划整理/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是：dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态方程是：result[i]=result[i-1]+result[i-2] 19">
+<meta property="og:description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是:dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态方程是:result[i]=result[i-1]+result[i-2] 19">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T05:20:45.900Z">
+<meta property="og:updated_time" content="2019-09-05T05:27:43.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DynamicProgramming动态规划整理">
-<meta name="twitter:description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是：dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态方程是：result[i]=result[i-1]+result[i-2] 19">
+<meta name="twitter:description" content="整理一下刷题过程中的一些想法，方便以后高效复习，动态规划部分整理如下： 主要的思路有如下几种： 基础类型 只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：  一维度： 53. 最大子序和,状态方程是:dp[i] = max(dp[i-1]+nums[i],nums[i]) 70. 爬楼梯,状态方程是:result[i]=result[i-1]+result[i-2] 19">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,157 字
+                  1,152 字
                 </span>
               
 
@@ -414,18 +414,18 @@
 <li><p>只需要写出i和i-1之间的状态转移方程即可，没有任何额外操作的行为，比如：</p>
 <ul>
 <li>一维度：<ul>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode53maximum-subarray.py" target="_blank" rel="noopener">53. 最大子序和</a>,状态方程是：<code>dp[i] = max(dp[i-1]+nums[i],nums[i])</code></li>
-<li><a href="https://leetcode-cn.com/problems/climbing-stairs/s" target="_blank" rel="noopener">70. 爬楼梯</a>,状态方程是：<code>result[i]=result[i-1]+result[i-2]</code></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode53maximum-subarray.py" target="_blank" rel="noopener">53. 最大子序和</a>,状态方程是:<code>dp[i] = max(dp[i-1]+nums[i],nums[i])</code></li>
+<li><a href="https://leetcode-cn.com/problems/climbing-stairs/s" target="_blank" rel="noopener">70. 爬楼梯</a>,状态方程是:<code>result[i]=result[i-1]+result[i-2]</code></li>
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode198house-robber.py" target="_blank" rel="noopener">198. 打家劫舍</a>,状态方程是:<code>dp[i] = max(dp[i-3],dp[i-2])+nums[i]</code></li>
 </ul>
 </li>
 <li><p>高维度：</p>
 <ul>
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode120triangle.py" target="_blank" rel="noopener">120. 三角形最小路径和</a>,状态方程是:<code>dp[k][z] = min((dp[k-1][z]+triangle[k][z]),(dp[k-1][z-1]+triangle[k][z]))</code></li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution63.java" target="_blank" rel="noopener">63. 不同路径 II</a>,状态方程是：<code>obstacleGrid[i][j] = obstacleGrid[i][j - 1] + obstacleGrid[i - 1][j]</code></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution63.java" target="_blank" rel="noopener">63. 不同路径 II</a>,状态方程是:<code>obstacleGrid[i][j] = obstacleGrid[i][j - 1] + obstacleGrid[i - 1][j]</code></li>
 <li><p><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode64minimum-path-sum.py" target="_blank" rel="noopener">64. 最小路径和</a>,状态方程是:<code>mat[i][j] = min(mat[i - 1][j], mat[i][j - 1]) + grid[i][j]</code></p>
 </li>
-<li><p><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode221maximal-square.py" target="_blank" rel="noopener">221. 最大正方形</a>,,状态方程是:<code>dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1</code></p>
+<li><p><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode221maximal-square.py" target="_blank" rel="noopener">221. 最大正方形</a>,状态方程是:<code>dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1</code></p>
 </li>
 </ul>
 </li>
@@ -434,9 +434,9 @@
 </ul>
 <h1 id="中间变量类型"><a href="#中间变量类型" class="headerlink" title="中间变量类型"></a>中间变量类型</h1><ul>
 <li>需要额外借助<strong>第三方变量</strong>进行中间值判断的：<ul>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution121.java" target="_blank" rel="noopener">121. 买卖股票的最佳时机</a>,状态方程是：<code>Math.max(profit, prices[i] - Math.min(minprofit, prices[i]));</code></li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode139word-break.py" target="_blank" rel="noopener">139. 单词拆分</a>,状态方程是：<code>dp[j] = True if dp[i] and s[i:j] in wordDict</code></li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution264.java" target="_blank" rel="noopener">264. 丑数 II</a>,状态方程是：<code>int minval = Math.min(last_2,Math.min(last_3,last_5));</code></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution121.java" target="_blank" rel="noopener">121. 买卖股票的最佳时机</a>,状态方程是:<code>Math.max(profit, prices[i] - Math.min(minprofit, prices[i]));</code></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode139word-break.py" target="_blank" rel="noopener">139. 单词拆分</a>,状态方程是:<code>dp[j] = True if dp[i] and s[i:j] in wordDict</code></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution264.java" target="_blank" rel="noopener">264. 丑数 II</a>,状态方程是:<code>int minval = Math.min(last_2,Math.min(last_3,last_5));</code></li>
 </ul>
 </li>
 </ul>
@@ -447,34 +447,38 @@
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode91decode-ways.py" target="_blank" rel="noopener">91. 解码方法</a>,状态方程条件是：<code>s[i] != &quot;0&quot;和s[i - 1] != &quot;0&quot; and int(s[i - 1:i + 1]) &lt;= 26</code></li>
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode152maximum-product-subarray.py" target="_blank" rel="noopener">152. 乘积最大子序列</a>,状态方程条件是：<code>MAX, MIN = MIN, MAX if nums[i] &lt; 0</code></li>
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution300.java" target="_blank" rel="noopener">300. 最长上升子序列</a>,状态方程条件是：<code>if (nums[i] &gt; nums[j]) {dp[i] = Math.max(dp[i], dp[j] + 1);}</code></li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution338.java" target="_blank" rel="noopener">338. 比特位计数</a>,状态方程条件是：<code>if (i%2==1){ans[i] = ans[i-1]+1;}else {ans[i] = ans[i/2];}</code></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/src/Solution338.java" target="_blank" rel="noopener">338. 比特位计数</a>,状态方程条件是：<code>if (i%2==1){ans[i] = ans[i-1]+1;} else {ans[i] = ans[i/2];}</code></li>
 </ul>
 </li>
 </ul>
-<h1 id="倒叙逆向类型："><a href="#倒叙逆向类型：" class="headerlink" title="倒叙逆向类型："></a>倒叙逆向类型：</h1><pre><code>- [174. 地下城游戏](https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode174dungeon-game.py),状态转移方程是:`dp[i][j] = max(1, min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j])`
-</code></pre><h1 id="循环判断类型"><a href="#循环判断类型" class="headerlink" title="循环判断类型"></a>循环判断类型</h1><ul>
+<h1 id="倒叙逆向类型"><a href="#倒叙逆向类型" class="headerlink" title="倒叙逆向类型"></a>倒叙逆向类型</h1><ul>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode174dungeon-game.py" target="_blank" rel="noopener">174. 地下城游戏</a>,状态转移方程是:<code>dp[i][j] = max(1, min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j])</code><br>反方向的的递归，比较打破常规思维</li>
+</ul>
+<h1 id="循环判断类型"><a href="#循环判断类型" class="headerlink" title="循环判断类型"></a>循环判断类型</h1><ul>
 <li>在dp的基础上需要再遍历已经扫过的数组。此类方法的复杂度一般较高:<ul>
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode279perfect-squares.py" target="_blank" rel="noopener">279. 完全平方数</a>,状态转移方程是：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while i - j ** 2 &gt;= 0:</span><br><span class="line">    dp[i] = min(dp[i], dp[i - j ** 2] + 1)</span><br><span class="line">    j += 1</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="预处理类型"><a href="#预处理类型" class="headerlink" title="预处理类型"></a>预处理类型</h1><pre><code>- [740. 删除与获得点数](https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode740delete-and-earn.py)
-</code></pre><p>这题麻烦在预处理每一个值，因为值有可能重复：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target = [0] * (max(nums) + 1)</span><br><span class="line">for num in nums:</span><br><span class="line">    target[num] += num</span><br></pre></td></tr></table></figure></p>
+<h1 id="预处理类型"><a href="#预处理类型" class="headerlink" title="预处理类型"></a>预处理类型</h1><ul>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode740delete-and-earn.py" target="_blank" rel="noopener">740. 删除与获得点数</a><br>这题麻烦在预处理每一个值，因为值有可能重复：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target = [0] * (max(nums) + 1)</span><br><span class="line">for num in nums:</span><br><span class="line">    target[num] += num</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>之后的转移方程反而非常简单:<code>d[i] = max(d[i - 1], d[i - 2] + target[i])</code></p>
 <h1 id="技巧类型"><a href="#技巧类型" class="headerlink" title="技巧类型"></a>技巧类型</h1><pre><code>- [940. 不同的子序列 II](https://leetcode-cn.com/problems/distinct-subsequences-ii/)
 </code></pre><p>这题在于要想到把字符转化对应的ASCII码，转移方程:<code>array[ord(c)-ord(&quot;a&quot;)]=sum(array)+1</code>，除此之外还需要想到新增一个字母等于当前所有字母后面可加+单独自身，这个方程确实非常非常有技巧</p>
 <hr>
-<p>以上为LeetCode中比较有代表性的一些题目，把这些搞懂之后可以解决绝大多数类似题型，以2020校招为例：</p>
+<p>以上为LeetCode中比较有代表性的一些题目，把这些搞懂之后可以解决绝大多数dp的类似题型，以2020校招为例：</p>
 <p><strong>携程 - Deep learning Engineer</strong></p>
 <blockquote>
 <p>给定一个时刻表，根据目的地进行分组，同一个目的地必须尽可能的多分，不能打乱顺序，比如aabbcddc，需要分成aa|bb|cddc,而不能分成aabb|cddc，因为这种情况下不是最多，也不能分成aa|bb|c|dd|c,因为相同的c没有被分在一起；求分组个数；</p>
 </blockquote>
-<p>这题就是典型的循环判断类型+中间变量类型，需要储存历史遍历结果并多次查询，<a href="https://github.com/sladesha/LeetCode/blob/master/random/%E6%95%B0%E7%BB%84%E5%88%86%E7%BB%84%E9%97%AE%E9%A2%98.py" target="_blank" rel="noopener">Code解答</a></p>
+<p>这题就是典型的循环判断类型+中间变量类型，需要储存历史遍历结果并多次查询，<a href="https://github.com/sladesha/LeetCode/blob/master/random/%E6%95%B0%E7%BB%84%E5%88%86%E7%BB%84%E9%97%AE%E9%A2%98.py" target="_blank" rel="noopener">代码解答</a></p>
 <p><strong>Tencent - Deep learning Engineer</strong><br><a href="http://codeforces.com/contest/474/problem/D" target="_blank" rel="noopener">花匠摆花问题</a>，两个坑：<br>1.用traceback的就直接gg，比如我<br>2.dp[i]为当前的长度为i的可摆放个数，dp[i] = dp[i-1]+dp[i-k]为状态转移矩阵，更多解释看代码注释</p>
 <p>这题就是简单的基础类型，唯一难的地方是要想到i-k这个dp结果</p>
 <p>Dynamic Programming 动态规划就给大家整理到这，如果大家想看更多的数据结构问题，可以关注一下<a href="https://github.com/sladesha/LeetCode" target="_blank" rel="noopener">我的Github</a>，希望有所帮助。</p>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转&gt;行疑问都欢迎通过邮箱发消息给我。</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 
       
     </div>
@@ -721,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础类型"><span class="nav-number">1.</span> <span class="nav-text">基础类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中间变量类型"><span class="nav-number">2.</span> <span class="nav-text">中间变量类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定制判断类型"><span class="nav-number">3.</span> <span class="nav-text">定制判断类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倒叙逆向类型："><span class="nav-number">4.</span> <span class="nav-text">倒叙逆向类型：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环判断类型"><span class="nav-number">5.</span> <span class="nav-text">循环判断类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预处理类型"><span class="nav-number">6.</span> <span class="nav-text">预处理类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技巧类型"><span class="nav-number">7.</span> <span class="nav-text">技巧类型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础类型"><span class="nav-number">1.</span> <span class="nav-text">基础类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中间变量类型"><span class="nav-number">2.</span> <span class="nav-text">中间变量类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定制判断类型"><span class="nav-number">3.</span> <span class="nav-text">定制判断类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倒叙逆向类型"><span class="nav-number">4.</span> <span class="nav-text">倒叙逆向类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环判断类型"><span class="nav-number">5.</span> <span class="nav-text">循环判断类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预处理类型"><span class="nav-number">6.</span> <span class="nav-text">预处理类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技巧类型"><span class="nav-number">7.</span> <span class="nav-text">技巧类型</span></a></li></ol></div>
             
 
           </div>
