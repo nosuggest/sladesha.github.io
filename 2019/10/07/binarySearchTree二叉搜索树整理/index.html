@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="数据结构," />
 
 
 
@@ -80,16 +80,18 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SladeSha&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/categories/工具/index.html">
+<meta name="description" content="所有数据结构中，我之前最不熟悉的都是二叉树题型，因为时间问题重来没有静心去研究过，十一正好有时间，在家里整理了二叉树基本的概念，希望自己不再有不熟悉的常见题型。 二叉树满二叉树所有分支结点都存在左右子树，并且所有叶子结点都在同一层上，这样即满二叉树。  叶子结点都在最底层 同样深度，结点个数最多，叶子树最多  完全二叉">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="binarySearchTree二叉搜索树整理">
+<meta property="og:url" content="http://sladesha.github.io/2019/10/07/binarySearchTree二叉搜索树整理/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="所有数据结构中，我之前最不熟悉的都是二叉树题型，因为时间问题重来没有静心去研究过，十一正好有时间，在家里整理了二叉树基本的概念，希望自己不再有不熟悉的常见题型。 二叉树满二叉树所有分支结点都存在左右子树，并且所有叶子结点都在同一层上，这样即满二叉树。  叶子结点都在最底层 同样深度，结点个数最多，叶子树最多  完全二叉树一个n个结点的二叉树按层序排列，所有结点与同样深度的满二叉树中的位置相同，这就">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-07T13:00:39.900Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SladeSha&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:title" content="binarySearchTree二叉搜索树整理">
+<meta name="twitter:description" content="所有数据结构中，我之前最不熟悉的都是二叉树题型，因为时间问题重来没有静心去研究过，十一正好有时间，在家里整理了二叉树基本的概念，希望自己不再有不熟悉的常见题型。 二叉树满二叉树所有分支结点都存在左右子树，并且所有叶子结点都在同一层上，这样即满二叉树。  叶子结点都在最底层 同样深度，结点个数最多，叶子树最多  完全二叉树一个n个结点的二叉树按层序排列，所有结点与同样深度的满二叉树中的位置相同，这就">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/categories/工具/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/10/07/binarySearchTree二叉搜索树整理/"/>
 
 
 
 
 
-  <title>分类: 工具 | SladeSha's Algorithm World</title>
+  <title>binarySearchTree二叉搜索树整理 | SladeSha's Algorithm World</title>
   
 
 
@@ -144,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,55 +274,286 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>工具<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/10/07/binarySearchTree二叉搜索树整理/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/06/19/常用R语言包介绍/" itemprop="url">
-              
-                <span itemprop="name">常用R语言包介绍</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">binarySearchTree二叉搜索树整理</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-19T00:11:41+08:00"
-              content="2017-06-19" >
-          06-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-07T20:59:30+08:00">
+                2019-10-07
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,051 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>所有数据结构中，我之前最不熟悉的都是二叉树题型，因为时间问题重来没有静心去研究过，十一正好有时间，在家里整理了二叉树基本的概念，希望自己不再有不熟悉的常见题型。</p>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h2><p>所有分支结点都存在左右子树，并且所有叶子结点都在同一层上，这样即满二叉树。</p>
+<ul>
+<li>叶子结点都在最底层</li>
+<li>同样深度，结点个数最多，叶子树最多</li>
+</ul>
+<h2 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h2><p>一个n个结点的二叉树按层序排列，所有结点与同样深度的满二叉树中的位置相同，这就是完全二叉树。</p>
+<ul>
+<li>叶子结点只能在最下一层（<strong>这不是最后一层，是最下层</strong>）</li>
+<li>最下层叶子结点一定集中在左侧连续位置（来自于层序遍历的属性）</li>
+<li>次下层叶子结点(如有，但不一定有)一定集中在右侧连续位置（来自于层序遍历的属性）</li>
+<li>同样的结点个数，完全二叉树深度最小（满二叉树也是满足的，满二叉树一定是完全二叉树，反之不成立）</li>
+</ul>
+<h2 id="基本性质"><a href="#基本性质" class="headerlink" title="基本性质"></a>基本性质</h2><h3 id="一般二叉树性质（通性）"><a href="#一般二叉树性质（通性）" class="headerlink" title="一般二叉树性质（通性）"></a>一般二叉树性质（通性）</h3><ul>
+<li>非空二叉树，第i层最多有pow(2,i-1)个节点个数</li>
+<li>深度为k的二叉树上，最多有pow(2,k)-1个节点个数</li>
+<li>在一棵二叉树中，除了叶子结点(度为0，也就是没有叶子结点的结点)，只有可能度为2（n2）和1（n1）的结点了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">假设T为结点的总个数，T=n2+n1+n0;连边数很好理解为T-1，T-1=2*n2+n1;所以，n0=n2+1。</span><br><span class="line">换句话说，0度结点个数=2度结点个数+1。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="完全二叉树（特性）"><a href="#完全二叉树（特性）" class="headerlink" title="完全二叉树（特性）"></a>完全二叉树（特性）</h3><ul>
+<li>n个结点的完全二叉树的深度为log(2,n)+1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k层满二叉树的节点个数pow(2,k)-1，所以完全二叉树中的结点个数N必定满足N&lt;=pow(2,k)-1，因为完全二叉树有满二叉树的排列性质，N必定也大于pow(2,k-1)-1。pow(2,k-1)-1&lt;N&lt;=pow(2,k)-1，易得pow(2,k-1)&lt;N&lt;=pow(2,k)，k-1&lt;log(2,N)&lt;=k，k为整数，所以k=[log(2,N)]+1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h1><h2 id="最核心的概念"><a href="#最核心的概念" class="headerlink" title="最核心的概念"></a>最核心的概念</h2><ul>
+<li>左树上所有结点的值均小于或者等于它的根结点的值</li>
+<li>右树上所有结点的值均大于或者等于它的根结点的值</li>
+<li>左右树也分别为二叉树</li>
+</ul>
+<h2 id="最大-最小值点查找"><a href="#最大-最小值点查找" class="headerlink" title="最大/最小值点查找"></a>最大/最小值点查找</h2><p>最大值必然在右子树上，最小值点必定在左子树上</p>
+<h2 id="删除结点"><a href="#删除结点" class="headerlink" title="删除结点"></a>删除结点</h2><ul>
+<li>找到当前结点哪个子树非空，所有的剩下的值都在非空的这个子树上</li>
+<li>判断当前结点是父结点哪个子树，左子树还是右子树</li>
+<li>父结点对应的（左/右）子树用当前结点的非空子树覆盖</li>
+</ul>
+<p>注意，如果左右子树都非空的话，把递归查找，找到右子树中的子树中第一次出现左子树为None的时候，把此子树的值赋值给要删除的结点，再把<strong>此子树的父结点的左子树用此子树的右子树进行覆盖</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n.element = next.element</span><br><span class="line">pre.lchild = next.rchild</span><br></pre></td></tr></table></figure></p>
+<h2 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h2><pre><code>    &#39;&#39;&#39;
+    1、访问根结点
+    2、先序遍历左子树
+    3、先序遍历右子树
+    &#39;&#39;&#39;
+</code></pre><h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><pre><code>    &#39;&#39;&#39;
+    1、中序遍历左子树
+    2、访问根结点
+    3、中序遍历右子树
+    &#39;&#39;&#39;
+</code></pre><h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><pre><code>    &#39;&#39;&#39;
+    1、后序遍历左子树
+    2、后序遍历右子树
+    3、访问根结点
+    &#39;&#39;&#39;
+</code></pre><p>三种遍历方式最核心的是什么时候打印根节点，这决定了便利逻辑。</p>
+<h2 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h2><p>利用了队列先进先出的性质。</p>
+<p>以上代码都依旧完善在我的GitHub中:<a href="https://github.com/sladesha/LeetCode/blob/master/random/binarySearchTree.py" target="_blank" rel="noopener">搜索二叉树</a>，大家可以参考一下。</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/05/ReservoirSampling蓄水池抽样/" rel="next" title="ReservoirSampling蓄水池抽样">
+                <i class="fa fa-chevron-left"></i> ReservoirSampling蓄水池抽样
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -328,6 +561,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -348,8 +590,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -447,6 +698,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树"><span class="nav-number">1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#满二叉树"><span class="nav-number">1.1.</span> <span class="nav-text">满二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完全二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">完全二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本性质"><span class="nav-number">1.3.</span> <span class="nav-text">基本性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般二叉树性质（通性）"><span class="nav-number">1.3.1.</span> <span class="nav-text">一般二叉树性质（通性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完全二叉树（特性）"><span class="nav-number">1.3.2.</span> <span class="nav-text">完全二叉树（特性）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树遍历"><span class="nav-number">2.</span> <span class="nav-text">二叉树遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最核心的概念"><span class="nav-number">2.1.</span> <span class="nav-text">最核心的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大-最小值点查找"><span class="nav-number">2.2.</span> <span class="nav-text">最大/最小值点查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除结点"><span class="nav-number">2.3.</span> <span class="nav-text">删除结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先序遍历"><span class="nav-number">2.4.</span> <span class="nav-text">先序遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中序遍历"><span class="nav-number">2.5.</span> <span class="nav-text">中序遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后序遍历"><span class="nav-number">2.6.</span> <span class="nav-text">后序遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次遍历"><span class="nav-number">2.7.</span> <span class="nav-text">层次遍历</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -596,6 +863,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -985,26 +1256,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
