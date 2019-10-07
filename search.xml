@@ -54,7 +54,7 @@
     <entry>
       <title><![CDATA[binarySearchTree二叉搜索树整理]]></title>
       <url>/2019/10/07/binarySearchTree%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%95%B4%E7%90%86/</url>
-      <content type="html"><![CDATA[<p>所有数据结构中，我之前最不熟悉的都是二叉树题型，因为时间问题重来没有静心去研究过，十一正好有时间，在家里整理了二叉树基本的概念，希望自己不再有不熟悉的常见题型。</p>
+      <content type="html"><![CDATA[<p>所有数据结构中，我之前最不熟悉的是二叉树题型，因为个人问题从来没有静心去研究过，十一正好有时间，在家里整理了二叉树基本的概念，希望自己不熟悉的常见题型会越来越少，也希望自己所学能为自己所用。</p>
 <h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h2><p>所有分支结点都存在左右子树，并且所有叶子结点都在同一层上，这样即满二叉树。</p>
 <ul>
 <li>叶子结点都在最底层</li>
@@ -104,7 +104,7 @@
     2、后序遍历右子树
     3、访问根结点
     &#39;&#39;&#39;
-</code></pre><p>三种遍历方式最核心的是什么时候打印根节点，这决定了便利逻辑。</p>
+</code></pre><p>三种遍历方式最核心的是什么时候打印根节点，这决定了遍历逻辑。</p>
 <h2 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h2><p>利用了队列先进先出的性质。</p>
 <p>以上代码都依旧完善在我的GitHub中:<a href="https://github.com/sladesha/LeetCode/blob/master/random/binarySearchTree.py" target="_blank" rel="noopener">搜索二叉树</a>，大家可以参考一下。</p>
 <p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
