@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="数据结构," />
 
 
 
@@ -80,16 +80,18 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SladeSha&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/page/11/index.html">
+<meta name="description" content="前言上一篇博客中，我们和大家简单的了解了一下BST二叉搜索树，但是实际上，这个可能工程实际中用的多，在实际面试的时候，可能更加关注的是二叉树这种更一般的情况。本着不懂就问，不会就学的态度，周末在家稍微整理了一些碎片化的知识，希望在这篇博客中能够把它们串联起来。 作为一个nlp算法工程师，我觉得tree+图是必不可少的技">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BinaryTree动态规划整理">
+<meta property="og:url" content="http://sladesha.github.io/2019/10/13/BinaryTree动态规划整理/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="前言上一篇博客中，我们和大家简单的了解了一下BST二叉搜索树，但是实际上，这个可能工程实际中用的多，在实际面试的时候，可能更加关注的是二叉树这种更一般的情况。本着不懂就问，不会就学的态度，周末在家稍微整理了一些碎片化的知识，希望在这篇博客中能够把它们串联起来。 作为一个nlp算法工程师，我觉得tree+图是必不可少的技能，甚至你可以不了解word embedded，但是这两个技能真的是需要去好好学">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-13T15:26:35.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SladeSha&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:title" content="BinaryTree动态规划整理">
+<meta name="twitter:description" content="前言上一篇博客中，我们和大家简单的了解了一下BST二叉搜索树，但是实际上，这个可能工程实际中用的多，在实际面试的时候，可能更加关注的是二叉树这种更一般的情况。本着不懂就问，不会就学的态度，周末在家稍微整理了一些碎片化的知识，希望在这篇博客中能够把它们串联起来。 作为一个nlp算法工程师，我觉得tree+图是必不可少的技能，甚至你可以不了解word embedded，但是这两个技能真的是需要去好好学">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/page/11/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/10/13/BinaryTree动态规划整理/"/>
 
 
 
 
 
-  <title>SladeSha's Algorithm World</title>
+  <title>BinaryTree动态规划整理 | SladeSha's Algorithm World</title>
   
 
 
@@ -144,8 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,9 +273,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -287,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/12/01/动态最优化经典面试题/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/10/13/BinaryTree动态规划整理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -304,9 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/01/动态最优化经典面试题/" itemprop="url">动态最优化经典面试题</a></h1>
+          <h1 class="post-title" itemprop="name headline">BinaryTree动态规划整理</h1>
         
 
         <div class="post-meta">
@@ -318,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T17:22:22+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-13T22:24:21+08:00">
+                2019-10-13
               </time>
             
 
@@ -372,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836 字
+                  1,492 字
                 </span>
               
 
@@ -388,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -409,19 +408,44 @@
       
 
       
-        
-          
-          最近看到了一条史前的算法面试题，觉得挺有意思的，虽然网上已经有了很多完善的答案，但是我还是想自己整理一遍，强化印象，同时也和大家分享一下这道12年的Google题目：
-一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从第 n-1 层扔鸡蛋，都不碎。这两只鸡蛋一模一样，不
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/01/动态最优化经典面试题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上一篇博客中，我们和大家简单的了解了一下<a href="http://www.shataowei.com/2019/10/07/binarySearchTree二叉搜索树整理/" target="_blank" rel="noopener">BST二叉搜索树</a>，但是实际上，这个可能工程实际中用的多，在实际面试的时候，可能更加关注的是二叉树这种更一般的情况。本着不懂就问，不会就学的态度，周末在家稍微整理了一些碎片化的知识，希望在这篇博客中能够把它们串联起来。</p>
+<p>作为一个nlp算法工程师，我觉得tree+图是必不可少的技能，甚至你可以不了解word embedded，但是这两个技能真的是需要去好好学习一下的。实际项目中，我遇到了一个问题，快速查找6级地址，并进行联想，如果用传统的kv的hashmap查找，这个真的是一个redis灾难性的问题，但是基于树的Tire树就可以很好的解决这个问题。这也是促使我去学习更新自己技能的原因，话不多说，让我们开始：</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>二叉树的思考策略：</p>
+<ul>
+<li>递归<ul>
+<li>万能，基本上树的问题都可以用递归去执行，天生的结构形式决定</li>
+</ul>
+</li>
+<li>迭代<ul>
+<li>队列：层次遍历</li>
+<li>栈：三种迭代递归</li>
+<li>dp：需要结合动态规划的</li>
+</ul>
+</li>
+</ul>
+<p>实际去用的过程中，建议优先考虑递归，相对来说更加简单，而迭代的边界考虑更为复杂。</p>
+<h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><h2 id="基本递归"><a href="#基本递归" class="headerlink" title="基本递归"></a>基本递归</h2><h3 id="先序遍历preOrderTraverse"><a href="#先序遍历preOrderTraverse" class="headerlink" title="先序遍历preOrderTraverse"></a>先序遍历preOrderTraverse</h3><h3 id="中序遍历inOrderTraverse"><a href="#中序遍历inOrderTraverse" class="headerlink" title="中序遍历inOrderTraverse"></a>中序遍历inOrderTraverse</h3><h3 id="后序遍历posOrderTraverse"><a href="#后序遍历posOrderTraverse" class="headerlink" title="后序遍历posOrderTraverse"></a>后序遍历posOrderTraverse</h3><h3 id="层序遍历levelOrderTraverse"><a href="#层序遍历levelOrderTraverse" class="headerlink" title="层序遍历levelOrderTraverse"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode102binary-tree-level-order-traversal.py" target="_blank" rel="noopener">层序遍历levelOrderTraverse</a></h3><p><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode94binary-tree-inorder-traversal.py" target="_blank" rel="noopener">遍历问题</a>和BST三种遍历方式一致，代码在这边。最简单，也是最基础的，后面很多题型回基于这个问题去做，务必掌握。</p>
+<h3 id="把二叉搜索树转换为累加树"><a href="#把二叉搜索树转换为累加树" class="headerlink" title="把二叉搜索树转换为累加树"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode538convert-bst-to-greater-tree.py" target="_blank" rel="noopener">把二叉搜索树转换为累加树</a></h3><p><strong>改写遍历方式</strong>的问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、先遍历到右树的根树，然后把根树的value赋值给add</span><br><span class="line">2、更新此树对应的父结点，并更新父结点对应的value = value+add</span><br><span class="line">3、同时再更新add，把父结点的值也更新到add上</span><br><span class="line">4、再更新父结点的左子树的value结点</span><br><span class="line">5、这样一次更新便完成了</span><br></pre></td></tr></table></figure></p>
+<h3 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode98validate-binary-search-tree.py" target="_blank" rel="noopener">验证二叉搜索树</a></h3><p>搜索二叉树的左支&lt;结点&lt;右支，正好可以用<strong>中序遍历</strong>比较</p>
+<blockquote>
+<p>BST两个特点<br>1、左支&lt;结点&lt;右支<br>2、无重复</p>
+</blockquote>
+<h3 id="判断两个树是否一致（待完成，leetcode100）"><a href="#判断两个树是否一致（待完成，leetcode100）" class="headerlink" title="判断两个树是否一致（待完成，leetcode100）"></a>判断两个树是否一致（待完成，leetcode100）</h3><h3 id="对称二叉树"><a href="#对称二叉树" class="headerlink" title="对称二叉树"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode101symmetric-tree.py" target="_blank" rel="noopener">对称二叉树</a></h3><p>利用了<strong>层次遍历</strong>的技巧</p>
+<h2 id="简单升级递归"><a href="#简单升级递归" class="headerlink" title="简单升级递归"></a>简单升级递归</h2><p>以上的递归围绕着简单遍历，实际上有更多剑走偏锋的问题：</p>
+<h3 id="二叉树最大深度"><a href="#二叉树最大深度" class="headerlink" title="二叉树最大深度"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode104maximum-depth-of-binary-tree.py" target="_blank" rel="noopener">二叉树最大深度</a></h3><h3 id="二叉树最小深度（待完成，leetcode111）"><a href="#二叉树最小深度（待完成，leetcode111）" class="headerlink" title="二叉树最小深度（待完成，leetcode111）"></a>二叉树最小深度（待完成，leetcode111）</h3><h3 id="合并二叉树"><a href="#合并二叉树" class="headerlink" title="合并二叉树"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode617merge-two-binary-trees.py" target="_blank" rel="noopener">合并二叉树</a></h3><h3 id="翻转二叉树"><a href="#翻转二叉树" class="headerlink" title="翻转二叉树"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode226invert-binary-tree.py" target="_blank" rel="noopener">翻转二叉树</a></h3><p>这四题都是直接利用递归结果之间的各种条件下的判断结果进行传递，没有额外的变量参与。典型的形式就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def func():</span><br><span class="line">	return new_func(func(root.left),func(root.right))</span><br></pre></td></tr></table></figure></p>
+<h2 id="技巧递归"><a href="#技巧递归" class="headerlink" title="技巧递归"></a>技巧递归</h2><h3 id="二叉树所有路径和（待完成，leetcode257）"><a href="#二叉树所有路径和（待完成，leetcode257）" class="headerlink" title="二叉树所有路径和（待完成，leetcode257）"></a>二叉树所有路径和（待完成，leetcode257）</h3><h3 id="二叉树中的最大路径和"><a href="#二叉树中的最大路径和" class="headerlink" title="二叉树中的最大路径和"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode124binary-tree-maximum-path-sum.py" target="_blank" rel="noopener">二叉树中的最大路径和</a></h3><ul>
+<li>借助了当前结点是否可以作为根结点通过，利用全局变量保存每一个结点的路径最大值</li>
+<li>借助了当前结点作为下一次迭代结点的时候，进行选左支还是右支考虑<h3 id="二叉树的直径"><a href="#二叉树的直径" class="headerlink" title="二叉树的直径"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode543diameter-of-binary-tree.py" target="_blank" rel="noopener">二叉树的直径</a></h3>遍历所有结点，保存所有结点作为根结点的情况下，左右子树的最大深度和即可</li>
+</ul>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="不同的二叉搜索树"><a href="#不同的二叉搜索树" class="headerlink" title="不同的二叉搜索树"></a><a href="https://leetcode-cn.com/problems/unique-binary-search-trees/" target="_blank" rel="noopener">不同的二叉搜索树</a></h3><p>状态转移方程为:<code>dp[i] += dp[j - 1] * dp[i - j]</code>,总树数=左右子树的分别数量的笛卡尔积</p>
+<h2 id="公共祖先问题"><a href="#公共祖先问题" class="headerlink" title="公共祖先问题"></a>公共祖先问题</h2><h3 id="二叉树结点个数（待完成，leetcode222）"><a href="#二叉树结点个数（待完成，leetcode222）" class="headerlink" title="二叉树结点个数（待完成，leetcode222）"></a>二叉树结点个数（待完成，leetcode222）</h3><h3 id="二叉树的最近公共祖先"><a href="#二叉树的最近公共祖先" class="headerlink" title="二叉树的最近公共祖先"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode236lowest-common-ancestor-of-a-binary-tree.py" target="_blank" rel="noopener">二叉树的最近公共祖先</a></h3><h3 id="二叉搜索树的最近公共祖先"><a href="#二叉搜索树的最近公共祖先" class="headerlink" title="二叉搜索树的最近公共祖先"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode235lowest-common-ancestor-of-a-binary-search-tree.py" target="_blank" rel="noopener">二叉搜索树的最近公共祖先</a></h3><p><code>left if right == None else right if left == None else root</code>这句话是核心，p,q有一个在一个分支上非空则返回对应的p,q,都非空则返回根节点。</p>
+<h2 id="恢复原树"><a href="#恢复原树" class="headerlink" title="恢复原树"></a>恢复原树</h2><h3 id="从前序与中序遍历序列构造二叉树"><a href="#从前序与中序遍历序列构造二叉树" class="headerlink" title="从前序与中序遍历序列构造二叉树"></a><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="noopener">从前序与中序遍历序列构造二叉树</a></h3><h3 id="从中序与后序遍历序列构造二叉树"><a href="#从中序与后序遍历序列构造二叉树" class="headerlink" title="从中序与后序遍历序列构造二叉树"></a>从中序与后序遍历序列构造二叉树</h3><h3 id="从前序与后序遍历序列构造二叉树"><a href="#从前序与后序遍历序列构造二叉树" class="headerlink" title="从前序与后序遍历序列构造二叉树"></a>从前序与后序遍历序列构造二叉树</h3><p>都是先找根节点，再把左右树范围找出来，分别在对左右树范围分别找出根节点，进行循环递归</p>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode297serialize-and-deserialize-binary-tree.py" target="_blank" rel="noopener">序列化与反序列化</a></h3><p><code>二叉树--&gt;list//list--&gt;二叉树</code><br>先通过某种遍历方法去把二叉树—&gt;list，再通过data.pop不断的拿结点去赋值，if判断条件用来当数据到最底层时候，跳出此次递归分支，切换到另一个子树上（此处为右子树）</p>
+<h3 id="dfs-两数之和-双递归"><a href="#dfs-两数之和-双递归" class="headerlink" title="dfs+两数之和+双递归"></a><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode437path-sum-iii.py" target="_blank" rel="noopener">dfs+两数之和+双递归</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这题leetcode认为是简单，但是我觉得贼难： </span><br><span class="line">1、python闭包的理解，count虽然是局部遍历，但是在递归的时候，每个count都是独立的 </span><br><span class="line">2、dfs(root.？？？？？, sum - root.val)用的是两数之和的逻辑进行递归 </span><br><span class="line">3、dfs(root,sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum) 这个用的是遍历所有结点的方法</span><br></pre></td></tr></table></figure>
+<p>以上就是常见问题的整理了，当然必然有一些新的问题，比如二叉树中的第k小的元素（待完成，leetcode230）,二叉树的锯齿形层次遍历（待完成，leetcode103），二叉树展开为链表（待完成，leetcode114）等等。但是只要把以上的这么多类别的问题都能搞定，这些问题也只是上述问题的一些翻版而已。</p>
+<p>BinaryTree动态规划整理就给大家整理到这，如果大家想看更多的数据结构问题，可以关注一下<a href="https://github.com/sladesha/LeetCode" target="_blank" rel="noopener">我的Github</a>，希望有所帮助。</p>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码、转行疑问都欢迎通过邮箱发消息给我。</p>
+
       
     </div>
     
@@ -431,383 +455,74 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/11/02/用户生命周期/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="沙韬伟 sladesha">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/image/1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SladeSha's Algorithm World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/02/用户生命周期/" itemprop="url">用户生命周期</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T00:01:25+08:00">
-                2017-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/特征刻画/" itemprop="url" rel="index">
-                    <span itemprop="name">特征刻画</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,829 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          
-摘要：设计一套完整的用户生命周期策略，极大程度上会提高用户活跃，降低用户流失，反应用户留存，为平台运营的不可或缺的一环
-
-定义用户生命周期是指用户从加入平台开始，熟悉平台，参与平台，最终流失的整个过程。用户的生命周期相对于自身而言，是一种参与度的变化，参与度也可以称之为活跃度。
-
-如何定义参与度？
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/02/用户生命周期/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/07/binarySearchTree二叉搜索树整理/" rel="next" title="binarySearchTree二叉搜索树整理">
+                <i class="fa fa-chevron-left"></i> binarySearchTree二叉搜索树整理
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/11/01/交叉销售算法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="沙韬伟 sladesha">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/image/1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SladeSha's Algorithm World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/01/交叉销售算法/" itemprop="url">交叉销售算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T23:34:24+08:00">
-                2017-11-01
-              </time>
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
+              </a>
             
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,888 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          
-最近做了一个交叉销售的项目，梳理了一些关键点，分享如下，希望对大家有所启发核心目标：在有限资源下，尽可能的提供高转化率的用户群，辅助业务增长初步效果：商家ROI值为50以上，用户日转化率提升10倍以上，用户日最低转化效果5pp以上以下为正文：数据准备：1.商品相关性存在商品A,B,C…，商品之间用
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/01/交叉销售算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -817,386 +532,27 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/10/02/随机森林枝剪问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="沙韬伟 sladesha">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/image/1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SladeSha's Algorithm World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/02/随机森林枝剪问题/" itemprop="url">随机森林-枝剪问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T00:08:38+08:00">
-                2017-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  743 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          通常情况下， 随机森林不需要后剪枝。
-剪枝的意义是：防止决策树生成过于庞大的子叶，避免实验预测结果过拟合，在实际生产中效果很差
-剪枝通常有两种：
-PrePrune：预剪枝，及早的停止树增长，在每个父节点分支的时候计算是否达到了限制值
-PostPrune：后剪枝，基于完全生长（过拟合）的树上进行剪枝，
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/02/随机森林枝剪问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2017/09/01/面试之常见决策树异同/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="沙韬伟 sladesha">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/image/1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SladeSha's Algorithm World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/01/面试之常见决策树异同/" itemprop="url">面试之常见决策树异同</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T23:59:54+08:00">
-                2017-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  499 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          历史回顾：1984年提出的cart，1986年提出的ID3，1993年提出的c4.5
-理论上总的来说，C4.5是基于ID3优化后产出的算法，主要优化了关于节点分支的计算方式，优化后解决了ID3分支过程中总喜欢偏向取值较多的属性ID3是信息增益分支：
-而CART一般是GINI系数分支：
-C4.5一般是
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/01/面试之常见决策树异同/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
 
-
-          </div>
-          
-
-
-          
 
         </div>
         
@@ -1217,8 +573,17 @@ C4.5一般是
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1316,6 +681,22 @@ C4.5一般是
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#详解"><span class="nav-number">3.</span> <span class="nav-text">详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本递归"><span class="nav-number">3.1.</span> <span class="nav-text">基本递归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先序遍历preOrderTraverse"><span class="nav-number">3.1.1.</span> <span class="nav-text">先序遍历preOrderTraverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中序遍历inOrderTraverse"><span class="nav-number">3.1.2.</span> <span class="nav-text">中序遍历inOrderTraverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后序遍历posOrderTraverse"><span class="nav-number">3.1.3.</span> <span class="nav-text">后序遍历posOrderTraverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层序遍历levelOrderTraverse"><span class="nav-number">3.1.4.</span> <span class="nav-text">层序遍历levelOrderTraverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把二叉搜索树转换为累加树"><span class="nav-number">3.1.5.</span> <span class="nav-text">把二叉搜索树转换为累加树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证二叉搜索树"><span class="nav-number">3.1.6.</span> <span class="nav-text">验证二叉搜索树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断两个树是否一致（待完成，leetcode100）"><span class="nav-number">3.1.7.</span> <span class="nav-text">判断两个树是否一致（待完成，leetcode100）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对称二叉树"><span class="nav-number">3.1.8.</span> <span class="nav-text">对称二叉树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单升级递归"><span class="nav-number">3.2.</span> <span class="nav-text">简单升级递归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树最大深度"><span class="nav-number">3.2.1.</span> <span class="nav-text">二叉树最大深度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树最小深度（待完成，leetcode111）"><span class="nav-number">3.2.2.</span> <span class="nav-text">二叉树最小深度（待完成，leetcode111）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并二叉树"><span class="nav-number">3.2.3.</span> <span class="nav-text">合并二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#翻转二叉树"><span class="nav-number">3.2.4.</span> <span class="nav-text">翻转二叉树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧递归"><span class="nav-number">3.3.</span> <span class="nav-text">技巧递归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树所有路径和（待完成，leetcode257）"><span class="nav-number">3.3.1.</span> <span class="nav-text">二叉树所有路径和（待完成，leetcode257）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树中的最大路径和"><span class="nav-number">3.3.2.</span> <span class="nav-text">二叉树中的最大路径和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的直径"><span class="nav-number">3.3.3.</span> <span class="nav-text">二叉树的直径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划"><span class="nav-number">3.4.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的二叉搜索树"><span class="nav-number">3.4.1.</span> <span class="nav-text">不同的二叉搜索树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公共祖先问题"><span class="nav-number">3.5.</span> <span class="nav-text">公共祖先问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树结点个数（待完成，leetcode222）"><span class="nav-number">3.5.1.</span> <span class="nav-text">二叉树结点个数（待完成，leetcode222）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的最近公共祖先"><span class="nav-number">3.5.2.</span> <span class="nav-text">二叉树的最近公共祖先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索树的最近公共祖先"><span class="nav-number">3.5.3.</span> <span class="nav-text">二叉搜索树的最近公共祖先</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复原树"><span class="nav-number">3.6.</span> <span class="nav-text">恢复原树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从前序与中序遍历序列构造二叉树"><span class="nav-number">3.6.1.</span> <span class="nav-text">从前序与中序遍历序列构造二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从中序与后序遍历序列构造二叉树"><span class="nav-number">3.6.2.</span> <span class="nav-text">从中序与后序遍历序列构造二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从前序与后序遍历序列构造二叉树"><span class="nav-number">3.6.3.</span> <span class="nav-text">从前序与后序遍历序列构造二叉树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题"><span class="nav-number">3.7.</span> <span class="nav-text">其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">3.7.1.</span> <span class="nav-text">序列化与反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dfs-两数之和-双递归"><span class="nav-number">3.7.2.</span> <span class="nav-text">dfs+两数之和+双递归</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1465,6 +846,10 @@ C4.5一般是
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1854,26 +1239,6 @@ C4.5一般是
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
