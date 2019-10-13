@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="前言上一篇博客中，我们和大家简单的了解了一下BST二叉搜索树，但是实际上，这个可能工程实际中用的多，在实际面试的时候，可能更加关注的是二叉树这种更一般的情况。本着不懂就问，不会就学的态度，周末在家稍微整理了一些碎片化的知识，希望在这篇博客中能够把它们串联起来。 作为一个nlp算法工程师，我觉得tree+图是必不可少的技能，甚至你可以不了解word embedded，但是这两个技能真的是需要去好好学">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-13T15:39:02.551Z">
+<meta property="og:updated_time" content="2019-10-13T15:42:09.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BinaryTree动态规划整理">
 <meta name="twitter:description" content="前言上一篇博客中，我们和大家简单的了解了一下BST二叉搜索树，但是实际上，这个可能工程实际中用的多，在实际面试的时候，可能更加关注的是二叉树这种更一般的情况。本着不懂就问，不会就学的态度，周末在家稍微整理了一些碎片化的知识，希望在这篇博客中能够把它们串联起来。 作为一个nlp算法工程师，我觉得tree+图是必不可少的技能，甚至你可以不了解word embedded，但是这两个技能真的是需要去好好学">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,488 字
+                  1,503 字
                 </span>
               
 
@@ -428,7 +428,7 @@
 <li>先序遍历preOrderTraverse</li>
 <li>中序遍历inOrderTraverse</li>
 <li>后序遍历posOrderTraverse<br><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode94binary-tree-inorder-traversal.py" target="_blank" rel="noopener">三种遍历问题</a>和BST三种遍历方式一致，代码在这边。最简单，也是最基础的，后面很多题型回基于这个问题去做，务必掌握。</li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode102binary-tree-level-order-traversal.py" target="_blank" rel="noopener">层序遍历levelOrderTraverse</a></li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode102binary-tree-level-order-traversal.py" target="_blank" rel="noopener">层序遍历levelOrderTraverse</a><br>两种方式去实现层序遍历</li>
 <li><p><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode538convert-bst-to-greater-tree.py" target="_blank" rel="noopener">把二叉搜索树转换为累加树</a><br><strong>改写遍历方式</strong>的问题：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、先遍历到右树的根树，然后把根树的value赋值给add</span><br><span class="line">2、更新此树对应的父结点，并更新父结点对应的value = value+add</span><br><span class="line">3、同时再更新add，把父结点的值也更新到add上</span><br><span class="line">4、再更新父结点的左子树的value结点</span><br><span class="line">5、这样一次更新便完成了</span><br></pre></td></tr></table></figure>
 </li>
@@ -438,7 +438,7 @@
 </blockquote>
 </li>
 <li>判断两个树是否一致（待完成，leetcode100）</li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode101symmetric-tree.py" target="_blank" rel="noopener">对称二叉树</a><br>利用了<strong>层次遍历</strong>的技巧</li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode101symmetric-tree.py" target="_blank" rel="noopener">对称二叉树</a><br>以上两题利用了<strong>层次遍历</strong>的技巧</li>
 </ul>
 <h1 id="简单升级递归"><a href="#简单升级递归" class="headerlink" title="简单升级递归"></a>简单升级递归</h1><p>以上的递归围绕着简单遍历，实际上有更多剑走偏锋的问题：</p>
 <ul>
@@ -463,7 +463,7 @@
 <h1 id="公共祖先问题"><a href="#公共祖先问题" class="headerlink" title="公共祖先问题"></a>公共祖先问题</h1><ul>
 <li>二叉树结点个数（待完成，leetcode222）</li>
 <li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode236lowest-common-ancestor-of-a-binary-tree.py" target="_blank" rel="noopener">二叉树的最近公共祖先</a></li>
-<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode235lowest-common-ancestor-of-a-binary-search-tree.py" target="_blank" rel="noopener">二叉搜索树的最近公共祖先</a><br><code>left if right == None else right if left == None else root</code>这句话是核心，p,q有一个在一个分支上非空则返回对应的p,q,都非空则返回根节点。</li>
+<li><a href="https://github.com/sladesha/LeetCode/blob/master/LeetCode/LeetCode235lowest-common-ancestor-of-a-binary-search-tree.py" target="_blank" rel="noopener">二叉搜索树的最近公共祖先</a><br><code>left if right == None else right if left == None else root</code>这句话是核心，p,q有一个在一个分支上非空则返回对应的p,q,都非空则返回根节点</li>
 </ul>
 <h1 id="恢复原树"><a href="#恢复原树" class="headerlink" title="恢复原树"></a>恢复原树</h1><ul>
 <li><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="noopener">从前序与中序遍历序列构造二叉树</a></li>
