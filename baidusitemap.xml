@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2017/12/01/SMOTE%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2019-10-22T10:44:02.942Z</lastmod>
+    <data>
+        <display>
+        <title>SMOTE算法</title>
+        <pubTime>2017-12-01T15:56:34.000Z</pubTime>
+        
+        <tag>理论解析</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法" url="http://sladesha.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2018/02/07/%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2019-10-22T10:39:54.778Z</lastmod>
     <data>
@@ -538,26 +558,6 @@
            
              
               <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2017/12/01/SMOTE%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2019-05-10T10:36:51.404Z</lastmod>
-    <data>
-        <display>
-        <title>SMOTE算法</title>
-        <pubTime>2017-12-01T15:56:34.000Z</pubTime>
-        
-        <tag>理论解析</tag>
-         
-         
-           
-             
-              <breadCrumb title="算法" url="http://sladesha.github.io/categories/%E7%AE%97%E6%B3%95/"/>
           
         </display>
     </data>
