@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2017/12/01/%E8%83%BD%E5%A4%9F%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8D%8F%E5%90%8C%E6%8E%A8%E8%8D%90/</loc>
+    <lastmod>2019-10-22T08:22:35.981Z</lastmod>
+    <data>
+        <display>
+        <title>能够快速实现的协同推荐</title>
+        <pubTime>2017-12-01T09:43:00.000Z</pubTime>
+        
+        <tag>推荐</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2019/10/22/Python%E8%87%AA%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8C%85PyTls/</loc>
     <lastmod>2019-10-22T07:37:55.340Z</lastmod>
     <data>
@@ -933,26 +953,6 @@
         <pubTime>2017-07-12T15:52:58.000Z</pubTime>
         
         <tag>预测</tag>
-         
-         
-           
-             
-              <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2017/12/01/%E8%83%BD%E5%A4%9F%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8D%8F%E5%90%8C%E6%8E%A8%E8%8D%90/</loc>
-    <lastmod>2019-05-10T08:35:33.968Z</lastmod>
-    <data>
-        <display>
-        <title>能够快速实现的协同推荐</title>
-        <pubTime>2017-12-01T09:43:00.000Z</pubTime>
-        
-        <tag>推荐</tag>
          
          
            
