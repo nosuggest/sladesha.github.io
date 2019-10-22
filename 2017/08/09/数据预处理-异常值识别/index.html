@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/20.png">
 <meta property="og:image" content="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/21.png">
 <meta property="og:image" content="http://sladesha.github.io/2017/08/09/数据预处理-异常值识别/22.png">
-<meta property="og:updated_time" content="2019-05-10T09:58:28.336Z">
+<meta property="og:updated_time" content="2019-10-22T13:59:33.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据预处理-异常值识别">
 <meta name="twitter:description" content="系统总结了常用的异常值识别思路，整理如下： 空间识别分位数识别代表的执行方法为箱式图：  上四分位数Q3，又叫做升序数列的75%位点下四分位数Q1，又叫做升序数列的25%位点箱式图检验就是摘除大于Q3+3/2*（Q3-Q1），小于Q1-3/2*（Q3-Q1）外的数据，并认定其为异常值；针对全量样本已知的问题比较好，缺点在于数据量庞大的时候的排序消耗R语言中的quantile函数，python中的p">
@@ -475,8 +475,13 @@
 <p> 比如N=3的形式下：</p>
 <p> <img src="/2017/08/09/数据预处理-异常值识别/19.png" alt="N=3"><br> 这样做的好处就是，随着N的增加可以将异常点或者异常点群集中在某一个离散阶梯范围内。<br> 通过对RNN的有监督训练，构造异常样本分类器，进行异常值识别。</p>
 <h2 id="isolation-forest"><a href="#isolation-forest" class="headerlink" title="isolation forest"></a>isolation forest</h2><p> 2010年南大的周志华教授提出了一个基于二叉树的异常值识别算法，在工业界来说，效果是非常不错的，最近我也做了一个流失用户模型，实测效果优秀。</p>
-<p> 和random forest一样，isolation forest是由isolation tree构成，先看一下isolation tree的逻辑：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> method:</span><br><span class="line"> 1.从原始数据中随机选择一个属性feature；</span><br><span class="line"> 2.从原始数据中随机选择该属性的下的一个样本值value；</span><br><span class="line"> 3.根据feature下的value对每条记录进行分类，把小于value的记录放在左子集，把大于等于value的记录放在右子集；</span><br><span class="line"> 4.repeat 1-3 until：</span><br><span class="line"> 　　　　4.1.传入的数据集只有一条记录或者多条一样的记录；</span><br><span class="line"> 　　　　　　　　4.2.树的高度达到了限定高度；</span><br></pre></td></tr></table></figure></p>
-<p> 　　　　　　　　大致的思路如下图：<br> 　　　　　　　　<br> 　　　　　　　　<img src="/2017/08/09/数据预处理-异常值识别/20.png" alt=""><br> 　　　　　　　　<br> 　　　　　　　　<br> 　　　　　　　　理论上，异常数据一般都是离群数据，非常容易在早期就被划分到最终子节点。所以，通过计算每个子节点的深度h(x)，来判断数据为异常数据的可能性。论文中，以s(x,n)为判断数据是否异常的衡量指标。<br> 　　　　　　　　<img src="/2017/08/09/数据预处理-异常值识别/21.png" alt=""><br> 　　　　　　　　<br> 　　　　　　　　<img src="/2017/08/09/数据预处理-异常值识别/22.png" alt=""><br> 　　　　　　　　<br> 　　　　　　　　其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。<br> 　　　　　　　　<br> 　　　　　　　　单棵树的可信性不足，所以我们通过用emsemble model的思路，去构造一个forest的树群来提高准确性。<br> 　　　　　　　　但是作为isolation forest的时候，需要对原s(x,n)的公式有所更改，通过E(h(x))来替代h(x),其中E(h(x))为数据x在各棵树上的h(x)的平均。<br> 　　　　　　　　同时，<br> 　　　　　　　　1.因为树的个数大大增加，所以需要控制计算的开销，所以每个棵树我们可以采取数据抽样的方式，使得抽样数据集远远小于原始数据集，且根据周志华老师的论文，采样大小超过256效果就提升不大了。<br> 　　　　　　　　2.我们可以控制深度，使得没棵树的最大深度limit length=ceiling(log2(样本大小))，当树深度大于最大深度时，其产生的子节点绝大多数均为正常数据节点，失去异常检验的意义。</p>
+<p> 和random forest一样，isolation forest是由isolation tree构成，先看一下isolation tree的逻辑：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> method:</span><br><span class="line"> 1.从原始数据中随机选择一个属性feature；</span><br><span class="line"> 2.从原始数据中随机选择该属性的下的一个样本值value；</span><br><span class="line"> 3.根据feature下的value对每条记录进行分类，把小于value的记录放在左子集，把大于等于value的记录放在右子集；</span><br><span class="line"> 4.repeat 1-3 until：</span><br><span class="line">4.1.传入的数据集只有一条记录或者多条一样的记录；</span><br><span class="line"> 4.2.树的高度达到了限定高度；</span><br></pre></td></tr></table></figure></p>
+<p> 大致的思路如下图：</p>
+<p> <img src="/2017/08/09/数据预处理-异常值识别/20.png" alt=""></p>
+<p> 理论上，异常数据一般都是离群数据，非常容易在早期就被划分到最终子节点。所以，通过计算每个子节点的深度h(x)，来判断数据为异常数据的可能性。论文中，以s(x,n)为判断数据是否异常的衡量指标。<br> <img src="/2017/08/09/数据预处理-异常值识别/21.png" alt=""></p>
+<p> <img src="/2017/08/09/数据预处理-异常值识别/22.png" alt=""></p>
+<p> 其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。</p>
+<p> 单棵树的可信性不足，所以我们通过用emsemble model的思路，去构造一个forest的树群来提高准确性。<br> 但是作为isolation forest的时候，需要对原s(x,n)的公式有所更改，通过E(h(x))来替代h(x),其中E(h(x))为数据x在各棵树上的h(x)的平均。<br> 同时，<br> 1.因为树的个数大大增加，所以需要控制计算的开销，所以每个棵树我们可以采取数据抽样的方式，使得抽样数据集远远小于原始数据集，且根据周志华老师的论文，采样大小超过256效果就提升不大了。<br> 2.我们可以控制深度，使得没棵树的最大深度limit length=ceiling(log2(样本大小))，当树深度大于最大深度时，其产生的子节点绝大多数均为正常数据节点，失去异常检验的意义。</p>
 
       
     </div>
