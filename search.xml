@@ -978,84 +978,6 @@ storge:以list的方式打印当前字符串
     </entry>
     
     <entry>
-      <title></title>
-      <url>/2019/05/10/%E5%A4%9A%E7%AE%97%E6%B3%95%E8%AF%86%E5%88%AB%E6%92%9E%E5%BA%93%E5%88%B7%E5%88%B8%E7%AD%89%E5%BC%82%E5%B8%B8%E7%94%A8%E6%88%B7/</url>
-      <content type="html"><![CDATA[<p>在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。</p>
-<p><strong>问题剖析：</strong><br>此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：</p>
-<ul>
-<li>1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户</li>
-<li>2.维数灾难及交叉指标计算之间的高频计算性能瓶颈</li>
-</ul>
-<p><strong>算法概述：</strong></p>
-<ul>
-<li>1.图形位置分布</li>
-<li>2.统计方法检测</li>
-<li>3.距离位置检测</li>
-<li>4.密度位置检测</li>
-<li>5.无监督模型识别</li>
-</ul>
-<p><strong>算法详述：</strong><br><strong>1.图形位置分布</strong><br>当我们不需要长期监控异常用户，只需要少数几次识别异常用户，且精度要求不高的时候，我们可以采取简单方便的图形识别方式，例如：箱式图。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876bls83fj30jz0f074z.jpg" alt=""></p>
-<p>箱式图判断中，一般我们只需要锁定25%(Q1)分位点的用户特征值，75%(Q3)分位点的用户特征值，Q3与Q1之间的位差即为IQR，一般认定Q3+1.5个IQR外的点即为异常点，对应的用户即为异常用户。这种方法也叫做“盖帽法”，不必人为设定上限阀值，随着用户的数据变化而变化上界，避免了高频修改的问题，只是精度欠缺且绝大多数情况下识别出的异常用户较少。</p>
-<p>方法比较简单，也不多加解释了。</p>
-<p><strong>2.统计方法检测</strong><br>方法也比较简单，上线开发简单。一直是分两步：</p>
-<ul>
-<li>先假设全量数据服从一定的分布，比如常见的正太分布，泊松分布等</li>
-<li>在计算每个点属于这个分布的概率，也就是大家常用的以平均值和方差定密度函数的问题</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876bqv44xj30i5025gll.jpg" alt=""></p>
-<p>因为这边，我们前期无法知道数据服从什么样的分布，所以，我们这边可以用切比雪夫不等式来代替确定的分布形式。除此之外，也就是同时用了马氏距离来衡量了每个具体的点在整体数据集中的位置。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876bx80cuj308406uaa1.jpg" alt=""></p>
-<p>核心代码就是下面这个协方差矩阵及矩阵相乘：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两个维度之间协方差矩阵</span></span><br><span class="line">S=np.cov(X)  </span><br><span class="line"><span class="comment">#协方差矩阵的逆矩阵</span></span><br><span class="line">SI = np.linalg.inv(S)    </span><br><span class="line"><span class="comment">#第一次计算全量用户的维度重心</span></span><br><span class="line">XTmean = XT.mean(axis=<span class="number">0</span>)</span><br><span class="line">d1=[]</span><br><span class="line">n  = XT.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    delta = XT[i] - XTmean</span><br><span class="line">    d = np.sqrt(np.dot(np.dot(delta,SI),delta.T))</span><br><span class="line">    d1.append(d)</span><br></pre></td></tr></table></figure></p>
-<p>这个方法的最核心的优点就是对全量数据进行了分块，可以理解为将1拆分成了必定有问题的1/m用户，可能有问题的1/n用户，必定没问题的1/w用户（1/m+1/n+1/w=1），这也奠定了后续更好的方法的基础。<br>但是问题也是很明显的，对于1/m，1/n的大小确定无法非常的精准，多了则影响正常用户，少了则无法准确拦截，还是一个划分的算法，并不能给出每个人的好坏程度。</p>
-<p><strong>3.距离位置检测</strong><br>距离探测的方法有一个非常强的假设，正常的用户都比较集中，有较多的邻居，而异常用户都特立独行。<br>在常见的业务问题中都是满足的，比如对爬虫ip的识别，撞库的识别，这些一看那些高频访问的就不是正常用户，但是对于特别稀疏的业务场景，比如企业融资，高深度的敏感页面访问，均不是很适用，它们的频次较低无法构成一个邻居的概念。</p>
-<p>这边非常常用的有2种，一个是连续特征间的欧式距离（标准化下的欧式距离（马氏距离）），另一个是名义变量下的余弦相似度。</p>
-<p>这边只讨论第一种情况，连续特征下如何衡量数据是否为异常数据。前面我们也说到了，切比雪夫不等式的方法能够有效的划分出三个类别正常用户，异常用户，未知用户。所以，相应的，我们只需要在未知用户的集群里面去寻找与正常用户更不相似的，或者和异常用户更相似的用户就可以了。</p>
-<p>对于单变量衡量：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876c725zgj30e403lglq.jpg" alt=""></p>
-<p>对于多变量衡量：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876cbwdpfj30h702t3yq.jpg" alt=""></p>
-<p>核心计算相似度的方式就是以上两个公式，会有一些细节处理的问题及注意点，大家可自行研究。</p>
-<p><strong>4.密度位置检测</strong><br>这边先等下谈原理，较为冗长，先说结论，其实，在能够使用距离位置检测的情况下，优先使用距离位置检测的方法。密度方法的前提几乎与位置方法的前提一致，但是在计算量级上而言，存在较大的差异差别。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876chcf58j30pg0ad77i.jpg" alt=""><br>上述的图片是Fei Tony Liu, Kai Ming Ting, Zhi-Hua Zhou的一篇论文里面对比的常见的iForest,ORCA,LOF(也就是密度位置检测),RF方法的准确率和耗时情况，也清晰的可以看出，同为距离衡量的ORCA的耗时较大，但是LOF的耗时更高，甚至部分情况下都无法计算出结果。</p>
-<p>下面让我们看下理论先，密度位置检测的方法之一，LOF：<br>概念定义：<br>1) d(p,o)：两点p和o之间的距离；<br>2) k-distance：第k距离<br>　　　　对于点p的第k距离dk(p)定义如下：<br>　　　　dk(p)=d(p,o)，并且满足：<br>　　　　　　a) 在集合中至少有不包括p在内的k个点o,∈C{x≠p}， 满足d(p,o,)≤d(p,o) ；<br>　　　　　　b) 在集合中最多有不包括p在内的k−1个点o,∈C{x≠p}，满足d(p,o,)&lt;d(p,o) ； </p>
-<p>上面两个条件总结起来就是1.距离范围内至少满足一定数量的点数，2.最多允许有一个距离最大的非p点<br>形象的看，距离就是p的第k距离，也就是距离p第k远的点的距离，不包括p，如下图箭头的路径长度。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876cmmdklj307105zdfs.jpg" alt=""></p>
-<p>3) k-distance neighborhood of p：第k距离邻域<br>　　　　点p的第k距离邻域Nk(p)，就是p的第k距离即以内的所有点，包括第k距离。<br>　　　　因此p的第k邻域点的个数记为 |Nk(p)|，且|Nk(p)|≥k</p>
-<p>我们在定义一些衡量指标，那么LOF就算是完成了：<br>1、可达距离（reach-distance）<br>点o到点p的第k可达距离定义为：<br>reach-distancek(p,o)=max{k−distance(o),d(p,o)}</p>
-<p>2、局部可达密度（local reachablility density）<br>点p处的局部可达密度为：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876cr17oej30ce02vt8n.jpg" alt=""></p>
-<p>其中，|Nk(p)|为p的第k领域点的个数，∑o∈Nk(p)reach-distk(p,o)计算的是p的k领域内的点到p的可达距离，也就是1中涉及的计算方式。</p>
-<p>3、局部离群因子（local outlier factor）<br>点p的局部离群因子为：<br>LOF（p） = （∑o∈Nk(p)lrdk(o)/lrdk(p)）/|Nk(p)|<br>其中，lrdk(o)/lrdk(p)比值衡量了p点与附近的点之间的密切差异情况，LOF值=1时，代表p与p附近的点密度一致；LOF值<1时，代表p点的密度大于p附近点的密度；lof值>1时，代表p点的密度小于p附近点的密度，也是非常符合我们的前提假设的，异常点总是比较稀疏，正常点总是比较稠密的。</1时，代表p点的密度大于p附近点的密度；lof值></p>
-<p>到此位置LOF的数学理论就完成了，让我们回顾一下它的思想。它其实就是找数据集合中的每一个点及其邻居的点，计算它和它的邻居的密度，当它的密度大于等于它邻居的密度的时候，则认为它是稠密中心，是正常用户数据；否则异常。<br>但是要计算每个点及对应的邻居的LOF值，计算成本也是非常的高的，最初我们也指出了这一点。</p>
-<p>核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_distance</span><span class="params">(k, instance, instances, distance_function=distance_euclidean)</span>:</span></span><br><span class="line">    distances = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> instance2 <span class="keyword">in</span> instances:</span><br><span class="line">        distance_value = distance_function(instance, instance2)</span><br><span class="line">        <span class="keyword">if</span> distance_value <span class="keyword">in</span> distances:</span><br><span class="line">            distances[distance_value].append(instance2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            distances[distance_value] = [instance2]</span><br><span class="line">    distances = sorted(distances.items())</span><br><span class="line">    neighbours = []</span><br><span class="line">    k_sero = <span class="number">0</span></span><br><span class="line">    k_dist = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">for</span> dist <span class="keyword">in</span> distances:</span><br><span class="line">        k_sero += len(dist[<span class="number">1</span>])</span><br><span class="line">        neighbours.extend(dist[<span class="number">1</span>])</span><br><span class="line">        k_dist = dist[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> k_sero &gt;= k:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> k_dist, neighbours</span><br></pre></td></tr></table></figure></p>
-<p><strong>5.无监督模型识别</strong><br>其实这边说完全的无监督，我觉得不是很准确，我觉得叫“半监督”可能更好一些。<br>这边方法很多，我只介绍两种：<br>1.Iforest<br>2.RNN</p>
-<p>先让我们看下Iforest：<br>算法的关键在于:对于一个有若干维的数据集合，对于其中的任一维度，如果该维度是连续属性的话，在若干次随机二分类后，边界稀疏点最容易优先达到子叶节点,如下图：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876d05aapj30bn07ct8t.jpg" alt=""></p>
-<p>算法实现详细的过程为：<br>假设数据集有N条数据，构建一颗iTree时，从N条数据中均匀抽样(一般是无放回抽样)出m(通常为256)个样本出来，作为这颗树的训练样本。在样本中，随机选一个特征，并在这个特征的所有值范围内(最小值与最大值之间)随机选一个值，对样本进行二叉划分，将样本中小于该值的划分到节点的左边，大于等于该值的划分到节点的右边,重复以上划分步骤，直到达到划分层数上限log(m)或者节点内只有一个样本，一棵树Itree的结果往往是不可信的，所以我们可以训练100-255棵树，最后整合所以树的结果取平均的深度作为输出深度，也叫做Isolation Forest。</p>
-<p>有了算法逻辑，再看衡量指标：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876d53qt2j30fe0380sq.jpg" alt=""></p>
-<p>其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。（这边需要注意，在sklearn中的Isolation是取得相反的逻辑，score越小数据异常的可能性越大。）</p>
-<p>这边也贴上核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None, sample_weight=None)</span>:</span></span><br><span class="line">       X = check_array(X, accept_sparse=[<span class="string">'csc'</span>], ensure_2d=<span class="keyword">False</span>)</span><br><span class="line">       <span class="keyword">if</span> issparse(X):</span><br><span class="line">           <span class="comment"># Pre-sort indices to avoid that each individual tree of the</span></span><br><span class="line">           <span class="comment"># ensemble sorts the indices.</span></span><br><span class="line">           X.sort_indices()</span><br><span class="line"></span><br><span class="line">       rnd = check_random_state(self.random_state)</span><br><span class="line">       y = rnd.uniform(size=X.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">       <span class="comment"># ensure that max_sample is in [1, n_samples]:</span></span><br><span class="line">       n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (self.max_samples &lt;= n_samples):</span><br><span class="line">           warn(<span class="string">"max_samples is larger than the total number of samples"</span></span><br><span class="line">                <span class="string">" n_samples. Corrected as max_samples=n_samples"</span>)</span><br><span class="line">           self.max_samples = n_samples</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (<span class="number">0</span> &lt; self.max_samples):</span><br><span class="line">           <span class="keyword">raise</span> ValueError(<span class="string">"max_samples has to be positive"</span>)</span><br><span class="line"></span><br><span class="line">       super(IsolationForest, self).fit(X, y, sample_weight=sample_weight)</span><br><span class="line">       <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">_cost</span><span class="params">(self, n)</span>:</span></span><br><span class="line">       <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1.</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           harmonic_number = np.log(n) + <span class="number">0.5772156649</span></span><br><span class="line">           <span class="keyword">return</span> <span class="number">2.</span> * harmonic_number - <span class="number">2.</span> * (n - <span class="number">1.</span>) / n</span><br></pre></td></tr></table></figure></p>
-<p>2.RNN<br>通常我们会以5层的卷积神经网络作为训练网络。我在这边处理之前将切比雪夫不等式划分出来的正常用户作为0-output，异常用户作为1-output，然后尽可能的降低损失函数的误差即可。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876dd8m76j30la0dv0u0.jpg" alt=""></p>
-<p>第一层是常规层，将不同的input做线性组合：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876dj2uxfj307g01vglg.jpg" alt=""></p>
-<p>第二层、第四层是做数据非线性变化：<br>这边选用的是tanh函数</p>
-<p>第三层是做梯度分层下的非线性变化，抹平相似特征间的ouput：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876do9o21j308u02l747.jpg" alt=""><br>其中，k为3，N为想要分的梯度的个数，a3为一个阶梯跳跃到另一个阶梯的转换效率，形如：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876dws1xyj30d505qglh.jpg" alt=""></p>
-<p>第五层，也就是最后一层通过sigmoid进行0-1之间的压缩。</p>
-<p>这边的损失函数用的是常见的mse：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876e4hu8kj309y03e0so.jpg" alt=""></p>
-<p>当通过测试数据训练完成后，再将未知数据进行模型训练，观察得到结果的大小，越靠近1，越有可能为异常用户。</p>
-<hr>
-<p>以上就是5种常见的只基于数据下的异常用户的识别，更偏方法技术一点，但是无论是算法实现还是业务应用中，同样需要注意输入特征的问题。由于大家运用方向不同，就不细节赘述。</p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876ec4huqj30760763z3.jpg" alt=""></p>
-]]></content>
-      
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[PKUseg在货运领域的评测]]></title>
       <url>/2019/01/14/PKUseg%E5%9C%A8%E8%B4%A7%E8%BF%90%E9%A2%86%E5%9F%9F%E7%9A%84%E8%AF%84%E6%B5%8B/</url>
       <content type="html"><![CDATA[<p>先说结论，再和大家闲聊，对比jieba与PKUseg在公路货运切词能力上：</p>
@@ -1605,6 +1527,37 @@ storge:以list的方式打印当前字符串
     </entry>
     
     <entry>
+      <title><![CDATA[热传导-物质扩散算法应用于推荐]]></title>
+      <url>/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC-%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</url>
+      <content type="html"><![CDATA[<p>没有大量的数据，没有大量的人力就不能做好推荐么？当然不是，热传导/物质扩散推荐算法就是作为冷启动及小规模团队非常实用的推荐召回部分的算法。</p>
+<p>目标是为a图中标有星号（不妨记为用户1）的用户推荐商品，该用户已经购买过的两件商品是我们可以利用的信息，用来给目标用户进行推荐。</p>
+<p>物质扩散算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/1.png" alt=""><br>初始，我们认为每件被目标用户购买过的商品的信息量为1。<br>商品把自己的信息平均分给所有购买过它的用户，用户的信息值则是从所有商品所得到的信息值得总和，比如上图(b)中的第一个节点的信息就等于第一个商品平均分给三个用户的的平均信息1/3，再加上第四个商品平均分给两个用户的平均信息1/2，即为1/3+1/2=5/6；接下来，每一个用户再把自己的信息平均分给所有购买过的商品，商品的信息则是从所有用户收到的信息值得总和，如对于图(c)中的第一个商品，它的信息值就等于第一个用户信息值的一半，为5/12，加上第二个用户信息值的1/4，为5/24，再加上第三个用户信息值得一半，为1/6，总的能量值即为:5/12+5/24+1/6=19/24。</p>
+<p>以上两个步骤加起来为从商品到商品信息扩散一步。针对大规模系统的推荐，为了保持实时性和效率，往往只需扩散三步以内。如果以一步为界，基于图(c)中的结果，则在目标用户没有购买过的所有商品中，第三个商品的信息值最大，因此基于物质扩散算法的推荐系统则会将此商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。值得注意的是物质扩散这种算法得到的所有商品最后的信息值之和就等于初始时所有商品的信息值，即能量是守恒的，图(c)中所有商品的信息之和仍为2。</p>
+<p>热传导算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/2.png" alt=""></p>
+<p>初始，我们认为目标用户购买过的每件商品的信息量为1。<br>目标用户的信息等于所有他购买过的商品信息的平均值，如图(d)所示，目标用户购买了商品1和商品4，则该用户的信息值即为(1 + 1) / 2 = 1。再根据目标用户浏览过的商品给所以商品计算信息，第一个商品、第四个商品信息量为1/2，其他商品的信息量为0（因为目标用户没有买过），接下来根据每一个商品的信息计算其他的用户的信息，如图(d)中的第二个用户的信息就为商品1,2,3,4的信息的平均值（1/2 + 1/2）/4 = 1/2；再根据每个用户的信息量平均分配信息到每个商品，如图(e)中的第一个商品来自第一个、第二个、第三个用户的信息的和，即为1/2<em>1/2+1/2</em>1/3+1/2*/12=2/3。</p>
+<p>以上两个步骤加起来为从商品到商品热传导一步。因此基于热传导算法的推荐系统则会将此信息量大的商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。与物质扩散不同的是这种算法得到的所有商品最后的信息值之和就不一定等于初始时所有商品的信息值，即不满足守恒定律，这是因为在信息传到的第二步过程中，有的用户的信息可能会被多次计算，从而导致不守恒。</p>
+<p>基于物质扩散和基于热传导的推荐算法的区别在于： 基于物质扩散的方法在进行个性化推荐时，系统的总信息是守恒的；而热传导在推荐过程中，目标用户（即被推荐用户）的收藏品将被视作信息初始点，负责提供能量，所以系统的总信息量随着传递步骤的增加是在不断增加的。</p>
+<p>如果对物理比较熟悉的朋友很容易联想到凸透镜和凹透镜，是的，我个人在理解的时候也是这样迁移理解，原理上确实一致。 基于物质扩散的方法相当于凸透镜一样把用户历史点击的信息聚焦到了少量优势的skn上了； 基于热传导的方法相当于是凹透镜一样把用户的历史点击信息发散到了那些较不流行的物品上，从而提高了推荐的新颖多样性。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 推荐 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[量化评估推荐系统效果]]></title>
       <url>/2018/07/19/%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C/</url>
       <content type="html"><![CDATA[<p>推荐系统最有效的方法就是A/B test进行模型之间的对比，但是由于现实原因的局限，存在现实实时的困难性，所以，梳理了一些可以补充替代的指标如下，但是离线评估也存在相应的问题：<br>1) 数据集的稀疏性限制了适用范围，用户之间的交集稀疏。<br>2) 评价结果的客观性，由于用户的主观性，不管离线评测的结果如何，都不能得出用户是否喜欢某推荐系统的结论，只是一个近似的评估。<br>3) 深度评估指标的缺失。(如点击深度、购买客单价、购买商品类别、购买偏好)之间的关联关系。<br>4）冷启动<br>5）Exploration 和 Exploitation问题</p>
@@ -1675,37 +1628,6 @@ storge:以list的方式打印当前字符串
         <tags>
             
             <tag> 推荐评估方法 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[热传导-物质扩散算法应用于推荐]]></title>
-      <url>/2018/07/19/%E7%83%AD%E4%BC%A0%E5%AF%BC-%E7%89%A9%E8%B4%A8%E6%89%A9%E6%95%A3%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E4%BA%8E%E6%8E%A8%E8%8D%90/</url>
-      <content type="html"><![CDATA[<p>没有大量的数据，没有大量的人力就不能做好推荐么？当然不是，热传导/物质扩散推荐算法就是作为冷启动及小规模团队非常实用的推荐召回部分的算法。</p>
-<p>目标是为a图中标有星号（不妨记为用户1）的用户推荐商品，该用户已经购买过的两件商品是我们可以利用的信息，用来给目标用户进行推荐。</p>
-<p>物质扩散算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/1.png" alt=""><br>初始，我们认为每件被目标用户购买过的商品的信息量为1。<br>商品把自己的信息平均分给所有购买过它的用户，用户的信息值则是从所有商品所得到的信息值得总和，比如上图(b)中的第一个节点的信息就等于第一个商品平均分给三个用户的的平均信息1/3，再加上第四个商品平均分给两个用户的平均信息1/2，即为1/3+1/2=5/6；接下来，每一个用户再把自己的信息平均分给所有购买过的商品，商品的信息则是从所有用户收到的信息值得总和，如对于图(c)中的第一个商品，它的信息值就等于第一个用户信息值的一半，为5/12，加上第二个用户信息值的1/4，为5/24，再加上第三个用户信息值得一半，为1/6，总的能量值即为:5/12+5/24+1/6=19/24。</p>
-<p>以上两个步骤加起来为从商品到商品信息扩散一步。针对大规模系统的推荐，为了保持实时性和效率，往往只需扩散三步以内。如果以一步为界，基于图(c)中的结果，则在目标用户没有购买过的所有商品中，第三个商品的信息值最大，因此基于物质扩散算法的推荐系统则会将此商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。值得注意的是物质扩散这种算法得到的所有商品最后的信息值之和就等于初始时所有商品的信息值，即能量是守恒的，图(c)中所有商品的信息之和仍为2。</p>
-<p>热传导算法：<br><img src="/2018/07/19/热传导-物质扩散算法应用于推荐/2.png" alt=""></p>
-<p>初始，我们认为目标用户购买过的每件商品的信息量为1。<br>目标用户的信息等于所有他购买过的商品信息的平均值，如图(d)所示，目标用户购买了商品1和商品4，则该用户的信息值即为(1 + 1) / 2 = 1。再根据目标用户浏览过的商品给所以商品计算信息，第一个商品、第四个商品信息量为1/2，其他商品的信息量为0（因为目标用户没有买过），接下来根据每一个商品的信息计算其他的用户的信息，如图(d)中的第二个用户的信息就为商品1,2,3,4的信息的平均值（1/2 + 1/2）/4 = 1/2；再根据每个用户的信息量平均分配信息到每个商品，如图(e)中的第一个商品来自第一个、第二个、第三个用户的信息的和，即为1/2<em>1/2+1/2</em>1/3+1/2*/12=2/3。</p>
-<p>以上两个步骤加起来为从商品到商品热传导一步。因此基于热传导算法的推荐系统则会将此信息量大的商品推荐给目标用户，同时可以得到对于用户1的商品得分排序，自然可以得到用户召回集。与物质扩散不同的是这种算法得到的所有商品最后的信息值之和就不一定等于初始时所有商品的信息值，即不满足守恒定律，这是因为在信息传到的第二步过程中，有的用户的信息可能会被多次计算，从而导致不守恒。</p>
-<p>基于物质扩散和基于热传导的推荐算法的区别在于： 基于物质扩散的方法在进行个性化推荐时，系统的总信息是守恒的；而热传导在推荐过程中，目标用户（即被推荐用户）的收藏品将被视作信息初始点，负责提供能量，所以系统的总信息量随着传递步骤的增加是在不断增加的。</p>
-<p>如果对物理比较熟悉的朋友很容易联想到凸透镜和凹透镜，是的，我个人在理解的时候也是这样迁移理解，原理上确实一致。 基于物质扩散的方法相当于凸透镜一样把用户历史点击的信息聚焦到了少量优势的skn上了； 基于热传导的方法相当于是凹透镜一样把用户的历史点击信息发散到了那些较不流行的物品上，从而提高了推荐的新颖多样性。</p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 推荐 </tag>
             
         </tags>
         
@@ -2904,6 +2826,96 @@ storge:以list的方式打印当前字符串
         <tags>
             
             <tag> 理论解析 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[多算法识别撞库刷券等异常用户]]></title>
+      <url>/2017/12/01/%E5%A4%9A%E7%AE%97%E6%B3%95%E8%AF%86%E5%88%AB%E6%92%9E%E5%BA%93%E5%88%B7%E5%88%B8%E7%AD%89%E5%BC%82%E5%B8%B8%E7%94%A8%E6%88%B7/</url>
+      <content type="html"><![CDATA[<p>在运营业务中，绝大多数公司会面临恶意注册，恶意刷接口，恶意刷券等流量问题，此类问题的常规解决方案都是拍定单位时间内的ip访问上限次数、qps上限次数等等，会存在误伤、频繁修改阀值等问题。</p>
+<p><strong>问题剖析：</strong><br>此类问题的关键在识别出与正常数据集群差异较大的离群点。所以，存在两个难点：</p>
+<ul>
+<li>1.难以找到一个很清晰的边界，界定什么是正常用户，什么是异常用户</li>
+<li>2.维数灾难及交叉指标计算之间的高频计算性能瓶颈</li>
+</ul>
+<p><strong>算法概述：</strong></p>
+<ul>
+<li>1.图形位置分布</li>
+<li>2.统计方法检测</li>
+<li>3.距离位置检测</li>
+<li>4.密度位置检测</li>
+<li>5.无监督模型识别</li>
+</ul>
+<p><strong>算法详述：</strong><br><strong>1.图形位置分布</strong><br>当我们不需要长期监控异常用户，只需要少数几次识别异常用户，且精度要求不高的时候，我们可以采取简单方便的图形识别方式，例如：箱式图。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876bls83fj30jz0f074z.jpg" alt=""></p>
+<p>箱式图判断中，一般我们只需要锁定25%(Q1)分位点的用户特征值，75%(Q3)分位点的用户特征值，Q3与Q1之间的位差即为IQR，一般认定Q3+1.5个IQR外的点即为异常点，对应的用户即为异常用户。这种方法也叫做“盖帽法”，不必人为设定上限阀值，随着用户的数据变化而变化上界，避免了高频修改的问题，只是精度欠缺且绝大多数情况下识别出的异常用户较少。</p>
+<p>方法比较简单，也不多加解释了。</p>
+<p><strong>2.统计方法检测</strong><br>方法也比较简单，上线开发简单。一直是分两步：</p>
+<ul>
+<li>先假设全量数据服从一定的分布，比如常见的正太分布，泊松分布等</li>
+<li>在计算每个点属于这个分布的概率，也就是大家常用的以平均值和方差定密度函数的问题</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876bqv44xj30i5025gll.jpg" alt=""></p>
+<p>因为这边，我们前期无法知道数据服从什么样的分布，所以，我们这边可以用切比雪夫不等式来代替确定的分布形式。除此之外，也就是同时用了马氏距离来衡量了每个具体的点在整体数据集中的位置。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876bx80cuj308406uaa1.jpg" alt=""></p>
+<p>核心代码就是下面这个协方差矩阵及矩阵相乘：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两个维度之间协方差矩阵</span></span><br><span class="line">S=np.cov(X)  </span><br><span class="line"><span class="comment">#协方差矩阵的逆矩阵</span></span><br><span class="line">SI = np.linalg.inv(S)    </span><br><span class="line"><span class="comment">#第一次计算全量用户的维度重心</span></span><br><span class="line">XTmean = XT.mean(axis=<span class="number">0</span>)</span><br><span class="line">d1=[]</span><br><span class="line">n  = XT.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    delta = XT[i] - XTmean</span><br><span class="line">    d = np.sqrt(np.dot(np.dot(delta,SI),delta.T))</span><br><span class="line">    d1.append(d)</span><br></pre></td></tr></table></figure></p>
+<p>这个方法的最核心的优点就是对全量数据进行了分块，可以理解为将1拆分成了必定有问题的1/m用户，可能有问题的1/n用户，必定没问题的1/w用户（1/m+1/n+1/w=1），这也奠定了后续更好的方法的基础。<br>但是问题也是很明显的，对于1/m，1/n的大小确定无法非常的精准，多了则影响正常用户，少了则无法准确拦截，还是一个划分的算法，并不能给出每个人的好坏程度。</p>
+<p><strong>3.距离位置检测</strong><br>距离探测的方法有一个非常强的假设，正常的用户都比较集中，有较多的邻居，而异常用户都特立独行。<br>在常见的业务问题中都是满足的，比如对爬虫ip的识别，撞库的识别，这些一看那些高频访问的就不是正常用户，但是对于特别稀疏的业务场景，比如企业融资，高深度的敏感页面访问，均不是很适用，它们的频次较低无法构成一个邻居的概念。</p>
+<p>这边非常常用的有2种，一个是连续特征间的欧式距离（标准化下的欧式距离（马氏距离）），另一个是名义变量下的余弦相似度。</p>
+<p>这边只讨论第一种情况，连续特征下如何衡量数据是否为异常数据。前面我们也说到了，切比雪夫不等式的方法能够有效的划分出三个类别正常用户，异常用户，未知用户。所以，相应的，我们只需要在未知用户的集群里面去寻找与正常用户更不相似的，或者和异常用户更相似的用户就可以了。</p>
+<p>对于单变量衡量：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876c725zgj30e403lglq.jpg" alt=""></p>
+<p>对于多变量衡量：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876cbwdpfj30h702t3yq.jpg" alt=""></p>
+<p>核心计算相似度的方式就是以上两个公式，会有一些细节处理的问题及注意点，大家可自行研究。</p>
+<p><strong>4.密度位置检测</strong><br>这边先等下谈原理，较为冗长，先说结论，其实，在能够使用距离位置检测的情况下，优先使用距离位置检测的方法。密度方法的前提几乎与位置方法的前提一致，但是在计算量级上而言，存在较大的差异差别。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876chcf58j30pg0ad77i.jpg" alt=""><br>上述的图片是Fei Tony Liu, Kai Ming Ting, Zhi-Hua Zhou的一篇论文里面对比的常见的iForest,ORCA,LOF(也就是密度位置检测),RF方法的准确率和耗时情况，也清晰的可以看出，同为距离衡量的ORCA的耗时较大，但是LOF的耗时更高，甚至部分情况下都无法计算出结果。</p>
+<p>下面让我们看下理论先，密度位置检测的方法之一，LOF：<br>概念定义：<br>1) d(p,o)：两点p和o之间的距离；<br>2) k-distance：第k距离<br>　　　　对于点p的第k距离dk(p)定义如下：<br>　　　　dk(p)=d(p,o)，并且满足：<br>　　　　　　a) 在集合中至少有不包括p在内的k个点o,∈C{x≠p}， 满足d(p,o,)≤d(p,o) ；<br>　　　　　　b) 在集合中最多有不包括p在内的k−1个点o,∈C{x≠p}，满足d(p,o,)&lt;d(p,o) ； </p>
+<p>上面两个条件总结起来就是1.距离范围内至少满足一定数量的点数，2.最多允许有一个距离最大的非p点<br>形象的看，距离就是p的第k距离，也就是距离p第k远的点的距离，不包括p，如下图箭头的路径长度。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876cmmdklj307105zdfs.jpg" alt=""></p>
+<p>3) k-distance neighborhood of p：第k距离邻域<br>　　　　点p的第k距离邻域Nk(p)，就是p的第k距离即以内的所有点，包括第k距离。<br>　　　　因此p的第k邻域点的个数记为 |Nk(p)|，且|Nk(p)|≥k</p>
+<p>我们在定义一些衡量指标，那么LOF就算是完成了：<br>1、可达距离（reach-distance）<br>点o到点p的第k可达距离定义为：<br>reach-distancek(p,o)=max{k−distance(o),d(p,o)}</p>
+<p>2、局部可达密度（local reachablility density）<br>点p处的局部可达密度为：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876cr17oej30ce02vt8n.jpg" alt=""></p>
+<p>其中，|Nk(p)|为p的第k领域点的个数，∑o∈Nk(p)reach-distk(p,o)计算的是p的k领域内的点到p的可达距离，也就是1中涉及的计算方式。</p>
+<p>3、局部离群因子（local outlier factor）<br>点p的局部离群因子为：<br>LOF（p） = （∑o∈Nk(p)lrdk(o)/lrdk(p)）/|Nk(p)|<br>其中，lrdk(o)/lrdk(p)比值衡量了p点与附近的点之间的密切差异情况，LOF值=1时，代表p与p附近的点密度一致；LOF值<1时，代表p点的密度大于p附近点的密度；lof值>1时，代表p点的密度小于p附近点的密度，也是非常符合我们的前提假设的，异常点总是比较稀疏，正常点总是比较稠密的。</1时，代表p点的密度大于p附近点的密度；lof值></p>
+<p>到此位置LOF的数学理论就完成了，让我们回顾一下它的思想。它其实就是找数据集合中的每一个点及其邻居的点，计算它和它的邻居的密度，当它的密度大于等于它邻居的密度的时候，则认为它是稠密中心，是正常用户数据；否则异常。<br>但是要计算每个点及对应的邻居的LOF值，计算成本也是非常的高的，最初我们也指出了这一点。</p>
+<p>核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_distance</span><span class="params">(k, instance, instances, distance_function=distance_euclidean)</span>:</span></span><br><span class="line">    distances = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> instance2 <span class="keyword">in</span> instances:</span><br><span class="line">        distance_value = distance_function(instance, instance2)</span><br><span class="line">        <span class="keyword">if</span> distance_value <span class="keyword">in</span> distances:</span><br><span class="line">            distances[distance_value].append(instance2)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            distances[distance_value] = [instance2]</span><br><span class="line">    distances = sorted(distances.items())</span><br><span class="line">    neighbours = []</span><br><span class="line">    k_sero = <span class="number">0</span></span><br><span class="line">    k_dist = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">for</span> dist <span class="keyword">in</span> distances:</span><br><span class="line">        k_sero += len(dist[<span class="number">1</span>])</span><br><span class="line">        neighbours.extend(dist[<span class="number">1</span>])</span><br><span class="line">        k_dist = dist[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> k_sero &gt;= k:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> k_dist, neighbours</span><br></pre></td></tr></table></figure></p>
+<p><strong>5.无监督模型识别</strong><br>其实这边说完全的无监督，我觉得不是很准确，我觉得叫“半监督”可能更好一些。<br>这边方法很多，我只介绍两种：<br>1.Iforest<br>2.RNN</p>
+<p>先让我们看下Iforest：<br>算法的关键在于:对于一个有若干维的数据集合，对于其中的任一维度，如果该维度是连续属性的话，在若干次随机二分类后，边界稀疏点最容易优先达到子叶节点,如下图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876d05aapj30bn07ct8t.jpg" alt=""></p>
+<p>算法实现详细的过程为：<br>假设数据集有N条数据，构建一颗iTree时，从N条数据中均匀抽样(一般是无放回抽样)出m(通常为256)个样本出来，作为这颗树的训练样本。在样本中，随机选一个特征，并在这个特征的所有值范围内(最小值与最大值之间)随机选一个值，对样本进行二叉划分，将样本中小于该值的划分到节点的左边，大于等于该值的划分到节点的右边,重复以上划分步骤，直到达到划分层数上限log(m)或者节点内只有一个样本，一棵树Itree的结果往往是不可信的，所以我们可以训练100-255棵树，最后整合所以树的结果取平均的深度作为输出深度，也叫做Isolation Forest。</p>
+<p>有了算法逻辑，再看衡量指标：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876d53qt2j30fe0380sq.jpg" alt=""></p>
+<p>其中，h(x)为x对应的节点深度，c(n)为样本可信度，s(x,n)~[0,1]，正常数据来讲s(x,n)小于0.8，s(x,n)越靠近1，数据异常的可能性越大。（这边需要注意，在sklearn中的Isolation是取得相反的逻辑，score越小数据异常的可能性越大。）</p>
+<p>这边也贴上核心代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None, sample_weight=None)</span>:</span></span><br><span class="line">       X = check_array(X, accept_sparse=[<span class="string">'csc'</span>], ensure_2d=<span class="keyword">False</span>)</span><br><span class="line">       <span class="keyword">if</span> issparse(X):</span><br><span class="line">           <span class="comment"># Pre-sort indices to avoid that each individual tree of the</span></span><br><span class="line">           <span class="comment"># ensemble sorts the indices.</span></span><br><span class="line">           X.sort_indices()</span><br><span class="line"></span><br><span class="line">       rnd = check_random_state(self.random_state)</span><br><span class="line">       y = rnd.uniform(size=X.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">       <span class="comment"># ensure that max_sample is in [1, n_samples]:</span></span><br><span class="line">       n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (self.max_samples &lt;= n_samples):</span><br><span class="line">           warn(<span class="string">"max_samples is larger than the total number of samples"</span></span><br><span class="line">                <span class="string">" n_samples. Corrected as max_samples=n_samples"</span>)</span><br><span class="line">           self.max_samples = n_samples</span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">not</span> (<span class="number">0</span> &lt; self.max_samples):</span><br><span class="line">           <span class="keyword">raise</span> ValueError(<span class="string">"max_samples has to be positive"</span>)</span><br><span class="line"></span><br><span class="line">       super(IsolationForest, self).fit(X, y, sample_weight=sample_weight)</span><br><span class="line">       <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">_cost</span><span class="params">(self, n)</span>:</span></span><br><span class="line">       <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1.</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           harmonic_number = np.log(n) + <span class="number">0.5772156649</span></span><br><span class="line">           <span class="keyword">return</span> <span class="number">2.</span> * harmonic_number - <span class="number">2.</span> * (n - <span class="number">1.</span>) / n</span><br></pre></td></tr></table></figure></p>
+<p>2.RNN<br>通常我们会以5层的卷积神经网络作为训练网络。我在这边处理之前将切比雪夫不等式划分出来的正常用户作为0-output，异常用户作为1-output，然后尽可能的降低损失函数的误差即可。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876dd8m76j30la0dv0u0.jpg" alt=""></p>
+<p>第一层是常规层，将不同的input做线性组合：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876dj2uxfj307g01vglg.jpg" alt=""></p>
+<p>第二层、第四层是做数据非线性变化：<br>这边选用的是tanh函数</p>
+<p>第三层是做梯度分层下的非线性变化，抹平相似特征间的ouput：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876do9o21j308u02l747.jpg" alt=""><br>其中，k为3，N为想要分的梯度的个数，a3为一个阶梯跳跃到另一个阶梯的转换效率，形如：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876dws1xyj30d505qglh.jpg" alt=""></p>
+<p>第五层，也就是最后一层通过sigmoid进行0-1之间的压缩。</p>
+<p>这边的损失函数用的是常见的mse：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876e4hu8kj309y03e0so.jpg" alt=""></p>
+<p>当通过测试数据训练完成后，再将未知数据进行模型训练，观察得到结果的大小，越靠近1，越有可能为异常用户。</p>
+<hr>
+<p>以上就是5种常见的只基于数据下的异常用户的识别，更偏方法技术一点，但是无论是算法实现还是业务应用中，同样需要注意输入特征的问题。由于大家运用方向不同，就不细节赘述。</p>
+<hr>
+<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我哦。<br><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g876ec4huqj30760763z3.jpg" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 风控 </tag>
             
         </tags>
         
