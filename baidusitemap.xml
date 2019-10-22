@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2017/12/01/%E5%9F%BA%E4%BA%8ETensorflow%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%A7%A3%E5%86%B3%E7%94%A8%E6%88%B7%E6%B5%81%E5%A4%B1%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2019-10-22T11:07:24.796Z</lastmod>
+    <data>
+        <display>
+        <title>基于Tensorflow的神经网络解决用户流失概率问题</title>
+        <pubTime>2017-12-01T09:41:59.000Z</pubTime>
+        
+        <tag>CRM预估</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2017/12/01/python%E5%BC%80%E5%8F%91%EF%BC%9A%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%A8%A1%E7%89%88-%E4%B8%80/</loc>
-    <lastmod>2019-10-22T11:00:56.824Z</lastmod>
+    <lastmod>2019-10-22T11:05:03.238Z</lastmod>
     <data>
         <display>
         <title>python开发：特征工程代码模版(一)</title>
@@ -798,26 +818,6 @@
            
              
               <breadCrumb title="算法" url="http://sladesha.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2017/12/01/%E5%9F%BA%E4%BA%8ETensorflow%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%A7%A3%E5%86%B3%E7%94%A8%E6%88%B7%E6%B5%81%E5%A4%B1%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2019-05-10T09:31:47.919Z</lastmod>
-    <data>
-        <display>
-        <title>基于Tensorflow的神经网络解决用户流失概率问题</title>
-        <pubTime>2017-12-01T09:41:59.000Z</pubTime>
-        
-        <tag>CRM预估</tag>
-         
-         
-           
-             
-              <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
