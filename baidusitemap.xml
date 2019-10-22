@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://sladesha.github.io/2018/08/06/%E5%9F%BA%E4%BA%8ETensorflow%E5%AE%9E%E7%8E%B0FFM/</loc>
+    <lastmod>2019-10-22T08:48:02.748Z</lastmod>
+    <data>
+        <display>
+        <title>基于Tensorflow实现FFM</title>
+        <pubTime>2018-08-06T03:12:58.000Z</pubTime>
+        
+        <tag>特征交叉</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://sladesha.github.io/2017/08/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E7%94%B5%E5%95%86%E5%95%86%E5%93%81%E6%8E%A8%E8%8D%90/</loc>
     <lastmod>2019-10-22T08:29:12.289Z</lastmod>
     <data>
@@ -1218,26 +1238,6 @@
            
              
               <breadCrumb title="深度学习" url="http://sladesha.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2018/08/06/%E5%9F%BA%E4%BA%8ETensorflow%E5%AE%9E%E7%8E%B0FFM/</loc>
-    <lastmod>2019-05-10T07:26:25.038Z</lastmod>
-    <data>
-        <display>
-        <title>基于Tensorflow实现FFM</title>
-        <pubTime>2018-08-06T03:12:58.000Z</pubTime>
-        
-        <tag>特征交叉</tag>
-         
-         
-           
-             
-              <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
