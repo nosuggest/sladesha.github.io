@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="理论解析," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -80,20 +80,17 @@
 
 
 
-<meta name="description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
-<meta name="keywords" content="理论解析">
+<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
 <meta property="og:type" content="article">
-<meta property="og:title" content="logistic regression一点理解">
-<meta property="og:url" content="http://sladesha.github.io/2018/08/14/regression一点理解/index.html">
+<meta property="og:title" content="集成学习需要理解的一些内容">
+<meta property="og:url" content="http://sladesha.github.io/2019/12/06/集成学习需要理解的一些内容/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
+<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://sladesha.github.io/2018/08/14/regression一点理解/1.png">
-<meta property="og:updated_time" content="2019-05-10T07:23:27.464Z">
+<meta property="og:updated_time" content="2019-12-06T09:35:48.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="logistic regression一点理解">
-<meta name="twitter:description" content="Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见logistic regression一点理解。   欢迎大家关注我的个人bolg，更多代码内容欢迎follow我的个人Github，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。">
-<meta name="twitter:image" content="http://sladesha.github.io/2018/08/14/regression一点理解/1.png">
+<meta name="twitter:title" content="集成学习需要理解的一些内容">
+<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/2018/08/14/regression一点理解/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/12/06/集成学习需要理解的一些内容/"/>
 
 
 
 
 
-  <title>logistic regression一点理解 | SladeSha's Algorithm World</title>
+  <title>集成学习需要理解的一些内容 | SladeSha's Algorithm World</title>
   
 
 
@@ -290,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2018/08/14/regression一点理解/">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/12/06/集成学习需要理解的一些内容/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沙韬伟 sladesha">
@@ -307,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">logistic regression一点理解</h1>
+          <h1 class="post-title" itemprop="name headline">集成学习需要理解的一些内容</h1>
         
 
         <div class="post-meta">
@@ -319,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T09:12:58+08:00">
-                2018-08-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-06T17:35:48+08:00">
+                2019-12-06
               </time>
             
 
@@ -329,28 +326,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -373,7 +348,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  82 字
+                  0 字
                 </span>
               
 
@@ -410,11 +385,7 @@
       
 
       
-        <p>Hexo没有办法用Latex，所以采取了截图的方式，更舒适的阅读体验可以参见<a href="https://www.jianshu.com/p/61ac39a57f9d" target="_blank" rel="noopener">logistic regression一点理解</a>。</p>
-<p><img src="/2018/08/14/regression一点理解/1.png" alt=""></p>
-<hr>
-<p>欢迎大家关注我的个人<a href="http://shataowei.com" target="_blank" rel="noopener">bolg</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过公众号发消息给我。</p>
-
+        
       
     </div>
     
@@ -458,12 +429,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/理论解析/" rel="tag"># 理论解析</a>
-          
-        </div>
-      
 
       
       
@@ -473,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/06/基于Tensorflow实现FFM/" rel="next" title="基于Tensorflow实现FFM">
-                <i class="fa fa-chevron-left"></i> 基于Tensorflow实现FFM
+              <a href="/2019/12/06/LR需要理解的一些内容/" rel="next" title="LR需要理解的一些内容">
+                <i class="fa fa-chevron-left"></i> LR需要理解的一些内容
               </a>
             
           </div>
@@ -483,8 +448,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/27/Segmenter问题整理/" rel="prev" title="Stanford Word Segmenter问题整理">
-                Stanford Word Segmenter问题整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
