@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sladesha.github.io/about/index.html</loc>
+    
+    <lastmod>2019-12-06T15:28:43.093Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sladesha.github.io/2019/12/06/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E9%9C%80%E8%A6%81%E7%90%86%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9/</loc>
     
     <lastmod>2019-12-06T09:39:41.766Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://sladesha.github.io/2019/12/06/LR%E9%9C%80%E8%A6%81%E7%90%86%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9/</loc>
     
     <lastmod>2019-12-06T09:25:24.104Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/about/index.html</loc>
-    
-    <lastmod>2019-11-24T02:23:02.411Z</lastmod>
     
   </url>
   
@@ -453,13 +453,6 @@
     <loc>http://sladesha.github.io/2017/12/04/FM%E7%90%86%E8%AE%BA%E8%A7%A3%E6%9E%90%E5%8F%8A%E5%BA%94%E7%94%A8/</loc>
     
     <lastmod>2019-05-10T07:35:36.312Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sladesha.github.io/2018/08/14/regression%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</loc>
-    
-    <lastmod>2019-05-10T07:23:27.464Z</lastmod>
     
   </url>
   

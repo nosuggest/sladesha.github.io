@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://sladesha.github.io/2019/12/06/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E9%9C%80%E8%A6%81%E7%90%86%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9/</loc>
     <lastmod>2019-12-06T09:39:41.766Z</lastmod>
@@ -42,7 +43,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://sladesha.github.io/2019/11/05/introductionToPython/</loc>
@@ -1279,21 +1279,6 @@
              
               <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2018/08/14/regression%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</loc>
-    <lastmod>2019-05-10T07:23:27.464Z</lastmod>
-    <data>
-        <display>
-        <title>logistic regression一点理解</title>
-        <pubTime>2018-08-14T01:12:58.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
