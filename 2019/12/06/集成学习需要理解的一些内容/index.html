@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="复习手册," />
 
 
 
@@ -80,17 +80,49 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="description" content="介绍一下Boosting的思想？ 初始化训练一个弱学习器，初始化下的各条样本的权重一致 根据上一个弱学习器的结果，调整权重，使得错分的样本的权重变得更高 基于调整后的样本及样本权重训练下一个弱学习器 预测时直接串联综合各学习器的加权结果  最小二乘回归树的切分过程是怎么样的？ 回归树在每个切分后的结点上都会有一个预测值">
+<meta name="keywords" content="复习手册">
 <meta property="og:type" content="article">
 <meta property="og:title" content="集成学习需要理解的一些内容">
 <meta property="og:url" content="http://sladesha.github.io/2019/12/06/集成学习需要理解的一些内容/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="介绍一下Boosting的思想？ 初始化训练一个弱学习器，初始化下的各条样本的权重一致 根据上一个弱学习器的结果，调整权重，使得错分的样本的权重变得更高 基于调整后的样本及样本权重训练下一个弱学习器 预测时直接串联综合各学习器的加权结果  最小二乘回归树的切分过程是怎么样的？ 回归树在每个切分后的结点上都会有一个预测值，这个预测值就是结点上所有值的均值 分枝时遍历所有的属性进行二叉划分，挑选使平方">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-06T09:35:48.502Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-7c764ce173341f32.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-8fb2acfce8842ec4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-265d8f17a3870c7d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a2cd9052b60ce460.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-b66c5324919bd90a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-570049f2c16cca73.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-fd504c48062c08ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-c66d63e2ccb7d68f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-94ce15face06fac6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-32b7d6b5896925ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-87cac00b0bdaa198.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-05c4131f2d9133a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-6e8b9d99336fdf35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-877636fa026a4971.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-ecaeda28b3a8b764.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-e868ac16bcbe0cd3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-0cb1cb6cb0b5bbda.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-b8d8eed575e0efef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-cc3e8eb69bc3c49d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-3f9184ada7f730bd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-d5c1da281c1ee966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-65c417cb1bfcd4dc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-6ad6751d806e6782.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-ce2791e4d70c9e9a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f1c90a67210507dd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-51c56d7c1bf56cac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-ea71310807e0d0a3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-30d85d87c2bf9f5c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f1779d239fe61737.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-979112dbb7815b74.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-12-06T09:39:41.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="集成学习需要理解的一些内容">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:description" content="介绍一下Boosting的思想？ 初始化训练一个弱学习器，初始化下的各条样本的权重一致 根据上一个弱学习器的结果，调整权重，使得错分的样本的权重变得更高 基于调整后的样本及样本权重训练下一个弱学习器 预测时直接串联综合各学习器的加权结果  最小二乘回归树的切分过程是怎么样的？ 回归树在每个切分后的结点上都会有一个预测值，这个预测值就是结点上所有值的均值 分枝时遍历所有的属性进行二叉划分，挑选使平方">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-7c764ce173341f32.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -327,6 +359,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -348,7 +402,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0 字
+                  3,494 字
                 </span>
               
 
@@ -364,7 +418,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -385,7 +439,269 @@
       
 
       
-        
+        <h1 id="介绍一下Boosting的思想？"><a href="#介绍一下Boosting的思想？" class="headerlink" title="介绍一下Boosting的思想？"></a>介绍一下Boosting的思想？</h1><ul>
+<li>初始化训练一个弱学习器，初始化下的各条样本的权重一致</li>
+<li>根据上一个弱学习器的结果，调整权重，使得错分的样本的权重变得更高</li>
+<li>基于调整后的样本及样本权重训练下一个弱学习器</li>
+<li>预测时直接串联综合各学习器的加权结果</li>
+</ul>
+<h1 id="最小二乘回归树的切分过程是怎么样的？"><a href="#最小二乘回归树的切分过程是怎么样的？" class="headerlink" title="最小二乘回归树的切分过程是怎么样的？"></a>最小二乘回归树的切分过程是怎么样的？</h1><ul>
+<li>回归树在每个切分后的结点上都会有一个预测值，这个预测值就是结点上所有值的均值</li>
+<li>分枝时遍历所有的属性进行二叉划分，挑选使平方误差最小的划分属性作为本节点的划分属性</li>
+<li>属性上有多个值，则需要遍历所有可能的属性值，挑选使平方误差最小的划分属性值作为本属性的划分值</li>
+<li>递归重复以上步骤，直到满足叶子结点上值的要求</li>
+</ul>
+<h1 id="有哪些直接利用了Boosting思想的树模型？"><a href="#有哪些直接利用了Boosting思想的树模型？" class="headerlink" title="有哪些直接利用了Boosting思想的树模型？"></a>有哪些直接利用了Boosting思想的树模型？</h1><p>adaboost，gbdt等等</p>
+<h1 id="gbdt和boostingtree的boosting分别体现在哪里？"><a href="#gbdt和boostingtree的boosting分别体现在哪里？" class="headerlink" title="gbdt和boostingtree的boosting分别体现在哪里？"></a>gbdt和boostingtree的boosting分别体现在哪里？</h1><ul>
+<li>boostingtree利用基模型学习器，拟合的是当前模型与标签值的残差</li>
+<li>gbdt利用基模型学习器，拟合的是当前模型与标签值的残差的负梯度</li>
+</ul>
+<h1 id="gbdt的中的tree是什么tree？有什么特征？"><a href="#gbdt的中的tree是什么tree？有什么特征？" class="headerlink" title="gbdt的中的tree是什么tree？有什么特征？"></a>gbdt的中的tree是什么tree？有什么特征？</h1><p>Cart tree，但是都是回归树</p>
+<h1 id="常用回归问题的损失函数？"><a href="#常用回归问题的损失函数？" class="headerlink" title="常用回归问题的损失函数？"></a>常用回归问题的损失函数？</h1><ul>
+<li>mse:<img src="https://upload-images.jianshu.io/upload_images/1129359-7c764ce173341f32.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li>负梯度：y-h(x)</li>
+<li>初始模型F0由目标变量的平均值给出</li>
+</ul>
+</li>
+<li>绝对损失:<img src="https://upload-images.jianshu.io/upload_images/1129359-8fb2acfce8842ec4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li>负梯度：sign(y-h(x))</li>
+<li>初始模型F0由目标变量的中值给出</li>
+</ul>
+</li>
+<li>Huber损失：mse和绝对损失的结合<ul>
+<li>负梯度：y-h(x)和sign(y-h(x))分段函数</li>
+<li>它是MSE和绝对损失的组合形式，对于远离中心的异常点，采用绝对损失，其他的点采用MSE，这个界限一般用分位数点度量</li>
+</ul>
+</li>
+</ul>
+<h1 id="常用分类问题的损失函数？"><a href="#常用分类问题的损失函数？" class="headerlink" title="常用分类问题的损失函数？"></a>常用分类问题的损失函数？</h1><ul>
+<li>对数似然损失函数<ul>
+<li>二元且标签y属于{-1,+1}：𝐿(𝑦,𝑓(𝑥))=𝑙𝑜𝑔(1+𝑒𝑥𝑝(−𝑦𝑓(𝑥)))<ul>
+<li>负梯度：y/(1+𝑒𝑥𝑝(−𝑦𝑓(𝑥)))</li>
+</ul>
+</li>
+<li>多元：<img src="https://upload-images.jianshu.io/upload_images/1129359-265d8f17a3870c7d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+</li>
+<li>指数损失函数:𝐿(𝑦,𝑓(𝑥))=𝑒𝑥𝑝(−𝑦𝑓(𝑥))<ul>
+<li>负梯度：y·𝑒𝑥𝑝(−𝑦𝑓(𝑥))<br>除了负梯度计算和叶子节点的最佳负梯度拟合的线性搜索，多元GBDT分类和二元GBDT分类以及GBDT回归算法过程相同</li>
+</ul>
+</li>
+</ul>
+<h1 id="什么是gbdt中的残差的负梯度？"><a href="#什么是gbdt中的残差的负梯度？" class="headerlink" title="什么是gbdt中的残差的负梯度？"></a>什么是gbdt中的残差的负梯度？</h1><p><img src="https://upload-images.jianshu.io/upload_images/1129359-a2cd9052b60ce460.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>当loss函数为均方误差<img src="https://upload-images.jianshu.io/upload_images/1129359-b66c5324919bd90a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">，gbdt中的残差的负梯度的结果y-H(x)正好与boostingtree的拟合残差一致</p>
+<h1 id="如何用损失函数的负梯度实现gbdt？"><a href="#如何用损失函数的负梯度实现gbdt？" class="headerlink" title="如何用损失函数的负梯度实现gbdt？"></a>如何用损失函数的负梯度实现gbdt？</h1><ul>
+<li>利用<img src="https://upload-images.jianshu.io/upload_images/1129359-570049f2c16cca73.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">可以计算得到x对应的损失函数的负梯度<img src="https://upload-images.jianshu.io/upload_images/1129359-fd504c48062c08ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">,据此我们可以构造出第t棵回归树，其对应的叶子结点区域<img src="https://upload-images.jianshu.io/upload_images/1129359-c66d63e2ccb7d68f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">j为叶子结点位置</li>
+<li>构建回归树的过程中，需要考虑找到特征A中最合适的切分点，使得切分后的数据集D1和D2的均方误差最小<img src="https://upload-images.jianshu.io/upload_images/1129359-94ce15face06fac6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>针对每一个叶子节点里的样本，我们求出使损失函数最小，也就是拟合叶子节点最好的输出值𝑐𝑡𝑗,<img src="https://upload-images.jianshu.io/upload_images/1129359-32b7d6b5896925ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li>首先，根据feature切分后的损失均方差大小，选取最优的特征切分</li>
+<li>其次，根据选定的feature切分后的叶子结点数据集，选取最使损失函数最小，也就是拟合叶子节点最好的输出值</li>
+<li>这样就完整的构造出一棵树：<img src="https://upload-images.jianshu.io/upload_images/1129359-87cac00b0bdaa198.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+</li>
+<li>本轮最终得到的强学习器的表达式如下：<img src="https://upload-images.jianshu.io/upload_images/1129359-05c4131f2d9133a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+<h1 id="拟合损失函数的负梯度为什么是可行的？"><a href="#拟合损失函数的负梯度为什么是可行的？" class="headerlink" title="拟合损失函数的负梯度为什么是可行的？"></a>拟合损失函数的负梯度为什么是可行的？</h1><ul>
+<li>泰勒展开的一阶形式：<img src="https://upload-images.jianshu.io/upload_images/1129359-6e8b9d99336fdf35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>m轮树模型可以写成：<img src="https://upload-images.jianshu.io/upload_images/1129359-877636fa026a4971.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li>对<img src="https://upload-images.jianshu.io/upload_images/1129359-ecaeda28b3a8b764.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">进行泰勒展开：<img src="https://upload-images.jianshu.io/upload_images/1129359-e868ac16bcbe0cd3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">,其中m-1轮对残差梯度为<img src="https://upload-images.jianshu.io/upload_images/1129359-0cb1cb6cb0b5bbda.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+</li>
+<li>我们拟合了残差的负梯度，<img src="https://upload-images.jianshu.io/upload_images/1129359-b8d8eed575e0efef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">,所以<img src="https://upload-images.jianshu.io/upload_images/1129359-cc3e8eb69bc3c49d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">内会让损失向下降对方向前进</li>
+</ul>
+<h1 id="即便拟合损失函数负梯度是可行的，为什么不直接拟合残差？-拟合负梯度好在哪里？"><a href="#即便拟合损失函数负梯度是可行的，为什么不直接拟合残差？-拟合负梯度好在哪里？" class="headerlink" title="即便拟合损失函数负梯度是可行的，为什么不直接拟合残差？ 拟合负梯度好在哪里？"></a>即便拟合损失函数负梯度是可行的，为什么不直接拟合残差？ 拟合负梯度好在哪里？</h1><ul>
+<li>前者不用残差的负梯度而是使用残差，是全局最优值，后者使用的是 局部最优方向（负梯度）*步长（𝛽）</li>
+<li>依赖残差进行优化，损失函数一般固定为反映残差的均方差损失函数，因此 当均方差损失函数失效（该损失函数对异常值敏感）的时候，换了其他一般的损失函数，便很难得到优化的结果。同时，因为损失函数的问题，Boosting Tree也很难处理回归之外问题。 而后者使用梯度下降的方法，对于任意可以求导的损失函数它都可以处理</li>
+</ul>
+<h1 id="Shrinkage收缩的作用？"><a href="#Shrinkage收缩的作用？" class="headerlink" title="Shrinkage收缩的作用？"></a>Shrinkage收缩的作用？</h1><p>每次走一小步逐渐逼近结果的效果，要比每次迈一大步很快逼近结果的方式更容易得到精确值，即它不完全信任每一棵残差树，认为每棵树只学到了真理的一部分累加的时候只累加了一小部分多学几棵树来弥补不足。 这个技巧类似于梯度下降里的学习率</p>
+<ul>
+<li>原始：<img src="https://upload-images.jianshu.io/upload_images/1129359-3f9184ada7f730bd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>Shrinkage：<img src="https://upload-images.jianshu.io/upload_images/1129359-d5c1da281c1ee966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+<h1 id="feature属性会被重复多次使用么？"><a href="#feature属性会被重复多次使用么？" class="headerlink" title="feature属性会被重复多次使用么？"></a>feature属性会被重复多次使用么？</h1><p>会，同时因为特征会进行多次使用，特征用的越多，则该特征的重要性越大</p>
+<h1 id="gbdt如何进行正则化的？"><a href="#gbdt如何进行正则化的？" class="headerlink" title="gbdt如何进行正则化的？"></a>gbdt如何进行正则化的？</h1><ul>
+<li>子采样<ul>
+<li>每一棵树基于原始原本的一个子集进行训练</li>
+<li>rf是有放回采样，gbdt是无放回采样</li>
+<li>特征子采样可以来控制模型整体的方差</li>
+</ul>
+</li>
+<li>利用Shrinkage收缩，控制每一棵子树的贡献度</li>
+<li>每棵Cart树的枝剪</li>
+</ul>
+<h1 id="为什么集成算法大多使用树类模型作为基学习器？或者说，为什么集成学习可以在树类模型上取得成功？"><a href="#为什么集成算法大多使用树类模型作为基学习器？或者说，为什么集成学习可以在树类模型上取得成功？" class="headerlink" title="为什么集成算法大多使用树类模型作为基学习器？或者说，为什么集成学习可以在树类模型上取得成功？"></a>为什么集成算法大多使用树类模型作为基学习器？或者说，为什么集成学习可以在树类模型上取得成功？</h1><ul>
+<li>对数据的要求比较低，不需要强假设，不需要数据预处理，连续离散都可以，缺失值也能接受</li>
+<li>bagging，关注于提升分类器的泛化能力</li>
+<li>boosting，关注于提升分类器的精度</li>
+</ul>
+<h1 id="gbdt的优缺点？"><a href="#gbdt的优缺点？" class="headerlink" title="gbdt的优缺点？"></a>gbdt的优缺点？</h1><p>优点：</p>
+<ul>
+<li>数据要求比较低，不需要前提假设，能处理缺失值，连续值，离散值</li>
+<li>使用一些健壮的损失函数，对异常值的鲁棒性非常强</li>
+<li>调参相对较简单</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>并行化能力差</li>
+</ul>
+<h1 id="gbdt和randomforest区别？"><a href="#gbdt和randomforest区别？" class="headerlink" title="gbdt和randomforest区别？"></a>gbdt和randomforest区别？</h1><ul>
+<li>相同：<ul>
+<li>都是多棵树的组合</li>
+</ul>
+</li>
+<li>不同：<ul>
+<li>RF每次迭代的样本是从全部训练集中有放回抽样形成的，而GBDT每次使用全部样本</li>
+<li>gbdt对异常值比rf更加敏感</li>
+<li>gbdt是串行，rf是并行</li>
+<li>gbdt是cart回归树，rf是cart分类回归树都可以</li>
+<li>gbdt是提高降低偏差提高性能，rf是通过降低方差提高性能</li>
+<li>gbdt对输出值是进行加权求和，rf对输出值是进行投票或者平均</li>
+</ul>
+</li>
+</ul>
+<h1 id="GBDT和LR的差异？"><a href="#GBDT和LR的差异？" class="headerlink" title="GBDT和LR的差异？"></a>GBDT和LR的差异？</h1><ul>
+<li>从决策边界来说，线性回归的决策边界是一条直线，逻辑回归的决策边界是一条曲线，而GBDT的决策边界可能是很多条线</li>
+<li>当在高维稀疏特征的场景下，LR的效果一般会比GBDT好。因为LR有参数惩罚，GBDT容易造成过拟合</li>
+</ul>
+<h1 id="XGboost缺点"><a href="#XGboost缺点" class="headerlink" title="XGboost缺点"></a>XGboost缺点</h1><ul>
+<li>每轮迭代时，都需要遍历整个训练数据多次。如果把整个训练数据装进内存则会限制训练数据的大小；如果不装进内存，反复地读写训练数据又会消耗非常大的时间</li>
+<li>预排序方法需要保存特征值，及特征排序后的索引结果，占用空间</li>
+<li>level-wise，在训练的时候哪怕新增的分裂点对loss增益没有提升也会先达到预定的层数</li>
+</ul>
+<h1 id="LightGBM对Xgboost的优化"><a href="#LightGBM对Xgboost的优化" class="headerlink" title="LightGBM对Xgboost的优化"></a>LightGBM对Xgboost的优化</h1><ul>
+<li>将连续的浮点特征离散成k个离散值，具体过程是首先确定对于每一个特征需要多少的桶bin，然后均分，将属于该桶的样本数据更新为bin的值，最后用直方图表示。在进行特征选择时，只需要根据直方图的离散值，遍历寻找最优的分割点<ul>
+<li>优点：时间开销由O(features)降低到O(bins)</li>
+<li>缺点：很多数据精度被丢失，相当于用了正则</li>
+</ul>
+</li>
+<li>利用leaf-wise代替level-wise<ul>
+<li>每次从当前所有叶子中找到分裂增益最大（一般也是数据量最大）的一个叶子，然后分裂，如此循环</li>
+</ul>
+</li>
+<li>直方图做差加速</li>
+</ul>
+<h1 id="LightGBM亮点"><a href="#LightGBM亮点" class="headerlink" title="LightGBM亮点"></a>LightGBM亮点</h1><ul>
+<li>单边梯度采样 Gradient-based One-Side Sampling (GOSS)：排除<strong>大部分</strong>小梯度的样本，仅用剩下的样本计算损失增益</li>
+<li>互斥稀疏特征绑定Exclusive Feature Bundling (EFB)：从减少特征角度，把尽可能互斥的特征进行合并，比如特征A[0,10],特征B[0,20],可以把B+10后与A合并，得到新特征A+B[0,30]</li>
+</ul>
+<h1 id="xgboost对比gbdt-boosting-Tree有了哪些方向上的优化？"><a href="#xgboost对比gbdt-boosting-Tree有了哪些方向上的优化？" class="headerlink" title="xgboost对比gbdt/boosting Tree有了哪些方向上的优化？"></a>xgboost对比gbdt/boosting Tree有了哪些方向上的优化？</h1><ul>
+<li>显示的把树模型复杂度作为正则项加到优化目标中</li>
+<li>优化目标计算中用到二阶泰勒展开代替一阶，更加准确</li>
+<li>实现了分裂点寻找近似算法<ul>
+<li>暴力枚举</li>
+<li>近似算法（分桶）</li>
+</ul>
+</li>
+<li>更加高效和快速<ul>
+<li>数据事先排序并且以block形式存储，有利于并行计算</li>
+<li>基于分布式通信框架rabit，可以运行在MPI和yarn上</li>
+<li>实现做了面向体系结构的优化，针对cache和内存做了性能优化</li>
+</ul>
+</li>
+</ul>
+<h1 id="xgboost和gbdt的区别？"><a href="#xgboost和gbdt的区别？" class="headerlink" title="xgboost和gbdt的区别？"></a>xgboost和gbdt的区别？</h1><ul>
+<li>模型优化上：<ul>
+<li>基模型的优化：<ul>
+<li>gbdt用的是cart回归树作为基模型，xgboost还可以用线性模型，加上天生的正则项，就是带L1和L2逻辑回归(分类)和线性回归(回归)</li>
+</ul>
+</li>
+<li>损失函数上的优化：<ul>
+<li>gbdt对loss是泰勒一阶展开，xgboost是泰勒二阶展开</li>
+<li>gbdt没有在loss中带入结点个数和预测值的正则项</li>
+</ul>
+</li>
+<li>特征选择上的优化：<ul>
+<li>实现了一种分裂节点寻找的近似算法，用于加速和减小内存消耗，而不是gbdt的暴力搜索</li>
+<li>节点分裂算法解决了缺失值方向的问题，gbdt则是沿用了cart的方法进行加权</li>
+</ul>
+</li>
+<li>正则化的优化：<ul>
+<li>特征采样</li>
+<li>样本采样</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>工程优化上：<ul>
+<li>xgboost在对特征进行了分block预排序，使得在做特征分裂的时候，最终选增益最大的那个特征去做分裂，那么各个特征的增益计算就可以开多线程进行</li>
+<li>cache-aware, out-of-core computation</li>
+<li>支持分布式计算可以运行在MPI，YARN上，得益于底层支持容错的分布式通信框架rabit</li>
+</ul>
+</li>
+</ul>
+<h1 id="xgboost优化目标-损失函数改变成什么样？"><a href="#xgboost优化目标-损失函数改变成什么样？" class="headerlink" title="xgboost优化目标/损失函数改变成什么样？"></a>xgboost优化目标/损失函数改变成什么样？</h1><ul>
+<li>原始：<img src="https://upload-images.jianshu.io/upload_images/1129359-65c417cb1bfcd4dc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li><img src="https://upload-images.jianshu.io/upload_images/1129359-6ad6751d806e6782.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">为泰勒一阶展开，<img src="https://upload-images.jianshu.io/upload_images/1129359-ce2791e4d70c9e9a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+</li>
+<li>改变：<img src="https://upload-images.jianshu.io/upload_images/1129359-f1c90a67210507dd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li>J为叶子结点的个数，<img src="https://upload-images.jianshu.io/upload_images/1129359-51c56d7c1bf56cac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">为第j个叶子结点中的最优值    </li>
+<li><img src="https://upload-images.jianshu.io/upload_images/1129359-ea71310807e0d0a3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">为泰勒二阶展开，<img src="https://upload-images.jianshu.io/upload_images/1129359-30d85d87c2bf9f5c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ul>
+</li>
+</ul>
+<h1 id="xgboost如何使用MAE或MAPE作为目标函数？"><a href="#xgboost如何使用MAE或MAPE作为目标函数？" class="headerlink" title="xgboost如何使用MAE或MAPE作为目标函数？"></a>xgboost如何使用MAE或MAPE作为目标函数？</h1><p>MAE:<img src="https://upload-images.jianshu.io/upload_images/1129359-f1779d239fe61737.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>MAPE:<img src="https://upload-images.jianshu.io/upload_images/1129359-979112dbb7815b74.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<ul>
+<li>利用可导的函数逼近MAE或MAPE<ul>
+<li>mse</li>
+<li>Huber loss</li>
+<li>Pseudo-Huber loss</li>
+</ul>
+</li>
+</ul>
+<h1 id="xgboost如何寻找分裂节点的候选集？"><a href="#xgboost如何寻找分裂节点的候选集？" class="headerlink" title="xgboost如何寻找分裂节点的候选集？"></a>xgboost如何寻找分裂节点的候选集？</h1><ul>
+<li>暴力枚举<ul>
+<li>法尝试所有特征和所有分裂位置，从而求得最优分裂点。当样本太大且特征为连续值时，这种暴力做法的计算量太大</li>
+</ul>
+</li>
+<li>近似算法（approx）<ul>
+<li>近似算法寻找最优分裂点时不会枚举所有的特征值，而是对特征值进行聚合统计，然后形成若干个桶。然后仅仅将桶边界上的特征的值作为分裂点的候选，从而获取计算性能的提升<ul>
+<li>离散值直接分桶</li>
+<li>连续值分位数分桶</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="xgboost如何处理缺失值？"><a href="#xgboost如何处理缺失值？" class="headerlink" title="xgboost如何处理缺失值？"></a>xgboost如何处理缺失值？</h1><ul>
+<li>训练时：缺失值数据会被分到左子树和右子树分别计算损失，选择较优的那一个</li>
+<li>预测时：如果训练中没有数据缺失，预测时出现了数据缺失，那么默认被分类到右子树</li>
+</ul>
+<h1 id="xgboost在计算速度上有了哪些点上提升？"><a href="#xgboost在计算速度上有了哪些点上提升？" class="headerlink" title="xgboost在计算速度上有了哪些点上提升？"></a>xgboost在计算速度上有了哪些点上提升？</h1><ul>
+<li>特征预排序<ul>
+<li>按特征进行存储，每一个block代表一个特征的值，样本在该block中按照它在该特征的值排好序。这些block只需要在程序开始的时候计算一次，后续排序只需要线性扫描这些block即可</li>
+<li>block可以仅存放样本的索引，而不是样本本身，这样节省了大量的存储空间</li>
+</ul>
+</li>
+</ul>
+<h1 id="xgboost特征重要性是如何得到的？"><a href="#xgboost特征重要性是如何得到的？" class="headerlink" title="xgboost特征重要性是如何得到的？"></a>xgboost特征重要性是如何得到的？</h1><ul>
+<li>’weight‘：代表着某个特征被选作分裂结点的次数；</li>
+<li>’gain‘：使用该特征作为分类结点的信息增益；</li>
+<li>’cover‘：某特征作为划分结点，覆盖样本总数的平均值；</li>
+</ul>
+<h1 id="XGBoost中如何对树进行剪枝？"><a href="#XGBoost中如何对树进行剪枝？" class="headerlink" title="XGBoost中如何对树进行剪枝？"></a>XGBoost中如何对树进行剪枝？</h1><ul>
+<li>在目标函数中增加了正则项：叶子结点树+叶子结点权重的L2模的平方</li>
+<li>在结点分裂时，定义了一个阈值，如果分裂后目标函数的增益小于该阈值，则不分裂</li>
+<li>当引入一次分裂后，重新计算新生成的左、右两个叶子结点的样本权重和。如果任一个叶子结点的样本权重低于某一个阈值（最小样本权重和），也会放弃此次分裂</li>
+<li>XGBoost 先从顶到底建立树直到最大深度，再从底到顶反向检查是否有不满足分裂条件的结点，进行剪枝</li>
+</ul>
+<h1 id="XGBoost模型如果过拟合了怎么解决？"><a href="#XGBoost模型如果过拟合了怎么解决？" class="headerlink" title="XGBoost模型如果过拟合了怎么解决？"></a>XGBoost模型如果过拟合了怎么解决？</h1><ul>
+<li>直接修改模型：<ul>
+<li>降低树的深度</li>
+<li>增大叶子结点的权重</li>
+<li>增大惩罚系数</li>
+</ul>
+</li>
+<li>subsample的力度变大，降低异常点的影响</li>
+<li>减小learning rate，提高estimator</li>
+</ul>
+<h1 id="xgboost如何调参数？"><a href="#xgboost如何调参数？" class="headerlink" title="xgboost如何调参数？"></a>xgboost如何调参数？</h1><ul>
+<li>先确定learningrate和estimator</li>
+<li>再确定每棵树的基本信息，max_depth和 min_child_weight</li>
+<li>再确定全局信息：比如最小分裂增益，子采样参数，正则参数</li>
+<li>重新降低learningrate，得到最优解</li>
+</ul>
+
       
     </div>
     
@@ -428,6 +744,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/复习手册/" rel="tag"># 复习手册</a>
+          
+        </div>
       
 
       
@@ -507,8 +829,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -607,6 +938,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍一下Boosting的思想？"><span class="nav-number">1.</span> <span class="nav-text">介绍一下Boosting的思想？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小二乘回归树的切分过程是怎么样的？"><span class="nav-number">2.</span> <span class="nav-text">最小二乘回归树的切分过程是怎么样的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有哪些直接利用了Boosting思想的树模型？"><span class="nav-number">3.</span> <span class="nav-text">有哪些直接利用了Boosting思想的树模型？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gbdt和boostingtree的boosting分别体现在哪里？"><span class="nav-number">4.</span> <span class="nav-text">gbdt和boostingtree的boosting分别体现在哪里？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gbdt的中的tree是什么tree？有什么特征？"><span class="nav-number">5.</span> <span class="nav-text">gbdt的中的tree是什么tree？有什么特征？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用回归问题的损失函数？"><span class="nav-number">6.</span> <span class="nav-text">常用回归问题的损失函数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用分类问题的损失函数？"><span class="nav-number">7.</span> <span class="nav-text">常用分类问题的损失函数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是gbdt中的残差的负梯度？"><span class="nav-number">8.</span> <span class="nav-text">什么是gbdt中的残差的负梯度？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何用损失函数的负梯度实现gbdt？"><span class="nav-number">9.</span> <span class="nav-text">如何用损失函数的负梯度实现gbdt？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拟合损失函数的负梯度为什么是可行的？"><span class="nav-number">10.</span> <span class="nav-text">拟合损失函数的负梯度为什么是可行的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#即便拟合损失函数负梯度是可行的，为什么不直接拟合残差？-拟合负梯度好在哪里？"><span class="nav-number">11.</span> <span class="nav-text">即便拟合损失函数负梯度是可行的，为什么不直接拟合残差？ 拟合负梯度好在哪里？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shrinkage收缩的作用？"><span class="nav-number">12.</span> <span class="nav-text">Shrinkage收缩的作用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#feature属性会被重复多次使用么？"><span class="nav-number">13.</span> <span class="nav-text">feature属性会被重复多次使用么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gbdt如何进行正则化的？"><span class="nav-number">14.</span> <span class="nav-text">gbdt如何进行正则化的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么集成算法大多使用树类模型作为基学习器？或者说，为什么集成学习可以在树类模型上取得成功？"><span class="nav-number">15.</span> <span class="nav-text">为什么集成算法大多使用树类模型作为基学习器？或者说，为什么集成学习可以在树类模型上取得成功？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gbdt的优缺点？"><span class="nav-number">16.</span> <span class="nav-text">gbdt的优缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gbdt和randomforest区别？"><span class="nav-number">17.</span> <span class="nav-text">gbdt和randomforest区别？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBDT和LR的差异？"><span class="nav-number">18.</span> <span class="nav-text">GBDT和LR的差异？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XGboost缺点"><span class="nav-number">19.</span> <span class="nav-text">XGboost缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LightGBM对Xgboost的优化"><span class="nav-number">20.</span> <span class="nav-text">LightGBM对Xgboost的优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LightGBM亮点"><span class="nav-number">21.</span> <span class="nav-text">LightGBM亮点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost对比gbdt-boosting-Tree有了哪些方向上的优化？"><span class="nav-number">22.</span> <span class="nav-text">xgboost对比gbdt/boosting Tree有了哪些方向上的优化？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost和gbdt的区别？"><span class="nav-number">23.</span> <span class="nav-text">xgboost和gbdt的区别？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost优化目标-损失函数改变成什么样？"><span class="nav-number">24.</span> <span class="nav-text">xgboost优化目标/损失函数改变成什么样？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost如何使用MAE或MAPE作为目标函数？"><span class="nav-number">25.</span> <span class="nav-text">xgboost如何使用MAE或MAPE作为目标函数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost如何寻找分裂节点的候选集？"><span class="nav-number">26.</span> <span class="nav-text">xgboost如何寻找分裂节点的候选集？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost如何处理缺失值？"><span class="nav-number">27.</span> <span class="nav-text">xgboost如何处理缺失值？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost在计算速度上有了哪些点上提升？"><span class="nav-number">28.</span> <span class="nav-text">xgboost在计算速度上有了哪些点上提升？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost特征重要性是如何得到的？"><span class="nav-number">29.</span> <span class="nav-text">xgboost特征重要性是如何得到的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XGBoost中如何对树进行剪枝？"><span class="nav-number">30.</span> <span class="nav-text">XGBoost中如何对树进行剪枝？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XGBoost模型如果过拟合了怎么解决？"><span class="nav-number">31.</span> <span class="nav-text">XGBoost模型如果过拟合了怎么解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xgboost如何调参数？"><span class="nav-number">32.</span> <span class="nav-text">xgboost如何调参数？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -635,7 +982,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">144.6k</span>
+    <span title="Site words total count">148.1k</span>
   
 </div>
 
