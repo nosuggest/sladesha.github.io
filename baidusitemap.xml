@@ -845,26 +845,6 @@
 
     
   <url>
-    <loc>http://sladesha.github.io/2017/06/02/%E6%AD%A3%E5%88%99%E5%8C%96-Lasso%E8%A7%84%E7%BA%A6/</loc>
-    <lastmod>2019-05-10T10:20:34.449Z</lastmod>
-    <data>
-        <display>
-        <title>正则化-Lasso规约</title>
-        <pubTime>2017-06-01T16:03:24.000Z</pubTime>
-        
-        <tag>正则化问题</tag>
-         
-         
-           
-             
-              <breadCrumb title="算法" url="http://sladesha.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://sladesha.github.io/2017/09/01/%E9%9D%A2%E8%AF%95%E4%B9%8B%E5%B8%B8%E8%A7%81%E5%86%B3%E7%AD%96%E6%A0%91%E5%BC%82%E5%90%8C/</loc>
     <lastmod>2019-05-10T10:06:09.734Z</lastmod>
     <data>
@@ -958,26 +938,6 @@
            
              
               <breadCrumb title="特征刻画" url="http://sladesha.github.io/categories/%E7%89%B9%E5%BE%81%E5%88%BB%E7%94%BB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://sladesha.github.io/2017/06/02/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/</loc>
-    <lastmod>2019-05-10T09:22:03.923Z</lastmod>
-    <data>
-        <display>
-        <title>因子分析原理剖析</title>
-        <pubTime>2017-06-01T16:13:00.000Z</pubTime>
-        
-        <tag>因子分析</tag>
-         
-         
-           
-             
-              <breadCrumb title="算法" url="http://sladesha.github.io/categories/%E7%AE%97%E6%B3%95/"/>
           
         </display>
     </data>
@@ -1332,13 +1292,8 @@
         <title>logistic regression一点理解</title>
         <pubTime>2018-08-14T01:12:58.000Z</pubTime>
         
-        <tag>理论解析</tag>
-         
          
            
-             
-              <breadCrumb title="机器学习" url="http://sladesha.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-          
         </display>
     </data>
     </url>
