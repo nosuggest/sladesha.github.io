@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="复习手册," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="logistic分布函数和密度函数，手绘大概的图像 分布函数： 密度函数： 其中，μ表示位置参数，γ为形状参数。logistic分布比正太分布有更长的尾部且波峰更尖锐  LR推导，基础5连问 基础公式 f(x) = wx + b y = sigmoid(f(x)) 可以看作是一次线性拟合+一次sigmoid的非线性变化">
+<meta name="keywords" content="复习手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LR需要理解的一些内容">
+<meta property="og:url" content="http://sladesha.github.io/2019/12/06/LR需要理解的一些内容/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:description" content="logistic分布函数和密度函数，手绘大概的图像 分布函数： 密度函数： 其中，μ表示位置参数，γ为形状参数。logistic分布比正太分布有更长的尾部且波峰更尖锐  LR推导，基础5连问 基础公式 f(x) = wx + b y = sigmoid(f(x)) 可以看作是一次线性拟合+一次sigmoid的非线性变化   伯努利过程 对于lr来说事情只有发生和不发生两种可能，对于已知样本来说，满">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-da9108e30c6eb475.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-1058e60e2975ec19.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-fb4ab5feccce821f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-daaedf91925b70c4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-802c51b2c37cd203.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-a96e2e74ba7c843c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-fdc724d5677a11f9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-7d517d61817ea0a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-cb33fbb54152fa7d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-d8f5d8a78c686d35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-c47fb88eb83de282.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-4592b2409d82b9a5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-0eb79e1e5208dddc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-f7007c6e1e33095b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-8b93ed24a0f23327.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-45afc95e282df488.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-12-06T09:25:24.104Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LR需要理解的一些内容">
+<meta name="twitter:description" content="logistic分布函数和密度函数，手绘大概的图像 分布函数： 密度函数： 其中，μ表示位置参数，γ为形状参数。logistic分布比正太分布有更长的尾部且波峰更尖锐  LR推导，基础5连问 基础公式 f(x) = wx + b y = sigmoid(f(x)) 可以看作是一次线性拟合+一次sigmoid的非线性变化   伯努利过程 对于lr来说事情只有发生和不发生两种可能，对于已知样本来说，满">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1129359-da9108e30c6eb475.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2019/12/06/LR需要理解的一些内容/"/>
+
+
+
+
+
+  <title>LR需要理解的一些内容 | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/12/06/LR需要理解的一些内容/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LR需要理解的一些内容</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-06T17:23:37+08:00">
+                2019-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,420 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="logistic分布函数和密度函数，手绘大概的图像"><a href="#logistic分布函数和密度函数，手绘大概的图像" class="headerlink" title="logistic分布函数和密度函数，手绘大概的图像"></a>logistic分布函数和密度函数，手绘大概的图像</h1><ul>
+<li>分布函数：<img src="https://upload-images.jianshu.io/upload_images/1129359-da9108e30c6eb475.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>密度函数：<img src="https://upload-images.jianshu.io/upload_images/1129359-1058e60e2975ec19.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>其中，μ表示位置参数，γ为形状参数。<strong>logistic分布比正太分布有更长的尾部且波峰更尖锐</strong></li>
+</ul>
+<h1 id="LR推导，基础5连问"><a href="#LR推导，基础5连问" class="headerlink" title="LR推导，基础5连问"></a>LR推导，基础5连问</h1><ul>
+<li>基础公式<ul>
+<li>f(x) = wx + b</li>
+<li>y = sigmoid(f(x))</li>
+<li>可以看作是一次线性拟合+一次sigmoid的非线性变化</li>
+</ul>
+</li>
+<li>伯努利过程<ul>
+<li>对于lr来说事情只有发生和不发生两种可能，对于已知样本来说，满足伯努利的概率假设：<ul>
+<li>p(y=1/x,θ) = h(θ,x)</li>
+<li>p(y=0/x,θ) = 1-h(θ,x)</li>
+<li>p(y/x,θ) = h(θ,x)^y · (1-h(θ,x))^(1-y) <ul>
+<li>第i个样本正确预测的概率如上可得</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>几率odds<ul>
+<li>数据特征下属于正例及反例的比值</li>
+<li>ln(y/(1-y))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>极大似然<ul>
+<li>第i个样本正确预测的概率如上可得每条样本的情况下</li>
+<li>综合全部样本发生的概率都要最大的话，采取极大似然连乘可得：<ul>
+<li>∏(h(θ,x)^y · (1-h(θ,x))^(1-y))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>损失函数<ul>
+<li>通常会对极大似然取对数，得到损失函数，方便计算<ul>
+<li>∑ylogh(θ,x)+(1-y)log(1-h(θ,x))最大</li>
+<li>及-1/m · ∑ylogh(θ,x)+(1-y)log(1-h(θ,x))最小    </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>梯度下降<ul>
+<li>损失函数求偏导，更新θ</li>
+<li>θj+1 = θj - ∆·∂Loss/∂θ =θj - ∆·1/m·∑x·(h-y)<ul>
+<li>∆为学习率</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="梯度下降如何并行化？"><a href="#梯度下降如何并行化？" class="headerlink" title="梯度下降如何并行化？"></a>梯度下降如何并行化？</h1><ul>
+<li>首先需要理解梯度下降的更新公式：<img src="https://upload-images.jianshu.io/upload_images/1129359-fb4ab5feccce821f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><ul>
+<li>∑处的并行，不同样本在不同机器上进行计算，计算完再进行合并</li>
+<li>同一条样本不同特征维度进行拆分，<img src="https://upload-images.jianshu.io/upload_images/1129359-daaedf91925b70c4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">处并行，把<img src="https://upload-images.jianshu.io/upload_images/1129359-802c51b2c37cd203.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">内的xi和Wi拆分成块分别计算后合并，再把外层<img src="https://upload-images.jianshu.io/upload_images/1129359-a96e2e74ba7c843c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">同样拆分成若干块进行计算</li>
+</ul>
+</li>
+</ul>
+<h1 id="LR明明是分类模型为什么叫回归？"><a href="#LR明明是分类模型为什么叫回归？" class="headerlink" title="LR明明是分类模型为什么叫回归？"></a>LR明明是分类模型为什么叫回归？</h1><p>观测样本中该特征在正负类中出现概率的比值满足线性条件，用的是线性拟合比率值，所以叫回归</p>
+<h1 id="为什么LR可以用来做CTR预估？"><a href="#为什么LR可以用来做CTR预估？" class="headerlink" title="为什么LR可以用来做CTR预估？"></a>为什么LR可以用来做CTR预估？</h1><ol>
+<li>点击行为为正向，未点击行为为负向，ctr需要得到点击行为的概率，lr可以产出正向行为的概率，完美match</li>
+<li>实现简单，方便并行，计算迭代速度很快</li>
+<li>可解释性强，可结合正则化等优化方法</li>
+</ol>
+<h1 id="满足什么样条件的数据用LR最好？"><a href="#满足什么样条件的数据用LR最好？" class="headerlink" title="满足什么样条件的数据用LR最好？"></a>满足什么样条件的数据用LR最好？</h1><ul>
+<li>特征之间尽可能独立<ul>
+<li>不独立所以我们把不独立的特征交叉了<ul>
+<li>还记得FM的思路？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>离散特征<ul>
+<li>连续特征通常没有特别含义，31岁和32岁差在哪？</li>
+<li>离散特征方便交叉考虑</li>
+<li>在异常值处理上也更加方便</li>
+<li>使的lr满足分布假设<ul>
+<li>什么分布假设？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在某种确定分类上的特征分布满足高斯分布<ul>
+<li><img src="https://upload-images.jianshu.io/upload_images/1129359-fdc724d5677a11f9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>C1和C2为正负类，观测样本中该特征在正负类中出现概率的比值满足线性条件的前提就是P服从正太分布<ul>
+<li>实际中不满足的很多，不满足我们通常就离散化，oneHotEncode</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>此处就用到了全概率公式推导，有可能会回到<a href="https://github.com/sladesha/Reflection_Summary/blob/master/基础概念/先验概率和后验概率/先验概率和后验概率.md#L96" target="_blank" rel="noopener">写出全概率公式&amp;贝叶斯公式</a>的问题中</p>
+<h1 id="LR为什么使用sigmoid函数作为激活函数？其他函数不行吗？"><a href="#LR为什么使用sigmoid函数作为激活函数？其他函数不行吗？" class="headerlink" title="LR为什么使用sigmoid函数作为激活函数？其他函数不行吗？"></a>LR为什么使用sigmoid函数作为激活函数？其他函数不行吗？</h1><ul>
+<li>思路一：lr的前提假设就是几率odds满足线性回归，odds又为正负样本的log比，参见<code>满足什么样条件的数据用LR最好？</code>中第三点公式的展开</li>
+<li>思路二：Exponential model 的形式是这样的：假设第i个特征对第k类的贡献是<img src="https://upload-images.jianshu.io/upload_images/1129359-7d517d61817ea0a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">，则数据点<img src="https://upload-images.jianshu.io/upload_images/1129359-cb33fbb54152fa7d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">属于第k类的概率正比于<img src="https://upload-images.jianshu.io/upload_images/1129359-d8f5d8a78c686d35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">。<ul>
+<li>二分类上：<img src="https://upload-images.jianshu.io/upload_images/1129359-c47fb88eb83de282.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+<li>化简即为sigmoid</li>
+<li>以上思路源自：PRML（Pattern Recognition and Machine Learning）</li>
+</ul>
+</li>
+<li>思路三：glm有满足指数族的性质，而作为lr作为y满足伯努利分布的的线性条件，伯努利分布的指数族形式就是sigmoid，或者也叫连接函数</li>
+</ul>
+<h1 id="利用几率odds的意义在哪？"><a href="#利用几率odds的意义在哪？" class="headerlink" title="利用几率odds的意义在哪？"></a>利用几率odds的意义在哪？</h1><ul>
+<li>直接对分类模型进行建模，前提假设为非常弱的指定类别上自变量的条件分布满足高斯</li>
+<li>由预测0/1的类别扩展到了预测0-1的概率值</li>
+<li>任意阶可导的优秀性质    </li>
+</ul>
+<h1 id="Sigmoid函数到底起了什么作用？"><a href="#Sigmoid函数到底起了什么作用？" class="headerlink" title="Sigmoid函数到底起了什么作用？"></a>Sigmoid函数到底起了什么作用？</h1><ul>
+<li>数据规约：[0,1]</li>
+<li>线性回归在全量数据上的敏感度一致，sigmoid在分界点0.5处更加敏感    </li>
+<li>sigmoid在逻辑回归的参数更新中也不起影响，避免了更新速度不稳定的问题</li>
+</ul>
+<h1 id="LR为什么要使用极大似然函数，交互熵作为损失函数？那为什么不选平方损失函数的呢"><a href="#LR为什么要使用极大似然函数，交互熵作为损失函数？那为什么不选平方损失函数的呢" class="headerlink" title="LR为什么要使用极大似然函数，交互熵作为损失函数？那为什么不选平方损失函数的呢"></a>LR为什么要使用极大似然函数，交互熵作为损失函数？那为什么不选平方损失函数的呢</h1><ul>
+<li>更新速度只与真实的x和y相关，与激活函数无关，更新平稳<ul>
+<li>比如mse就会导致更新速度与激活函数sigmoid挂钩，而sigmoid函数在定义域内的梯度大小都比较小(0.25&gt;x)，不利于快速更新</li>
+<li>mse下的lr损失函数非凸，难以得到解析解</li>
+</ul>
+</li>
+</ul>
+<h1 id="LR中若标签为-1和-1，损失函数如何推导？"><a href="#LR中若标签为-1和-1，损失函数如何推导？" class="headerlink" title="LR中若标签为+1和-1，损失函数如何推导？"></a>LR中若标签为+1和-1，损失函数如何推导？</h1><ul>
+<li>way1:把0-1的sigmoid的lr结果Y映射为2y-1，推导不变</li>
+<li>way2:把激活函数换成tanh，因为tanh的值域范围为[-1,1],满足结果，推导不变    </li>
+<li>way3:依旧以sigmoid函数的话，似然函数(likelihood)模型是：<img src="https://upload-images.jianshu.io/upload_images/1129359-4592b2409d82b9a5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">，重复极大似然计算即可    </li>
+</ul>
+<h1 id="如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？"><a href="#如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？" class="headerlink" title="如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？"></a>如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？</h1><h1 id="为什么要避免共线性？"><a href="#为什么要避免共线性？" class="headerlink" title="为什么要避免共线性？"></a>为什么要避免共线性？</h1><ul>
+<li>如果在损失函数最终收敛的情况下，其实就算有很多特征高度相关也不会影响分类器的效果</li>
+<li>每一个特征都是原来特征权重值的百分之一，线性可能解释性优点也消失了</li>
+<li>增加训练收敛的难度及耗时，有限次数下可能共线性变量无法收敛，系数估计变得不可靠</li>
+<li>泛化能力变差，训练是两列特征可能会共线性，当线上数据加入噪声后共线性消失，效果可能变差</li>
+</ul>
+<h1 id="LR可以用核么？可以怎么用？"><a href="#LR可以用核么？可以怎么用？" class="headerlink" title="LR可以用核么？可以怎么用？"></a>LR可以用核么？可以怎么用？</h1><p>结论：可以，加l2正则项后可用</p>
+<p>原因：</p>
+<ul>
+<li>核逻辑回归，需要把拟合参数w表示成z的线性组合及representer theorem理论。这边比较复杂，待更新，需要了解：<ul>
+<li>w拆解的z的线性组合中的系数α来源</li>
+<li>representer theorem 的证明<ul>
+<li>凡是进行L2正则化的线性问题我们都能使用核函数的技巧的证明</li>
+</ul>
+</li>
+<li>如何将将W*表示成β的形式带到我们最佳化的问题</li>
+</ul>
+</li>
+</ul>
+<h1 id="LR中的L1-L2正则项是啥？"><a href="#LR中的L1-L2正则项是啥？" class="headerlink" title="LR中的L1/L2正则项是啥？"></a>LR中的L1/L2正则项是啥？</h1><ul>
+<li>L1正则项：为模型加了一个先验知识，未知参数w满足拉普拉斯分布，<img src="https://upload-images.jianshu.io/upload_images/1129359-0eb79e1e5208dddc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"> ,u为0。在lr模型损失函数中新增了<img src="https://upload-images.jianshu.io/upload_images/1129359-f7007c6e1e33095b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">项</li>
+<li>L2正则项：为模型加了一个先验知识，未知参数w满足0均值正太分布，<img src="https://upload-images.jianshu.io/upload_images/1129359-8b93ed24a0f23327.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">,u为0。在lr模型损失函数中新增了<img src="https://upload-images.jianshu.io/upload_images/1129359-45afc95e282df488.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">项</li>
+</ul>
+<h1 id="lr加l1还是l2好？"><a href="#lr加l1还是l2好？" class="headerlink" title="lr加l1还是l2好？"></a>lr加l1还是l2好？</h1><p>这个问题还可以换一个说法，l1和l2的各自作用。<br>刚才我们说到l1对未知参数w有个前提假设满足拉普拉斯分布，l2对未知参数的假设则是正太分布，且都是零均值，单纯从图像上我们就可以发现，拉普拉斯对w的规约到0的可能性更高，所以对于特征约束强的需求下l1合适，否则l2    </p>
+<h1 id="正则化是依据什么理论实现模型优化？"><a href="#正则化是依据什么理论实现模型优化？" class="headerlink" title="正则化是依据什么理论实现模型优化？"></a>正则化是依据什么理论实现模型优化？</h1><p>结构风险最小化：在经验风险最小化的基础上（也就是训练误差最小化），尽可能采用简单的模型，以此提高泛化预测精度。</p>
+<h1 id="LR可以用来处理非线性问题么？"><a href="#LR可以用来处理非线性问题么？" class="headerlink" title="LR可以用来处理非线性问题么？"></a>LR可以用来处理非线性问题么？</h1><ul>
+<li>特征交叉，类似fm</li>
+<li>核逻辑回归，类似svm</li>
+<li>线性变换+非线性激活，类似neural network</li>
+</ul>
+<h1 id="为什么LR需要归一化或者取对数"><a href="#为什么LR需要归一化或者取对数" class="headerlink" title="为什么LR需要归一化或者取对数?"></a>为什么LR需要归一化或者取对数?</h1><p><strong>模型中对数据对处理一般都有一个标答是提升数据表达能力，也就是使数据含有的可分信息量更大</strong></p>
+<ul>
+<li>工程角度：<ul>
+<li>加速收敛</li>
+<li>提高计算效率</li>
+</ul>
+</li>
+<li>理论角度:<ul>
+<li>梯度下降过程稳定</li>
+<li>使得数据在某类上更服从高斯分布，满足前提假设，这个是必须要答出来的</li>
+<li><a href="https://github.com/sladesha/Reflection_Summary/blob/master/数据预处理/特征提取/数据变换.md#L6" target="_blank" rel="noopener">归一化和标准化之间的关系</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="为什么LR把特征离散化后效果更好？离散化的好处有哪些？"><a href="#为什么LR把特征离散化后效果更好？离散化的好处有哪些？" class="headerlink" title="为什么LR把特征离散化后效果更好？离散化的好处有哪些？"></a>为什么LR把特征离散化后效果更好？离散化的好处有哪些？</h1><ul>
+<li>原来的单变量可扩展到n个离散变量，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合</li>
+<li>离散后结合正则化可以进行特征筛选，更好防止过拟合</li>
+<li>数据的鲁棒性更好，不会因为无意义的连续值变动导致异常因素的影响，（31岁和32岁的差异在哪呢？）</li>
+<li>离散变量的计算相对于连续变量更快    </li>
+</ul>
+<h1 id="逻辑回归估计参数时的目标函数逻辑回归的值表示概率吗？"><a href="#逻辑回归估计参数时的目标函数逻辑回归的值表示概率吗？" class="headerlink" title="逻辑回归估计参数时的目标函数逻辑回归的值表示概率吗？"></a>逻辑回归估计参数时的目标函数逻辑回归的值表示概率吗？</h1><p>lr的output是彼此之间相对谁的可能性更高，而不是概率，概率是事情发生的可能，lr的output不代表可能    </p>
+<h1 id="LR对比万物？"><a href="#LR对比万物？" class="headerlink" title="LR对比万物？"></a>LR对比万物？</h1><ul>
+<li><p>lr和线性回归</p>
+<ul>
+<li>lr解用的极大似然，线性回归用的最小二乘</li>
+<li>lr用于分类，线性回归用于回归</li>
+<li>但两者都是广义线性回归GLM问题</li>
+<li>两者对非线性问题的处理能力都是欠佳的</li>
+</ul>
+</li>
+<li><p>lr和最大熵</p>
+<ul>
+<li>在解决二分类问题是等同的</li>
+</ul>
+</li>
+<li><p>lr和svm</p>
+<ul>
+<li>都可分类，都是判别式模型思路</li>
+<li>通常都是用正则化进行规约</li>
+<li>模型上<ul>
+<li>lr是交叉熵，svm是HingeLoss</li>
+<li>lr是全量数据拟合，svm是支持向量拟合</li>
+<li>lr是参数估计有参数的前提假设，svm没有</li>
+<li>lr依赖的是极大似然，svm依赖的是距离</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>lr和朴素贝叶斯</p>
+<ul>
+<li>如果朴素贝叶斯也有在某一类上的数据x满足高斯分布的假设前提，lr和朴素贝叶斯一致</li>
+<li>lr是判别模型，朴素贝叶斯是生成模型</li>
+<li>lr没有明确feature条件独立(但是不能共线性，理由之前讲了)，朴素贝叶斯要求feature条件独立</li>
+</ul>
+</li>
+<li><p>lr和最大熵模型</p>
+<ul>
+<li>本质没有区别</li>
+<li>最大熵模型在解决二分类问题就是逻辑回归</li>
+<li>最大熵模型在解决多分类问题的时候就是多项逻辑回归回归</li>
+</ul>
+</li>
+</ul>
+<h1 id="LR梯度下降方法？"><a href="#LR梯度下降方法？" class="headerlink" title="LR梯度下降方法？"></a>LR梯度下降方法？</h1><ul>
+<li>随机梯度下降<ul>
+<li>局部最优解，可跳出鞍点</li>
+<li>计算快</li>
+</ul>
+</li>
+<li>批梯度下降<ul>
+<li>全局最优解</li>
+<li>计算量大</li>
+</ul>
+</li>
+<li>mini批梯度下降<ul>
+<li>综合以上两种方法</li>
+</ul>
+</li>
+</ul>
+<p>除此之外，比如ada和冲量梯度下降法会对下降的速率速度进行控制，也会对不同更新速度的参数进行控制，等等，多用于深度学习中</p>
+<h1 id="LR的优缺点？"><a href="#LR的优缺点？" class="headerlink" title="LR的优缺点？"></a>LR的优缺点？</h1><ul>
+<li>优点<ul>
+<li>简单，易部署，训练速度快</li>
+<li>模型下限较高</li>
+<li>可解释性强</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>只能线性可分</li>
+<li>数据不平衡需要人为处理，weight_class/<a href="https://github.com/sladesha/Reflection_Summary/blob/master/数据预处理/数据平衡/采样.md#L11" target="_blank" rel="noopener">有哪些常见的采样方法</a></li>
+<li>模型上限较低</li>
+</ul>
+</li>
+</ul>
+<h1 id="除了做分类，你还会用LR做什么？"><a href="#除了做分类，你还会用LR做什么？" class="headerlink" title="除了做分类，你还会用LR做什么？"></a>除了做分类，你还会用LR做什么？</h1><p>特征筛选，特征的系数决定该特征的重要性</p>
+<h1 id="你有用过sklearn中的lr么？你用的是哪个包？"><a href="#你有用过sklearn中的lr么？你用的是哪个包？" class="headerlink" title="你有用过sklearn中的lr么？你用的是哪个包？"></a>你有用过sklearn中的lr么？你用的是哪个包？</h1><p>sklearn.linear_model.LogisticRegression</p>
+<h1 id="看过源码么？为什么去看？"><a href="#看过源码么？为什么去看？" class="headerlink" title="看过源码么？为什么去看？"></a>看过源码么？为什么去看？</h1><ul>
+<li>看部分参数的解释<ul>
+<li>比如dual、weight_class中的1:0还是0:1比</li>
+<li>比如输出值的形式，输出的格式</li>
+</ul>
+</li>
+</ul>
+<h1 id="谈一下sklearn-linear-model-LogisticRegression中的penalty和solver的选择？"><a href="#谈一下sklearn-linear-model-LogisticRegression中的penalty和solver的选择？" class="headerlink" title="谈一下sklearn.linear_model.LogisticRegression中的penalty和solver的选择？"></a>谈一下sklearn.linear_model.LogisticRegression中的penalty和solver的选择？</h1><ul>
+<li>penalty是正则化，solver是函数优化方法</li>
+<li>penalty包含l1和l2两种，solver包含坐标轴下降、牛顿、随机梯度下降等</li>
+<li>牛顿法，拟牛顿法和随机梯度下降都不能使用l1，因为他们都需要损失函数的一阶二阶导数，而坐标轴下降法不限制这些，l1和l2都可行。</li>
+<li>l1和l2选择参考上面讲的正则化部分</li>
+<li>随机梯度下降在数据较少的时候最好别用，但是速度比较快。默认的是坐标轴下降法</li>
+</ul>
+<h1 id="谈一下sklearn-linear-model-LogisticRegression中对多分类是怎么处理的？"><a href="#谈一下sklearn-linear-model-LogisticRegression中对多分类是怎么处理的？" class="headerlink" title="谈一下sklearn.linear_model.LogisticRegression中对多分类是怎么处理的？"></a>谈一下sklearn.linear_model.LogisticRegression中对多分类是怎么处理的？</h1><ul>
+<li>首先，决定是否为多分类的参数是multi_class</li>
+<li>在二分类的时候，multi和ovr和auto都是一样的</li>
+<li>在真正执行multi的时候，会通过LabelEncoder把目标值y离散化，不停的选择两类去做ovr的计算直到取完所有情况    </li>
+</ul>
+<h1 id="我的总结"><a href="#我的总结" class="headerlink" title="我的总结"></a>我的总结</h1><ul>
+<li>逻辑回归假设观测样本中该特征在正负类中出现结果服从伯努利分布，通过极大化似然函数的方法，运用梯度下降来求解参数，来达到将数据二分类的目的</li>
+<li>逻辑回归本质是线性模型，只能解决线性相关的问题，非线性相关用核或者svm等</li>
+<li>逻辑回归不需要特征的条件独立，但是不能共线性，需要核线性回归一样，做共线性检验</li>
+<li>逻辑回归对样本噪声是鲁棒对，SVM对噪声比较敏感，而logistic回归对噪声不是很敏感，是因为如果噪声点落在了支持向量上，将会直接影响判别面的方程。而logistic回归通过最大似然求解模型参数，将会弱化噪声的影响</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/复习手册/" rel="tag"># 复习手册</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/05/introductionToPython/" rel="next" title="introductionToPython">
+                <i class="fa fa-chevron-left"></i> introductionToPython
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#logistic分布函数和密度函数，手绘大概的图像"><span class="nav-number">1.</span> <span class="nav-text">logistic分布函数和密度函数，手绘大概的图像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR推导，基础5连问"><span class="nav-number">2.</span> <span class="nav-text">LR推导，基础5连问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降如何并行化？"><span class="nav-number">3.</span> <span class="nav-text">梯度下降如何并行化？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR明明是分类模型为什么叫回归？"><span class="nav-number">4.</span> <span class="nav-text">LR明明是分类模型为什么叫回归？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么LR可以用来做CTR预估？"><span class="nav-number">5.</span> <span class="nav-text">为什么LR可以用来做CTR预估？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#满足什么样条件的数据用LR最好？"><span class="nav-number">6.</span> <span class="nav-text">满足什么样条件的数据用LR最好？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR为什么使用sigmoid函数作为激活函数？其他函数不行吗？"><span class="nav-number">7.</span> <span class="nav-text">LR为什么使用sigmoid函数作为激活函数？其他函数不行吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用几率odds的意义在哪？"><span class="nav-number">8.</span> <span class="nav-text">利用几率odds的意义在哪？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sigmoid函数到底起了什么作用？"><span class="nav-number">9.</span> <span class="nav-text">Sigmoid函数到底起了什么作用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR为什么要使用极大似然函数，交互熵作为损失函数？那为什么不选平方损失函数的呢"><span class="nav-number">10.</span> <span class="nav-text">LR为什么要使用极大似然函数，交互熵作为损失函数？那为什么不选平方损失函数的呢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR中若标签为-1和-1，损失函数如何推导？"><span class="nav-number">11.</span> <span class="nav-text">LR中若标签为+1和-1，损失函数如何推导？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？"><span class="nav-number">12.</span> <span class="nav-text">如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要避免共线性？"><span class="nav-number">13.</span> <span class="nav-text">为什么要避免共线性？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR可以用核么？可以怎么用？"><span class="nav-number">14.</span> <span class="nav-text">LR可以用核么？可以怎么用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR中的L1-L2正则项是啥？"><span class="nav-number">15.</span> <span class="nav-text">LR中的L1/L2正则项是啥？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lr加l1还是l2好？"><span class="nav-number">16.</span> <span class="nav-text">lr加l1还是l2好？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化是依据什么理论实现模型优化？"><span class="nav-number">17.</span> <span class="nav-text">正则化是依据什么理论实现模型优化？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR可以用来处理非线性问题么？"><span class="nav-number">18.</span> <span class="nav-text">LR可以用来处理非线性问题么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么LR需要归一化或者取对数"><span class="nav-number">19.</span> <span class="nav-text">为什么LR需要归一化或者取对数?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么LR把特征离散化后效果更好？离散化的好处有哪些？"><span class="nav-number">20.</span> <span class="nav-text">为什么LR把特征离散化后效果更好？离散化的好处有哪些？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归估计参数时的目标函数逻辑回归的值表示概率吗？"><span class="nav-number">21.</span> <span class="nav-text">逻辑回归估计参数时的目标函数逻辑回归的值表示概率吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR对比万物？"><span class="nav-number">22.</span> <span class="nav-text">LR对比万物？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR梯度下降方法？"><span class="nav-number">23.</span> <span class="nav-text">LR梯度下降方法？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LR的优缺点？"><span class="nav-number">24.</span> <span class="nav-text">LR的优缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#除了做分类，你还会用LR做什么？"><span class="nav-number">25.</span> <span class="nav-text">除了做分类，你还会用LR做什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#你有用过sklearn中的lr么？你用的是哪个包？"><span class="nav-number">26.</span> <span class="nav-text">你有用过sklearn中的lr么？你用的是哪个包？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#看过源码么？为什么去看？"><span class="nav-number">27.</span> <span class="nav-text">看过源码么？为什么去看？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈一下sklearn-linear-model-LogisticRegression中的penalty和solver的选择？"><span class="nav-number">28.</span> <span class="nav-text">谈一下sklearn.linear_model.LogisticRegression中的penalty和solver的选择？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈一下sklearn-linear-model-LogisticRegression中对多分类是怎么处理的？"><span class="nav-number">29.</span> <span class="nav-text">谈一下sklearn.linear_model.LogisticRegression中对多分类是怎么处理的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我的总结"><span class="nav-number">30.</span> <span class="nav-text">我的总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">144.6k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
