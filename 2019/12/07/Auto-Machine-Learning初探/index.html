@@ -90,7 +90,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-4b57a85a9676e525.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1129359-bdf8dcc026774a3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-12-07T07:09:20.992Z">
+<meta property="og:updated_time" content="2019-12-07T07:10:54.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Auto Machine Learning初探">
 <meta name="twitter:description" content="前言最近在看AutoML，业界在 automl 上的进展还是很不错的，个人比较看好这个方向，所以做了一些了解：  Google: Cloud AutoML, Google’s Prediction API Microsoft: Custom Vision, Azure Machine Learning Amazon: Amazon Machine Learning BaiDu：EasyE Alib">
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,186 字
+                  1,173 字
                 </span>
               
 
@@ -512,7 +512,7 @@
 <li>Automated Machine Learning Hyperparameter Tuning in Python</li>
 </ul>
 <h1 id="auto-sklearn快速体验"><a href="#auto-sklearn快速体验" class="headerlink" title="auto-sklearn快速体验"></a><a href="https://automl.github.io/auto-sklearn/master/" target="_blank" rel="noopener">auto-sklearn快速体验</a></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> autosklearn.classification</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sklearn.model_selection</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sklearn.metrics</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X, y = sklearn.datasets.load_digits(return_X_y=<span class="keyword">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X_train, X_test, y_train, y_test = \</span><br><span class="line">        sklearn.model_selection.train_test_split(X, y, random_state=<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>automl = autosklearn.classification.AutoSklearnClassifier()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>automl.fit(X_train, y_train)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y_hat = automl.predict(X_test)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">"Accuracy score"</span>, sklearn.metrics.accuracy_score(y_test, y_hat))</span><br></pre></td></tr></table></figure>
-<p>欢迎大家关注我的个人<a href="http://www.shataowei.com" target="_blank" rel="noopener">bolg</a>，<a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" rel="noopener">知乎</a>，更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过邮箱发消息给我。</p>
+<p>更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过邮箱发消息给我。</p>
 
       
     </div>
@@ -794,7 +794,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">146.0k</span>
+    <span title="Site words total count">145.9k</span>
   
 </div>
 
