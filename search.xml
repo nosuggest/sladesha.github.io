@@ -60,7 +60,7 @@
 <li>改变Memorization为attention网络，强化feature直接的联系，让B中的电脑与蔡徐坤进行绑定，而不是让篮球电脑蔡徐坤进行混合绑定，让Memorization去记忆的时候进行权重倾斜</li>
 <li>Memorization通常为低阶特征交互，那我就升高阶数，svm告诉我们，在越高的维度上我们越有可能把数据集进行越离散的切分，XDeepFM就相当于把DeepFM中的1维+2维，变成了1维+2维+(l+1)维特征组合</li>
 </ul>
-<h1 id="XDeepFM如何实现的？"><a href="#XDeepFM如何实现的？" class="headerlink" title="XDeepFM如何实现的？"></a>XDeepFM如何实现的？</h1><p>网上大多数版本都是甩出的正方体图+公式，我觉得很不清晰，这边就不贴了，我<a href="">直接贴代码</a>及解释：</p>
+<h1 id="XDeepFM如何实现的？"><a href="#XDeepFM如何实现的？" class="headerlink" title="XDeepFM如何实现的？"></a>XDeepFM如何实现的？</h1><p>网上大多数版本都是甩出的正方体图+公式，我觉得很不清晰，这边就不贴了，我<a href="https://github.com/sladesha/deep_learning/blob/master/XDeepFm/script/extremeDeepFm.py" target="_blank" rel="noopener">直接贴代码</a>及解释：</p>
 <p><code>nn_input = tf.reshape(nn_input, shape=[-1, int(field_num), self.hparams.dim])</code></p>
 <p>我们知道，无论是deepfm还是XDeepFM在初始化的时候，都会把feature进行onehotencoding后向量化，然后再压缩成一个[batch,dim<code>*</code>FIELD_COUNT]的input，这边只是将其还原成网上常见的正方体的形式：[batch,field_num,dim]</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">split_tensor0 = tf.split(hidden_nn_layers[<span class="number">0</span>], self.hparams.dim * [<span class="number">1</span>], <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
