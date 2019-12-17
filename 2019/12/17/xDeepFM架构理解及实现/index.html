@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="推荐," />
 
 
 
@@ -80,16 +80,20 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SladeSha&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/archives/2019/07/index.html">
+<meta name="description" content="本文主要是为了讲解xDeepFM的框架，及如何用tensorflow去实现主干部分，如果需要直接拆箱可用，可以参考:xDeepFM，我的部分代码也来自于其中，这边主要是和大家一起对比着看下，xDeepFM到底做了哪些事情？我的工程实现代码等待我司项目上线稳定后开源。 XDeepFM到底extreme在哪里？首先，我在做">
+<meta name="keywords" content="推荐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xDeepFM架构理解及实现">
+<meta property="og:url" content="http://sladesha.github.io/2019/12/17/xDeepFM架构理解及实现/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="本文主要是为了讲解xDeepFM的框架，及如何用tensorflow去实现主干部分，如果需要直接拆箱可用，可以参考:xDeepFM，我的部分代码也来自于其中，这边主要是和大家一起对比着看下，xDeepFM到底做了哪些事情？我的工程实现代码等待我司项目上线稳定后开源。 XDeepFM到底extreme在哪里？首先，我在做论坛帖子推荐的时候遇到这么一个问题（问题真实，问题内容纯属虚构），用户A：带有如">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1g9zzwat15zj306r01lglh.jpg">
+<meta property="og:updated_time" content="2019-12-17T12:42:02.701Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SladeSha&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:title" content="xDeepFM架构理解及实现">
+<meta name="twitter:description" content="本文主要是为了讲解xDeepFM的框架，及如何用tensorflow去实现主干部分，如果需要直接拆箱可用，可以参考:xDeepFM，我的部分代码也来自于其中，这边主要是和大家一起对比着看下，xDeepFM到底做了哪些事情？我的工程实现代码等待我司项目上线稳定后开源。 XDeepFM到底extreme在哪里？首先，我在做论坛帖子推荐的时候遇到这么一个问题（问题真实，问题内容纯属虚构），用户A：带有如">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1g9zzwat15zj306r01lglh.jpg">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/archives/2019/07/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2019/12/17/xDeepFM架构理解及实现/"/>
 
 
 
 
 
-  <title>归档 | SladeSha's Algorithm World</title>
+  <title>xDeepFM架构理解及实现 | SladeSha's Algorithm World</title>
   
 
 
@@ -144,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,110 +276,256 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        好! 目前共计 73 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2019/12/17/xDeepFM架构理解及实现/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/07/15/Python踩坑指南（第三季）/" itemprop="url">
-              
-                <span itemprop="name">Python踩坑指南（第三季）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">xDeepFM架构理解及实现</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-07-15T09:20:37+08:00"
-              content="2019-07-15" >
-          07-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-17T20:01:29+08:00">
+                2019-12-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,224 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/01/transformer工程实现笔记/" itemprop="url">
-              
-                <span itemprop="name">transformer工程实现笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-07-01T08:38:36+08:00"
-              content="2019-07-01" >
-          07-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>本文主要是为了讲解xDeepFM的框架，及如何用tensorflow去实现主干部分，如果需要直接拆箱可用，可以参考:<a href="https://github.com/Leavingseason/xDeepFM" target="_blank" rel="noopener">xDeepFM</a>，我的部分代码也来自于其中，这边主要是和大家一起对比着看下，xDeepFM到底做了哪些事情？我的工程实现代码等待我司项目上线稳定后开源。</p>
+<h1 id="XDeepFM到底extreme在哪里？"><a href="#XDeepFM到底extreme在哪里？" class="headerlink" title="XDeepFM到底extreme在哪里？"></a>XDeepFM到底extreme在哪里？</h1><p>首先，我在做论坛帖子推荐的时候遇到这么一个问题（问题真实，问题内容纯属虚构），用户A：带有如下标签[篮球、足球、健身]，用户B：带有如下标签[篮球，电脑，蔡徐坤]，在使用deepfm做精排的时候，常常会把A和B所看的内容互相推荐，很明显，A是运动达人，而B是二次元达人，这样推荐是存在很大问题的。<br>我在处理的时候，采取了两种套路：</p>
+<ul>
+<li>改变Memorization为attention网络，强化feature直接的联系，让B中的电脑与蔡徐坤进行绑定，而不是让篮球电脑蔡徐坤进行混合绑定，让Memorization去记忆的时候进行权重倾斜</li>
+<li>Memorization通常为低阶特征交互，那我就升高阶数，svm告诉我们，在越高的维度上我们越有可能把数据集进行越离散的切分，XDeepFM就相当于把DeepFM中的1维+2维，变成了1维+2维+(l+1)维特征组合</li>
+</ul>
+<h1 id="XDeepFM如何实现的？"><a href="#XDeepFM如何实现的？" class="headerlink" title="XDeepFM如何实现的？"></a>XDeepFM如何实现的？</h1><p>网上大多数版本都是甩出的正方体图+公式，我觉得很不清晰，这边就不贴了，我<a href="">直接贴代码</a>及解释：</p>
+<p><code>nn_input = tf.reshape(nn_input, shape=[-1, int(field_num), self.hparams.dim])</code></p>
+<p>我们知道，无论是deepfm还是XDeepFM在初始化的时候，都会把feature进行onehotencoding后向量化，然后再压缩成一个[batch,dim<code>*</code>FIELD_COUNT]的input，这边只是将其还原成网上常见的正方体的形式：[batch,field_num,dim]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">split_tensor0 = tf.split(hidden_nn_layers[<span class="number">0</span>], self.hparams.dim * [<span class="number">1</span>], <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>这个就是XDeepFM最有意思的地方，我们正常理解都是把特征按照不同的特征进行切分组合，在XDeepFM它却按照dim进行切开然后进行点击，而且是外积，所以大家难以理解的就在这边，用数据来说就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(np.arange(<span class="number">1</span>,<span class="number">13</span>).reshape(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>),dtype=tf.int32)</span><br><span class="line"></span><br><span class="line">array([[[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>],</span><br><span class="line">        [<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]]], dtype=int32)</span><br><span class="line">切割完为：</span><br><span class="line">[array([[[ <span class="number">1</span>],</span><br><span class="line">         [ <span class="number">4</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">7</span>],</span><br><span class="line">         [<span class="number">10</span>]]], dtype=int32), </span><br><span class="line"></span><br><span class="line">         array([[[ <span class="number">2</span>],</span><br><span class="line">         [ <span class="number">5</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">8</span>],</span><br><span class="line">         [<span class="number">11</span>]]], dtype=int32), </span><br><span class="line"></span><br><span class="line">         array([[[ <span class="number">3</span>],</span><br><span class="line">         [ <span class="number">6</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">9</span>],</span><br><span class="line">         [<span class="number">12</span>]]], dtype=int32)]</span><br></pre></td></tr></table></figure>
+<p>这边没有按照[1,2,3]这种方式去切分，而是按照[[1],[4]]这种方式，在dim上进行切分。</p>
+<p><code>dot_result_m = tf.matmul(split_tensor0, split_tensor, transpose_b=True)</code>这一步也是很有意思，没有常规意义上做点击dot，做的外积，生生的把向量铺开了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">array([[[[  <span class="number">1</span>,   <span class="number">4</span>],</span><br><span class="line">         [  <span class="number">4</span>,  <span class="number">16</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">49</span>,  <span class="number">70</span>],</span><br><span class="line">         [ <span class="number">70</span>, <span class="number">100</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       [[[  <span class="number">4</span>,  <span class="number">10</span>],</span><br><span class="line">         [ <span class="number">10</span>,  <span class="number">25</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">64</span>,  <span class="number">88</span>],</span><br><span class="line">         [ <span class="number">88</span>, <span class="number">121</span>]]],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       [[[  <span class="number">9</span>,  <span class="number">18</span>],</span><br><span class="line">         [ <span class="number">18</span>,  <span class="number">36</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">81</span>, <span class="number">108</span>],</span><br><span class="line">         [<span class="number">108</span>, <span class="number">144</span>]]]], dtype=int32)</span><br></pre></td></tr></table></figure>
+<p>把刚才的[[1],[4]]按照外积的形式去处理了，并得到了一个[bacth_size,dim,field_nums[0] <code>*</code> field_nums[-1]]的形式。再通过[1,field_nums[-1] * field_nums[0],output]进行卷积处理相当于在dim的每一维上进行融合，融合的是所有特征dim的每一维。最后才sum_pooling操作，外接一个输出层压缩到1个输出值。</p>
+<h1 id="CIN为什么要搞这么复杂，比deepfm好在哪？"><a href="#CIN为什么要搞这么复杂，比deepfm好在哪？" class="headerlink" title="CIN为什么要搞这么复杂，比deepfm好在哪？"></a>CIN为什么要搞这么复杂，比deepfm好在哪？</h1><p>看代码就知道，刚才CIN的过程可以进行N次，<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9zzwat15zj306r01lglh.jpg" alt="">这里面的l代表着从0层开始了l次的特征组合，比起deepfm的2次，对特征的组合更深，能解释的空间更为复杂</p>
+<h1 id="CIN很完美吗？"><a href="#CIN很完美吗？" class="headerlink" title="CIN很完美吗？"></a>CIN很完美吗？</h1><p>虽然作者在论文刚开始的时候就吐槽了DCN的低端，认为DCN其实就是init层的N次交叉，但是我认为DCN的残差项保证了特征的1～l+1特征都有，而CIN中去除了残差项，虽然更快了，但是相当于丢弃了1～l阶特征的组合结果，不见得可取</p>
+<h1 id="实操经验分享？"><a href="#实操经验分享？" class="headerlink" title="实操经验分享？"></a>实操经验分享？</h1><ul>
+<li>XDeepFM比起循环神经网络是快了不止一个量级的，基于DNN+CNN这种架构下，并行策略保证它很高效的执行速度。</li>
+<li>如果是baseline的尝试，建议优先DeepFM，绝大多数情况下，DeepFM已经满足了我们的基础需求。我司实际项目的效果下XDeepFM在离线数据集上目前也只有0.1%的提升，但是代码量及code review的压力却大了很多。</li>
+<li>在走XDeepFM的路子时候，可以考虑把DeepFM中的Memorization层加入DIN中的Attention，完全不逊色。</li>
+</ul>
+<p>更多代码内容欢迎follow我的个人<a href="https://github.com/sladesha" target="_blank" rel="noopener">Github</a>，如果有任何算法、代码疑问都欢迎通过邮箱发消息给我。</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/07/Auto-Machine-Learning初探/" rel="next" title="Auto Machine Learning初探">
+                <i class="fa fa-chevron-left"></i> Auto Machine Learning初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -383,6 +533,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -403,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -502,6 +670,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XDeepFM到底extreme在哪里？"><span class="nav-number">1.</span> <span class="nav-text">XDeepFM到底extreme在哪里？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XDeepFM如何实现的？"><span class="nav-number">2.</span> <span class="nav-text">XDeepFM如何实现的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CIN为什么要搞这么复杂，比deepfm好在哪？"><span class="nav-number">3.</span> <span class="nav-text">CIN为什么要搞这么复杂，比deepfm好在哪？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CIN很完美吗？"><span class="nav-number">4.</span> <span class="nav-text">CIN很完美吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实操经验分享？"><span class="nav-number">5.</span> <span class="nav-text">实操经验分享？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -651,6 +835,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1040,26 +1228,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
