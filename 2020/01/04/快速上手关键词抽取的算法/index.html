@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gakslj78daj309m01waa1.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gaksm7yjvqj30i602w759.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gaksx10uttj30kv040jri.jpg">
-<meta property="og:updated_time" content="2020-01-04T12:33:15.948Z">
+<meta property="og:updated_time" content="2020-01-04T12:37:23.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速上手关键词抽取的算法">
 <meta name="twitter:description" content="前言在自然语言处理领域，我们有一种类型的问题是如何在一堆文本中提取出核心词/句子。而无论是对于长文本还是短文本，往往几个关键词就可以代表整个文本的主题思想。同时，在很多推荐系统中，由于无法直接就整体文本进行利用，往往会现对文本进行汇总，常用的方法就是embedding或者关键词抽取，关键词提取的准确程度直接关系到推荐系统或者搜索系统的最终效果。让我们看下有哪些快速上手可用的方法。 TFIDFTFI">
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  739 字
+                  736 字
                 </span>
               
 
@@ -414,10 +414,13 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在自然语言处理领域，我们有一种类型的问题是如何在一堆文本中提取出核心词/句子。而无论是对于长文本还是短文本，往往几个关键词就可以代表整个文本的主题思想。同时，在很多推荐系统中，由于无法直接就整体文本进行利用，往往会现对文本进行汇总，常用的方法就是embedding或者关键词抽取，关键词提取的准确程度直接关系到推荐系统或者搜索系统的最终效果。让我们看下有哪些快速上手可用的方法。</p>
 <h1 id="TFIDF"><a href="#TFIDF" class="headerlink" title="TFIDF"></a>TFIDF</h1><p>TFIDF是term frequency inverse document frequency的简称，很好理解：term frequency dot inverse document frequency，文本频率与逆文档频率指数, TFIDF就是为了表征一个token（可以是一个字或者一个词）的重要程度。所以，当我们把doc中的每个词的重要程度算出来，倒序即可作为关键词。</p>
-<h2 id="Term-Frequency"><a href="#Term-Frequency" class="headerlink" title="Term Frequency"></a>Term Frequency</h2><p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gakslj78daj309m01waa1.jpg" alt="">,及词频的意思</p>
-<h2 id="Inverse-Document-Frequency"><a href="#Inverse-Document-Frequency" class="headerlink" title="Inverse Document Frequency"></a>Inverse Document Frequency</h2><p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gaksm7yjvqj30i602w759.jpg" alt="">，分母是平衡未出现词</p>
+<h2 id="Term-Frequency"><a href="#Term-Frequency" class="headerlink" title="Term Frequency"></a>Term Frequency</h2><p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gakslj78daj309m01waa1.jpg" alt=""></p>
+<h2 id="Inverse-Document-Frequency"><a href="#Inverse-Document-Frequency" class="headerlink" title="Inverse Document Frequency"></a>Inverse Document Frequency</h2><p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gaksm7yjvqj30i602w759.jpg" alt="">分母+1是平衡未出现词</p>
 <h2 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF * IDF"></a>TF * IDF</h2><p>TF-IDF算法非常容易理解，并且很容易实现，但是其简单结构并没有考虑词语的语义信息，无法处理一词多义与一义多词的情况。</p>
-<h2 id="Java实现-TfIdf"><a href="#Java实现-TfIdf" class="headerlink" title="Java实现:TfIdf"></a>Java实现:<a href="https://github.com/sladesha/machine_learning/blob/master/TFIDF/src/TfIdf.java" target="_blank" rel="noopener">TfIdf</a></h2><h1 id="RAKE"><a href="#RAKE" class="headerlink" title="RAKE"></a>RAKE</h1><p>RAKE是Rapid Automatic Keyword Extraction的简称，RAKE算法的亮点在于“R”，快速同时也有不俗的效果。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>Java版本：<a href="https://github.com/sladesha/machine_learning/blob/master/TFIDF/src/TfIdf.java" target="_blank" rel="noopener">TfIdf</a></li>
+</ul>
+<h1 id="RAKE"><a href="#RAKE" class="headerlink" title="RAKE"></a>RAKE</h1><p>RAKE是Rapid Automatic Keyword Extraction的简称，RAKE算法的亮点在于“R”，快速同时也有不俗的效果。</p>
 <h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ul>
 <li>切句切词：切句是以标点+停顿词+分割词做标记，切词是借助第三方切词工具，我python版实现的时候用的是jieba，Java版实现的时候用的是HanNlp</li>
 <li>共现矩阵：构建共现矩阵</li>
@@ -427,13 +430,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><ul>
 <li>Java版本：<a href="https://github.com/sladesha/machine_learning/blob/master/Rake/model/src/Rake.java" target="_blank" rel="noopener">RAKE</a></li>
 <li>Python版本：<a href="https://github.com/sladesha/machine_learning/blob/master/Rake/Rake.py" target="_blank" rel="noopener">RAKE</a></li>
 </ul>
 <h1 id="TextRank"><a href="#TextRank" class="headerlink" title="TextRank"></a>TextRank</h1><p>知道PageRank的同学，一定知道这么一个道理，网页点击行为是一个有向图，重要的网页会被各种网页链接到，比如baidu，所以我们求出有向图中节点的重要性就是网页的重要性。TextRank其实思想类似，只是把有向图换成了无向图，所以公式大家就应该很熟悉，和PageRank类似：<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gaksx10uttj30kv040jri.jpg" alt=""></p>
 <p>其中，d依旧是阻尼系数，但是大家发现多了w，这个其实是节点之间边的权重，因为无向图，文本分词后的词汇跳转我们假设是相互等同的。</p>
-<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><ul>
+<h2 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h2><ul>
 <li>关键词提取：<a href="https://github.com/sladesha/machine_learning/blob/master/TextRank/src/TextRankKeyWord.java" target="_blank" rel="noopener">TextRankKeyWord</a></li>
 <li>摘要句提取：<a href="https://github.com/sladesha/machine_learning/blob/master/TextRank/src/TextRankSummary.java" target="_blank" rel="noopener">TextRankSummary</a></li>
 </ul>
@@ -685,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TFIDF"><span class="nav-number">2.</span> <span class="nav-text">TFIDF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Term-Frequency"><span class="nav-number">2.1.</span> <span class="nav-text">Term Frequency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inverse-Document-Frequency"><span class="nav-number">2.2.</span> <span class="nav-text">Inverse Document Frequency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF"><span class="nav-number">2.3.</span> <span class="nav-text">TF * IDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java实现-TfIdf"><span class="nav-number">2.4.</span> <span class="nav-text">Java实现:TfIdf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAKE"><span class="nav-number">3.</span> <span class="nav-text">RAKE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">3.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TextRank"><span class="nav-number">4.</span> <span class="nav-text">TextRank</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-1"><span class="nav-number">4.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TFIDF"><span class="nav-number">2.</span> <span class="nav-text">TFIDF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Term-Frequency"><span class="nav-number">2.1.</span> <span class="nav-text">Term Frequency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inverse-Document-Frequency"><span class="nav-number">2.2.</span> <span class="nav-text">Inverse Document Frequency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF"><span class="nav-number">2.3.</span> <span class="nav-text">TF * IDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.4.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAKE"><span class="nav-number">3.</span> <span class="nav-text">RAKE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">3.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-1"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TextRank"><span class="nav-number">4.</span> <span class="nav-text">TextRank</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-2"><span class="nav-number">4.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></div>
             
 
           </div>
