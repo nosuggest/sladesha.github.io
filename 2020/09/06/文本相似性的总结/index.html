@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+
+
+
+  
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NLP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文本相似性的应用场景会有很多，在工业界我粗略遇到过：  热点做舆情识别监控的时候，需要对全网文章进行聚合，聚合过程中需要知道哪些文章是一致的 推荐做相似内容召回的时候，需要对文章内容进行匹配，匹配过程中需要知道哪些文章是一致的 特殊分类场景，比如fake news这种样本集合较小的场景下，相似匹配可以用来补充分类结果 ">
+<meta name="keywords" content="NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本相似性的总结">
+<meta property="og:url" content="http://sladesha.github.io/2020/09/06/文本相似性的总结/index.html">
+<meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
+<meta property="og:description" content="文本相似性的应用场景会有很多，在工业界我粗略遇到过：  热点做舆情识别监控的时候，需要对全网文章进行聚合，聚合过程中需要知道哪些文章是一致的 推荐做相似内容召回的时候，需要对文章内容进行匹配，匹配过程中需要知道哪些文章是一致的 特殊分类场景，比如fake news这种样本集合较小的场景下，相似匹配可以用来补充分类结果 …  说到文本相似性可以有很多种划分的方式，从文章的长短可以分别处理，从计算的方">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-06T13:33:15.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本相似性的总结">
+<meta name="twitter:description" content="文本相似性的应用场景会有很多，在工业界我粗略遇到过：  热点做舆情识别监控的时候，需要对全网文章进行聚合，聚合过程中需要知道哪些文章是一致的 推荐做相似内容召回的时候，需要对文章内容进行匹配，匹配过程中需要知道哪些文章是一致的 特殊分类场景，比如fake news这种样本集合较小的场景下，相似匹配可以用来补充分类结果 …  说到文本相似性可以有很多种划分的方式，从文章的长短可以分别处理，从计算的方">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sladesha.github.io/2020/09/06/文本相似性的总结/"/>
+
+
+
+
+
+  <title>文本相似性的总结 | SladeSha's Algorithm World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SladeSha's Algorithm World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：ml_trip</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-me">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            ME
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2020/09/06/文本相似性的总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文本相似性的总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T18:36:22+08:00">
+                2020-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,922 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文本相似性的应用场景会有很多，在工业界我粗略遇到过：</p>
+<ul>
+<li>热点做舆情识别监控的时候，需要对全网文章进行聚合，聚合过程中需要知道哪些文章是一致的</li>
+<li>推荐做相似内容召回的时候，需要对文章内容进行匹配，匹配过程中需要知道哪些文章是一致的</li>
+<li>特殊分类场景，比如fake news这种样本集合较小的场景下，相似匹配可以用来补充分类结果</li>
+<li>…</li>
+</ul>
+<p>说到文本相似性可以有很多种划分的方式，从文章的长短可以分别处理，从计算的方式可以分为深度学习和机器学习方式，从实现目的上可以分为去重和匹配…</p>
+<p>以下面两个例子举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0 伟大祖国让我们过的非常幸福</span><br><span class="line">1 伟大的祖国让我们过的非常幸福</span><br><span class="line">2 伟大的祖国是我们过的非常幸福原因</span><br><span class="line">3 中国人民现在的日子真的很幸福</span><br></pre></td></tr></table></figure>
+<h1 id="Hash方法"><a href="#Hash方法" class="headerlink" title="Hash方法"></a>Hash方法</h1><p>我们可以说0和1是相似的，因为它们之间只差了一个“的”，通常通过SimiHash或者MiniHash我们就可以解决这类问题</p>
+<p>分词、hash、加权、合并、降维，这个是它们在常规流程。总结一下就是，根据各种权重赋值方式（比如tfidf）给出每个词的权重，通过hash的方式给每个词一个01表征方式，通过权重和表征结果得到加权结果，再根据加权结果map到0或者1，得到一串签名结果Fingerprints，再通过分段比对或者其他什么方式进行两句话的比对，看下差异是否在可接受的范围内，得到两句话是否一致。</p>
+<p>这种方式通常用作去重，比如如果我们有一份非常庞大的样本集合，要去做去重，大家通常的做法就是在写hive sql或者spark sql的时候distinct一下，在做后续的自然语言处理任务，通过这种方式可以去除掉一些真·近似的文本，加快速度且干掉一些异常点非常有效，最重要的是超级快。</p>
+<h1 id="词袋方法"><a href="#词袋方法" class="headerlink" title="词袋方法"></a>词袋方法</h1><p>1和2由于相差的字数比较多，可能不是以一种hash方式去做能识别多出的。但是细心的朋友回发现，它们之间重合率非常高，通过分词后的比对也是可以识别的。</p>
+<p>这边点名一下常见的倒排索引、杰卡德相似、onehot的cosine、切词后的词交集个数，句法依存，编辑距离等等，都可以实现，而且其中不乏一些非常高效的解决方案，相似框架faiss，l2正则化后稀疏矩阵点积，tire树做文本内容的存储以匹配词交叉的情况等等。</p>
+<p>这种方式通常是应用在业务场景中了，它们通常不会作为一个自然语言理解必备的preprocessing工作去做，而是解决一系列要求高时效或者<strong>要求高相似</strong>的文本判断的场景下。</p>
+<h1 id="匹配方法"><a href="#匹配方法" class="headerlink" title="匹配方法"></a>匹配方法</h1><p>刚才为说到<strong>要求高相似</strong>，很多朋友可能不理解什么叫做高相似，对比1和2，2和3就会发现，大家对相似的标准其实是不一致的，在某些场景，比如热点榜单生成，1，2，3就是一件事情，大家都不喜欢在自己的热榜排序结果中重复出现1，2，3中的任意2条；而在信息流推荐中，2，3或者，1，3就是两件不同的事情，可能它们的文章有不同的侧重点。</p>
+<p>如果需要识别出1，2，3是同一件事情，可能词袋方法也不适用，因为它们没啥重复的词，词袋就失效了。</p>
+<ul>
+<li>LDA</li>
+<li>TWE</li>
+<li>WordEmbedding</li>
+<li>SentenceEmbedding</li>
+<li>BERT</li>
+<li>supervised method</li>
+</ul>
+<p>以上6种方式是工业界最常用的6种思路，不乏会有一些奇思妙想没有列出来，但是各大厂主力的方法一定包含在其上。</p>
+<h2 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h2><p>LDA是一个nlp工程师必会的技能，这边不展开讲，这边主要讲它能带来什么。LDA这个方法对一段文本的表征，它优秀在于考虑了当前文本和全局之间的关系，我在做文本匹配的时候，我不简简单单的立足在这个两篇文本是否一致，而是把它放在了全部数据集中，拼的是文本1、文本2在全量数据集中到底是个什么地位，在全部的文档库中这两个文本讲的到底是不是一类事情。</p>
+<p>LDA提供的是两篇文本的主题的分布，得到这个量化后的分布后如何去比呢？cosine？其实大家在高代学习过程中一定听过相对熵这个逻辑，从这个角度上来看，是不是text1对text2的相对熵和text2对text1的相对熵的加权平均很合适，因为它们都是衡量的两个分布上的一致性，而主题恰巧是text本文的分布。对，这个方法就是JS散度。另外一种方式是Hellinger Distance，它的中文名叫概率分布之间的距离—海林格距离，话不多说，同理易得。</p>
+<p>这边补充一下，百度的Familia就集成这两种方式去算相似度，异常好用。</p>
+<h2 id="TWE"><a href="#TWE" class="headerlink" title="TWE"></a>TWE</h2><p>用过LDA的人应该知道：LDA 产生的主题往往被高频词占据，这种现象导致低频词在实际应用中的作用非常有限。</p>
+<p>知道LDA原理的人应该知道：LDA通常假设同一个句子里的词产生自同一主题，对句子内的词进行了进一步的建模。</p>
+<p>显而易见，这些都是不合理的。</p>
+<p>Topical Word Embedding (TWE) 利用 LDA 训练获得的主题为词向量的训练提供补充信息，进而得到词和主题的向量表示。也就是说，我得到了主题向量，我也得到词向量，我结合两者一起来补充信息，这样我既照顾到了句的主题，也没有损失词的多样性信息。</p>
+<p>如何去生成：</p>
+<ul>
+<li>我们将每个主题视为一个伪词(pseudo word)，分别学习主题向量和词向量。然后根据向量wiwi和zizi构建主题词向量⟨wi,zi⟩⟨wi,zi⟩</li>
+<li>我们将每个单词词-主题对⟨wi,zi⟩⟨wi,zi⟩视为一个伪词(pseudo word)，并直接学习到主题词向量</li>
+<li>我们分别为每个词和每个主题保留不同的嵌入向量，通过连接相应的单词和主题向量来建立每个单词-主题对的向量</li>
+</ul>
+<p>法1精度差但是好实现，法2训练时间长但是效果更可接受，法3给单词embedded学习过程中引入了主题向量的影响。我现在一般用3，但是我觉得2是也是可接受的。</p>
+<h2 id="WordEmbedding"><a href="#WordEmbedding" class="headerlink" title="WordEmbedding"></a>WordEmbedding</h2><p>这段比较无脑，是个nlp工程师都用过的方式。GloVe，FastText，W2V，DSSM生成词的向量化表征结果，然后通过SIF，加权，Attention，平均，求和，Pooling等各种花里胡哨的方法然后在计算Cosine相似度。</p>
+<p>这个方法一定是baseline，效果非常可观，这边不多说。只是给大家分享一些我使用的心得</p>
+<ul>
+<li>找个靠谱的词向量做Fine-tune，不要随机。这边我是用的集团AI提供的词向量，开源的有腾讯16G，搜狗的20G，科大讯飞的8G结果</li>
+<li>数据越多，越好。但是要的是分布均匀的数据，玩命怼一个方向的数据对提升效果作用=0，我在finetune的时候是打撒后38哥垂类的1亿2000万条咨询文章，但是这些文章已经做了fingerprint过滤的</li>
+<li>不要剔除过多的词，不要只保留实体。一些连接词的学习会带来句子的连惯性上的帮助。假如你有一天需要做seq2seq的任务呢？</li>
+<li>添加<cls>可以帮你索定词位置，引入可以帮助你解决一些语句合理性判断的问题</cls></li>
+<li>把过短的内容删掉，1个字的词删掉，纯数字删掉，如果是资讯文章最后的版权声明删掉，小细节注意一下</li>
+</ul>
+<p>word embedding会带来一种问题，苹果和香蕉相关，“我下午想吃香蕉”和“我下午想吃苹果”，word embedding认为是一件事，但是实际可能并不是。</p>
+<h2 id="SentenceEmbedding"><a href="#SentenceEmbedding" class="headerlink" title="SentenceEmbedding"></a>SentenceEmbedding</h2><p>Sentence Embedding认为既然一个词可以是一个向量，一句话也可以是。这边的论文一堆，方法也一堆：doc2vec，Infersent，Sentence2Vec，skip-thought，Quick-Thought，FastSent。</p>
+<p>以上这些是我看过还没忘的，我觉得比较有价值的。它们基于不同的思想，也有不同的作用，我这边谈几个比较经典的。</p>
+<ul>
+<li>doc2vec是word2vec翻版，通常的做法是在句首加一个<cls>，学习到的<cls>的向量作为句向量。</cls></cls></li>
+<li>Skip-thought利用中心句预测context中的句子，用了一个encoder来压缩中心句子的信息，然后用两个decoder来产生context里的句子，一个decoder用于预测前一句，另外一个decoder用于预测后一句。<br>QT针对这个问题，对decoder部分做了大的调整，它直接把decoder拿掉，取而代之的是一个classifier，使得预测行为变成了分类行为。就是用向量点积来判断同样的encoder的向量的相似度。</li>
+<li>Sentence2Vec是Skip-thought加强版</li>
+<li>Infersent是有监督的方法，用的是相似内容对，构造了<u，v,|u-v|,u*v>进行Entailment、contradiction and neutral三分类的预测</u，v,|u-v|,u*v></li>
+<li>FastSent，用上下文的词来预测目标句子的词，然后把目标句的词的和作为目标句的向量</li>
+</ul>
+<p>句向量来补充词向量衡量一个句子的相似度会有明显的提升，我日常做baseline就是wordembedding+sentenceembedding来算cosine的</p>
+<h2 id="Bert"><a href="#Bert" class="headerlink" title="Bert"></a>Bert</h2><p>原理就不讲了，一万个写过bolg了，这边给大家整理了一份易错知识点<a href="https://github.com/sladesha/Reflection_Summary/blob/master/自然语言处理/Bert.md#L164" target="_blank" rel="noopener">Bert知识点</a>。</p>
+<p>主要注意的是：</p>
+<ul>
+<li>原始的bertbase别用，效果差，建议在自己的数据集上微调</li>
+<li>不要用CLS或者词向量拼接的方式，建议拿倒数第一层的output向量，你需要的只是句子综合信息</li>
+<li>这个速度真的慢，考虑场景，收益没有想的那么大</li>
+</ul>
+<h2 id="supervised-method"><a href="#supervised-method" class="headerlink" title="supervised method"></a>supervised method</h2><p>有监督的方式大概有两种思路：</p>
+<ul>
+<li>fasttext/infersent这种用有监督的方式生成词向量或者句向量方式，再计算句词向量之间的cosine相似度</li>
+<li>直接求解（Universal Sentence Encoder/DSSM）<ul>
+<li>第一步选择监督训练数据，设计相应的包含句子编码器Encoder的模型框架</li>
+<li>第二步选择（设计）具体的句子编码器，包括DAN、基于LSTM、基于CNN和Transformer等</li>
+</ul>
+</li>
+</ul>
+<p>正儿八经的人用infersent或者fasttext这种就行了，越复杂的设计带来的风险在工业界也是难以hold住的。</p>
+<p>以上这些，匹配方法可以得到2和3这种语句的聚合，但是需要考虑使用场景和收益率。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>讲道理，上面这些方法可以覆盖日常工作中的绝大多数文本相似度计算的方法，剩下就是如何去融合成一个适合场景的解决方案了。代码按大家的需要后续给大家开源。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/14/2019总结2020计划/" rel="next" title="2019总结2020计划">
+                <i class="fa fa-chevron-left"></i> 2019总结2020计划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/1.png"
+                alt="沙韬伟 sladesha" />
+            
+              <p class="site-author-name" itemprop="name">沙韬伟 sladesha</p>
+              <p class="site-description motion-element" itemprop="description">前滴滴出行风控算法负责人，前HP-AILab算法研究员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sladesha/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/79b57248a6c3" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sladesha" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:stw386@sina.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/slade_sha" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hash方法"><span class="nav-number">1.</span> <span class="nav-text">Hash方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词袋方法"><span class="nav-number">2.</span> <span class="nav-text">词袋方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匹配方法"><span class="nav-number">3.</span> <span class="nav-text">匹配方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LDA"><span class="nav-number">3.1.</span> <span class="nav-text">LDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TWE"><span class="nav-number">3.2.</span> <span class="nav-text">TWE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WordEmbedding"><span class="nav-number">3.3.</span> <span class="nav-text">WordEmbedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SentenceEmbedding"><span class="nav-number">3.4.</span> <span class="nav-text">SentenceEmbedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bert"><span class="nav-number">3.5.</span> <span class="nav-text">Bert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#supervised-method"><span class="nav-number">3.6.</span> <span class="nav-text">supervised method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沙韬伟 sladesha</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">152.9k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
