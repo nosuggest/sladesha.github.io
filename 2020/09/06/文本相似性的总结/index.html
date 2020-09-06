@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="文本相似性的应用场景会有很多，在工业界我粗略遇到过：  热点做舆情识别监控的时候，需要对全网文章进行聚合，聚合过程中需要知道哪些文章是一致的 推荐做相似内容召回的时候，需要对文章内容进行匹配，匹配过程中需要知道哪些文章是一致的 特殊分类场景，比如fake news这种样本集合较小的场景下，相似匹配可以用来补充分类结果 …  说到文本相似性可以有很多种划分的方式，从文章的长短可以分别处理，从计算的方">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-06T13:33:15.511Z">
+<meta property="og:updated_time" content="2020-09-06T13:42:42.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文本相似性的总结">
 <meta name="twitter:description" content="文本相似性的应用场景会有很多，在工业界我粗略遇到过：  热点做舆情识别监控的时候，需要对全网文章进行聚合，聚合过程中需要知道哪些文章是一致的 推荐做相似内容召回的时候，需要对文章内容进行匹配，匹配过程中需要知道哪些文章是一致的 特殊分类场景，比如fake news这种样本集合较小的场景下，相似匹配可以用来补充分类结果 …  说到文本相似性可以有很多种划分的方式，从文章的长短可以分别处理，从计算的方">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,922 字
+                  2,924 字
                 </span>
               
 
@@ -453,23 +453,23 @@
 <p>这个方法一定是baseline，效果非常可观，这边不多说。只是给大家分享一些我使用的心得</p>
 <ul>
 <li>找个靠谱的词向量做Fine-tune，不要随机。这边我是用的集团AI提供的词向量，开源的有腾讯16G，搜狗的20G，科大讯飞的8G结果</li>
-<li>数据越多，越好。但是要的是分布均匀的数据，玩命怼一个方向的数据对提升效果作用=0，我在finetune的时候是打撒后38哥垂类的1亿2000万条咨询文章，但是这些文章已经做了fingerprint过滤的</li>
+<li>数据越多，越好。但是要的是分布均匀的数据，玩命怼一个方向的数据对提升效果作用=0，我在finetune的时候是打散后的38个垂类的1亿2000万条资讯文章，而且这些文章已经做了fingerprint过滤的</li>
 <li>不要剔除过多的词，不要只保留实体。一些连接词的学习会带来句子的连惯性上的帮助。假如你有一天需要做seq2seq的任务呢？</li>
-<li>添加<cls>可以帮你索定词位置，引入可以帮助你解决一些语句合理性判断的问题</cls></li>
+<li>添加\<cls>可以帮你索定词位置，引入可以帮助你解决一些语句合理性判断的问题</cls></li>
 <li>把过短的内容删掉，1个字的词删掉，纯数字删掉，如果是资讯文章最后的版权声明删掉，小细节注意一下</li>
 </ul>
 <p>word embedding会带来一种问题，苹果和香蕉相关，“我下午想吃香蕉”和“我下午想吃苹果”，word embedding认为是一件事，但是实际可能并不是。</p>
 <h2 id="SentenceEmbedding"><a href="#SentenceEmbedding" class="headerlink" title="SentenceEmbedding"></a>SentenceEmbedding</h2><p>Sentence Embedding认为既然一个词可以是一个向量，一句话也可以是。这边的论文一堆，方法也一堆：doc2vec，Infersent，Sentence2Vec，skip-thought，Quick-Thought，FastSent。</p>
 <p>以上这些是我看过还没忘的，我觉得比较有价值的。它们基于不同的思想，也有不同的作用，我这边谈几个比较经典的。</p>
 <ul>
-<li>doc2vec是word2vec翻版，通常的做法是在句首加一个<cls>，学习到的<cls>的向量作为句向量。</cls></cls></li>
+<li>doc2vec是word2vec翻版，通常的做法是在句首加一个\<cls>，学习到的\<cls>的向量作为句向量。</cls></cls></li>
 <li>Skip-thought利用中心句预测context中的句子，用了一个encoder来压缩中心句子的信息，然后用两个decoder来产生context里的句子，一个decoder用于预测前一句，另外一个decoder用于预测后一句。<br>QT针对这个问题，对decoder部分做了大的调整，它直接把decoder拿掉，取而代之的是一个classifier，使得预测行为变成了分类行为。就是用向量点积来判断同样的encoder的向量的相似度。</li>
 <li>Sentence2Vec是Skip-thought加强版</li>
-<li>Infersent是有监督的方法，用的是相似内容对，构造了<u，v,|u-v|,u*v>进行Entailment、contradiction and neutral三分类的预测</u，v,|u-v|,u*v></li>
+<li>Infersent是有监督的方法，用的是相似内容对，构造了\<u，v,|u-v|,u*v>进行Entailment、contradiction and neutral三分类的预测</u，v,|u-v|,u*v></li>
 <li>FastSent，用上下文的词来预测目标句子的词，然后把目标句的词的和作为目标句的向量</li>
 </ul>
 <p>句向量来补充词向量衡量一个句子的相似度会有明显的提升，我日常做baseline就是wordembedding+sentenceembedding来算cosine的</p>
-<h2 id="Bert"><a href="#Bert" class="headerlink" title="Bert"></a>Bert</h2><p>原理就不讲了，一万个写过bolg了，这边给大家整理了一份易错知识点<a href="https://github.com/sladesha/Reflection_Summary/blob/master/自然语言处理/Bert.md#L164" target="_blank" rel="noopener">Bert知识点</a>。</p>
+<h2 id="Bert"><a href="#Bert" class="headerlink" title="Bert"></a>Bert</h2><p>原理就不讲了，一万个人写过bolg了，这边给大家整理了一份易错知识点<a href="https://github.com/sladesha/Reflection_Summary/blob/master/自然语言处理/Bert.md#L164" target="_blank" rel="noopener">Bert知识点</a>。</p>
 <p>主要注意的是：</p>
 <ul>
 <li>原始的bertbase别用，效果差，建议在自己的数据集上微调</li>
