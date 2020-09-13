@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="NLP," />
 
 
 
@@ -80,16 +80,22 @@
 
 
 
-<meta name="description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SladeSha&#39;s Algorithm World">
-<meta property="og:url" content="http://sladesha.github.io/tags/python/index.html">
+<meta name="description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&amp;lt;基础LDA理解&amp;gt;和没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议">
+<meta name="keywords" content="NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主题模型的一些思考">
+<meta property="og:url" content="http://sladesha.github.io/2020/09/13/主题模型的一些思考/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta property="og:description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&amp;lt;基础LDA理解&amp;gt;和没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议用两者的concat。 LDALDA整体流程，先定义一些字母的含义：文档集合D，topic集合T">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip27upefqj30p207e752.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip2807lyoj30qs0rgadp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip21g3g9rj30ic07tn1t.jpg">
+<meta property="og:updated_time" content="2020-09-13T07:36:21.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SladeSha&#39;s Algorithm World">
-<meta name="twitter:description" content="前滴滴出行风控算法负责人，前HP-AILab算法研究员">
+<meta name="twitter:title" content="主题模型的一些思考">
+<meta name="twitter:description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&amp;lt;基础LDA理解&amp;gt;和没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议用两者的concat。 LDALDA整体流程，先定义一些字母的含义：文档集合D，topic集合T">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip27upefqj30p207e752.jpg">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://sladesha.github.io/tags/python/"/>
+  <link rel="canonical" href="http://sladesha.github.io/2020/09/13/主题模型的一些思考/"/>
 
 
 
 
 
-  <title>标签: python | SladeSha's Algorithm World</title>
+  <title>主题模型的一些思考 | SladeSha's Algorithm World</title>
   
 
 
@@ -144,7 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,250 +278,275 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>python<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sladesha.github.io/2020/09/13/主题模型的一些思考/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沙韬伟 sladesha">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SladeSha's Algorithm World">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/11/05/introductionToPython/" itemprop="url">
-              
-                <span itemprop="name">introductionToPython</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">主题模型的一些思考</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-05T22:52:58+08:00"
-              content="2019-11-05" >
-          11-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-13T15:20:52+08:00">
+                2020-09-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,757 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/22/Python自用工具包PyTls/" itemprop="url">
-              
-                <span itemprop="name">Python自用工具包PyTls</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-10-22T08:20:09+08:00"
-              content="2019-10-22" >
-          10-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/15/Python踩坑指南（第三季）/" itemprop="url">
-              
-                <span itemprop="name">Python踩坑指南（第三季）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-07-15T09:20:37+08:00"
-              content="2019-07-15" >
-          07-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/Python踩坑指南（第二季）/" itemprop="url">
-              
-                <span itemprop="name">Python踩坑指南（第二季）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-28T09:24:37+08:00"
-              content="2019-05-28" >
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/14/Python踩坑指南（第一季）/" itemprop="url">
-              
-                <span itemprop="name">Python踩坑指南（第一季）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-14T09:13:41+08:00"
-              content="2019-05-14" >
-          05-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/23/pandas中的问题记录/" itemprop="url">
-              
-                <span itemprop="name">pandas中的问题记录</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-23T14:12:58+08:00"
-              content="2018-10-23" >
-          10-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/01/python开发：特征工程代码模版-二/" itemprop="url">
-              
-                <span itemprop="name">python开发：特征工程代码模版(二)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-01T18:16:42+08:00"
-              content="2017-12-01" >
-          12-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/01/python开发：特征工程代码模版-一/" itemprop="url">
-              
-                <span itemprop="name">python开发：特征工程代码模版(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-01T18:09:59+08:00"
-              content="2017-12-01" >
-          12-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&lt;基础LDA理解&gt;和<sentencelda>没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。</sentencelda></p>
+<p>词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议用两者的concat。</p>
+<h1 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h1><p>LDA整体流程，先定义一些字母的含义：文档集合D，topic集合T</p>
+<p>D中每个文档d看作一个单词序列&lt; w1,w2,…,wn &gt;，wi表示第i个单词，设d有n个单词。（LDA里面称之为word bag，实际上每个单词的出现位置对LDA算法无影响）<br>D中涉及的所有不同单词组成一个大集合VOCABULARY（简称VOC）<br>LDA以文档集合D作为输入（会有切词，去停用词，取词干等常见的预处理，略去不表），希望训练出的两个结果向量（设聚成k个Topic，VOC中共包含m个词）：</p>
+<p>对每个D中的文档d，对应到不同topic的概率θd &lt; pt1,…, ptk &gt;，其中，pti表示d对应T中第i个topic的概率。计算方法是直观的，pti=nti/n，其中nti表示d中对应第i个topic的词的数目，n是d中所有词的总数。<br>对每个T中的topic t，生成不同单词的概率φt &lt; pw1,…, pwm &gt;，其中，pwi表示t生成VOC中第i个单词的概率。计算方法同样很直观，pwi=Nwi/N，其中Nwi表示对应到topic t的VOC中第i个单词的数目，N表示所有对应到topic t的单词总数。<br>LDA的核心公式如下：</p>
+<p>p(w|d) = p(w|t)*p(t|d)</p>
+<p>直观的看这个公式，就是以Topic作为中间层，可以通过当前的θd和φt给出了文档d中出现单词w的概率。其中p(t|d)利用θd计算得到，p(w|t)利用φt计算得到。</p>
+<p>实际上，利用当前的θd和φt，我们可以为一个文档中的一个单词计算它对应任意一个Topic时的p(w|d)，然后根据这些结果来更新这个词应该对应的topic。然后，如果这个更新改变了这个单词所对应的Topic，就会反过来影响θd和φt。</p>
+<p>LDA算法开始时，先随机地给θd和φt赋值（对所有的d和t）。然后上述过程不断重复，最终收敛到的结果就是LDA的输出。</p>
+<h1 id="SentenceLDA"><a href="#SentenceLDA" class="headerlink" title="SentenceLDA"></a>SentenceLDA</h1><h2 id="参考论文-：-On-a-topic-Model-for-Sentence"><a href="#参考论文-：-On-a-topic-Model-for-Sentence" class="headerlink" title="参考论文 ： On a topic Model for Sentence"></a>参考论文 ： On a topic Model for Sentence</h2><p>核心思想：传统的lda的假设是一篇文章的主题多个主题组合成，每个单词有对应的主题，考虑生成文章对应的词的最大联合概率分布即可。SentenceLDA是假设文章中的每一句话都是一个主题，每个句子里的每个词都是由该主题生成，考虑生成这句话对应的词最大联合概率分布即可。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ul>
+<li>对于每个主题 z，刻画主题-词分布矩阵 Φz ，它是服从参数为 β 的狄利克雷分布生成的多项式分布，表示为:Φz~Dirichlet(β)，z～Φz </li>
+<li>对于每个文本d<ul>
+<li>刻画文本-主题分布矩阵 θd ，它服从参数为 α 的狄利克雷分布生成的多项式分布，表示为θd ~ Dirichlet(α)</li>
+<li>对于每个文本d中的每个句子s<ul>
+<li>基于多项式分布文本-主题矩阵 θd ，选择一个主题 z，获取这个句子的主题</li>
+<li>基于多项式分布主题-词矩阵 Φz ，获取这个句子唯一主题的一个主题词</li>
+<li>其中，句子的主题z的获取来自于如下：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip27upefqj30p207e752.jpg" alt=""><br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip2807lyoj30qs0rgadp.jpg" alt=""><br>推导来自于Sentence-based text analysis for customer reviews论文的附录</p>
+<h1 id="实战的总结"><a href="#实战的总结" class="headerlink" title="实战的总结"></a>实战的总结</h1><h2 id="训练的技巧"><a href="#训练的技巧" class="headerlink" title="训练的技巧"></a>训练的技巧</h2><ul>
+<li>迭代次数在1000-1200次基本上均可收敛，亲测了20万条的小样本数据和1亿2000万条的大样本数据均在1100-1400收敛，loss提升小于十万分之一，收益太小了。</li>
+<li><strong>超参数alpha越大，先验起的作用就越大，推导的topic分布就越倾向于在每个topic上的概率都差不多。alpha的经验选择为50/topic的个数，beta一般为0.01</strong><br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip21g3g9rj30ic07tn1t.jpg" alt=""><br>3个彩图中，每一个点对应一个主题分布，高度代表某个主题分布被dirichlet分布选中的概率，且选不同的alpha，dirichlet 分布会偏向不同的主题分布</li>
+<li>K × 词典的大小 ～ 语料库中词的总数，这个是老师上课说的，但是实锤无效，在数据量足够大的情况下（500万条以上有效文本），建议做k～512，2048，4096组合</li>
+<li>不要用变分推断，实测吉布斯采样的WarpLda，LightLda效果比GensimLDA要好，聚出来的主题一致性更高。WarpLda支持Familia框架更方便部署，LightLda的训练结果更快，各有千秋</li>
+</ul>
+<h2 id="数据预处理的技巧"><a href="#数据预处理的技巧" class="headerlink" title="数据预处理的技巧"></a>数据预处理的技巧</h2><ul>
+<li>去除一些TF/DF较低/高的词，较低的词在拟合的过程中会被平滑掉，较高的词没有区分力</li>
+<li>手动合并2-gram的一些词，会增强生成主题的表述能力</li>
+<li><strong>可以通过相似文本合并，相似用户合并，解决短文本主题生成不准的问题。如果数据量很大则不用考虑，直接剔除短文本即可</strong></li>
+<li>数据分布不平衡会导致小主题识别不出来。原因是LDA设计思路就是使得通过主题-词分布+文本-主题分布矩阵最大化语料库词出现的似然概率，如果某个类别特别大，小主题可以拆开单独训练一个model</li>
+</ul>
+<h2 id="其他的思考"><a href="#其他的思考" class="headerlink" title="其他的思考"></a>其他的思考</h2><ul>
+<li>如果不是为了推断新文本主题，而只是为了看当前语料库的主题分布，可以用20万条长度为7以内的去重后文本得到全量语料中的主题分布，更快也基本满足分布描述</li>
+<li>同doc的词相似度更高，同doc的词与doc内最大重要性的词相似度高于其他词</li>
+<li><strong>如果想获得长尾topic，分垂类训练；如果想看头部topic，不分垂类训练</strong></li>
+<li>LDA的最大似然不好求的原因是映入了主题的概率先验，alpha和beta需要求，且还有考虑每个主题生成词的概率，通常求隐藏变量的EM算法需要条件概率，但是LDA的条件概率难以刻画。所以用的是吉布斯得到的几个样本来近似这个条件分布。</li>
+<li>如果内容偏向单一主题的场景，比如信息流中的新闻，通常只讲一件事，alpha建议小一点，建议0.1；如果是传统的小说散文法律文本，通常会有很多思想不能简单化为一个主题的时候，alpha建议大一点，建议10</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏的大佬可以联系我，赠送超赞的算法资料</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/image/wechatpay.jpg" alt="沙韬伟 sladesha 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/image/alipay.jpg" alt="沙韬伟 sladesha 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/06/文本相似性的总结/" rel="next" title="文本相似性的总结">
+                <i class="fa fa-chevron-left"></i> 文本相似性的总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2029/01/20/博客导读公告/" rel="prev" title="博客导读公告(置顶)">
+                博客导读公告(置顶) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -523,6 +554,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -543,8 +583,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -642,6 +691,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LDA"><span class="nav-number">1.</span> <span class="nav-text">LDA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SentenceLDA"><span class="nav-number">2.</span> <span class="nav-text">SentenceLDA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考论文-：-On-a-topic-Model-for-Sentence"><span class="nav-number">2.1.</span> <span class="nav-text">参考论文 ： On a topic Model for Sentence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">2.2.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战的总结"><span class="nav-number">3.</span> <span class="nav-text">实战的总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#训练的技巧"><span class="nav-number">3.1.</span> <span class="nav-text">训练的技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理的技巧"><span class="nav-number">3.2.</span> <span class="nav-text">数据预处理的技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的思考"><span class="nav-number">3.3.</span> <span class="nav-text">其他的思考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -791,6 +856,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1180,26 +1249,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
