@@ -80,21 +80,21 @@
 
 
 
-<meta name="description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&amp;lt;基础LDA理解&amp;gt;和没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议">
+<meta name="description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边《LDA》和《SentenceLDA》没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 我在实际用的过程中，词表征用LDA，句表征用了SentenceLDA，文章表征的时候">
 <meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="主题模型的一些思考">
 <meta property="og:url" content="http://sladesha.github.io/2020/09/13/主题模型的一些思考/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&amp;lt;基础LDA理解&amp;gt;和没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议用两者的concat。 LDALDA整体流程，先定义一些字母的含义：文档集合D，topic集合T">
+<meta property="og:description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边《LDA》和《SentenceLDA》没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 我在实际用的过程中，词表征用LDA，句表征用了SentenceLDA，文章表征的时候用了512维，2048维，4096维的LDA进行concat。 LDA参考各算法">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip27upefqj30p207e752.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip2807lyoj30qs0rgadp.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip21g3g9rj30ic07tn1t.jpg">
-<meta property="og:updated_time" content="2020-09-13T07:36:21.836Z">
+<meta property="og:updated_time" content="2020-09-13T07:48:55.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="主题模型的一些思考">
-<meta name="twitter:description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&amp;lt;基础LDA理解&amp;gt;和没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议用两者的concat。 LDALDA整体流程，先定义一些字母的含义：文档集合D，topic集合T">
+<meta name="twitter:description" content="最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边《LDA》和《SentenceLDA》没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。 我在实际用的过程中，词表征用LDA，句表征用了SentenceLDA，文章表征的时候用了512维，2048维，4096维的LDA进行concat。 LDA参考各算法">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gip27upefqj30p207e752.jpg">
 
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,757 字
+                  1,778 字
                 </span>
               
 
@@ -412,12 +412,12 @@
       
 
       
-        <p>最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边&lt;基础LDA理解&gt;和<sentencelda>没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。</sentencelda></p>
-<p>词表征用LDA表征即可，句表征建议用SentenceLDA，文章LDA建议用两者的concat。</p>
-<h1 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h1><p>LDA整体流程，先定义一些字母的含义：文档集合D，topic集合T</p>
-<p>D中每个文档d看作一个单词序列&lt; w1,w2,…,wn &gt;，wi表示第i个单词，设d有n个单词。（LDA里面称之为word bag，实际上每个单词的出现位置对LDA算法无影响）<br>D中涉及的所有不同单词组成一个大集合VOCABULARY（简称VOC）<br>LDA以文档集合D作为输入（会有切词，去停用词，取词干等常见的预处理，略去不表），希望训练出的两个结果向量（设聚成k个Topic，VOC中共包含m个词）：</p>
-<p>对每个D中的文档d，对应到不同topic的概率θd &lt; pt1,…, ptk &gt;，其中，pti表示d对应T中第i个topic的概率。计算方法是直观的，pti=nti/n，其中nti表示d中对应第i个topic的词的数目，n是d中所有词的总数。<br>对每个T中的topic t，生成不同单词的概率φt &lt; pw1,…, pwm &gt;，其中，pwi表示t生成VOC中第i个单词的概率。计算方法同样很直观，pwi=Nwi/N，其中Nwi表示对应到topic t的VOC中第i个单词的数目，N表示所有对应到topic t的单词总数。<br>LDA的核心公式如下：</p>
-<p>p(w|d) = p(w|t)*p(t|d)</p>
+        <p>最近有在用主题模型对信息流推荐的一些策略召回和深度召回对文本进行表征。在做的过程中有一些关于主题模型的思考和理解。这边《LDA》和《SentenceLDA》没啥价值，就是一些口语话的解释，实战的总结大家可以一起看下，我觉得比较有价值。</p>
+<p>我在实际用的过程中，词表征用LDA，句表征用了SentenceLDA，文章表征的时候用了512维，2048维，4096维的LDA进行concat。</p>
+<h1 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h1><h2 id="参考各算法库中的LDA源码"><a href="#参考各算法库中的LDA源码" class="headerlink" title="参考各算法库中的LDA源码"></a>参考各算法库中的LDA源码</h2><p>LDA整体流程，先定义一些字母的含义：文档集合D，topic集合T</p>
+<p>D中每个文档d看作一个单词序列&lt; w1,w2,…,wn &gt;，wi表示第i个单词，设d有n个单词。（LDA里面称之为word bag，实际上每个单词的出现位置对LDA算法无影响）。D中涉及的所有不同单词组成一个大集合VOCABULARY（简称VOC）。LDA以文档集合D作为输入（会有切词，去停用词，取词干等常见的预处理，略去不表），希望训练出的两个结果向量（设聚成k个Topic，VOC中共包含m个词）：</p>
+<p>对每个D中的文档d，对应到不同topic的概率θd &lt; pt1,…, ptk &gt;，其中，pti表示d对应T中第i个topic的概率。计算方法是直观的，pti=nti/n，其中nti表示d中对应第i个topic的词的数目，n是d中所有词的总数。<br>对每个T中的topic t，生成不同单词的概率φt &lt; pw1,…, pwm &gt;，其中，pwi表示t生成VOC中第i个单词的概率。计算方法同样很直观，pwi=Nwi/N，其中Nwi表示对应到topic t的VOC中第i个单词的数目，N表示所有对应到topic t的单词总数。</p>
+<p>LDA的核心公式如下：<br>p(w|d) = p(w|t)*p(t|d)</p>
 <p>直观的看这个公式，就是以Topic作为中间层，可以通过当前的θd和φt给出了文档d中出现单词w的概率。其中p(t|d)利用θd计算得到，p(w|t)利用φt计算得到。</p>
 <p>实际上，利用当前的θd和φt，我们可以为一个文档中的一个单词计算它对应任意一个Topic时的p(w|d)，然后根据这些结果来更新这个词应该对应的topic。然后，如果这个更新改变了这个单词所对应的Topic，就会反过来影响θd和φt。</p>
 <p>LDA算法开始时，先随机地给θd和φt赋值（对所有的d和t）。然后上述过程不断重复，最终收敛到的结果就是LDA的输出。</p>
@@ -452,7 +452,7 @@
 <li>如果不是为了推断新文本主题，而只是为了看当前语料库的主题分布，可以用20万条长度为7以内的去重后文本得到全量语料中的主题分布，更快也基本满足分布描述</li>
 <li>同doc的词相似度更高，同doc的词与doc内最大重要性的词相似度高于其他词</li>
 <li><strong>如果想获得长尾topic，分垂类训练；如果想看头部topic，不分垂类训练</strong></li>
-<li>LDA的最大似然不好求的原因是映入了主题的概率先验，alpha和beta需要求，且还有考虑每个主题生成词的概率，通常求隐藏变量的EM算法需要条件概率，但是LDA的条件概率难以刻画。所以用的是吉布斯得到的几个样本来近似这个条件分布。</li>
+<li>LDA的最大似然不好求的原因是引入了主题的概率先验，alpha和beta需要求，且还有考虑每个主题生成词的概率，通常求隐藏变量的EM算法需要条件概率，但是LDA的条件概率难以刻画。所以用的是吉布斯得到的几个样本来近似这个条件分布。</li>
 <li>如果内容偏向单一主题的场景，比如信息流中的新闻，通常只讲一件事，alpha建议小一点，建议0.1；如果是传统的小说散文法律文本，通常会有很多思想不能简单化为一个主题的时候，alpha建议大一点，建议10</li>
 </ul>
 
@@ -701,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LDA"><span class="nav-number">1.</span> <span class="nav-text">LDA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SentenceLDA"><span class="nav-number">2.</span> <span class="nav-text">SentenceLDA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考论文-：-On-a-topic-Model-for-Sentence"><span class="nav-number">2.1.</span> <span class="nav-text">参考论文 ： On a topic Model for Sentence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">2.2.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战的总结"><span class="nav-number">3.</span> <span class="nav-text">实战的总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#训练的技巧"><span class="nav-number">3.1.</span> <span class="nav-text">训练的技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理的技巧"><span class="nav-number">3.2.</span> <span class="nav-text">数据预处理的技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的思考"><span class="nav-number">3.3.</span> <span class="nav-text">其他的思考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LDA"><span class="nav-number">1.</span> <span class="nav-text">LDA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考各算法库中的LDA源码"><span class="nav-number">1.1.</span> <span class="nav-text">参考各算法库中的LDA源码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SentenceLDA"><span class="nav-number">2.</span> <span class="nav-text">SentenceLDA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考论文-：-On-a-topic-Model-for-Sentence"><span class="nav-number">2.1.</span> <span class="nav-text">参考论文 ： On a topic Model for Sentence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">2.2.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战的总结"><span class="nav-number">3.</span> <span class="nav-text">实战的总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#训练的技巧"><span class="nav-number">3.1.</span> <span class="nav-text">训练的技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理的技巧"><span class="nav-number">3.2.</span> <span class="nav-text">数据预处理的技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的思考"><span class="nav-number">3.3.</span> <span class="nav-text">其他的思考</span></a></li></ol></li></ol></div>
             
 
           </div>
