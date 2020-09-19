@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 记忆存储机制：EntNet">
+<meta name="description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 Attention机制：E">
 <meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文本分类的一些思考">
 <meta property="og:url" content="http://sladesha.github.io/2020/09/19/文本分类的一些思考/index.html">
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
-<meta property="og:description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 记忆存储机制：EntNet,DMN, HAN等等 预训练机制：Bert,XLnet等等  但是业务同学提了">
+<meta property="og:description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 Attention机制：EntNet,DMN, HAN等等 预训练机制：Bert,XLNet等等  但是业">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-19T13:47:42.889Z">
+<meta property="og:updated_time" content="2020-09-19T13:53:57.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文本分类的一些思考">
-<meta name="twitter:description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 记忆存储机制：EntNet,DMN, HAN等等 预训练机制：Bert,XLnet等等  但是业务同学提了">
+<meta name="twitter:description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 Attention机制：EntNet,DMN, HAN等等 预训练机制：Bert,XLNet等等  但是业">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,693 字
+                  1,692 字
                 </span>
               
 
@@ -413,18 +413,18 @@
 <li>词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等</li>
 <li>卷积神经网络特征提取：TextCNN,CharCNN等等</li>
 <li>上下文机制：TextRNN,BiLstm,RCNN等等</li>
-<li>记忆存储机制：EntNet,DMN, HAN等等</li>
-<li>预训练机制：Bert,XLnet等等</li>
+<li>Attention机制：EntNet,DMN, HAN等等</li>
+<li>预训练机制：Bert,XLNet等等</li>
 </ul>
-<p>但是业务同学提了两个要求，要一周效果达到可上线标准且线上预测不能超过10ms，所以直接排除3,4,5项。就让组里面的同学用词嵌入向量化或者卷积神经网络特征提取去解决一下，这边整理了我们在做的过程中的一些事情。</p>
-<p>词嵌入向量化就不说了，tfidf+svm确定了baseline准确率在0.7，因为我们是40分类，所以在实际做的过程中我们用了oneVsOthers，对了N层的二分，整个工程代码及其丑陋，这边主要说我们做TextCnn过程的一些记录。</p>
+<p>但是业务同学提了两个要求，要一周效果达到可上线标准且线上预测耗时不能超过10ms，所以直接排除3,4,5项。就让组里面的同学用词嵌入向量化或者卷积神经网络特征提取去解决一下，这边整理了我们在做的过程中的一些事情。</p>
+<p>词嵌入向量化就不说了，tfidf+svm确定了baseline准确率在0.7，因为我们是40分类，所以在实际做的过程中我们用了oneVsOthers，怼了N层的二分，整个工程代码极其丑陋，这边主要说我们做TextCnn过程的一些记录。</p>
 <h1 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h1><p>我们第一轮的准确率做出来在65%，所有在场的小伙伴都惊呆了，做出来的效果比baseline还低，第一反应就是数据没有进行合理预处理。后面我们发现，存在以下的问题：</p>
 <ul>
 <li>分词后的数据存在同样的分词结果对应不同的label</li>
 <li>因为是短文本，部分分词后长度不足3</li>
 <li>部分数据异常，存在几条数据切词后有100多个词，导致整体的padding规模过大，大多数都padding了几十个<pad>，<strong>这个存疑，我觉得没影响</strong>，组里的同学表示改了有1个点的提升</pad></li>
 <li>部分垂类的数据不平衡，比如运势在300多万的训练数据中只有不到1万条</li>
-<li>在剔除高频词的时候剔除不少实体词，而这些实体词恰好完全对应一个专业垂类，比如新冠—&gt;健康，特普朗—&gt;时政</li>
+<li>在剔除高频词的时候剔除不少实体词，而这些实体词恰好完全对应一个专有垂类，比如新冠—&gt;健康，特普朗—&gt;时政</li>
 </ul>
 <p>没错，其实看到这里，我们主要提升的模块讲完了，事情就是这么残酷，把上面的都改了之后，准确达到了75%，已经达到上线标准了。<br>实际上，如果能把数据清洗到一个比较干净的程度，带来的提升远远比做各种花里胡哨的算法要更有性价比，但是我们没有停止，因为根据之前的经验，简单做一下，79～81%的准确率还是很容易的。</p>
 <h1 id="模型优化"><a href="#模型优化" class="headerlink" title="模型优化"></a>模型优化</h1><p>当我们数据处理完之后，我们就去看了这些短文本，我们发现了几个问题：</p>
@@ -435,7 +435,7 @@
 <li>视频内容分布时效性很关键，很多新词，OOV的情况在校验集比较严重</li>
 </ul>
 <p>针对每个问题，我做了一些有优化，这边记录其中有效的：</p>
-<p><strong>1.textCNN对3-6词的文本预测，和10个词以上文本预测的效果不好</strong></p>
+<p><strong>1.textCNN对3-4词的文本预测，和10个词以上文本预测的效果不好</strong></p>
 <p>我们做了ensemble，在3-4词样本剔除，10个词以上的数据上（占比25%）我们用了fasttext，5-10个词的数据，我们用了textcnn，提升了0.5点左右</p>
 <p><strong>2.很容易把绝大多数的词相似的句子预测成同一种</strong></p>
 <p>meta-feature的使用，我们引入了词性作为另外一个textCNN的embedding层，在最后conv-maxPooling-fc后进行concat，举个例子，[今天，天气，真好]作为input的同时，也将其对应的词性[‘TIME’, ‘n’, ‘a’]也做了另一路的input，相当于告诉了分类器，虽然词都一样，但是不同词在不同的语境下不完全一致，提升了1.8%左右</p>
