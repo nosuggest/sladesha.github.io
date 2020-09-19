@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SladeSha&#39;s Algorithm World">
 <meta property="og:description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 Attention机制：EntNet,DMN, HAN等等 预训练机制：Bert,XLNet等等  但是业">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-19T13:53:57.713Z">
+<meta property="og:updated_time" content="2020-09-19T13:54:39.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文本分类的一些思考">
 <meta name="twitter:description" content="前言是这样的，最近业务同学有一个视频标题分类的需求，理论上成熟方案有很多：  词嵌入向量化：word2vec,tfidf,glove,sent2vec,QT,FastText等等 卷积神经网络特征提取：TextCNN,CharCNN等等 上下文机制：TextRNN,BiLstm,RCNN等等 Attention机制：EntNet,DMN, HAN等等 预训练机制：Bert,XLNet等等  但是业">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,692 字
+                  1,696 字
                 </span>
               
 
@@ -436,7 +436,7 @@
 </ul>
 <p>针对每个问题，我做了一些有优化，这边记录其中有效的：</p>
 <p><strong>1.textCNN对3-4词的文本预测，和10个词以上文本预测的效果不好</strong></p>
-<p>我们做了ensemble，在3-4词样本剔除，10个词以上的数据上（占比25%）我们用了fasttext，5-10个词的数据，我们用了textcnn，提升了0.5点左右</p>
+<p>我们做了ensemble，训练过程中3-4词样本剔除，10个词以上的数据上（占比25%）我们用了fasttext，5-10个词的数据，我们用了textcnn，提升了0.5点左右</p>
 <p><strong>2.很容易把绝大多数的词相似的句子预测成同一种</strong></p>
 <p>meta-feature的使用，我们引入了词性作为另外一个textCNN的embedding层，在最后conv-maxPooling-fc后进行concat，举个例子，[今天，天气，真好]作为input的同时，也将其对应的词性[‘TIME’, ‘n’, ‘a’]也做了另一路的input，相当于告诉了分类器，虽然词都一样，但是不同词在不同的语境下不完全一致，提升了1.8%左右</p>
 <p><strong>3.textCNN得到了word Embedding不太相似</strong></p>
